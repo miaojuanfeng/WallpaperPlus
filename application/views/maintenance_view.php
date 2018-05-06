@@ -284,7 +284,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-ok-circle"></i>
-										<a href="<?=base_url('xxx')?>">Delivery checklist</a>
+										<a href="<?=base_url('deliverychecklist/select/invoice_status/processing')?>">Delivery checklist</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12"></div>
