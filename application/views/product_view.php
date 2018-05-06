@@ -152,6 +152,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<textarea id="product_detail" name="product_detail" class="form-control input-sm required" placeholder="Detail" rows="5"><?=$product->product_detail?></textarea>
 										</div>
 										<div class="form-group">
+                                            <label for="product_link">单位</label>
+                                            <select id="product_vendor_id" name="product_vendor_id" data-placeholder="单位" class="chosen-select required">
+                                                <option value></option>
+                                                <?php
+                                                // foreach($vendors as $key1 => $value1){
+                                                //     $selected = ($value1->vendor_id == $product->product_vendor_id) ? ' selected="selected"' : "" ;
+                                                //     echo '<option value="'.$value1->vendor_id.'"'.$selected.'>'.$value1->vendor_company_name.' '.$value1->vendor_firstname.' '.$value1->vendor_lastname.'</option>';
+                                                // }
+                                                ?>
+                                            </select>
+                                        </div>
+										<div class="form-group">
 											<label for="product_cost">Cost</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">currency</span>
@@ -173,6 +185,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<input id="product_price_usd" name="product_price_usd" type="number" min="0" class="form-control input-sm" placeholder="Price USD" value="<?=$product->product_price_usd?>" />
 											</div>
 										</div>
+										<div class="form-group">
+                                            <label for="product_link">Weight</label>
+                                            <input id="product_link" name="product_link" type="text" class="form-control input-sm" placeholder="Weight" value="<?=$product->product_link?>" />
+                                        </div>
                                         <div class="form-group">
                                             <label for="product_link">Link</label>
                                             <input id="product_link" name="product_link" type="text" class="form-control input-sm" placeholder="Link" value="<?=$product->product_link?>" />

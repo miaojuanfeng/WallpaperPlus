@@ -326,7 +326,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <a href="<?=base_url('currency')?>">Currency</a>
                                     </blockquote>
                                 </div>
-								<div class="col-md-3 col-sm-12"></div>
+								<div class="col-md-3 col-sm-12">
+									<blockquote>
+                                        <i class="glyphicon glyphicon-cog"></i>
+                                        <a href="<?=base_url('approval')?>">Approval code</a>
+                                    </blockquote>
+								</div>
 								<div class="col-md-3 col-sm-12"></div>
 							</div>
 

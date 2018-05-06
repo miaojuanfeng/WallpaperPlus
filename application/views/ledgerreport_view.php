@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Commission report</title>
+		<title>Ledger report</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<script>
 		$(function(){
-			$('input[name="salesorder_id"]').focus();
+			$('input[name="invoice_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
@@ -148,7 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12">Commission report</h2>
+					<h2 class="col-sm-12">Ledger report</h2>
 
 					<div class="content-column-area col-md-12 col-sm-12">
 
@@ -156,36 +156,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<?=$this->session->tempdata('alert');?>
 							<div class="search-area">
 
-								<form salesorder="form" method="get">
-									<input type="hidden" name="salesorder_id" />
+								<form invoice="form" method="get">
+									<input type="hidden" name="invoice_id" />
 									<table>
 										<tbody>
 											<tr>
 												<td width="90%">
-													<div class="row">
-														<div class="col-sm-2"><h6>Sales Order</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />
-														</div>
-														<div class="col-sm-2">
-															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_greateq" name="salesorder_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</span>
-														</div>
-														<div class="col-sm-2">
-															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_smalleq" name="salesorder_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</span>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
 													<div class="row">
 														<div class="col-sm-2"><h6>Invoice</h6></div>
 														<div class="col-sm-2">
@@ -213,10 +189,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<div class="row">
 														<div class="col-sm-2"><h6>Customer</h6></div>
 														<div class="col-sm-2">
-															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
+															<input type="text" name="invoice_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
 														</div>
 														<div class="col-sm-2">
-															<select id="salesorder_user_id" name="salesorder_user_id" data-placeholder="Sales" class="chosen-select">
+															<select id="invoice_user_id" name="invoice_user_id" data-placeholder="Sales" class="chosen-select">
 																<option value></option>
 																<?php foreach($users as $key => $value){ ?>
 																<option value="<?=$value->user_id?>"><?=ucfirst($value->user_name)?></option>
@@ -230,7 +206,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<div class="row">
 														<div class="col-sm-2"><h6>Project</h6></div>
 														<div class="col-sm-2">
-															<input type="text" name="salesorder_project_name_like" class="form-control input-sm" placeholder="Project Name" value="" />
+															<input type="text" name="invoice_project_name_like" class="form-control input-sm" placeholder="Project Name" value="" />
 														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
@@ -267,9 +243,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="fieldset">
 
 							<div class="list-area">
-								<form name="list" action="<?=base_url('salesorder/delete')?>" method="post">
-									<input type="hidden" name="salesorder_id" />
-									<input type="hidden" name="salesorder_delete_reason" />
+								<form name="list" action="<?=base_url('invoice/delete')?>" method="post">
+									<input type="hidden" name="invoice_id" />
+									<input type="hidden" name="invoice_delete_reason" />
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
@@ -281,109 +257,76 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<thead>
 											<tr>
 												<th>Customer</th>
-												<th>SO No</th>
-												<th>Total</th>
 												<th>IN No</th>
+												<th>Deadline</th>
+												<th>外币</th>
+												<th>汇率</th>
+												<th>Pay</th>
+												<th>外币</th>
+												<th>汇率</th>
+												<th>Receive</th>
 												<th>IN date</th>
+												<th>OUT date</th>
+												<th>Customer PO</th>
 												<th>Sales</th>
-												<th>IN total</th>
-												<th>Commission rate</th>
-												<th>Commission</th>
-												<th>Commission to</th>
-												<th>Status</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
-											$salesorder_total = 0;
-											$invoice_subtotal = 0;
 											$invoice_total = 0;
-											$invoice_commission_subtotal = 0;
-											$invoice_commission_total = 0;
-											foreach($salesorders as $key => $value){
+											$invoice_total_smalleq30 = 0;
+											$invoice_total_from31to60 = 0;
+											$invoice_total_from61to90 = 0;
+											$invoice_total_largereq91 = 0;
+											foreach($invoices as $key => $value){
 											?>
 											<tr>
-												<td><?=$value->salesorder_client_company_name?></td>
-												<td><a href="<?=base_url('salesorder/update/salesorder_id/'.$value->salesorder_id)?>"><?=$value->salesorder_number?></a></td>
-												<td><?=strtoupper($value->salesorder_currency).' '.money_format('%!n', $value->salesorder_total)?></td>
-												<td>
-													<?php foreach($value->invoices as $key1 => $value1){ ?>
-													<div><?=$value1->invoice_number?></div>
-													<?php } ?>
-												</td>
-												<td>
-													<?php foreach($value->invoices as $key1 => $value1){ ?>
-													<div><?=convert_datetime_to_date($value1->invoice_create)?></div>
-													<?php } ?>
-												</td>
-												<td>
-													<?php foreach($value->invoices as $key1 => $value1){ ?>
-													<div><?=ucfirst(get_user($value1->invoice_quotation_user_id)->user_name)?></div>
-													<?php } ?>
-												</td>
+												<td><?=$value->invoice_client_company_name?></td>
+												<td><a href="<?=base_url('invoice/select/invoice_id/'.$value->invoice_id)?>"><?=$value->invoice_number?></a></td>
+												<td><?=$value->invoice_expire?></td>
+												<th>外币</th>
+												<th>汇率</th>
 												<td>
 													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.strtoupper($value1->invoice_currency).' '.money_format('%!n', $value1->invoice_pay).'</div>';
-														$invoice_subtotal += $value1->invoice_pay;
-													}
+													$invoice_total += $value->invoice_pay;
+													echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
 													?>
 												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.$value->salesorder_commission_rate.'%</div>';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.strtoupper($value1->invoice_currency).' '.money_format('%!n', ($value1->invoice_pay * $value->salesorder_commission_rate / 100)).'</div>';
-														$invoice_commission_subtotal += ($value1->invoice_pay * $value->salesorder_commission_rate / 100);
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.ucfirst(get_user($value->salesorder_commission_user_id)->user_name).'</div>';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.$value1->invoice_commission_status.'</div>';
-													}
-													?>
-												</td>
+												<th>外币</th>
+												<th>汇率</th>
+												<th>Receive</th>
+												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
+												<th>OUT date</th>
+												<td>Customer PO</td>
+												<td><?=get_user($value->invoice_quotation_user_id)->user_name?></td>
+
 											</tr>
 											<?php
-											$salesorder_total += $value->salesorder_total;
-											$invoice_total += $invoice_subtotal;
-											$invoice_commission_total += $invoice_commission_subtotal;
+											// $invoice_total += $value->invoice_pay;
+											// $invoice_total += $invoice_subtotal;
 											}
 											?>
 
-											<?php if(!$salesorders){ ?>
+											<?php if(!$invoices){ ?>
 											<tr>
-												<td colspan="15">No record found</td>
+												<td colspan="11">No record found</td>
 											</tr>
 											<?php } ?>
 										</tbody>
-										<?php if($salesorders){ ?>
+										<?php if($invoices){ ?>
 										<tfoot>
 											<tr>
 												<th></th>
 												<th></th>
-												<th><?='HKD '.money_format('%!n', $salesorder_total)?></th>
+												<th></th>
+												<th>外币</th>
+												<th></th>
+												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total)?></th>
+												<th>外币</th>
+												<th></th>
+												<th>Receive</th>
 												<th></th>
 												<th></th>
-												<th></th>
-												<th><?='HKD '.money_format('%!n', $invoice_total)?></th>
-												<th></th>
-												<th><?='HKD '.money_format('%!n', $invoice_commission_total)?></th>
 												<th></th>
 												<th></th>
 											</tr>
@@ -399,8 +342,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</div>
 					</div>
 					<div class="blue">
-						<p>Is it <b>completed</b> SO show in this report?</p>
-						<p>Customer PO ?</p>
+						<!-- <p>Is it <b>completed</b> SO show in this report?</p>
+						<p>Customer PO ?</p> -->
 					</div>
 				</div>
 			</div>

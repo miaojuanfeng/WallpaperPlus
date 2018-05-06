@@ -249,6 +249,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
+										<button type="submit" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" title="" data-original-title="Export to Excel">
+											<i class="glyphicon glyphicon-export"></i>
+										</button>
 									</div>
 									<table class="table table-striped table-bordered">
 										<thead>
@@ -256,6 +259,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>Customer</th>
 												<th>IN No</th>
 												<th>Deadline</th>
+												<th>外币</th>
+												<th>汇率</th>
 												<th>Total</th>
 												<th>0-30</th>
 												<th>31-60</th>
@@ -279,6 +284,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->invoice_client_company_name?></td>
 												<td><a href="<?=base_url('invoice/select/invoice_id/'.$value->invoice_id)?>"><?=$value->invoice_number?></a></td>
 												<td><?=$value->invoice_expire?></td>
+												<th>外币</th>
+												<th>汇率</th>
 												<td>
 													<?php
 													$invoice_total += $value->invoice_total;
@@ -347,6 +354,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th></th>
 												<th></th>
+												<th></th>
+												<th>外币</th>
 												<th></th>
 												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total)?></th>
 												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_smalleq30)?></th>

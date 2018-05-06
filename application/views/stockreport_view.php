@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Commission report</title>
+		<title>Stock report</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -148,7 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12">Commission report</h2>
+					<h2 class="col-sm-12">Stock report</h2>
 
 					<div class="content-column-area col-md-12 col-sm-12">
 
@@ -163,7 +163,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td width="90%">
 													<div class="row">
-														<div class="col-sm-2"><h6>Sales Order</h6></div>
+														<div class="col-sm-2"><h6>Stock Order</h6></div>
 														<div class="col-sm-2">
 															<input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />
 														</div>
@@ -216,13 +216,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
 														</div>
 														<div class="col-sm-2">
-															<select id="salesorder_user_id" name="salesorder_user_id" data-placeholder="Sales" class="chosen-select">
+															<select id="salesorder_user_id" name="salesorder_user_id" data-placeholder="Stock" class="chosen-select">
 																<option value></option>
 																<?php foreach($users as $key => $value){ ?>
 																<option value="<?=$value->user_id?>"><?=ucfirst($value->user_name)?></option>
 																<?php } ?>
 															</select>
 														</div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+													</div>
+													<div class="row">
+														<div class="col-sm-2"><h6>Vendor</h6></div>
+														<div class="col-sm-2">
+															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Vendor company name" value="" />
+														</div>
+														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
@@ -280,17 +290,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<table class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>Customer</th>
-												<th>SO No</th>
+												<th>Code</th>
+												<th>Name</th>
+												<th>WH0</th>
+												<th>WH1</th>
+												<th>WH2</th>
+												<th>WH3</th>
 												<th>Total</th>
-												<th>IN No</th>
-												<th>IN date</th>
-												<th>Sales</th>
-												<th>IN total</th>
-												<th>Commission rate</th>
-												<th>Commission</th>
-												<th>Commission to</th>
-												<th>Status</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -298,12 +304,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											$salesorder_total = 0;
 											$invoice_subtotal = 0;
 											$invoice_total = 0;
-											$invoice_commission_subtotal = 0;
-											$invoice_commission_total = 0;
 											foreach($salesorders as $key => $value){
 											?>
 											<tr>
 												<td><?=$value->salesorder_client_company_name?></td>
+												<td>
+													<?php foreach($value->purchaseorders as $key1 => $value1){ ?>
+													<div>Customer PO ? <a href="<?=base_url('purchaseorder/update/purchaseorder_id/'.$value1->purchaseorder_id)?>"><?=$value1->purchaseorder_number?></a></div>
+													<?php } ?>
+												</td>
 												<td><a href="<?=base_url('salesorder/update/salesorder_id/'.$value->salesorder_id)?>"><?=$value->salesorder_number?></a></td>
 												<td><?=strtoupper($value->salesorder_currency).' '.money_format('%!n', $value->salesorder_total)?></td>
 												<td>
@@ -317,11 +326,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<?php } ?>
 												</td>
 												<td>
-													<?php foreach($value->invoices as $key1 => $value1){ ?>
-													<div><?=ucfirst(get_user($value1->invoice_quotation_user_id)->user_name)?></div>
-													<?php } ?>
-												</td>
-												<td>
 													<?php
 													foreach($value->invoices as $key1 => $value1){
 														echo '<div>'.strtoupper($value1->invoice_currency).' '.money_format('%!n', $value1->invoice_pay).'</div>';
@@ -329,40 +333,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													}
 													?>
 												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.$value->salesorder_commission_rate.'%</div>';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.strtoupper($value1->invoice_currency).' '.money_format('%!n', ($value1->invoice_pay * $value->salesorder_commission_rate / 100)).'</div>';
-														$invoice_commission_subtotal += ($value1->invoice_pay * $value->salesorder_commission_rate / 100);
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.ucfirst(get_user($value->salesorder_commission_user_id)->user_name).'</div>';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.$value1->invoice_commission_status.'</div>';
-													}
-													?>
-												</td>
 											</tr>
 											<?php
 											$salesorder_total += $value->salesorder_total;
 											$invoice_total += $invoice_subtotal;
-											$invoice_commission_total += $invoice_commission_subtotal;
 											}
 											?>
 
@@ -377,15 +351,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th></th>
 												<th></th>
+												<th></th>
 												<th><?='HKD '.money_format('%!n', $salesorder_total)?></th>
 												<th></th>
 												<th></th>
-												<th></th>
 												<th><?='HKD '.money_format('%!n', $invoice_total)?></th>
-												<th></th>
-												<th><?='HKD '.money_format('%!n', $invoice_commission_total)?></th>
-												<th></th>
-												<th></th>
 											</tr>
 										</tfoot>
 										<?php } ?>

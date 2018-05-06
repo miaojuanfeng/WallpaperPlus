@@ -175,6 +175,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12"></div>
 								<div class="col-md-3 col-sm-12"></div>
 							</div>
+							<div class="row">
+								<div class="col-md-3 col-sm-12">
+									<blockquote>
+										<i class="glyphicon glyphicon-usd"></i>
+										<a href="<?=base_url('ledgerreport')?>">General Ledger report</a>
+										<small>Show complete purchase and invoice order only</small>
+									</blockquote>
+								</div>
+								<div class="col-md-3 col-sm-12"></div>
+								<div class="col-md-3 col-sm-12"></div>
+								<div class="col-md-3 col-sm-12"></div>
+							</div>
 
 							<div class="hr"></div>
 
@@ -205,7 +217,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('salesreport')?>">Stock report</a>
+										<a href="<?=base_url('stockreport')?>">Stock report</a>
 										<small>Show stock status report</small>
 									</blockquote>
 								</div>

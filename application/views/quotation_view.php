@@ -637,6 +637,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><label for="quotation_expire">Expire Date</label></td>
 														<td><input id="quotation_expire" name="quotation_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($quotation->quotation_expire != '' && $this->router->fetch_method() != 'duplicate') ? $quotation->quotation_expire : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
 													</tr>
+													<tr>
+														<td><label for="quotation_expire">Approval code</label></td>
+														<td><input id="quotation_expire" name="quotation_expire" type="text" class="form-control input-sm" placeholder="Approval code" value="" /></td>
+													</tr>
 												</table>
 											</div>
 										</div>

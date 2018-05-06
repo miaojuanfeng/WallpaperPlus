@@ -127,6 +127,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="waybillin_number">Number <span class="highlight">*</span></label>
 											<input id="waybillin_number" name="waybillin_number" type="text" class="form-control input-sm required" placeholder="Number" value="<?=$waybillin->waybillin_number?>" />
 										</p>
+										<p class="form-group">
+											<label for="waybillin_customs_number">Customs number <span class="highlight"></span></label>
+											<input id="waybillin_customs_number" name="waybillin_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$waybillin->waybillin_number?>" />
+										</p>
                                         <p class="form-group">
                                             <label for="waybillin_remark">Remark</label>
                                             <textarea id="waybillin_remark" name="waybillin_remark" class="form-control input-sm" placeholder="Remark" rows="3"><?=$waybillin->waybillin_remark?></textarea>

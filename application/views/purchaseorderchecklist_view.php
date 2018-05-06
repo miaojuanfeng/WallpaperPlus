@@ -318,7 +318,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->purchaseorder_vendor_company_name?></td>
 												<td><?=$value->purchaseorder_project_name?></td>
 												<td><?=ucfirst(get_user($value->purchaseorder_user_id)->user_name)?></td>
-												<td><?=$value->purchaseorder_expire?></td>
+												<td><?=$value->purchaseorder_reminder_date?></td>
 												<td><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total)?></td>
 												<td><?=ucfirst($value->purchaseorder_status)?></td>
 												<td><?=($value->purchaseorder_status_remark) ? $value->purchaseorder_status_remark : 'N/A'?></td>

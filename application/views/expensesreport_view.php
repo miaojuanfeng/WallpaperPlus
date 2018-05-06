@@ -249,6 +249,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
+										<button type="submit" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" title="" data-original-title="Export to Excel">
+											<i class="glyphicon glyphicon-export"></i>
+										</button>
 									</div>
 									<table class="table table-striped table-bordered">
 										<thead>
@@ -256,6 +259,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>Customer</th>
 												<th>PO No</th>
 												<th>Deadline</th>
+												<th>外币</th>
+												<th>汇率</th>
 												<th>Total</th>
 												<th>0-30</th>
 												<th>31-60</th>
@@ -277,7 +282,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td><?=$value->purchaseorder_vendor_company_name?></td>
 												<td><a href="<?=base_url('purchaseorder/select/purchaseorder_id/'.$value->purchaseorder_id)?>"><?=$value->purchaseorder_number?></a></td>
-												<td><?=$value->purchaseorder_expire?></td>
+												<td><?=$value->purchaseorder_reminder_date?></td>
+												<th>外币</th>
+												<th>汇率</th>
 												<td>
 													<?php
 													$purchaseorder_total += $value->purchaseorder_total;
@@ -286,7 +293,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</td>
 												<td>
 													<?php
-													if(get_expire_period($value->purchaseorder_expire) == '<=30'){
+													if(get_expire_period($value->purchaseorder_reminder_date) == '<=30'){
 														$purchaseorder_total_smalleq30 += $value->purchaseorder_total;
 														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
 													}else{
@@ -296,7 +303,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</td>
 												<td>
 													<?php
-													if(get_expire_period($value->purchaseorder_expire) == '31-60'){
+													if(get_expire_period($value->purchaseorder_reminder_date) == '31-60'){
 														$purchaseorder_total_from31to60 += $value->purchaseorder_total;
 														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
 													}else{
@@ -306,7 +313,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</td>
 												<td>
 													<?php
-													if(get_expire_period($value->purchaseorder_expire) == '61-90'){
+													if(get_expire_period($value->purchaseorder_reminder_date) == '61-90'){
 														$purchaseorder_total_from61to90 += $value->purchaseorder_total;
 														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
 													}else{
@@ -316,7 +323,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</td>
 												<td>
 													<?php
-													if(get_expire_period($value->purchaseorder_expire) == '>=91'){
+													if(get_expire_period($value->purchaseorder_reminder_date) == '>=91'){
 														$purchaseorder_total_largereq91 += $value->purchaseorder_total;
 														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
 													}else{
@@ -345,6 +352,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th></th>
 												<th></th>
+												<th></th>
+												<th>外币</th>
 												<th></th>
 												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total)?></th>
 												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total_smalleq30)?></th>

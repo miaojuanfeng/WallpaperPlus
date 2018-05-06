@@ -228,6 +228,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2"></div>
 													</div>
 													<div class="row">
+														<div class="col-sm-2"><h6>Vendor</h6></div>
+														<div class="col-sm-2">
+															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Vendor company name" value="" />
+														</div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+													</div>
+													<div class="row">
 														<div class="col-sm-2"><h6>Project</h6></div>
 														<div class="col-sm-2">
 															<input type="text" name="salesorder_project_name_like" class="form-control input-sm" placeholder="Project Name" value="" />
@@ -273,6 +283,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
+										<button type="submit" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" title="" data-original-title="Export to Excel">
+											<i class="glyphicon glyphicon-export"></i>
+										</button>
 									</div>
 									<table class="table table-striped table-bordered">
 										<thead>
