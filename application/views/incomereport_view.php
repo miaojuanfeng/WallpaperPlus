@@ -262,7 +262,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>汇率</th>
 												<th>Pay (HKD)</th>
 												<th>IN date</th>
-												<th>付钱时间</th>
+												<th>点击checklist完成的时间</th>
 												<th>Sales</th>
 											</tr>
 										</thead>
@@ -283,7 +283,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													?>
 												</td>
 												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
-												<td>status=>complete time</td>
+												<td>status=>click complete time</td>
 												<td><?=get_user($value->invoice_quotation_user_id)->user_name?></td>
 
 											</tr>
