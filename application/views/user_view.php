@@ -149,6 +149,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<?php } ?>
 											</select>
 										</p>
+										<?php
+										if( 
+											in_array(1, $z_role_user_role_ids) ||
+											in_array(2, $z_role_user_role_ids) ||
+											in_array(3, $z_role_user_role_ids)
+										){
+										?>
+										<p class="form-group">
+											<label for="user_code">Code <span class="highlight">*</span></label>
+											<input id="user_code" name="user_code" type="text" maxlength="30" class="form-control input-sm required" placeholder="Code" value="<?=$user->user_code?>" />
+										</p>
+										<?php
+										}
+										?>
 									</div>
 								</div>
 

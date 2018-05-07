@@ -106,7 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12"><a href="<?=base_url('waybillin')?>">PO waybill management</a> > <?=($this->router->fetch_method() == 'update') ? 'Upate' : 'Insert'?> waybillin</h2>
+					<h2 class="col-sm-12"><a href="<?=base_url('waybillin')?>">PO waybill management</a> > <?=($this->router->fetch_method() == 'update') ? 'Upate' : 'Insert'?> waybill</h2>
 
 					<div class="col-sm-12">
 						<form method="post" enctype="multipart/form-data">
@@ -153,6 +153,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 ?>
                                             </select>
                                         </p>
+                                        <p class="form-group">
+											<label for="invoice_client_company_name">批號</label>
+											<input id="invoice_client_company_name" name="invoice_client_company_name" type="text" class="form-control input-sm required" placeholder="Company/Domain/Client" value="<?=$waybillin->waybillin_number?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_company_address">waybill number</label>
+											<input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$waybillin->waybillin_number?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_email">報關號碼</label>
+											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybillin->waybillin_number?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_company_phone">速遞公司</label>
+											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybillin->waybillin_number?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_company_phone">速遞公司</label>
+											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybillin->waybillin_number?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_phone">送货日子</label>
+											<input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$waybillin->waybillin_number?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_email">到货日子</label>
+											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybillin->waybillin_number?>" />
+										</p>
 									</div>
 								</div>
 

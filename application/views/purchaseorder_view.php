@@ -450,10 +450,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												?>
 											</select>
 										</p>
-                                        <p class="form-group">
-                                            <label for="purchaseorder_waybill_number">Waybill number <span class="highlight">*</span></label>
-                                            <input id="purchaseorder_waybill_number" name="purchaseorder_waybill_number" type="text" class="form-control input-sm" placeholder="Waybill number" value="<?=$purchaseorder->purchaseorder_waybill_number?>" />
-                                        </p>
 									</div>
 									<div class="col-sm-9 col-xs-12">
 										<h4 class="corpcolor-font">Purchase order</h4>
@@ -922,6 +918,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>Deadline</th>
 												<th>Total</th>
 												<th>Status</th>
+												<th>Stock status</th>
+												<th></th>
 												<th></th>
 												<th></th>
 												<th class="text-right">
@@ -951,9 +949,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->purchaseorder_reminder_date?></td>
 												<td><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total)?></td>
 												<td><?=ucfirst($value->purchaseorder_status)?></td>
+												<td></td>
 												<td class="text-right">
 													<a target="_blank" href="<?=base_url('/assets/images/pdf/purchaseorder/'.$value->purchaseorder_number.'.pdf')?>" data-toggle="tooltip" title="Print">
 														<i class="glyphicon glyphicon-print"></i>
+													</a>
+												</td>
+												<td class="text-right">
+													<a href="<?=base_url('stockstatus/update/purchaseorder_id/'.$value->purchaseorder_id)?>" data-toggle="tooltip" title="Stock status">
+														<i class="glyphicon glyphicon-log-in"></i>
 													</a>
 												</td>
 												<td class="text-right">

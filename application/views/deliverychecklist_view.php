@@ -168,39 +168,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<h4 class="corpcolor-font">Delivery checklist</h4>
 										<div class="row">
 											<div class="col-sm-6 col-xs-6">
-												<table class="table table-condensed table-borderless">
-													<tr>
-														<td><label for="invoice_client_company_name">批號</label></td>
-														<td><input id="invoice_client_company_name" name="invoice_client_company_name" type="text" class="form-control input-sm required" placeholder="Company/Domain/Client" value="<?=$invoice->invoice_client_company_name?>" /></td>
-													</tr>
-													<tr>
-														<td><label for="invoice_client_company_address">waybill number</label></td>
-														<td><input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$invoice->invoice_client_company_address?>" /></td>
-													</tr>
-													<tr>
-														<td><label for="invoice_client_email">報關號碼</label></td>
-														<td><input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$invoice->invoice_client_email?>" /></td>
-													</tr>
-												</table>
 											</div>
 											<div class="col-sm-1 col-xs-1">
-
 											</div>
 											<div class="col-sm-5 col-xs-5">
-												<table class="table table-condensed table-borderless">
-													<tr>
-														<td><label for="invoice_client_company_phone">速遞公司</label></td>
-														<td><input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$invoice->invoice_client_company_phone?>" /></td>
-													</tr>
-													<tr>
-														<td><label for="invoice_client_phone">送货日子</label></td>
-														<td><input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$invoice->invoice_client_phone?>" /></td>
-													</tr>
-													<tr>
-														<td><label for="invoice_client_email">到货日子</label></td>
-														<td><input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$invoice->invoice_client_email?>" /></td>
-													</tr>
-												</table>
 											</div>
 										</div>
 										<div class="list-area">
@@ -408,8 +379,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>送货日子</th>
 												<th>是否到货</th>
 												<th>Remark</th>
-												<th></th>
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -431,20 +400,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->invoice_client_company_name?></td>
 												<td><?=$value->invoice_project_name?></td>
 												<td><?=($value->invoice_status_remark) ? $value->invoice_status_remark : 'N/A'?></td>
-												<td class="text-right">
-													<a target="_blank" href="<?=base_url('/assets/images/pdf/invoice/'.$value->invoice_number.'.pdf')?>" data-toggle="tooltip" title="Print">
-														<i class="glyphicon glyphicon-print"></i>
-													</a>
-												</td>
-												<td class="text-right">
-													<?php if(!check_permission('invoice_update', 'display')){ ?>
-													<a href="<?=base_url('deliverychecklist/update/invoice_id/'.$value->invoice_id)?>" data-toggle="tooltip" title="Update">
-														<i class="glyphicon glyphicon-edit"></i>
-													</a>
-													<?php }else{ ?>
-													<i class="glyphicon glyphicon-edit"></i>
-													<?php } ?>
-												</td>
 											</tr>
 											<?php } ?>
 

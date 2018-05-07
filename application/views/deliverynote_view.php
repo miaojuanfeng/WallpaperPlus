@@ -303,6 +303,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												?>
 											</select>
 										</p>
+										<p class="form-group">
+											<label for="invoice_client_company_name">批號</label>
+											<input id="invoice_client_company_name" name="invoice_client_company_name" type="text" class="form-control input-sm required" placeholder="Company/Domain/Client" value="<?=$deliverynote->deliverynote_status?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_company_address">waybill number</label>
+											<input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$deliverynote->deliverynote_status?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_email">報關號碼</label>
+											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$deliverynote->deliverynote_status?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_company_phone">速遞公司</label>
+											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$deliverynote->deliverynote_status?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_company_phone">速遞公司</label>
+											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$deliverynote->deliverynote_status?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_phone">送货日子</label>
+											<input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$deliverynote->deliverynote_status?>" />
+										</p>
+										<p class="form-group">
+											<label for="invoice_client_email">到货日子</label>
+											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$deliverynote->deliverynote_status?>" />
+										</p>
 									</div>
 									<div class="col-sm-9 col-xs-12">
 										<h4 class="corpcolor-font">Delivery note</h4>

@@ -793,10 +793,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
-                                    <blockquote>
+                                    <!-- <blockquote>
                                         <i class="glyphicon glyphicon-ok-circle"></i>
                                         <a href="<?=base_url('waybillout')?>">Invoice waybill</a>
-                                    </blockquote>
+                                    </blockquote> -->
                                 </div>
 								<div class="col-md-3 col-sm-12"></div>
 							</div>
