@@ -259,13 +259,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>Customer</th>
 												<th>PO No</th>
 												<th>Deadline</th>
-												<th>外币</th>
-												<th>汇率</th>
 												<th>Total</th>
-												<th>0-30</th>
-												<th>31-60</th>
-												<th>61-90</th>
-												<th>90+</th>
+												<th>汇率</th>
+												<th>Total (HKD)</th>
 												<th>PO date</th>
 												<th>Sales</th>
 											</tr>
@@ -289,46 +285,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<?php
 													$purchaseorder_total += $value->purchaseorder_total;
 													echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->purchaseorder_reminder_date) == '<=30'){
-														$purchaseorder_total_smalleq30 += $value->purchaseorder_total;
-														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->purchaseorder_reminder_date) == '31-60'){
-														$purchaseorder_total_from31to60 += $value->purchaseorder_total;
-														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->purchaseorder_reminder_date) == '61-90'){
-														$purchaseorder_total_from61to90 += $value->purchaseorder_total;
-														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->purchaseorder_reminder_date) == '>=91'){
-														$purchaseorder_total_largereq91 += $value->purchaseorder_total;
-														echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
-													}else{
-														echo '- - -';
-													}
 													?>
 												</td>
 												<td><?=convert_datetime_to_date($value->purchaseorder_create)?></td>
@@ -356,10 +312,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>外币</th>
 												<th></th>
 												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total)?></th>
-												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total_smalleq30)?></th>
-												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total_from31to60)?></th>
-												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total_from61to90)?></th>
-												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total_largereq91)?></th>
 												<th></th>
 												<th></th>
 											</tr>

@@ -375,10 +375,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 						</div>
 					</div>
-					<div class="blue">
-						<p>Is it <b>completed</b> SO show in this report?</p>
-						<p>Customer PO ?</p>
-					</div>
 				</div>
 			</div>
 

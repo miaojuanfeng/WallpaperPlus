@@ -16,6 +16,7 @@ class Product extends CI_Controller {
 //		$this->load->model('category_model');
         $this->load->model('vendor_model');
 		$this->load->model('type_model');
+		$this->load->model('unit_model');
 	}
 
 	public function index()
@@ -63,6 +64,12 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['brands'] = $this->brand_model->select($thisSelect);
+
+			/* unit */
+			$thisSelect = array(
+				'return' => 'result'
+			);
+			$data['units'] = $this->unit_model->select($thisSelect);
 
 			/* category */
 //			$thisSelect = array(
@@ -139,6 +146,12 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['brands'] = $this->brand_model->select($thisSelect);
+
+			/* unit */
+			$thisSelect = array(
+				'return' => 'result'
+			);
+			$data['units'] = $this->unit_model->select($thisSelect);
 
 			/* category */
 //			$thisSelect = array(

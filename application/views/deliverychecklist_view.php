@@ -178,8 +178,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$invoice->invoice_client_company_address?>" /></td>
 													</tr>
 													<tr>
-														<td><label for="invoice_client_company_phone">速遞公司</label></td>
-														<td><input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$invoice->invoice_client_company_phone?>" /></td>
+														<td><label for="invoice_client_email">報關號碼</label></td>
+														<td><input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$invoice->invoice_client_email?>" /></td>
 													</tr>
 												</table>
 											</div>
@@ -189,11 +189,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<div class="col-sm-5 col-xs-5">
 												<table class="table table-condensed table-borderless">
 													<tr>
+														<td><label for="invoice_client_company_phone">速遞公司</label></td>
+														<td><input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$invoice->invoice_client_company_phone?>" /></td>
+													</tr>
+													<tr>
 														<td><label for="invoice_client_phone">送货日子</label></td>
 														<td><input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$invoice->invoice_client_phone?>" /></td>
 													</tr>
 													<tr>
-														<td><label for="invoice_client_email">是否到货</label></td>
+														<td><label for="invoice_client_email">到货日子</label></td>
 														<td><input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$invoice->invoice_client_email?>" /></td>
 													</tr>
 												</table>
@@ -399,6 +403,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th></th>
 												<th>批號</th>
 												<th>waybill number</th>
+												<th>報關號碼</th>
 												<th>速遞公司</th>
 												<th>送货日子</th>
 												<th>是否到货</th>
@@ -421,6 +426,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<a href="<?=base_url('salesorder/update/salesorder_id/'.$value->invoice_salesorder_id)?>"><?=get_salesorder($value->invoice_salesorder_id)->salesorder_number?></a>
 													<?php } ?>
 												</td>
+												<th>報關號碼</th>
 												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
 												<td><?=$value->invoice_client_company_name?></td>
 												<td><?=$value->invoice_project_name?></td>

@@ -435,9 +435,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 						</div>
 					</div>
-					<div class="blue">
-						<p>Internal exchange order, stock transfer generate document</p>
-					</div>
 				</div>
 			</div>
 

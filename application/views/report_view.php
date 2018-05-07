@@ -154,10 +154,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<small>Show complete purchase order only</small>
 									</blockquote>
 								</div>
-								<div class="col-md-3 col-sm-12"></div>
-								<div class="col-md-3 col-sm-12"></div>
-							</div>
-							<div class="row">
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-usd"></i>
@@ -172,8 +168,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<small>Show processing purchase order only</small>
 									</blockquote>
 								</div>
-								<div class="col-md-3 col-sm-12"></div>
-								<div class="col-md-3 col-sm-12"></div>
 							</div>
 							<div class="row">
 								<div class="col-md-3 col-sm-12">

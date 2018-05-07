@@ -258,32 +258,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th>Customer</th>
 												<th>IN No</th>
-												<th>Deadline</th>
-												<th>外币</th>
-												<th>汇率</th>
 												<th>Pay</th>
-												<th>0-30</th>
-												<th>31-60</th>
-												<th>61-90</th>
-												<th>90+</th>
+												<th>汇率</th>
+												<th>Pay (HKD)</th>
 												<th>IN date</th>
-												<th>Customer PO</th>
+												<th>付钱时间</th>
 												<th>Sales</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
 											$invoice_total = 0;
-											$invoice_total_smalleq30 = 0;
-											$invoice_total_from31to60 = 0;
-											$invoice_total_from61to90 = 0;
-											$invoice_total_largereq91 = 0;
 											foreach($invoices as $key => $value){
 											?>
 											<tr>
 												<td><?=$value->invoice_client_company_name?></td>
 												<td><a href="<?=base_url('invoice/select/invoice_id/'.$value->invoice_id)?>"><?=$value->invoice_number?></a></td>
-												<td><?=$value->invoice_expire?></td>
 												<th>外币</th>
 												<th>汇率</th>
 												<td>
@@ -292,48 +282,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
 													?>
 												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '<=30'){
-														$invoice_total_smalleq30 += $value->invoice_pay;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '31-60'){
-														$invoice_total_from31to60 += $value->invoice_pay;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '61-90'){
-														$invoice_total_from61to90 += $value->invoice_pay;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '>=91'){
-														$invoice_total_largereq91 += $value->invoice_pay;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
 												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
-												<td>Customer PO</td>
+												<td>status=>complete time</td>
 												<td><?=get_user($value->invoice_quotation_user_id)->user_name?></td>
 
 											</tr>
@@ -354,14 +304,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th></th>
 												<th></th>
-												<th></th>
 												<th>外币</th>
 												<th></th>
 												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_smalleq30)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_from31to60)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_from61to90)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_largereq91)?></th>
 												<th></th>
 												<th></th>
 												<th></th>

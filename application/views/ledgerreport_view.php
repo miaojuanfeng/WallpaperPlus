@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ledger report</title>
+		<title>General Ledger report</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -148,7 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12">Ledger report</h2>
+					<h2 class="col-sm-12">General Ledger report</h2>
 
 					<div class="content-column-area col-md-12 col-sm-12">
 
@@ -259,15 +259,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>Customer</th>
 												<th>IN No</th>
 												<th>Deadline</th>
-												<th>外币</th>
-												<th>汇率</th>
 												<th>Pay</th>
-												<th>外币</th>
 												<th>汇率</th>
+												<th>Pay (HKD)</th>
 												<th>Receive</th>
+												<th>汇率</th>
+												<th>Receive (HKD)</th>
 												<th>IN date</th>
 												<th>OUT date</th>
-												<th>Customer PO</th>
+												<th>Balance</th>
 												<th>Sales</th>
 											</tr>
 										</thead>
@@ -284,20 +284,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->invoice_client_company_name?></td>
 												<td><a href="<?=base_url('invoice/select/invoice_id/'.$value->invoice_id)?>"><?=$value->invoice_number?></a></td>
 												<td><?=$value->invoice_expire?></td>
-												<th>外币</th>
-												<th>汇率</th>
+												<td>外币</td>
+												<td>汇率</td>
 												<td>
 													<?php
 													$invoice_total += $value->invoice_pay;
 													echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
 													?>
 												</td>
-												<th>外币</th>
-												<th>汇率</th>
-												<th>Receive</th>
+												<td>外币</td>
+												<td>汇率</td>
+												<td>Receive</td>
 												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
-												<th>OUT date</th>
-												<td>Customer PO</td>
+												<td>OUT date</td>
+												<td>HKD 123.00</td>
 												<td><?=get_user($value->invoice_quotation_user_id)->user_name?></td>
 
 											</tr>
@@ -333,6 +333,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</tfoot>
 										<?php } ?>
 									</table>
+									与Excel一致
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>

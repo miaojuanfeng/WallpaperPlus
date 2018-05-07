@@ -259,15 +259,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>Customer</th>
 												<th>IN No</th>
 												<th>Deadline</th>
-												<th>外币</th>
+												<th>Pay</th>
 												<th>汇率</th>
-												<th>Total</th>
-												<th>0-30</th>
-												<th>31-60</th>
-												<th>61-90</th>
-												<th>90+</th>
+												<th>Pay (HKD)</th>
 												<th>IN date</th>
-												<th>Customer PO</th>
 												<th>Sales</th>
 											</tr>
 										</thead>
@@ -292,48 +287,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_total);
 													?>
 												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '<=30'){
-														$invoice_total_smalleq30 += $value->invoice_total;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_total);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '31-60'){
-														$invoice_total_from31to60 += $value->invoice_total;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_total);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '61-90'){
-														$invoice_total_from61to90 += $value->invoice_total;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_total);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													if(get_expire_period($value->invoice_expire) == '>=91'){
-														$invoice_total_largereq91 += $value->invoice_total;
-														echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_total);
-													}else{
-														echo '- - -';
-													}
-													?>
-												</td>
 												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
-												<td>Customer PO</td>
 												<td><?=get_user($value->invoice_quotation_user_id)->user_name?></td>
 
 											</tr>
@@ -358,17 +312,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>外币</th>
 												<th></th>
 												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_smalleq30)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_from31to60)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_from61to90)?></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total_largereq91)?></th>
-												<th></th>
 												<th></th>
 												<th></th>
 											</tr>
 										</tfoot>
 										<?php } ?>
 									</table>
+									显示所有status->processing
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
