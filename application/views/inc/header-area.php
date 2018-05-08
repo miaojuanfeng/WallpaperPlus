@@ -56,7 +56,7 @@
 													<li<?=($this->router->fetch_class() == 'salesorder') ? ' class="active"' : ''?>>
 														<a href="<?=base_url('salesorder')?>">Sales Order</a>
 													</li>
-													<li<?=($this->router->fetch_class() == 'purchaseorder' || $this->router->fetch_class() == 'waybill') ? ' class="active"' : ''?>>
+													<li<?=($this->router->fetch_class() == 'purchaseorder' || $this->router->fetch_class() == 'waybill' || $this->router->fetch_class() == 'stockstatus') ? ' class="active"' : ''?>>
 														<a href="<?=base_url('purchaseorder')?>">Purchase Order</a>
 													</li>
 													<li<?=($this->router->fetch_class() == 'invoice') ? ' class="active"' : ''?>>

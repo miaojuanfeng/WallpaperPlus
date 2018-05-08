@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<script>
 		$(function(){
-			$('input[name="invoice_id"]').focus();
+			$('input[name="deliverynote_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
@@ -54,9 +54,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						var answer = prompt("Please insert remark");
 						if(answer){
 							thisId = thisInputName.replace('checklistStatus-', '');
-							$('input[name="invoice_id"]').val(thisId);
-							$('input[name="invoice_status"]').val('complete');
-							$('input[name="invoice_status_remark"]').val(encodeURI(answer));
+							$('input[name="deliverynote_id"]').val(thisId);
+							$('input[name="deliverynote_status"]').val('complete');
+							$('input[name="deliverynote_status_remark"]').val(encodeURI(answer));
 							$('form[name="list"]').submit();
 						}else{
 							$('input[name="'+thisInputName+'"]').prop('checked', false);
@@ -119,11 +119,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12"><a href="<?=base_url('deliverychecklist/select/invoice_status/processing')?>">Delivery checklist management</a> > <?=($this->router->fetch_method() == 'update') ? 'Update' : 'Insert'?> delivery checklist</h2>
+					<h2 class="col-sm-12"><a href="<?=base_url('deliverychecklist/select/deliverynote_status/processing')?>">Delivery checklist management</a> > <?=($this->router->fetch_method() == 'update') ? 'Update' : 'Insert'?> delivery checklist</h2>
 
 					<div class="col-sm-12">
 						<form method="post" enctype="multipart/form-data">
-							<input type="hidden" name="invoice_id" value="<?=$invoice->invoice_id?>" />
+							<input type="hidden" name="deliverynote_id" value="<?=$deliverynote->deliverynote_id?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
@@ -144,20 +144,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p>
 										<?php if($this->router->fetch_method() == 'update'){ ?>
 										<p class="form-group">
-											<a class="btn btn-sm btn-primary btn-block" target="_blank" href="<?=base_url('assets/images/pdf/invoice/'.$invoice->invoice_number.'.pdf?'.time())?>" data-toggle="tooltip" title="Print"><i class="glyphicon glyphicon-print"></i> Print</a>
+											<a class="btn btn-sm btn-primary btn-block" target="_blank" href="<?=base_url('assets/images/pdf/deliverynote/'.$deliverynote->deliverynote_number.'.pdf?'.time())?>" data-toggle="tooltip" title="Print"><i class="glyphicon glyphicon-print"></i> Print</a>
 										</p>
 										<?php } ?>
 										<h4 class="corpcolor-font">Setting</h4>
 										<p class="form-group">
-											<label for="invoice_status">Status</label>
-											<select id="invoice_status" name="invoice_status" data-placeholder="Status" class="chosen-select required">
+											<label for="deliverynote_status">Status</label>
+											<select id="deliverynote_status" name="deliverynote_status" data-placeholder="Status" class="chosen-select required">
 												<option value></option>
 												<?php
-												if($invoice->invoice_status == ''){
-													$invoice->invoice_status = 'hkd';
+												if($deliverynote->deliverynote_status == ''){
+													$deliverynote->deliverynote_status = 'hkd';
 												}
 												foreach($statuss as $key => $value){
-													$selected = ($value->status_name == $invoice->invoice_status) ? ' selected="selected"' : "" ;
+													$selected = ($value->status_name == $deliverynote->deliverynote_status) ? ' selected="selected"' : "" ;
 													echo '<option value="'.$value->status_name.'"'.$selected.'>'.strtoupper($value->status_name).'</option>';
 												}
 												?>
@@ -179,8 +179,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</div>
 										<hr />
 										<p class="form-group">
-											<label for="invoice_remark">Remark</label>
-											<textarea id="invoice_remark" name="invoice_remark" class="form-control input-sm" placeholder="Remark" rows="3"><?=$invoice->invoice_remark?></textarea>
+											<label for="deliverynote_remark">Remark</label>
+											<textarea id="deliverynote_remark" name="deliverynote_remark" class="form-control input-sm" placeholder="Remark" rows="3"><?=$deliverynote->deliverynote_remark?></textarea>
 										</p>
 									</div>
 								</div>
@@ -258,8 +258,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<?=$this->session->tempdata('alert');?>
 							<div class="search-area">
 
-								<form invoice="form" method="get">
-									<input type="hidden" name="invoice_id" />
+								<form deliverynote="form" method="get">
+									<input type="hidden" name="deliverynote_id" />
 									<table>
 										<tbody>
 											<tr>
@@ -267,11 +267,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<div class="row">
 														<div class="col-sm-2"><h6>Delivery</h6></div>
 														<div class="col-sm-2">
-															<input type="text" name="invoice_number_like" class="form-control input-sm" placeholder="INNo" value="" />
+															<input type="text" name="deliverynote_number_like" class="form-control input-sm" placeholder="DNNo" value="" />
 														</div>
 														<div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="invoice_create_greateq" name="invoice_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<input id="deliverynote_create_greateq" name="deliverynote_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
@@ -279,70 +279,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</div>
 														<div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="invoice_create_smalleq" name="invoice_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<input id="deliverynote_create_smalleq" name="deliverynote_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
 															</span>
 														</div>
 														<div class="col-sm-2">
-															<input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />
-														</div>
-														<div class="col-sm-2">
-															<select id="invoice_status" name="invoice_status" data-placeholder="Status" class="chosen-select">
+															<select id="deliverynote_status" name="deliverynote_status" data-placeholder="Status" class="chosen-select">
 																<?php
 																foreach($statuss as $key => $value){
-																	$selected = ($value->status_name == $this->uri->uri_to_assoc()['invoice_status']) ? ' selected="selected"' : "" ;
+																	$selected = ($value->status_name == $this->uri->uri_to_assoc()['deliverynote_status']) ? ' selected="selected"' : "" ;
 																	echo '<option value="'.$value->status_name.'"'.$selected.'>'.ucfirst($value->status_name).'</option>';
 																}
 																?>
 															</select>
 														</div>
 													</div>
-                                                    <!-- <div class="row">
-														<div class="col-sm-2"><h6>Customer</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="invoice_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
-														</div>
-														<div class="col-sm-2">
-															<select id="invoice_user_id" name="invoice_user_id" data-placeholder="Sales" class="chosen-select">
-																<option value></option>
-																<?php foreach($users as $key => $value){ ?>
-																<option value="<?=$value->user_id?>"><?=ucfirst($value->user_name)?></option>
-																<?php } ?>
-															</select>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Project</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="invoice_project_name_like" class="form-control input-sm" placeholder="Project Name" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Product</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_code_like" class="form-control input-sm" placeholder="Item Code" value="" />
-														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
-														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div> -->
 												</td>
 												<td valign="top" width="10%" class="text-right">
 													<button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
@@ -359,11 +312,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="fieldset">
 
 							<div class="list-area">
-								<form name="list" action="<?=base_url('invoicechecklist/update')?>" method="post">
-									<input type="hidden" name="invoice_id" />
-									<!-- <input type="hidden" name="invoice_delete_reason" /> -->
-									<input type="hidden" name="invoice_status" />
-									<input type="hidden" name="invoice_status_remark" />
+								<form name="list" action="<?=base_url('deliverychecklist/update')?>" method="post">
+									<input type="hidden" name="deliverynote_id" />
+									<!-- <input type="hidden" name="deliverynote_delete_reason" /> -->
+									<input type="hidden" name="deliverynote_status" />
+									<input type="hidden" name="deliverynote_status_remark" />
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
@@ -372,17 +325,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<thead>
 											<tr>
 												<th></th>
-												<th>批號</th>
-												<th>waybill number</th>
-												<th>報關號碼</th>
-												<th>速遞公司</th>
-												<th>送货日子</th>
-												<th>是否到货</th>
+                                                <th>DN No</th>
+												<th>Lot number</th>
+												<th>Waybill number</th>
+												<th>Customs number</th>
+												<th>Express company</th>
+												<th>Delivery day</th>
+												<th>Status</th>
 												<th>Remark</th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php foreach($deliverynotes as $key => $value){ break; ?>
+											<?php foreach($deliverynotes as $key => $value){ ?>
 											<tr>
 												<td><input<?=($this->uri->uri_to_assoc()['deliverynote_status'] == 'complete') ? ' disabled="disabled" checked="checked"' : ''?> name="checklistStatus-<?=$value->deliverynote_id?>" type="checkbox" /></td>
 												<td>
@@ -390,16 +344,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<?=$value->deliverynote_number?>
 													</a>
 												</td>
-												<td>
-													<?php if($value->invoice_salesorder_id != 0){ ?>
-													<a href="<?=base_url('deliverynote/update/deliverynote_id/'.$value->invoice_salesorder_id)?>"><?=get_salesorder($value->invoice_salesorder_id)->deliverynote_number?></a>
-													<?php } ?>
-												</td>
-												<th>報關號碼</th>
-												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
-												<td><?=$value->invoice_client_company_name?></td>
-												<td><?=$value->invoice_project_name?></td>
-												<td><?=($value->invoice_status_remark) ? $value->invoice_status_remark : 'N/A'?></td>
+												<th><?=$value->deliverynote_lot_number?></th>
+                                                <td><?=$value->deliverynote_waybill_number?></td>
+                                                <td><?=$value->deliverynote_customs_number?></td>
+                                                <td><?=$value->deliverynote_express_company?></td>
+												<td><?=convert_datetime_to_date($value->deliverynote_delivery_day)?></td>
+												<td><?=$value->deliverynote_status?></td>
+												<td><?=($value->deliverynote_remark) ? $value->deliverynote_remark : 'N/A'?></td>
 											</tr>
 											<?php } ?>
 
@@ -420,7 +371,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="blue">
 						<!-- <p>Add processing and complete status filter</p>
-						<p>"Complete" invoicechecklist will not show in this list</p> -->
+						<p>"Complete" deliverynotechecklist will not show in this list</p> -->
 					</div>
 				</div>
 			</div>

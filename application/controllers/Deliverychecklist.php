@@ -28,21 +28,18 @@ class Deliverychecklist extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
-			$this->invoicechecklist_model->update($thisPOST);
 
-			/* set salesorder status */
-			set_salesorder_status_complete(get_invoice($thisPOST['invoice_id'])->invoice_salesorder_id);
 			/* set delivery note status */
-//            set_delivery_note_status_complete()
+            set_delivery_note_status_complete($thisPOST['deliverynote_id']);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
 			$thisLog['log_permission_action'] = $this->router->fetch_method();
-			$thisLog['log_record_id'] = $thisPOST['invoice_id'];
+			$thisLog['log_record_id'] = $thisPOST['deliverynote_id'];
 			set_log($thisLog);
 
 			$thisAlert = 'Data saved';
 			$this->session->set_tempdata('alert', '<div class="btn btn-sm btn-primary btn-block bottom-buffer-10">'.$thisAlert.'</div>', 0);
-			redirect('deliverychecklist/select/invoice_status/processing');
+			redirect('deliverychecklist/select/deliverynote_status/processing');
 		}else{
 			/* invoice */
 			$thisSelect = array(

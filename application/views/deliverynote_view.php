@@ -289,48 +289,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<?php } ?>
 										<h4 class="corpcolor-font">Setting</h4>
 										<p class="form-group">
-											<label for="deliverynote_status">Status</label>
-											<select id="deliverynote_status" name="deliverynote_status" data-placeholder="Status" class="chosen-select required">
-												<option value></option>
-												<?php
-												if($deliverynote->deliverynote_status == ''){
-													$deliverynote->deliverynote_status = 'hkd';
-												}
-												foreach($statuss as $key => $value){
-													$selected = ($value->status_name == $deliverynote->deliverynote_status) ? ' selected="selected"' : "" ;
-													echo '<option value="'.$value->status_name.'"'.$selected.'>'.strtoupper($value->status_name).'</option>';
-												}
-												?>
-											</select>
+											<label for="deliverynote_lot_number">Lot number</label>
+											<input id="deliverynote_lot_number" name="deliverynote_lot_number" type="text" class="form-control input-sm" placeholder="Lot number" value="<?=$deliverynote->deliverynote_lot_number?>" />
 										</p>
 										<p class="form-group">
-											<label for="invoice_client_company_name">批號</label>
-											<input id="invoice_client_company_name" name="invoice_client_company_name" type="text" class="form-control input-sm required" placeholder="Company/Domain/Client" value="<?=$deliverynote->deliverynote_status?>" />
+											<label for="deliverynote_waybill_number">Waybill number</label>
+											<input id="deliverynote_waybill_number" name="deliverynote_waybill_number" type="text" class="form-control input-sm" placeholder="Waybill number" value="<?=$deliverynote->deliverynote_waybill_number?>" />
 										</p>
 										<p class="form-group">
-											<label for="invoice_client_company_address">waybill number</label>
-											<input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$deliverynote->deliverynote_status?>" />
+											<label for="deliverynote_customs_number">Customs number</label>
+											<input id="deliverynote_customs_number" name="deliverynote_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$deliverynote->deliverynote_customs_number?>" />
 										</p>
 										<p class="form-group">
-											<label for="invoice_client_email">報關號碼</label>
-											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$deliverynote->deliverynote_status?>" />
+											<label for="deliverynote_express_company">Express company</label>
+											<input id="deliverynote_express_company" name="deliverynote_express_company" type="text" class="form-control input-sm" placeholder="Express company" value="<?=$deliverynote->deliverynote_express_company?>" />
 										</p>
 										<p class="form-group">
-											<label for="invoice_client_company_phone">速遞公司</label>
-											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$deliverynote->deliverynote_status?>" />
+											<label for="deliverynote_delivery_day">Delivery day</label>
+                                            <span class="input-group date datetimepicker">
+                                                <input id="deliverynote_delivery_day" name="deliverynote_delivery_day" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" value="<?=$deliverynote->deliverynote_delivery_day?>" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </span>
 										</p>
-										<p class="form-group">
-											<label for="invoice_client_company_phone">速遞公司</label>
-											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$deliverynote->deliverynote_status?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_phone">送货日子</label>
-											<input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$deliverynote->deliverynote_status?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_email">到货日子</label>
-											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$deliverynote->deliverynote_status?>" />
-										</p>
+                                        <p class="form-group">
+                                            <label for="deliverynote_status">Status</label>
+                                            <select id="deliverynote_status" name="deliverynote_status" data-placeholder="Status" class="chosen-select required">
+                                                <option value></option>
+                                                <?php
+                                                if($deliverynote->deliverynote_status == ''){
+                                                    $deliverynote->deliverynote_status = 'hkd';
+                                                }
+                                                foreach($statuss as $key => $value){
+                                                    $selected = ($value->status_name == $deliverynote->deliverynote_status) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value->status_name.'"'.$selected.'>'.strtoupper($value->status_name).'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </p>
 									</div>
 									<div class="col-sm-9 col-xs-12">
 										<h4 class="corpcolor-font">Delivery note</h4>
@@ -665,7 +662,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<table class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th>IN No</th>
+												<th>DN No</th>
 												<th>SO No</th>
 												<th>Create</th>
 												<th>Customer</th>
