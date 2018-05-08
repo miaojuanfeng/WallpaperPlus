@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<script>
 		$(function(){
-			$('input[name="waybillin_id"]').focus();
+			$('input[name="waybill_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
@@ -39,8 +39,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		function check_delete(id){
 			var answer = prompt("Confirm delete?");
 			if(answer){
-				$('input[name="waybillin_id"]').val(id);
-				$('input[name="waybillin_delete_reason"]').val(encodeURI(answer));
+				$('input[name="waybill_id"]').val(id);
+				$('input[name="waybill_delete_reason"]').val(encodeURI(answer));
 				$('form[name="list"]').submit();
 			}else{
 				return false;
@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 		function login_as(id){
-			$('input[name="waybillin_id"]').val(id);
+			$('input[name="waybill_id"]').val(id);
 			$('input[name="act"]').val('login_as');
 			$('form[name="list"]').submit();
 		}
@@ -106,11 +106,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12"><a href="<?=base_url('waybillin')?>">PO waybill management</a> > <?=($this->router->fetch_method() == 'update') ? 'Upate' : 'Insert'?> waybill</h2>
+					<h2 class="col-sm-12"><a href="<?=base_url('waybill')?>">PO waybill management</a> > <?=($this->router->fetch_method() == 'update') ? 'Upate' : 'Insert'?> waybill</h2>
 
 					<div class="col-sm-12">
 						<form method="post" enctype="multipart/form-data">
-							<input type="hidden" name="waybillin_id" value="<?=$waybillin->waybillin_id?>" />
+							<input type="hidden" name="waybill_id" value="<?=$waybill->waybill_id?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<div class="row">
@@ -124,30 +124,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
-											<label for="waybillin_number">Number <span class="highlight">*</span></label>
-											<input id="waybillin_number" name="waybillin_number" type="text" class="form-control input-sm required" placeholder="Number" value="<?=$waybillin->waybillin_number?>" />
+											<label for="waybill_number">Number <span class="highlight">*</span></label>
+											<input id="waybill_number" name="waybill_number" type="text" class="form-control input-sm required" placeholder="Number" value="<?=$waybill->waybill_number?>" />
 										</p>
 										<p class="form-group">
-											<label for="waybillin_customs_number">Customs number <span class="highlight"></span></label>
-											<input id="waybillin_customs_number" name="waybillin_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$waybillin->waybillin_number?>" />
+											<label for="waybill_customs_number">Customs number <span class="highlight"></span></label>
+											<input id="waybill_customs_number" name="waybill_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$waybill->waybill_number?>" />
 										</p>
                                         <p class="form-group">
-                                            <label for="waybillin_remark">Remark</label>
-                                            <textarea id="waybillin_remark" name="waybillin_remark" class="form-control input-sm" placeholder="Remark" rows="3"><?=$waybillin->waybillin_remark?></textarea>
+                                            <label for="waybill_remark">Remark</label>
+                                            <textarea id="waybill_remark" name="waybill_remark" class="form-control input-sm" placeholder="Remark" rows="3"><?=$waybill->waybill_remark?></textarea>
                                         </p>
 									</div>
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Related information</h4>
                                         <p class="form-group">
-                                            <label for="waybillin_po_id">PO</label>
-                                            <select id="waybillin_po_id" name="waybillin_po_id" data-placeholder="PO" class="chosen-select required" multiple="multiple">
+                                            <label for="waybill_po_id">PO</label>
+                                            <select id="waybill_po_id" name="waybill_po_id" data-placeholder="PO" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
-                                                if($purchaseorder->waybillin_po_id == ''){
-                                                    $purchaseorder->waybillin_po_id = 'hkd';
+                                                if($purchaseorder->waybill_po_id == ''){
+                                                    $purchaseorder->waybill_po_id = 'hkd';
                                                 }
                                                 foreach($purchaseorders as $key => $value){
-                                                    $selected = ($value->currency_name == $purchaseorder->waybillin_po_id) ? ' selected="selected"' : "" ;
+                                                    $selected = ($value->currency_name == $purchaseorder->waybill_po_id) ? ' selected="selected"' : "" ;
                                                     echo '<option value="'.$value->purchaseorder_id.'"'.$selected.'>'.strtoupper($value->purchaseorder_number).'</option>';
                                                 }
                                                 ?>
@@ -155,31 +155,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </p>
                                         <p class="form-group">
 											<label for="invoice_client_company_name">批號</label>
-											<input id="invoice_client_company_name" name="invoice_client_company_name" type="text" class="form-control input-sm required" placeholder="Company/Domain/Client" value="<?=$waybillin->waybillin_number?>" />
+											<input id="invoice_client_company_name" name="invoice_client_company_name" type="text" class="form-control input-sm required" placeholder="Company/Domain/Client" value="<?=$waybill->waybill_number?>" />
 										</p>
 										<p class="form-group">
 											<label for="invoice_client_company_address">waybill number</label>
-											<input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$waybillin->waybillin_number?>" />
+											<input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$waybill->waybill_number?>" />
 										</p>
 										<p class="form-group">
 											<label for="invoice_client_email">報關號碼</label>
-											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybillin->waybillin_number?>" />
+											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybill->waybill_number?>" />
 										</p>
 										<p class="form-group">
 											<label for="invoice_client_company_phone">速遞公司</label>
-											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybillin->waybillin_number?>" />
+											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybill->waybill_number?>" />
 										</p>
 										<p class="form-group">
 											<label for="invoice_client_company_phone">速遞公司</label>
-											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybillin->waybillin_number?>" />
+											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybill->waybill_number?>" />
 										</p>
 										<p class="form-group">
 											<label for="invoice_client_phone">送货日子</label>
-											<input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$waybillin->waybillin_number?>" />
+											<input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$waybill->waybill_number?>" />
 										</p>
 										<p class="form-group">
 											<label for="invoice_client_email">到货日子</label>
-											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybillin->waybillin_number?>" />
+											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybill->waybill_number?>" />
 										</p>
 									</div>
 								</div>
@@ -260,8 +260,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="fieldset">
 							<div class="search-area">
 
-								<form waybillin="form" method="get">
-									<input type="hidden" name="waybillin_id" />
+								<form waybill="form" method="get">
+									<input type="hidden" name="waybill_id" />
 									<table>
 										<tbody>
 											<tr>
@@ -269,10 +269,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<div class="row">
 														<div class="col-sm-2"><h6>PO waybill</h6></div>
 														<div class="col-sm-2">
-															<input type="text" name="waybillin_id" class="form-control input-sm" placeholder="#" value="" />
+															<input type="text" name="waybill_id" class="form-control input-sm" placeholder="#" value="" />
 														</div>
 														<div class="col-sm-2">
-															<input type="text" name="waybillin_number_like" class="form-control input-sm" placeholder="Waybill number" value="" />
+															<input type="text" name="waybill_number_like" class="form-control input-sm" placeholder="Waybill number" value="" />
 														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
@@ -295,57 +295,57 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="fieldset">
 
 							<div class="list-area">
-								<form name="list" action="<?=base_url('waybillin/delete')?>" method="post">
-									<input type="hidden" name="waybillin_id" />
-									<input type="hidden" name="waybillin_delete_reason" />
+								<form name="list" action="<?=base_url('waybill/delete')?>" method="post">
+									<input type="hidden" name="waybill_id" />
+									<input type="hidden" name="waybill_delete_reason" />
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
 									</div>
-									<table id="waybillin" class="table table-striped table-bordered">
+									<table id="waybill" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>#</th>
 												<th>
-													<a href="<?=get_order_link('waybillin_number')?>">
+													<a href="<?=get_order_link('waybill_number')?>">
 														Number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
-													<a href="<?=get_order_link('waybillin_modify')?>">
+													<a href="<?=get_order_link('waybill_modify')?>">
 														Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<!-- <th width="40"></th> -->
 												<th width="40"></th>
 												<th width="40" class="text-right">
-													<a href="<?=base_url('waybillin/insert')?>" data-toggle="tooltip" title="Insert">
+													<a href="<?=base_url('waybill/insert')?>" data-toggle="tooltip" title="Insert">
 														<i class="glyphicon glyphicon-plus"></i>
 													</a>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php foreach($waybillins as $key => $value){ ?>
+											<?php foreach($waybills as $key => $value){ ?>
 											<tr>
-												<td title="<?=$value->waybillin_id?>"><?=$key+1?></td>
-												<td><?=ucfirst($value->waybillin_number)?></td>
-												<td><?=convert_datetime_to_date($value->waybillin_modify)?></td>
+												<td title="<?=$value->waybill_id?>"><?=$key+1?></td>
+												<td><?=ucfirst($value->waybill_number)?></td>
+												<td><?=convert_datetime_to_date($value->waybill_modify)?></td>
 												<!-- <td class="text-right">
-													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->waybillin_id?>">
+													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->waybill_id?>">
 														<a data-toggle="tooltip" title="More">
 															<i class="glyphicon glyphicon-chevron-right"></i>
 														</a>
 													</span>
 												</td> -->
 												<td class="text-right">
-													<a href="<?=base_url('waybillin/update/waybillin_id/'.$value->waybillin_id)?>" data-toggle="tooltip" title="Update">
+													<a href="<?=base_url('waybill/update/waybill_id/'.$value->waybill_id)?>" data-toggle="tooltip" title="Update">
 														<i class="glyphicon glyphicon-edit"></i>
 													</a>
 												</td>
 												<td class="text-right">
-													<?php if(!check_permission('waybillin_delete', 'display')){ ?>
-													<a onclick="check_delete(<?=$value->waybillin_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('waybillin_delete', 'disable')?>">
+													<?php if(!check_permission('waybill_delete', 'display')){ ?>
+													<a onclick="check_delete(<?=$value->waybill_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('waybill_delete', 'disable')?>">
 														<i class="glyphicon glyphicon-remove"></i>
 													</a>
 													<?php }else{ ?>

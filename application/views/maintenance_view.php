@@ -152,12 +152,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<a href="<?=base_url('vendor')?>">Vendor</a>
 									</blockquote>
 								</div>
-								<!-- <div class="col-md-3 col-sm-12">
-									<blockquote>
-										<i class="glyphicon glyphicon-home"></i>
-										<a href="<?=base_url('company')?>">Company</a>
-									</blockquote>
-								</div> -->
 								<div class="col-md-3 col-sm-12"></div>
 								<div class="col-md-3 col-sm-12"></div>
 							</div>
@@ -179,7 +173,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="row">
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
-										<i class="glyphicon glyphicon-user"></i>
+										<i class="glyphicon glyphicon-eye-open"></i>
 										<a href="<?=base_url('brand')?>">Brand</a>
 									</blockquote>
 								</div>
@@ -191,13 +185,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
-										<i class="glyphicon glyphicon-user"></i>
+										<i class="glyphicon glyphicon-adjust"></i>
 										<a href="<?=base_url('attribute/select/1')?>">Color</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
-										<i class="glyphicon glyphicon-home"></i>
+										<i class="glyphicon glyphicon-tint"></i>
 										<a href="<?=base_url('attribute/select/2')?>">Style</a>
 									</blockquote>
 								</div>
@@ -205,25 +199,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="row">
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
-										<i class="glyphicon glyphicon-home"></i>
+										<i class="glyphicon glyphicon-gift"></i>
 										<a href="<?=base_url('attribute/select/3')?>">Usage</a>
 									</blockquote>
 								</div>
                                 <div class="col-md-3 col-sm-12">
                                     <blockquote>
-                                        <i class="glyphicon glyphicon-home"></i>
+                                        <i class="glyphicon glyphicon-leaf"></i>
                                         <a href="<?=base_url('attribute/select/4')?>">Material</a>
                                     </blockquote>
                                 </div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
-										<i class="glyphicon glyphicon-barcode"></i>
+										<i class="glyphicon glyphicon-search"></i>
 										<a href="<?=base_url('attribute/select/5')?>">Keyword</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
-										<i class="glyphicon glyphicon-th-list"></i>
+										<i class="glyphicon glyphicon-resize-horizontal"></i>
 										<a href="<?=base_url('attribute/select/6')?>">Size</a>
 									</blockquote>
 								</div>
@@ -281,16 +275,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<a href="<?=base_url('commissionchecklist/select/invoice_commission_status/processing')?>">Commission checklist</a>
 									</blockquote>
 								</div>
-								<div class="col-md-3 col-sm-12">
-									<blockquote>
-										<i class="glyphicon glyphicon-ok-circle"></i>
-										<a href="<?=base_url('deliverychecklist/select/invoice_status/processing')?>">Delivery checklist</a>
-									</blockquote>
-								</div>
 								<div class="col-md-3 col-sm-12"></div>
 							</div>
 
 							<div class="hr"></div>
+
+                            <h4>Operation</h4>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <blockquote>
+                                        <i class="glyphicon glyphicon-ok-circle"></i>
+                                        <a href="<?=base_url('deliverychecklist/select/deliverynote_status/processing')?>">Delivery checklist</a>
+                                    </blockquote>
+                                </div>
+                                <div class="col-md-3 col-sm-12"></div>
+                                <div class="col-md-3 col-sm-12"></div>
+                                <div class="col-md-3 col-sm-12"></div>
+                            </div>
+
+                            <div class="hr"></div>
 							
 							<h4>Role / User</h4>
 							<div class="row">

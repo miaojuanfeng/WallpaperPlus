@@ -949,7 +949,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->purchaseorder_reminder_date?></td>
 												<td><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total)?></td>
 												<td><?=ucfirst($value->purchaseorder_status)?></td>
-												<td></td>
+												<td><?=ucfirst($value->purchaseorder_arrive_status)?></td>
 												<td class="text-right">
 													<a target="_blank" href="<?=base_url('/assets/images/pdf/purchaseorder/'.$value->purchaseorder_number.'.pdf')?>" data-toggle="tooltip" title="Print">
 														<i class="glyphicon glyphicon-print"></i>
@@ -1008,7 +1008,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
                                     <blockquote>
                                         <i class="glyphicon glyphicon-ok-circle"></i>
-                                        <a href="<?=base_url('waybillin')?>">Purchase order waybill</a>
+                                        <a href="<?=base_url('waybill')?>">Purchase order waybill</a>
                                     </blockquote>
                                 </div>
 								<div class="col-md-3 col-sm-12"></div>

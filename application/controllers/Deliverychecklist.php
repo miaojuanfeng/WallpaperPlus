@@ -14,9 +14,8 @@ class Deliverychecklist extends CI_Controller {
 		convert_get_slashes_pretty_link();
 		check_permission();
 
-		$this->load->model('invoicechecklist_model');
 		$this->load->model('salesorder_model');
-		$this->load->model('invoice_model');
+		$this->load->model('deliverynote_model');
 		$this->load->model('user_model');
 	}
 
@@ -33,6 +32,8 @@ class Deliverychecklist extends CI_Controller {
 
 			/* set salesorder status */
 			set_salesorder_status_complete(get_invoice($thisPOST['invoice_id'])->invoice_salesorder_id);
+			/* set delivery note status */
+//            set_delivery_note_status_complete()
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
 			$thisLog['log_permission_action'] = $this->router->fetch_method();
@@ -92,18 +93,18 @@ class Deliverychecklist extends CI_Controller {
 		
 		$thisSelect = array(
 			'where' => $thisGET,
-			'group' => 'invoice_number',
+			'group' => 'deliverynote_number',
 			'limit' => $per_page,
 			'return' => 'result'
 		);
-		$data['invoices'] = $this->invoicechecklist_model->select($thisSelect);
+		$data['deliverynotes'] = $this->deliverynote_model->select($thisSelect);
 
 		$thisSelect = array(
 			'where' => $thisGET,
-			'group' => 'invoice_number',
+			'group' => 'deliverynote_number',
 			'return' => 'num_rows'
 		);
-		$data['num_rows'] = $this->invoicechecklist_model->select($thisSelect);
+		$data['num_rows'] = $this->deliverynote_model->select($thisSelect);
 
 		/* status */
 		$data['statuss'] = (object)array(

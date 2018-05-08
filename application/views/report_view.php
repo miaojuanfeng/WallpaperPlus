@@ -210,7 +210,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="row">
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
-										<i class="glyphicon glyphicon-user"></i>
+										<i class="glyphicon glyphicon-check"></i>
 										<a href="<?=base_url('stockreport')?>">Stock report</a>
 										<small>Show stock status report</small>
 									</blockquote>

@@ -299,7 +299,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</select>
 														</div>
 													</div>
-													<div class="row">
+                                                    <!-- <div class="row">
 														<div class="col-sm-2"><h6>Customer</h6></div>
 														<div class="col-sm-2">
 															<input type="text" name="invoice_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
@@ -328,7 +328,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 													</div>
-													<!-- <div class="row">
+													<div class="row">
 														<div class="col-sm-2"><h6>Product</h6></div>
 														<div class="col-sm-2">
 															<input type="text" name="quotationitem_product_code_like" class="form-control input-sm" placeholder="Item Code" value="" />
@@ -382,17 +382,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</tr>
 										</thead>
 										<tbody>
-											<?php foreach($invoices as $key => $value){ ?>
+											<?php foreach($deliverynotes as $key => $value){ break; ?>
 											<tr>
-												<td><input<?=($this->uri->uri_to_assoc()['invoice_status'] == 'complete') ? ' disabled="disabled" checked="checked"' : ''?> name="checklistStatus-<?=$value->invoice_id?>" type="checkbox" /></td>
+												<td><input<?=($this->uri->uri_to_assoc()['deliverynote_status'] == 'complete') ? ' disabled="disabled" checked="checked"' : ''?> name="checklistStatus-<?=$value->deliverynote_id?>" type="checkbox" /></td>
 												<td>
-													<a href="<?=base_url('invoice/update/invoice_id/'.$value->invoice_id)?>">
-														<?=$value->invoice_number?>
+													<a href="<?=base_url('deliverynote/update/deliverynote_id/'.$value->deliverynote_id)?>">
+														<?=$value->deliverynote_number?>
 													</a>
 												</td>
 												<td>
 													<?php if($value->invoice_salesorder_id != 0){ ?>
-													<a href="<?=base_url('salesorder/update/salesorder_id/'.$value->invoice_salesorder_id)?>"><?=get_salesorder($value->invoice_salesorder_id)->salesorder_number?></a>
+													<a href="<?=base_url('deliverynote/update/deliverynote_id/'.$value->invoice_salesorder_id)?>"><?=get_salesorder($value->invoice_salesorder_id)->deliverynote_number?></a>
 													<?php } ?>
 												</td>
 												<th>報關號碼</th>
@@ -403,7 +403,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</tr>
 											<?php } ?>
 
-											<?php if(!$invoices){ ?>
+											<?php if(!$deliverynotes){ ?>
 											<tr>
 												<td colspan="15">No record found</td>
 											</tr>

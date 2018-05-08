@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Waybillout_model extends CI_Model {
+class Waybill_model extends CI_Model {
 	
 	function __construct()
 	{
@@ -11,10 +11,10 @@ class Waybillout_model extends CI_Model {
 
 	function update($data = array())
 	{
-		$data['waybillout_modify'] = date('Y-m-d H:i:s');
-		$data = get_array_prefix('waybillout_', $data);
-		$this->db->where('waybillout_id', $data['waybillout_id']);
-		$thisResult = $this->db->update('waybillout', $data);
+		$data['waybill_modify'] = date('Y-m-d H:i:s');
+		$data = get_array_prefix('waybill_', $data);
+		$this->db->where('waybill_id', $data['waybill_id']);
+		$thisResult = $this->db->update('waybill', $data);
 
 		$log_SQL = $this->session->userdata('log_SQL');
 		$log_SQL[] = array(
@@ -26,11 +26,11 @@ class Waybillout_model extends CI_Model {
 
 	function delete($data = array())
 	{
-		$data['waybillout_modify'] = date('Y-m-d H:i:s');
-		$data['waybillout_deleted'] = 'Y';
-		$data = get_array_prefix('waybillout_', $data);
-		$this->db->where('waybillout_id', $data['waybillout_id']);
-		$thisResult = $this->db->update('waybillout', $data);
+		$data['waybill_modify'] = date('Y-m-d H:i:s');
+		$data['waybill_deleted'] = 'Y';
+		$data = get_array_prefix('waybill_', $data);
+		$this->db->where('waybill_id', $data['waybill_id']);
+		$thisResult = $this->db->update('waybill', $data);
 
 		$log_SQL = $this->session->userdata('log_SQL');
 		$log_SQL[] = array(
@@ -42,11 +42,11 @@ class Waybillout_model extends CI_Model {
 
 	function insert($data = array())
 	{
-		$data['waybillout_create'] = date('Y-m-d H:i:s');
-		$data['waybillout_modify'] = date('Y-m-d H:i:s');
-		$data['waybillout_deleted'] = 'N';
-		$data = get_array_prefix('waybillout_', $data);
-		$thisResult = $this->db->insert('waybillout', $data);
+		$data['waybill_create'] = date('Y-m-d H:i:s');
+		$data['waybill_modify'] = date('Y-m-d H:i:s');
+		$data['waybill_deleted'] = 'N';
+		$data = get_array_prefix('waybill_', $data);
+		$thisResult = $this->db->insert('waybill', $data);
 		$thisInsertId = $this->db->insert_id();
 
 		$log_SQL = $this->session->userdata('log_SQL');
@@ -66,18 +66,18 @@ class Waybillout_model extends CI_Model {
 		if(isset($data['where'])){
 			foreach($data['where'] as $key => $value){
 				switch($key){
-					case 'waybillout_id':
-					case 'waybillout_number':
+					case 'waybill_id':
+					case 'waybill_number':
 						$thisField = $key;
 						$this->db->where($thisField, urldecode($value));
 						break;
-					case 'waybillout_id_like':
-					case 'waybillout_number_like':
+					case 'waybill_id_like':
+					case 'waybill_number_like':
 						$thisField = str_replace('_like', '', $key);
 						$this->db->like($thisField, urldecode($value));
 						break;
-					case 'waybillout_id_noteq':
-					case 'waybillout_number_noteq':
+					case 'waybill_id_noteq':
+					case 'waybill_number_noteq':
 						$thisField = str_replace('_noteq', '', $key);
 						$this->db->where($thisField.' !=', urldecode($value));
 						break;
@@ -111,8 +111,8 @@ class Waybillout_model extends CI_Model {
 			}
 		}
 
-		$this->db->where('waybillout_deleted', 'N');
-		$this->db->from('waybillout');
+		$this->db->where('waybill_deleted', 'N');
+		$this->db->from('waybill');
 		$query = $this->db->get();
 		// echo $this->db->last_query();
 		// exit;
@@ -135,7 +135,7 @@ class Waybillout_model extends CI_Model {
 
 	function structure()
 	{
-		$query = $this->db->query("show full columns from waybillout");
+		$query = $this->db->query("show full columns from waybill");
 		return $query->result();
 	}
  

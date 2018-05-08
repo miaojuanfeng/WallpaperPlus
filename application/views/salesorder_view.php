@@ -752,6 +752,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</select>
 														</div>
 													</div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2"><h6>Purchase Order</h6></div>
+                                                        <div class="col-sm-2">
+                                                            <input type="text" name="quotation_number_like" class="form-control input-sm" placeholder="PONo" value="" />
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select id="salesorder_status" name="salesorder_status" data-placeholder="PO Status" class="chosen-select">
+                                                                <option value></option>
+                                                                <?php foreach($statuss as $key => $value){ ?>
+                                                                    <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select id="salesorder_status" name="salesorder_status" data-placeholder="Arrive Status" class="chosen-select">
+                                                                <option value></option>
+                                                                <?php foreach($statuss as $key => $value){ ?>
+                                                                    <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2"><h6>Invoice Order</h6></div>
+                                                        <div class="col-sm-2">
+                                                            <input type="text" name="quotation_number_like" class="form-control input-sm" placeholder="INNo" value="" />
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select id="salesorder_status" name="salesorder_status" data-placeholder="IN Status" class="chosen-select">
+                                                                <option value></option>
+                                                                <?php foreach($statuss as $key => $value){ ?>
+                                                                    <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 													<!-- <div class="row">
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2">
@@ -847,6 +883,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>SO No</th>
 												<th>QO No</th>
 												<th>PO No</th>
+                                                <th>IN No</th>
 												<th>Create</th>
 												<th>Customer</th>
 												<th>Project</th>
@@ -875,10 +912,87 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><a href="<?=base_url('quotation/update/quotation_id/'.$value->salesorder_quotation_id)?>"><?=get_quotation($value->salesorder_quotation_id)->quotation_number?></a></td>
 												<td>
 													<?php foreach($value->purchaseorders as $key1 => $value1){ ?>
-													<div><a href="<?=base_url('purchaseorder/update/purchaseorder_id/'.$value1->purchaseorder_id)?>"><?=$value1->purchaseorder_number?></a></div>
+													<div class="no-wrap">
+                                                        <?php
+                                                        switch($value1->purchaseorder_status){
+                                                            case 'complete':
+                                                                echo '<a data-toggle="tooltip" title="Complete">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-ok-circle"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                            case 'cancel':
+                                                                echo '<a data-toggle="tooltip" title="Cancel">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-remove-circle"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                            case 'partial':
+                                                                echo '<a data-toggle="tooltip" title="Partial">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-adjust"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                            default:
+                                                                echo '<a data-toggle="tooltip" title="Processing">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-play-circle"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                        }
+                                                        echo " ";
+                                                        switch($value1->purchaseorder_arrive_status){
+                                                            case 'complete':
+                                                                echo '<a data-toggle="tooltip" title="Complete">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-ok-circle"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                            case 'cancel':
+                                                                echo '<a data-toggle="tooltip" title="Cancel">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-remove-circle"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                            case 'partial':
+                                                                echo '<a data-toggle="tooltip" title="Partial">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-adjust"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                            default:
+                                                                echo '<a data-toggle="tooltip" title="Processing">';
+                                                                echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-play-circle"></i></span>';
+                                                                echo '</a>';
+                                                                break;
+                                                        }
+                                                        ?>
+                                                        <a href="<?=base_url('purchaseorder/update/purchaseorder_id/'.$value1->purchaseorder_id)?>"><?=$value1->purchaseorder_number?></a></div>
 													<?php } ?>
-													<!-- <a href="<?=base_url('purchaseorder/insert/salesorder_id/'.$value->salesorder_id)?>"><i class="glyphicon glyphicon-plus"></i> PO</a> -->
 												</td>
+                                                <td>
+                                                    <?php foreach($value->invoiceorders as $key1 => $value1){ ?>
+                                                        <div class="no-wrap">
+                                                            <?php
+                                                            switch($value1->invoice_status){
+                                                                case 'complete':
+                                                                    echo '<a data-toggle="tooltip" title="Complete">';
+                                                                    echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-ok-circle"></i></span>';
+                                                                    echo '</a>';
+                                                                    break;
+                                                                case 'cancel':
+                                                                    echo '<a data-toggle="tooltip" title="Cancel">';
+                                                                    echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-remove-circle"></i></span>';
+                                                                    echo '</a>';
+                                                                    break;
+                                                                case 'partial':
+                                                                    echo '<a data-toggle="tooltip" title="Partial">';
+                                                                    echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-adjust"></i></span>';
+                                                                    echo '</a>';
+                                                                    break;
+                                                                default:
+                                                                    echo '<a data-toggle="tooltip" title="Processing">';
+                                                                    echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-play-circle"></i></span>';
+                                                                    echo '</a>';
+                                                                    break;
+                                                            }
+                                                            ?>
+                                                            <a href="<?=base_url('invoice/update/invoice_id/'.$value1->invoice_id)?>"><?=$value1->invoice_number?></a></div>
+                                                    <?php } ?>
+                                                </td>
 												<td><?=convert_datetime_to_date($value->salesorder_create)?></td>
 												<td><?=$value->salesorder_client_company_name?></td>
 												<td><?=$value->salesorder_project_name?></td>

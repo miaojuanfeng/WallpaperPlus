@@ -115,6 +115,9 @@ small {
 .width100percent {
 	width: 100% !important;
 }
+.no-wrap{
+	white-space:nowrap;
+}
 
 /*===============================================*/
 

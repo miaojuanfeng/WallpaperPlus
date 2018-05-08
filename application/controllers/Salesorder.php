@@ -19,6 +19,7 @@ class Salesorder extends CI_Controller {
 		$this->load->model('quotation_model');
 		$this->load->model('client_model');
 		$this->load->model('purchaseorder_model');
+        $this->load->model('invoice_model');
 		$this->load->model('product_model');
 		$this->load->model('user_model');
 		$this->load->model('quotationitem_model');
@@ -378,7 +379,17 @@ class Salesorder extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-			$data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
+            $data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
+            /* invoice */
+            $thisSelect = array(
+                'where' => array(
+                    'invoice_salesorder_id' => $value->salesorder_id,
+                    'invoice_status_noteq' => 'cancel'
+                ),
+                'return' => 'result'
+            );
+            $data['invoiceorders'] = $this->invoice_model->select($thisSelect);
+            $data['salesorders'][$key]->invoiceorders = $data['invoiceorders'];
 		}
 
 		$thisSelect = array(

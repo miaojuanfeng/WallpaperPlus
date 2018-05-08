@@ -1314,6 +1314,25 @@ if(!function_exists('set_salesorder_status_complete'))
 	}
 }
 
+if(!function_exists('set_delivery_note_status_complete'))
+{
+    function set_delivery_note_status_complete($thisSalesorderId){
+        $CI =& get_instance();
+        $CI->load->model('deliverynote_model');
+
+        $thisData['deliverynote_status'] = 'complete';
+        $CI->db->where('deliverynote_id', $thisSalesorderId);
+        $thisResult = $CI->db->update('deliverynote', $thisData);
+
+        $log_SQL = $CI->session->userdata('log_SQL');
+        $log_SQL[] = array(
+            'result' => $thisResult,
+            'sql' => $CI->db->last_query()
+        );
+        $CI->session->set_userdata('log_SQL', $log_SQL);
+    }
+}
+
 if(!function_exists('set_log'))
 {
 	function set_log($thisLog = array()){
