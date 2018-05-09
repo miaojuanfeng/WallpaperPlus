@@ -45,7 +45,7 @@ class Deliverynote extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/deliverynote/header/deliverynote_id/'.$thisPOST['deliverynote_id']).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/deliverynote/content/deliverynote_id/'.$thisPOST['deliverynote_id']).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/deliverynote/'.$thisPOST['deliverynote_number'].'.pdf';
@@ -178,7 +178,7 @@ class Deliverynote extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/deliverynote/header/deliverynote_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/deliverynote/content/deliverynote_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/salesorder/'.$thisPOST['deliverynote_number'].'.pdf';

@@ -69,7 +69,7 @@ class Quotation extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/quotation/header/quotation_id/'.$thisPOST['quotation_id']).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/quotation/content/quotation_id/'.$thisPOST['quotation_id']).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/quotation/'.$thisPOST['quotation_number'].'-v'.$thisPOST['quotation_version'].'.pdf';
@@ -252,7 +252,7 @@ class Quotation extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/quotation/header/quotation_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/quotation/content/quotation_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/quotation/'.$thisPOST['quotation_number'].'-v'.$thisPOST['quotation_version'].'.pdf';
@@ -461,7 +461,7 @@ class Quotation extends CI_Controller {
 			$this->quotation_model->update($thisPOST);
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/quotation/header/quotation_id/'.$thisPOST['quotation_id']).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/quotation/content/quotation_id/'.$thisPOST['quotation_id']).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/quotation/'.$thisPOST['quotation_number'].'-v'.$thisPOST['quotation_version'].'.pdf';
@@ -525,7 +525,7 @@ class Quotation extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/quotation/header/quotation_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/quotation/content/quotation_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/quotation/'.$thisPOST['quotation_number'].'-v'.$thisPOST['quotation_version'].'.pdf';

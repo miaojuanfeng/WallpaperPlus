@@ -45,7 +45,7 @@ class Invoice extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/invoice/header/invoice_id/'.$thisPOST['invoice_id']).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/invoice/content/invoice_id/'.$thisPOST['invoice_id']).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/invoice/'.$thisPOST['invoice_number'].'.pdf';
@@ -178,7 +178,7 @@ class Invoice extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/invoice/header/invoice_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/invoice/content/invoice_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/invoice/'.$thisPOST['invoice_number'].'.pdf';

@@ -45,7 +45,7 @@ class Purchaseorder extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/purchaseorder/header/purchaseorder_id/'.$thisPOST['purchaseorder_id']).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/purchaseorder/content/purchaseorder_id/'.$thisPOST['purchaseorder_id']).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/purchaseorder/'.$thisPOST['purchaseorder_number'].'.pdf';
@@ -190,7 +190,7 @@ class Purchaseorder extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/purchaseorder/header/purchaseorder_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/purchaseorder/content/purchaseorder_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/salesorder/'.$thisPOST['purchaseorder_number'].'.pdf';

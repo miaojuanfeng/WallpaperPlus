@@ -45,7 +45,7 @@ class Proformainvoice extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/proformainvoice/header/proformainvoice_id/'.$thisPOST['proformainvoice_id']).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/proformainvoice/content/proformainvoice_id/'.$thisPOST['proformainvoice_id']).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/proformainvoice/'.$thisPOST['proformainvoice_number'].'.pdf';
@@ -178,7 +178,7 @@ class Proformainvoice extends CI_Controller {
 			}
 
 			/* print as PDF */
-			$wkhtmltopdf  = '/home/chuyan/www/www/wkhtmltopdf-i386';
+			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/proformainvoice/header/proformainvoice_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/proformainvoice/content/proformainvoice_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' assets/images/pdf/proformainvoice/'.$thisPOST['proformainvoice_number'].'.pdf';
