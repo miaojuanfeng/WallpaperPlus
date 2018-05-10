@@ -305,6 +305,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 ?>
                                             </select>
                                         </p>
+                                        <p class="form-group">
+                                            <label for="product_team_id">Team <span class="highlight">*</span></label>
+                                            <select id="product_team_id" name="product_team_id" data-placeholder="Team" class="chosen-select required">
+                                                <option value></option>
+                                                <?php
+                                                foreach($teams as $key1 => $value1){
+                                                    $selected = ($value1->team_id == $product->product_team_id) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value1->team_id.'"'.$selected.'>'.$value1->team_name.'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </p>
 										<!-- <p class="form-group">
 											<label for="product_vendor_id">Vendor <span class="highlight">*</span></label>
 											<select id="product_vendor_id" name="product_vendor_id" data-placeholder="Vendor" class="chosen-select required">

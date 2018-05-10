@@ -164,7 +164,7 @@ class Proformainvoice extends CI_Controller {
 			$this->salesorder_model->update($thisPOST);
 
 			/* proformainvoice */
-			$thisPOST['proformainvoice_serial'] = sprintf("%04s", (get_proformainvoice_serial() + 1));
+			$thisPOST['proformainvoice_serial'] = sprintf("%03s", (get_proformainvoice_serial() + 1));
 			$thisPOST['proformainvoice_number'] = 'PI'.date('ym').$thisPOST['proformainvoice_serial'];
 			$thisPOST['proformainvoice_version'] = 1;
 			$thisPOST['proformainvoice_status'] = 'processing';

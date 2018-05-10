@@ -13,6 +13,7 @@ class User extends CI_Controller {
 
 		$this->load->model('role_model');
 		$this->load->model('user_model');
+        $this->load->model('team_model');
 		$this->load->model('z_role_user_model');
 	}
 
@@ -64,6 +65,12 @@ class User extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['z_role_user_user_ids'] = convert_object_to_array($this->z_role_user_model->select($thisSelect), 'z_role_user_user_id');
+
+            /* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
 
 			$thisSelect = array(
 				'where' => array(
@@ -131,6 +138,12 @@ class User extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['z_role_user_user_ids'] = convert_object_to_array($this->z_role_user_model->select($thisSelect), 'z_role_user_user_id');
+
+			/* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
 
 			$thisSelect = array(
 				'where' => array(

@@ -29,6 +29,7 @@ class Purchaseorderchecklist extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
+            $thisPOST['purchaseorder_confirmed_date'] = Date('Y-m-d');
 			$this->purchaseorderchecklist_model->update($thisPOST);
 
 			/* set salesorder status */

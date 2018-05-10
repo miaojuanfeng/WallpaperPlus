@@ -118,5 +118,11 @@ $(function(){
 		thisRecordId = $(this).attr('rel');
 		$('.modal-body').load('/load/', {'thisTableId': thisTableId, 'thisRecordId': thisRecordId, 't': timestamp()});
 	});
+
+
+    $('.popup-view').animate({right:'15px'}, 1000);
+    $('.popup-view .popup-close').click(function(){
+        $('.popup-view').hide();
+    });
 	
 });

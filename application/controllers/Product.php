@@ -17,6 +17,7 @@ class Product extends CI_Controller {
         $this->load->model('vendor_model');
 		$this->load->model('type_model');
 		$this->load->model('unit_model');
+        $this->load->model('team_model');
 	}
 
 	public function index()
@@ -70,6 +71,12 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['units'] = $this->unit_model->select($thisSelect);
+
+            /* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
 
 			/* category */
 //			$thisSelect = array(
@@ -152,6 +159,12 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['units'] = $this->unit_model->select($thisSelect);
+
+            /* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
 
 			/* category */
 //			$thisSelect = array(

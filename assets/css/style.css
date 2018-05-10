@@ -119,6 +119,12 @@ small {
 	white-space:nowrap;
 }
 
+.popup-view{ width:260px; height:160px; background:#D8D8D8; position:fixed; right:-262px; bottom:10px; z-index: 99;}
+.popup-view .popup-header{background-color: #cab132; height: 25px;}
+.popup-view .popup-header .popup-close{ font-size:12px; color:#fff; text-decoration:none; width:40px; height:22px; line-height:22px; text-align: center; display:block; float:right;}
+.popup-view .popup-list-area{overflow-y: auto; height: 135px;}
+.popup-view .popup-list-area table{margin-bottom: 0;}
+
 /*===============================================*/
 
 /* bootstrap borderless */

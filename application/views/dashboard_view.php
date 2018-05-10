@@ -148,8 +148,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<div class="clearfix"></div>
 									</div>
 									<div class="dashboard-box-bottom">
-										<span class="pull-left">More</span>
-										<span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        <a href="<?=base_url('salesorder/select')?>">
+                                            <span class="pull-left">More</span>
+                                            <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        </a>
 										<div class="clearfix"></div>
 									</div>
 								</div>
@@ -163,8 +165,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<div class="clearfix"></div>
 									</div>
 									<div class="dashboard-box-bottom">
-										<span class="pull-left">More</span>
-										<span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        <a href="<?=base_url('quotation/select')?>">
+                                            <span class="pull-left">More</span>
+                                            <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        </a>
 										<div class="clearfix"></div>
 									</div>
 								</div>
@@ -178,8 +182,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<div class="clearfix"></div>
 									</div>
 									<div class="dashboard-box-bottom">
-										<span class="pull-left">More</span>
-										<span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        <a href="<?=base_url('purchaseorder/select')?>">
+                                            <span class="pull-left">More</span>
+                                            <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        </a>
 										<div class="clearfix"></div>
 									</div>
 								</div>
@@ -193,8 +199,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<div class="clearfix"></div>
 									</div>
 									<div class="dashboard-box-bottom">
-										<span class="pull-left">More</span>
-										<span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        <a href="<?=base_url('invoice/select')?>">
+                                            <span class="pull-left">More</span>
+                                            <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                        </a>
 										<div class="clearfix"></div>
 									</div>
 								</div>
@@ -569,7 +577,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 								<div class="col-md-6 col-sm-12">
 									<div class="list-area">
-										<h4 class="corpcolor-font"><i class="glyphicon glyphicon-bullhorn"></i> Processing invoice <small>View <a href="<?=base_url('invoicechecklist/select/invoice_status/processing')?>"><u>checklist</u></a> here</small></h4>
+										<h4 class="corpcolor-font"><i class="glyphicon glyphicon-bullhorn"></i> Processing invoice order <small>View <a href="<?=base_url('invoicechecklist/select/invoice_status/processing')?>"><u>checklist</u></a> here</small></h4>
 										<table class="table table-striped table-bordered">
 											<thead>
 												<tr>

@@ -101,7 +101,11 @@ class Dashboard extends CI_Controller {
 		$data['countInvoiceTotal'] = $this->invoice_model->select($thisSelect);
 		/*************************** Dashboard ***************************/
 
+        $thisGET = $this->uri->uri_to_assoc();
+
 		/*************************** Summary ***************************/
+        $thisGET['salesorder_status'] = 'processing';
+
 		$thisSelect = array(
 			'where' => $thisGET,
 			'group' => 'salesorder_number',

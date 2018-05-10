@@ -233,7 +233,7 @@ class Quotation extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
-			$thisPOST['quotation_serial'] = sprintf("%04s", (get_quotation_serial() + 1));
+			$thisPOST['quotation_serial'] = sprintf("%03s", (get_quotation_serial() + 1));
 			$thisPOST['quotation_number'] = 'QO'.date('ym').$thisPOST['quotation_serial'];
 			$thisPOST['quotation_version'] = 1;
 			$thisPOST['quotation_id'] = $thisInsertId = $this->quotation_model->insert($thisPOST);
@@ -505,7 +505,7 @@ class Quotation extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$thisPOST['quotation_id'] = '';
-			$thisPOST['quotation_serial'] = sprintf("%04s", (get_quotation_serial() + 1));
+			$thisPOST['quotation_serial'] = sprintf("%03s", (get_quotation_serial() + 1));
 			$thisPOST['quotation_number'] = 'QO'.date('ym').$thisPOST['quotation_serial'];
 			$thisPOST['quotation_version'] = 1;
 			$thisPOST['quotation_id'] = $thisInsertId = $this->quotation_model->insert($thisPOST);

@@ -56,10 +56,13 @@ class Excel extends CI_Controller {
         $this->db->query("delete from unit where 1");
         $this->db->query("alter table unit AUTO_INCREMENT=1");
 
-        $this->p1();
+//        $this->p1();
 //        $this->p2();
 //        $this->p3();
-//        $this->p4();
+        $this->p4();
+        $this->p3();
+        $this->p2();
+        $this->p1();
     }
 
     private function excel_get_value($filename, $encode='utf-8') {
@@ -110,6 +113,14 @@ class Excel extends CI_Controller {
                 $this->vendor_cache[$vendor_company] = $vendor_id;
             }
             /*
+             * 获取team_id
+             */
+            if( !empty($vendor_company_code[0]) && strtoupper($vendor_company_code[0]) == 'E' ){
+                $product_team_id = 1;
+            }else{
+                $product_team_id = 2;
+            }
+            /*
              * 获取unit
              */
             $product_unit = '';
@@ -137,10 +148,11 @@ class Excel extends CI_Controller {
                 'product_price_hkd' => $value[4],
                 'product_unit_id' => $unit_id,
                 'product_weight' => $value[11].'Kg',
-                'product_detail' => $value[6]
+                'product_detail' => $value[6],
+                'product_team_id' => $product_team_id
             );
-            $this->product_model->insert($product);
-            break;
+            $product_id = $this->product_model->insert($product);
+            echo "Done: ".$product_id;
         }
     }
 
@@ -165,6 +177,14 @@ class Excel extends CI_Controller {
                 );
                 $vendor_id = $this->vendor_model->insert($vendor);
                 $this->vendor_cache[$vendor_company] = $vendor_id;
+            }
+            /*
+             * 获取team_id
+             */
+            if( !empty($vendor_company_code[0]) && strtoupper($vendor_company_code[0]) == 'E' ){
+                $product_team_id = 1;
+            }else{
+                $product_team_id = 2;
             }
             /*
              * 获取unit
@@ -194,10 +214,11 @@ class Excel extends CI_Controller {
                 'product_price_hkd' => $value[11],
                 'product_unit_id' => $unit_id,
                 'product_weight' => $value[10].'Kg',
-                'product_detail' => $value[13]."\n\n".$value[14]
+                'product_detail' => $value[13]."\n\n".$value[14],
+                'product_team_id' => $product_team_id
             );
-            $this->product_model->insert($product);
-            break;
+            $product_id = $this->product_model->insert($product);
+            echo "Done: ".$product_id;
         }
     }
 
@@ -210,8 +231,13 @@ class Excel extends CI_Controller {
              * 获取vendor_id
              */
             $vendor_company = $value[0];
-            $vendor_company_code = explode('-', $vendor_company)[0];
-            $vendor_company_name = explode('-', $vendor_company)[1];
+            if( strpos($vendor_company, '-') !== false ) {
+                $vendor_company_code = explode('-', $vendor_company)[0];
+                $vendor_company_name = explode('-', $vendor_company)[1];
+            }else{
+                $vendor_company_code = '';
+                $vendor_company_name = $vendor_company;
+            }
             if( isset($this->vendor_cache[$vendor_company]) ){
                 $vendor_id = $this->vendor_cache[$vendor_company];
             }else{
@@ -239,6 +265,14 @@ class Excel extends CI_Controller {
                 $this->unit_cache[$product_unit] = $unit_id;
             }
             /*
+             * 获取team_id
+             */
+            if( !empty($vendor_company_code[0]) && strtoupper($vendor_company_code[0]) == 'E' ){
+                $product_team_id = 1;
+            }else{
+                $product_team_id = 2;
+            }
+            /*
              * 获取product
              */
             //还未保存size
@@ -251,10 +285,11 @@ class Excel extends CI_Controller {
                 'product_price_hkd' => $value[8],
                 'product_unit_id' => $unit_id,
                 'product_weight' => $value[10].'Kg',
-                'product_detail' => $value[12]."\n\n".$value[13]
+                'product_detail' => $value[12]."\n\n".$value[13],
+                'product_team_id' => $product_team_id
             );
-            $this->product_model->insert($product);
-            break;
+            $product_id = $this->product_model->insert($product);
+            echo "Done: ".$product_id;
         }
     }
 
@@ -279,6 +314,14 @@ class Excel extends CI_Controller {
                 );
                 $vendor_id = $this->vendor_model->insert($vendor);
                 $this->vendor_cache[$vendor_company] = $vendor_id;
+            }
+            /*
+             * 获取team_id
+             */
+            if( !empty($vendor_company_code[0]) && strtoupper($vendor_company_code[0]) == 'E' ){
+                $product_team_id = 1;
+            }else{
+                $product_team_id = 2;
             }
             /*
              * 获取unit
@@ -306,9 +349,11 @@ class Excel extends CI_Controller {
                 'product_price_hkd' => $value[6],
                 'product_unit_id' => $unit_id,
                 'product_weight' => $value[8].'Kg',
-                'product_detail' => $value[9]."\n\n".$value[10]
+                'product_detail' => $value[9]."\n\n".$value[10],
+                'product_team_id' => $product_team_id
             );
-            $this->product_model->insert($product);
+            $product_id = $this->product_model->insert($product);
+            echo "Done: ".$product_id;
         }
     }
 

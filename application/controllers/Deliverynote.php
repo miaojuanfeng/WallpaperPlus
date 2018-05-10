@@ -164,7 +164,7 @@ class Deliverynote extends CI_Controller {
 			$this->salesorder_model->update($thisPOST);
 
 			/* deliverynote */
-			$thisPOST['deliverynote_serial'] = sprintf("%04s", (get_deliverynote_serial() + 1));
+			$thisPOST['deliverynote_serial'] = sprintf("%03s", (get_deliverynote_serial() + 1));
 			$thisPOST['deliverynote_number'] = 'DN'.date('ym').$thisPOST['deliverynote_serial'];
 			$thisPOST['deliverynote_version'] = 1;
 			$thisPOST['deliverynote_status'] = 'processing';
@@ -392,6 +392,16 @@ class Deliverynote extends CI_Controller {
 			(object)array('status_name' => 'complete'),
 			(object)array('status_name' => 'cancel')
 		);
+
+        /* popup-list */
+        $thisSelect = array(
+            'where' => array('deliverynote_status' => 'complete'),
+            'group' => 'deliverynote_number',
+            'order' => 'deliverynote_confirmed_date',
+            'ascend' => 'desc',
+            'return' => 'result'
+        );
+        $data['popup_list'] = $this->deliverynote_model->select($thisSelect);
 
 		/* user */
 		$thisSelect = array(

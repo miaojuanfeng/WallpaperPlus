@@ -176,7 +176,7 @@ class Purchaseorder extends CI_Controller {
 			$this->salesorder_model->update($thisPOST);
 
 			/* purchaseorder */
-			$thisPOST['purchaseorder_serial'] = sprintf("%04s", (get_purchaseorder_serial() + 1));
+			$thisPOST['purchaseorder_serial'] = sprintf("%03s", (get_purchaseorder_serial() + 1));
 			$thisPOST['purchaseorder_number'] = 'PO'.date('ym').$thisPOST['purchaseorder_serial'];
 			$thisPOST['purchaseorder_version'] = 1;
 			$thisPOST['purchaseorder_status'] = 'processing';
@@ -441,6 +441,16 @@ class Purchaseorder extends CI_Controller {
 			(object)array('status_name' => 'complete'),
 			(object)array('status_name' => 'cancel')
 		);
+
+        /* popup-list */
+        $thisSelect = array(
+            'where' => array('purchaseorder_status' => 'complete'),
+            'group' => 'purchaseorder_number',
+            'order' => 'purchaseorder_confirmed_date',
+            'ascend' => 'desc',
+            'return' => 'result'
+        );
+        $data['popup_list'] = $this->purchaseorder_model->select($thisSelect);
 
 		/* user */
 		$thisSelect = array(

@@ -164,8 +164,8 @@ class Invoice extends CI_Controller {
 			$this->salesorder_model->update($thisPOST);
 
 			/* invoice */
-			$thisPOST['invoice_serial'] = sprintf("%04s", (get_invoice_serial() + 1));
-			$thisPOST['invoice_number'] = 'IN'.date('ym').$thisPOST['invoice_serial'];
+			$thisPOST['invoice_serial'] = sprintf("%03s", (get_invoice_serial() + 1));
+			$thisPOST['invoice_number'] = 'INV'.date('ym').$thisPOST['invoice_serial'];
 			$thisPOST['invoice_version'] = 1;
 			$thisPOST['invoice_status'] = 'processing';
 			$thisPOST['invoice_id'] = $thisInsertId = $this->invoice_model->insert($thisPOST);
@@ -392,6 +392,16 @@ class Invoice extends CI_Controller {
 			(object)array('status_name' => 'complete'),
 			(object)array('status_name' => 'cancel')
 		);
+
+		/* popup-list */
+        $thisSelect = array(
+            'where' => array('invoice_status' => 'complete'),
+            'group' => 'invoice_number',
+            'order' => 'invoice_confirmed_date',
+            'ascend' => 'desc',
+            'return' => 'result'
+        );
+        $data['popup_list'] = $this->invoice_model->select($thisSelect);
 
 		/* user */
 		$thisSelect = array(

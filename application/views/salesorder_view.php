@@ -299,9 +299,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<p class="form-group">
 											<a class="btn btn-sm btn-primary btn-block<?=check_permission('invoice_insert', 'disable')?>" href="<?=base_url('invoice/insert/salesorder_id/'.$salesorder->salesorder_id)?>" data-toggle="tooltip" title="Invoice"><i class="glyphicon glyphicon-refresh"></i> Invoice</a>
 										</p>
-										<p class="form-group">
+										<!-- <p class="form-group">
 											<a class="btn btn-sm btn-primary btn-block<?=check_permission('proformainvoice_insert', 'disable')?>" href="<?=base_url('proformainvoice/insert/salesorder_id/'.$salesorder->salesorder_id)?>" data-toggle="tooltip" title="Proforma Invoice"><i class="glyphicon glyphicon-refresh"></i> Proforma Invoice</a>
-										</p>
+										</p> -->
 										<p class="form-group">
 											<a class="btn btn-sm btn-primary btn-block<?=check_permission('deliverynote_insert', 'disable')?>" href="<?=base_url('deliverynote/insert/salesorder_id/'.$salesorder->salesorder_id)?>" data-toggle="tooltip" title="Delivery Note"><i class="glyphicon glyphicon-refresh"></i> Delivery Note</a>
 										</p>
@@ -1068,7 +1068,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 				</div>
 			</div>
-
+            <?php if(isset($popup_list) && !empty($popup_list)){ ?>
+                <div class="popup-view">
+                    <div class="popup-header"><a href="javascript:" class="popup-close">Close</a></div>
+                    <div class="popup-list-area">
+                        <form name="list">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>SO No</th>
+                                    <th>Confirmed</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($popup_list as $key => $value){ ?>
+                                    <tr>
+                                        <td><a href="<?=base_url('salesorder/update/salesorder_id/'.$value->salesorder_id)?>" data-toggle="tooltip" title="Update"><?=$value->salesorder_number?></a></td>
+                                        <td><?=$value->salesorder_confirmed_date?></td>
+                                        <td><?=ucfirst($value->salesorder_status)?></td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            <?php } ?>
 		</div>
 		<?php } ?>
 

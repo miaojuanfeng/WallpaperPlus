@@ -57,7 +57,7 @@ class Invoice extends CI_Controller {
 			$this->salesorder_model->update($thisPOST);
 
 			/* invoice */
-			$thisPOST['invoice_serial'] = sprintf("%04s", (get_invoice_serial() + 1));
+			$thisPOST['invoice_serial'] = sprintf("%03s", (get_invoice_serial() + 1));
 			$thisPOST['invoice_number'] = 'SO'.date('ym').$thisPOST['invoice_serial'];
 			$thisPOST['invoice_version'] = 1;
 			$thisPOST['invoice_status'] = 'processing';

@@ -179,7 +179,7 @@ class Salesorder extends CI_Controller {
 			$this->quotation_model->update($thisPOST);
 
 			/* salesorder */
-			$thisPOST['salesorder_serial'] = sprintf("%04s", (get_salesorder_serial() + 1));
+			$thisPOST['salesorder_serial'] = sprintf("%03s", (get_salesorder_serial() + 1));
 			$thisPOST['salesorder_number'] = 'SO'.date('ym').$thisPOST['salesorder_serial'];
 			$thisPOST['salesorder_version'] = 1;
 			$thisPOST['salesorder_status'] = 'processing';
@@ -405,6 +405,16 @@ class Salesorder extends CI_Controller {
 			(object)array('status_name' => 'complete'),
 			(object)array('status_name' => 'cancel')
 		);
+
+        /* popup-list */
+        $thisSelect = array(
+            'where' => array('salesorder_status' => 'complete'),
+            'group' => 'salesorder_number',
+            'order' => 'salesorder_confirmed_date',
+            'ascend' => 'desc',
+            'return' => 'result'
+        );
+        $data['popup_list'] = $this->salesorder_model->select($thisSelect);
 
 		/* user */
 		$thisSelect = array(

@@ -29,6 +29,7 @@ class Invoicechecklist extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
+			$thisPOST['invoice_confirmed_date'] = Date('Y-m-d');
 			$this->invoicechecklist_model->update($thisPOST);
 
 			/* set salesorder status */

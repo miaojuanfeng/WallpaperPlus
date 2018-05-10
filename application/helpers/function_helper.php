@@ -1300,6 +1300,7 @@ if(!function_exists('set_salesorder_status_complete'))
 
 			if($thisSalesorderTotal == $thisSalesorderSumOfInvoicePay){
 				$thisData['salesorder_status'] = 'complete';
+                $thisData['salesorder_confirmed_date'] = Date('Y-m-d');
 				$CI->db->where('salesorder_id', $thisSalesorderId);
 				$thisResult = $CI->db->update('salesorder', $thisData);
 

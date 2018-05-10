@@ -27,6 +27,7 @@ class Deliverychecklist extends CI_Controller {
 	public function update()
 	{
 		if($this->input->post()){
+            $thisPOST['deliverynote_confirmed_date'] = Date('Y-m-d');
 			$thisPOST = $this->input->post();
 
 			/* set delivery note status */

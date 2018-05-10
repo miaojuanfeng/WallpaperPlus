@@ -150,8 +150,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</select>
 										</p>
 										<p class="form-group">
-											<label for="user_team">Team <span class="highlight">*</span></label>
-                                            <select id="user_team" name="user_team[]" data-placeholder="Team" class="chosen-select required" multiple="multiple">
+											<label for="user_team_id">Team <span class="highlight"></span></label>
+                                            <select id="user_team_id" name="user_team_id[]" data-placeholder="Team" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
                                                 foreach($teams as $key => $value){

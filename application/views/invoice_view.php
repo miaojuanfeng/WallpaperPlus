@@ -804,7 +804,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 				</div>
 			</div>
-
+            <?php if(isset($popup_list) && !empty($popup_list)){ ?>
+            <div class="popup-view">
+                <div class="popup-header"><a href="javascript:" class="popup-close">Close</a></div>
+                <div class="popup-list-area">
+                    <form name="list">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>IN No</th>
+                                <th>Confirmed</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($popup_list as $key => $value){ ?>
+                                <tr>
+                                    <td><a href="<?=base_url('invoice/update/invoice_id/'.$value->invoice_id)?>" data-toggle="tooltip" title="Update"><?=$value->invoice_number?></a></td>
+                                    <td><?=$value->invoice_confirmed_date?></td>
+                                    <td><?=ucfirst($value->invoice_status)?></td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <?php } ?>
 		</div>
 		<?php } ?>
 
