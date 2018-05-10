@@ -117,6 +117,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
+                                        <p class="form-group">
+                                            <label for="vendor_company_code">Company code</label>
+                                            <input id="vendor_company_code" name="vendor_company_code" type="text" class="form-control input-sm" placeholder="Company code" value="<?=$vendor->vendor_company_code?>" />
+                                        </p>
 										<p class="form-group">
 											<label for="vendor_company_name">Company name</label>
 											<input id="vendor_company_name" name="vendor_company_name" type="text" class="form-control input-sm" placeholder="Company name" value="<?=$vendor->vendor_company_name?>" />

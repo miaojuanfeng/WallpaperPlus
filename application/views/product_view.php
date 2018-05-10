@@ -157,8 +157,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <option value></option>
                                                 <?php
                                                 foreach($units as $key => $value){
-                                                    $selected = ($value->unit_name == $product->product_unit) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value->unit_name.'"'.$selected.'>'.$value->unit_name.'</option>';
+                                                    $selected = ($value->unit_id == $product->product_unit_id) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value->unit_id.'"'.$selected.'>'.$value->unit_name.'</option>';
                                                 }
                                                 ?>
                                             </select>
@@ -190,10 +190,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<input id="product_price_usd" name="product_price_usd" type="number" min="0" class="form-control input-sm" placeholder="Price USD" value="<?=$product->product_price_usd?>" />
 											</div>
 										</div>
-										<div class="form-group">
-                                            <label for="product_link">Weight</label>
-                                            <input id="product_link" name="product_link" type="text" class="form-control input-sm" placeholder="Weight" value="<?=$product->product_link?>" />
-                                        </div>
                                         <div class="form-group">
                                             <label for="product_link">Link</label>
                                             <input id="product_link" name="product_link" type="text" class="form-control input-sm" placeholder="Link" value="<?=$product->product_link?>" />

@@ -2,14 +2,258 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a620b4db-c109-41ad-a8a2-26fd2cfd6aaa" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/wallpaperplus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wallpaperplus.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/config/._config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/._Invoice.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/._.DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/application/._.DS_Store" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/config/._.DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/._.DS_Store" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._.DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._.DS_Store" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Balance_sheet.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Balance_sheet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Brand.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Brand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Client.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Client_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Client_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Commission.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Commission.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Commissionchecklist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Commissionchecklist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Commissionreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Commissionreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Document.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Document.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Exchange.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Exchange.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Expenses_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Expenses_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Expensesreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Expensesreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Income_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Income_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Incomereport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Incomereport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Invoicechecklist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Invoicechecklist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Location.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Location.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Maintenance.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Maintenance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Payablereport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Payablereport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Product_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Product_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Purchase_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Purchase_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Purchaseorder_xxx.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Purchaseorder_xxx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Purchaseorderchecklist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Purchaseorderchecklist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Receivablereport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Receivablereport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Salesreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Salesreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Terms.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Terms.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Type.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Type.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/._Warehouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/._Warehouse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Approval.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Approval.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Attribute.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Attribute.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Balance_sheet.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Balance_sheet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Brand.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Brand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Client.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Client_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Client_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Commission.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Commission.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Commissionchecklist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Commissionchecklist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Commissionreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Commissionreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Currency.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Currency.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Deliverychecklist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Deliverychecklist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Deliverynote.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Deliverynote.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Document.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Document.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Exchange.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Exchange.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Expenses_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Expenses_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Expensesreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Expensesreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Income_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Income_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Incomereport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Incomereport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Invoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Invoice_20171218.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Invoice_20171218.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Invoicechecklist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Invoicechecklist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Ledgerreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Ledgerreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Location.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Location.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Maintenance.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Maintenance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Payablereport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Payablereport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Product_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Product_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Proformainvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Proformainvoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Purchase_report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Purchase_report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Purchaseorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Purchaseorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Purchaseorder_xxx.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Purchaseorder_xxx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Purchaseorderchecklist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Purchaseorderchecklist.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/Quotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Quotation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/pdf/invoice/._IN18010001.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/pdf/invoice/IN18010001.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Receivablereport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Receivablereport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Salesorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Salesorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Salesreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Salesreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Stockreport.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Stockreport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Stockstatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Stockstatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Terms.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Terms.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Type.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Type.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Vendor.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Vendor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Warehouse.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Warehouse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Waybill.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Waybill.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/._Deliverynote.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/._Deliverynote.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/._Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/._Invoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/._Proformainvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/._Proformainvoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/._Purchaseorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/._Purchaseorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/._Quotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/._Quotation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/._Salesorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/._Salesorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/Deliverynote.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/Deliverynote.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/Invoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/Proformainvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/Proformainvoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/Purchaseorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/Purchaseorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/Quotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/Quotation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/Salesorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/Salesorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/language/._.DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/._.DS_Store" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._.DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._.DS_Store" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Brand_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Brand_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Client_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Client_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Commission_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Commission_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Commissionchecklist_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Commissionchecklist_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Commissionreport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Commissionreport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Company_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Company_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Deliverynote_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Deliverynote_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Deliverynoteitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Deliverynoteitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Exchange_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Exchange_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Invoice_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Invoice_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Invoice_model_20171218.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Invoice_model_20171218.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Invoicechecklist_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Invoicechecklist_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Invoiceitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Invoiceitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Invoiceitem_model_20171218.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Invoiceitem_model_20171218.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Location_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Location_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Payablereport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Payablereport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Proformainvoice_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Proformainvoice_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Proformainvoiceitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Proformainvoiceitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Purchaseorder_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Purchaseorder_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Purchaseorderchecklist_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Purchaseorderchecklist_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Purchaseorderitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Purchaseorderitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Quotation_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Quotation_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Quotationitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Quotationitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Receivablereport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Receivablereport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Salesorder_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Salesorder_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Salesorderitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Salesorderitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Salesreport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Salesreport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Setting_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Setting_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Terms_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Terms_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Type_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Type_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Unit_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Unit_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Vendor_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Vendor_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Warehouse_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Warehouse_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Z_client_user_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Z_client_user_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/._Z_product_warehouse_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/._Z_product_warehouse_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Approval_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Approval_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Attribute_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Attribute_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Brand_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Brand_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Client_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Client_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Commission_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Commission_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Commissionchecklist_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Commissionchecklist_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Commissionreport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Commissionreport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Company_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Company_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Currency_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Currency_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Deliverynote_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Deliverynote_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Deliverynoteitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Deliverynoteitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Exchange_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Exchange_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Invoice_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Invoice_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Invoice_model_20171218.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Invoice_model_20171218.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Invoicechecklist_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Invoicechecklist_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Invoiceitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Invoiceitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Invoiceitem_model_20171218.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Invoiceitem_model_20171218.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Location_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Location_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Payablereport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Payablereport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Product_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Product_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Proformainvoice_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Proformainvoice_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Proformainvoiceitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Proformainvoiceitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Purchaseorder_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Purchaseorder_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Purchaseorderchecklist_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Purchaseorderchecklist_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Purchaseorderitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Purchaseorderitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Quotation_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Quotation_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Quotationitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Quotationitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Receivablereport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Receivablereport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Salesorder_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Salesorder_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Salesorderitem_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Salesorderitem_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Salesreport_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Salesreport_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Setting_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Setting_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Terms_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Terms_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Type_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Type_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Unit_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Unit_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Vendor_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Vendor_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Warehouse_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Warehouse_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Waybill_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Waybill_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Z_client_user_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Z_client_user_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Z_product_warehouse_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Z_product_warehouse_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._.DS_Store" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._.DS_Store" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._brand_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._brand_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._commission_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._commission_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._commissionchecklist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._commissionchecklist_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._commissionreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._commissionreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._company_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._company_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._deliverynote_view_xxx.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._deliverynote_view_xxx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._exchange_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._exchange_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._expensesreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._expensesreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._income_report_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._income_report_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._incomereport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._incomereport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._invoice_view_20171218.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._invoice_view_20171218.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._invoicechecklist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._invoicechecklist_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._location_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._location_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._payablereport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._payablereport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._proformainvoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._proformainvoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._purchaseorder_view_xxx.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._purchaseorder_view_xxx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._purchaseorderchecklist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._purchaseorderchecklist_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._quotation_view_20180318.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._quotation_view_20180318.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._receivablereport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._receivablereport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._salesreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._salesreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._setting_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._setting_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._terms_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._terms_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._type_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._type_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/._warehouse_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/._warehouse_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/approval_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/approval_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/attribute_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/attribute_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/brand_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/brand_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/client_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/client_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/commission_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/commission_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/commissionchecklist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/commissionchecklist_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/commissionreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/commissionreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/company_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/company_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/currency_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/currency_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/deliverychecklist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/deliverychecklist_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/deliverynote_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/deliverynote_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/deliverynote_view_xxx.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/deliverynote_view_xxx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/exchange_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/exchange_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/expensesreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/expensesreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/income_report_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/income_report_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/incomereport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/incomereport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/invoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/invoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/invoice_view_20171218.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/invoice_view_20171218.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/invoicechecklist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/invoicechecklist_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/ledgerreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/ledgerreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/location_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/location_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/maintenance_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/maintenance_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/payablereport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/payablereport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/._deliverynote_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/._deliverynote_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/._invoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/._invoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/._proformainvoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/._proformainvoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/._purchaseorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/._purchaseorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/._salesorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/._salesorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/deliverynote_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/deliverynote_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/invoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/invoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/proformainvoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/proformainvoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/purchaseorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/purchaseorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/salesorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/salesorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/product_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/product_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/proformainvoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/proformainvoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/purchaseorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/purchaseorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/purchaseorder_view_xxx.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/purchaseorder_view_xxx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/purchaseorderchecklist_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/purchaseorderchecklist_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/quotation_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/quotation_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/quotation_view_20180318.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/quotation_view_20180318.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/receivablereport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/receivablereport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/report_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/report_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/role_" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/role_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/salesorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/salesorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/salesreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/salesreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/setting_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/setting_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/stockreport_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/stockreport_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/stockstatus_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/stockstatus_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/terms_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/terms_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/type_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/type_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/user_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/user_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/vendor_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/vendor_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/warehouse_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/warehouse_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/waybill_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/waybill_view.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,83 +264,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/config/config.php">
+      <file leaf-file-name="Excel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Excel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="19" column="23" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="23" />
+            <state relative-caret-position="19">
+              <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Invoice.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Invoice.php">
+      <file leaf-file-name="user_view.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/user_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="180" column="65" selection-start-line="180" selection-start-column="65" selection-end-line="180" selection-end-column="65" />
+            <state relative-caret-position="626">
+              <caret line="159" column="118" selection-start-line="159" selection-start-column="118" selection-end-line="159" selection-end-column="118" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Quotation.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Quotation.php">
+      <file leaf-file-name="Exchange.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Exchange.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1021">
-              <caret line="527" column="65" selection-start-line="527" selection-start-column="65" selection-end-line="527" selection-end-column="65" />
+            <state relative-caret-position="703">
+              <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="69" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Purchaseorder.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Purchaseorder.php">
+      <file leaf-file-name="Vendor_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Vendor_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="193" column="93" lean-forward="true" selection-start-line="193" selection-start-column="93" selection-end-line="193" selection-end-column="93" />
+            <state relative-caret-position="152">
+              <caret line="8" column="41" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Invoice_20171218.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Invoice_20171218.php">
+      <file leaf-file-name="product_view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="79" column="65" selection-start-line="79" selection-start-column="65" selection-end-line="79" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Proformainvoice.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Proformainvoice.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="180" column="65" selection-start-line="180" selection-start-column="65" selection-end-line="180" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Stockstatus.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Stockstatus.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="47" column="65" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Deliverynote.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Deliverynote.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="180" column="65" selection-start-line="180" selection-start-column="65" selection-end-line="180" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Salesorder.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Salesorder.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="201" column="65" selection-start-line="201" selection-start-column="65" selection-end-line="201" selection-end-column="65" />
+            <state relative-caret-position="3629">
+              <caret line="191" column="46" selection-start-line="191" selection-start-column="46" selection-end-line="191" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -146,6 +354,10 @@
         <option value="$PROJECT_DIR$/application/controllers/Deliverynote.php" />
         <option value="$PROJECT_DIR$/application/controllers/Salesorder.php" />
         <option value="$PROJECT_DIR$/application/controllers/Invoice.php" />
+        <option value="$PROJECT_DIR$/application/views/vendor_view.php" />
+        <option value="$PROJECT_DIR$/application/views/product_view.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Excel.php" />
+        <option value="$PROJECT_DIR$/application/views/user_view.php" />
       </list>
     </option>
   </component>
@@ -171,6 +383,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -187,20 +400,13 @@
               <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
               <item name="wallpaperplus" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaperplus" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
               <item name="wallpaperplus" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="print" type="462c0819:PsiDirectoryNode" />
+              <item name="libraries" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
@@ -247,7 +453,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -256,6 +461,12 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.scopes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/application/models" />
+      <recent name="$PROJECT_DIR$/application/controllers" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -282,28 +493,29 @@
       <workItem from="1525749506159" duration="3491000" />
       <workItem from="1525753550099" duration="9136000" />
       <workItem from="1525835532897" duration="1116000" />
-      <workItem from="1525838375034" duration="1495000" />
+      <workItem from="1525838375034" duration="13501000" />
+      <workItem from="1525917714453" duration="2000" />
+      <workItem from="1525920979360" duration="98000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15238000" />
+    <option name="totallyTimeSpent" value="27344000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32960325" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -312,6 +524,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.1546287" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +534,62 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/application/controllers/Excel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2508">
+          <caret line="132" column="44" lean-forward="true" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Exchange.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Vendor_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="41" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3629">
+          <caret line="191" column="46" selection-start-line="191" selection-start-column="46" selection-end-line="191" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Excel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2508">
+          <caret line="132" column="44" lean-forward="true" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Exchange.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Vendor_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="41" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3629">
+          <caret line="191" column="46" selection-start-line="191" selection-start-column="46" selection-end-line="191" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Invoice.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="893">
@@ -457,6 +726,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Invoice.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="190" column="12" lean-forward="true" selection-start-line="190" selection-start-column="12" selection-end-line="190" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Quotation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1021">
@@ -506,10 +782,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Invoice.php">
+    <entry file="file://$PROJECT_DIR$/application/views/vendor_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="180" column="65" selection-start-line="180" selection-start-column="65" selection-end-line="180" selection-end-column="65" />
+        <state relative-caret-position="346">
+          <caret line="121" column="210" selection-start-line="121" selection-start-column="210" selection-end-line="121" selection-end-column="210" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Vendor_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3629">
+          <caret line="191" column="46" selection-start-line="191" selection-start-column="46" selection-end-line="191" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Exchange.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Excel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="132" column="44" selection-start-line="132" selection-start-column="44" selection-end-line="132" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/user_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="159" column="118" selection-start-line="159" selection-start-column="118" selection-end-line="159" selection-end-column="118" />
         </state>
       </provider>
     </entry>
