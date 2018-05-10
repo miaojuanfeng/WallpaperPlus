@@ -304,7 +304,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<th>Purchase order #</th>
 													<th>Sales</th>
 													<th>Purchase order amount</th>
-													<th>Deadline</th>
+													<th>Reminder date</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -482,7 +482,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<th>Purchase order #</th>
 													<th>Sales</th>
 													<th>Purchase order amount</th>
-													<th>Deadline</th>
+													<th>Reminder date</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -492,7 +492,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<td><a href="<?=base_url('purchaseorder/select/purchaseorder_id/'.$value->purchaseorder_id)?>"><?=$value->purchaseorder_number?></a></td>
 													<td><?=ucfirst(get_user($value->purchaseorder_quotation_user_id)->user_name)?></td>
 													<td><?=strtoupper($value->purchaseorder_currency).' '.$value->purchaseorder_total?></td>
-													<td><?=$value->purchaseorder_expire?></td>
+													<td><?=$value->purchaseorder_reminder_date?></td>
 												</tr>
 												<?php } ?>
 
