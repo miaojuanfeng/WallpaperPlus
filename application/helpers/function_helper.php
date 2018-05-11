@@ -1380,3 +1380,63 @@ if(!function_exists('chuyan'))
 // 		return $form_value;
 // 	}
 // }
+
+if (!function_exists('php_excel_export')) {
+    function php_excel_export($title, $data, $name) {
+//        require_once(dirname(__FILE__) . '../libraries/PHPExcel/PHPExcel.php');
+        error_reporting(E_ALL);
+        //date_default_timezone_set('Europe/London');
+        $objPHPExcel = new PHPExcel();
+        $letterArr=array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
+        /*以下是一些设置 ，什么作者标题啊之类的*/
+        $objPHPExcel->getProperties()->setCreator("nexus")
+            ->setLastModifiedBy("nexus")
+            ->setTitle("EXCEL导出")
+            ->setSubject("EXCEL导出")
+            ->setDescription("EXCEL导出")
+            ->setKeywords("excel")
+            ->setCategory("result file");
+
+        //设置标题
+        $num=1;
+        $letterArrNum=0;
+        foreach ($title as $key => $value) {
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue($letterArr[$letterArrNum].$num, $value);
+            $letterArrNum++;
+        }
+
+        $letterArrNum=0;
+        foreach($data as $k => $v){
+            $num = $k+2;
+            $letterArrNum=0;
+            foreach ($title as $key => $value) {
+                $objPHPExcel->getActiveSheet()->getStyle($letterArr[$letterArrNum].$num)->getAlignment()->setWrapText(true);
+                $objPHPExcel->setActiveSheetIndex(0)->setCellValue($letterArr[$letterArrNum].$num, strip_tags(str_replace("<br/>", "\n", $v[$key])));
+                $letterArrNum++;
+            }
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('User');
+        $objPHPExcel->setActiveSheetIndex(0);
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$name.'.xls"');
+        header('Cache-Control: max-age=0');
+        $objWriter->save('php://output');
+    }
+}
+
+if (!function_exists('get_uri_string_parameters')) {
+    function get_uri_string_parameters($uri_string)
+    {
+        $retval = '';
+
+        $uri_array = explode('/', $uri_string);
+        foreach ($uri_array as $key => $value){
+            if( $key < 2 ) continue;
+            $retval .= '/'.$value;
+        }
+        return $retval;
+    }
+}

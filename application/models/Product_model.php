@@ -107,7 +107,9 @@ class Product_model extends CI_Model {
 		/* limit */
 		if(isset($data['limit'])){
 			$this->db->limit($data['limit']);
-		}
+		}else{
+            $this->db->limit(100);
+        }
 
 		/* offset */
 		if(isset($data['offset'])){

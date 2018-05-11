@@ -3,6 +3,61 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Payablereport extends CI_Controller {
 
+    private $th_header = array(
+        'Customer',
+        'PO No',
+        'Deadline',
+        'Total',
+        '汇率',
+        'Total (HKD)',
+        'PO date',
+        'Sales'
+    );
+
+    private $td_body = array();
+
+    private $th_footer = array(
+        '',
+        '',
+        '',
+        '',
+        '',
+        'Pay (HKD)',
+        '',
+        ''
+    );
+
+    private $thisGET;
+    private $per_page;
+
+    private function get_form_data($rows){
+        $data = array();
+
+        $total = 0;
+        $this->td_body = array();
+        if( $rows && count($rows) ) {
+            foreach ($rows as $key => $value) {
+                $row = array();
+                $row[] = $value->purchaseorder_vendor_company_name;
+                $row[] = '<a href="' . base_url('purchaseorder/select/purchaseorder_id/' . $value->purchaseorder_id) . '">' . $value->purchaseorder_number . '</a>';
+                $row[] = $value->purchaseorder_reminder_date;
+                $row[] = '外币';
+                $row[] = '汇率';
+                $total += $value->purchaseorder_total;
+                $row[] = strtoupper($value->purchaseorder_currency) . ' ' . money_format('%!n', $value->purchaseorder_total);
+                $row[] = convert_datetime_to_date($value->purchaseorder_create);
+                $row[] = get_user($value->purchaseorder_quotation_user_id)->user_name;
+                $this->td_body[] = $row;
+            }
+            $this->th_footer[5] = strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $total);
+        }
+        $data['th_header'] = $this->th_header;
+        $data['td_body'] = $this->td_body;
+        $data['th_footer'] = $this->th_footer;
+
+        return $data;
+    }
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -14,8 +69,14 @@ class Payablereport extends CI_Controller {
 		convert_get_slashes_pretty_link();
 		check_permission();
 
+        $this->load->library('PHPExcel');
 		$this->load->model('purchaseorder_model');
 		$this->load->model('user_model');
+
+        $this->per_page = get_setting('per_page')->setting_value;
+        $this->thisGET = $this->uri->uri_to_assoc();
+        $this->thisGET['purchaseorder_status'] = 'processing';
+        $this->thisGET['purchaseorder_deleted'] = 'N';
 	}
 
 	public function index()
@@ -40,23 +101,19 @@ class Payablereport extends CI_Controller {
 
 	public function select()
 	{
-		$per_page = get_setting('per_page')->setting_value;
-
-		$thisGET = $this->uri->uri_to_assoc();
-		$thisGET['purchaseorder_status'] = 'processing';
-		$thisGET['purchaseorder_deleted'] = 'N';
-
 		$thisSelect = array(
-			'where' => $thisGET,
+			'where' => $this->thisGET,
 			'order' => 'purchaseorder_vendor_id',
 			'ascend' => 'asc',
-			'limit' => $per_page,
+			'limit' => $this->per_page,
 			'return' => 'result'
 		);
 		$data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
 
+        $data = array_merge($data, $this->get_form_data($data['purchaseorders']));
+
 		$thisSelect = array(
-			'where' => $thisGET,
+			'where' => $this->thisGET,
 			'group' => 'purchaseorder_number',
 			'return' => 'num_rows'
 		);
@@ -76,9 +133,25 @@ class Payablereport extends CI_Controller {
 		$data['users'] = $this->user_model->select($thisSelect);
 
 		/* pagination */
-		$this->pagination->initialize(get_pagination_config($per_page, $data['num_rows']));
+		$this->pagination->initialize(get_pagination_config($this->per_page, $data['num_rows']));
 
 		$this->load->view('payablereport_view', $data);
 	}
+
+    public function export()
+    {
+        $thisSelect = array(
+            'where' => $this->thisGET,
+            'order' => 'purchaseorder_vendor_id',
+            'ascend' => 'asc',
+            'limit' => $this->per_page,
+            'return' => 'result'
+        );
+        $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+        $this->get_form_data($data['purchaseorders']);
+
+        $fileName = 'Payable_report_'.date('YmdHis');
+        php_excel_export($this->th_header, $this->td_body, $fileName);
+    }
 
 }

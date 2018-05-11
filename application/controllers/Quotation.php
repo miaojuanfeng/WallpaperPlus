@@ -230,7 +230,7 @@ class Quotation extends CI_Controller {
 	}
 
 	public function insert()
-	{
+    {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$thisPOST['quotation_serial'] = sprintf("%03s", (get_quotation_serial() + 1));

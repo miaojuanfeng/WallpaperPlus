@@ -105,6 +105,7 @@ class Client extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$thisInsertId = $this->client_model->insert($thisPOST);
+            $thisPOST['client_id'] = $thisInsertId;
 			$this->z_client_user_model->insert($thisPOST);
 
 			/* attachment */

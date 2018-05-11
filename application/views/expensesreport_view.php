@@ -249,75 +249,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
-										<button type="submit" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" title="" data-original-title="Export to Excel">
-											<i class="glyphicon glyphicon-export"></i>
-										</button>
+                                        <a href="<?=base_url('expensesreport/export'.get_uri_string_parameters($this->uri->uri_string()))?>" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" data-original-title="Export">
+                                            <i class="glyphicon glyphicon-export"></i>
+                                        </a>
 									</div>
-									<table class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th>Customer</th>
-												<th>PO No</th>
-												<th>Deadline</th>
-												<th>Total</th>
-												<th>汇率</th>
-												<th>Total (HKD)</th>
-												<th>PO date</th>
-												<th>Sales</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-											$purchaseorder_total = 0;
-											$purchaseorder_total_smalleq30 = 0;
-											$purchaseorder_total_from31to60 = 0;
-											$purchaseorder_total_from61to90 = 0;
-											$purchaseorder_total_largereq91 = 0;
-											foreach($purchaseorders as $key => $value){
-											?>
-											<tr>
-												<td><?=$value->purchaseorder_vendor_company_name?></td>
-												<td><a href="<?=base_url('purchaseorder/select/purchaseorder_id/'.$value->purchaseorder_id)?>"><?=$value->purchaseorder_number?></a></td>
-												<td><?=$value->purchaseorder_reminder_date?></td>
-												<th>外币</th>
-												<th>汇率</th>
-												<td>
-													<?php
-													$purchaseorder_total += $value->purchaseorder_total;
-													echo strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $value->purchaseorder_total);
-													?>
-												</td>
-												<td><?=convert_datetime_to_date($value->purchaseorder_create)?></td>
-												<td><?=get_user($value->purchaseorder_quotation_user_id)->user_name?></td>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <?php foreach ($th_header as $key => $value) {
+                                                echo '<th>'.$value.'</th>';
+                                            } ?>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach($td_body as $key => $value){
+                                            ?>
+                                            <tr>
+                                                <?php
+                                                for($i=0;$i<count($th_header);$i++){
+                                                    echo '<td>'.$value[$i].'</td>';
+                                                }
+                                                ?>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
 
-											</tr>
-											<?php
-											// $purchaseorder_total += $value->purchaseorder_total;
-											// $purchaseorder_total += $purchaseorder_subtotal;
-											}
-											?>
-
-											<?php if(!$purchaseorders){ ?>
-											<tr>
-												<td colspan="10">No record found</td>
-											</tr>
-											<?php } ?>
-										</tbody>
-										<?php if($purchaseorders){ ?>
-										<tfoot>
-											<tr>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th>外币</th>
-												<th></th>
-												<th><?=strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $purchaseorder_total)?></th>
-												<th></th>
-												<th></th>
-											</tr>
-										</tfoot>
-										<?php } ?>
-									</table>
+                                        <?php if(!$td_body){ ?>
+                                            <tr>
+                                                <td colspan="11">No record found</td>
+                                            </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                        <?php if($td_body){ ?>
+                                            <tfoot>
+                                            <tr>
+                                                <?php foreach ($th_footer as $key => $value) {
+                                                    echo '<th>'.$value.'</th>';
+                                                } ?>
+                                            </tr>
+                                            </tfoot>
+                                        <?php } ?>
+                                    </table>
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>

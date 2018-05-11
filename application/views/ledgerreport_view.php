@@ -249,91 +249,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
-										<button type="submit" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" title="" data-original-title="Export to Excel">
-											<i class="glyphicon glyphicon-export"></i>
-										</button>
+                                        <a href="<?=base_url('ledgerreport/export'.get_uri_string_parameters($this->uri->uri_string()))?>" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" data-original-title="Export">
+                                            <i class="glyphicon glyphicon-export"></i>
+                                        </a>
 									</div>
-									<table class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th>Customer</th>
-												<th>IN No</th>
-												<th>Deadline</th>
-												<th>Pay</th>
-												<th>汇率</th>
-												<th>Pay (HKD)</th>
-												<th>Receive</th>
-												<th>汇率</th>
-												<th>Receive (HKD)</th>
-												<th>IN date</th>
-												<th>OUT date</th>
-												<th>Balance</th>
-												<th>Sales</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-											$invoice_total = 0;
-											$invoice_total_smalleq30 = 0;
-											$invoice_total_from31to60 = 0;
-											$invoice_total_from61to90 = 0;
-											$invoice_total_largereq91 = 0;
-											foreach($invoices as $key => $value){
-											?>
-											<tr>
-												<td><?=$value->invoice_client_company_name?></td>
-												<td><a href="<?=base_url('invoice/select/invoice_id/'.$value->invoice_id)?>"><?=$value->invoice_number?></a></td>
-												<td><?=$value->invoice_expire?></td>
-												<td>外币</td>
-												<td>汇率</td>
-												<td>
-													<?php
-													$invoice_total += $value->invoice_pay;
-													echo strtoupper($value->invoice_currency).' '.money_format('%!n', $value->invoice_pay);
-													?>
-												</td>
-												<td>外币</td>
-												<td>汇率</td>
-												<td>Receive</td>
-												<td><?=convert_datetime_to_date($value->invoice_create)?></td>
-												<td>OUT date</td>
-												<td>HKD 123.00</td>
-												<td><?=get_user($value->invoice_quotation_user_id)->user_name?></td>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <?php foreach ($th_header as $key => $value) {
+                                                echo '<th>'.$value.'</th>';
+                                            } ?>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach($td_body as $key => $value){
+                                            ?>
+                                            <tr>
+                                                <?php
+                                                for($i=0;$i<count($th_header);$i++){
+                                                    echo '<td>'.$value[$i].'</td>';
+                                                }
+                                                ?>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
 
-											</tr>
-											<?php
-											// $invoice_total += $value->invoice_pay;
-											// $invoice_total += $invoice_subtotal;
-											}
-											?>
-
-											<?php if(!$invoices){ ?>
-											<tr>
-												<td colspan="11">No record found</td>
-											</tr>
-											<?php } ?>
-										</tbody>
-										<?php if($invoices){ ?>
-										<tfoot>
-											<tr>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th>外币</th>
-												<th></th>
-												<th><?=strtoupper($value->invoice_currency).' '.money_format('%!n', $invoice_total)?></th>
-												<th>外币</th>
-												<th></th>
-												<th>Receive</th>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th></th>
-											</tr>
-										</tfoot>
-										<?php } ?>
-									</table>
-									与Excel一致
+                                        <?php if(!$td_body){ ?>
+                                            <tr>
+                                                <td colspan="11">No record found</td>
+                                            </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                        <?php if($td_body){ ?>
+                                            <tfoot>
+                                            <tr>
+                                                <?php foreach ($th_footer as $key => $value) {
+                                                    echo '<th>'.$value.'</th>';
+                                                } ?>
+                                            </tr>
+                                            </tfoot>
+                                        <?php } ?>
+                                    </table>
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>

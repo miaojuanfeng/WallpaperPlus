@@ -273,123 +273,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
-										<button type="submit" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" title="" data-original-title="Export to Excel">
-											<i class="glyphicon glyphicon-export"></i>
-										</button>
+                                        <a href="<?=base_url('commissionreport/export'.get_uri_string_parameters($this->uri->uri_string()))?>" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" data-original-title="Export">
+                                            <i class="glyphicon glyphicon-export"></i>
+                                        </a>
 									</div>
-									<table class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th>Customer</th>
-												<th>SO No</th>
-												<th>Total</th>
-												<th>IN No</th>
-												<th>IN date</th>
-												<th>Sales</th>
-												<th>IN total</th>
-												<th>Commission rate</th>
-												<th>Commission</th>
-												<th>Commission to</th>
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-											$salesorder_total = 0;
-											$invoice_subtotal = 0;
-											$invoice_total = 0;
-											$invoice_commission_subtotal = 0;
-											$invoice_commission_total = 0;
-											foreach($salesorders as $key => $value){
-											?>
-											<tr>
-												<td><?=$value->salesorder_client_company_name?></td>
-												<td><a href="<?=base_url('salesorder/update/salesorder_id/'.$value->salesorder_id)?>"><?=$value->salesorder_number?></a></td>
-												<td><?=strtoupper($value->salesorder_currency).' '.money_format('%!n', $value->salesorder_total)?></td>
-												<td>
-													<?php foreach($value->invoices as $key1 => $value1){ ?>
-													<div><?=$value1->invoice_number?></div>
-													<?php } ?>
-												</td>
-												<td>
-													<?php foreach($value->invoices as $key1 => $value1){ ?>
-													<div><?=convert_datetime_to_date($value1->invoice_create)?></div>
-													<?php } ?>
-												</td>
-												<td>
-													<?php foreach($value->invoices as $key1 => $value1){ ?>
-													<div><?=ucfirst(get_user($value1->invoice_quotation_user_id)->user_name)?></div>
-													<?php } ?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.strtoupper($value1->invoice_currency).' '.money_format('%!n', $value1->invoice_pay).'</div>';
-														$invoice_subtotal += $value1->invoice_pay;
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.$value->salesorder_commission_rate.'%</div>';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.strtoupper($value1->invoice_currency).' '.money_format('%!n', ($value1->invoice_pay * $value->salesorder_commission_rate / 100)).'</div>';
-														$invoice_commission_subtotal += ($value1->invoice_pay * $value->salesorder_commission_rate / 100);
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.ucfirst(get_user($value->salesorder_commission_user_id)->user_name).'</div>';
-													}
-													?>
-												</td>
-												<td>
-													<?php
-													foreach($value->invoices as $key1 => $value1){
-														echo '<div>'.$value1->invoice_commission_status.'</div>';
-													}
-													?>
-												</td>
-											</tr>
-											<?php
-											$salesorder_total += $value->salesorder_total;
-											$invoice_total += $invoice_subtotal;
-											$invoice_commission_total += $invoice_commission_subtotal;
-											}
-											?>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <?php foreach ($th_header as $key => $value) {
+                                                echo '<th>'.$value.'</th>';
+                                            } ?>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach($td_body as $key => $value){
+                                            ?>
+                                            <tr>
+                                                <?php
+                                                for($i=0;$i<count($th_header);$i++){
+                                                    echo '<td>'.$value[$i].'</td>';
+                                                }
+                                                ?>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
 
-											<?php if(!$salesorders){ ?>
-											<tr>
-												<td colspan="15">No record found</td>
-											</tr>
-											<?php } ?>
-										</tbody>
-										<?php if($salesorders){ ?>
-										<tfoot>
-											<tr>
-												<th></th>
-												<th></th>
-												<th><?='HKD '.money_format('%!n', $salesorder_total)?></th>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th><?='HKD '.money_format('%!n', $invoice_total)?></th>
-												<th></th>
-												<th><?='HKD '.money_format('%!n', $invoice_commission_total)?></th>
-												<th></th>
-												<th></th>
-											</tr>
-										</tfoot>
-										<?php } ?>
-									</table>
+                                        <?php if(!$td_body){ ?>
+                                            <tr>
+                                                <td colspan="11">No record found</td>
+                                            </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                        <?php if($td_body){ ?>
+                                            <tfoot>
+                                            <tr>
+                                                <?php foreach ($th_footer as $key => $value) {
+                                                    echo '<th>'.$value.'</th>';
+                                                } ?>
+                                            </tr>
+                                            </tfoot>
+                                        <?php } ?>
+                                    </table>
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>

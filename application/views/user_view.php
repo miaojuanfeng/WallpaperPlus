@@ -150,17 +150,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</select>
 										</p>
 										<p class="form-group">
-											<label for="user_team_id">Team <span class="highlight"></span></label>
-                                            <select id="user_team_id" name="user_team_id[]" data-placeholder="Team" class="chosen-select required" multiple="multiple">
+											<label for="user_team_id">Team <span class="highlight">*</span></label>
+                                            <select id="user_team_id" name="user_team_id" data-placeholder="Team" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
                                                 foreach($teams as $key => $value){
-                                                    $selected = (in_array($value->team_id, $z_role_user_role_ids)) ? ' selected="selected"' : "" ;
+                                                    $selected = (in_array($value->team_id, $user->user_team_id)) ? ' selected="selected"' : "" ;
                                                     ?>
-                                                    <option value="<?=$value->team_id?>"<?=$selected?>><?=$value->team_name?></option>
+                                                    <option value="<?=$value->team_id?>"<?=$selected?>><?=ucfirst($value->team_name)?></option>
                                                 <?php } ?>
                                             </select>
 										</p>
+                                        <?php
+                                        if(
+                                            in_array(1, $z_role_user_role_ids) ||
+                                            in_array(2, $z_role_user_role_ids) ||
+                                            in_array(3, $z_role_user_role_ids)
+                                        ){
+                                            ?>
+                                            <p class="form-group">
+                                                <label for="user_code">Code <span class="highlight"></span></label>
+                                                <input id="user_code" name="user_code" type="text" maxlength="30" class="form-control input-sm" placeholder="Code" value="<?=$user->user_code?>" />
+                                            </p>
+                                            <?php
+                                        }
+                                        ?>
 									</div>
 								</div>
 
