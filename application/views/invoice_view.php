@@ -266,7 +266,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="invoice_salesorder_id" value="<?=$invoice->invoice_salesorder_id?>" />
 							<input type="hidden" name="invoice_client_id" value="<?=$invoice->invoice_client_id?>" />
 							<input type="hidden" name="invoice_project_name" value="<?=$invoice->invoice_project_name?>" />
-							<input type="hidden" name="invoice_currency" value="<?=$invoice->invoice_currency?>" />
+                            <input type="hidden" name="invoice_client_company_code" value="<?=$invoice->invoice_client_company_code?>" />
 							<input type="hidden" name="invoice_client_company_name" value="<?=$invoice->invoice_client_company_name?>" />
 							<input type="hidden" name="invoice_client_company_address" value="<?=$invoice->invoice_client_company_address?>" />
 							<input type="hidden" name="invoice_client_company_phone" value="<?=$invoice->invoice_client_company_phone?>" />
@@ -346,6 +346,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><label for="invoice_client_name">Attn</label></td>
 														<td><input id="invoice_client_name" name="invoice_client_name" type="text" class="form-control input-sm required" placeholder="Attn." value="<?=$invoice->invoice_client_name?>" /></td>
 													</tr>
+                                                    <tr>
+                                                        <td><label for="invoice_exchange_rate">Exchange rate</label></td>
+                                                        <td><input id="invoice_exchange_rate" name="invoice_exchange_rate" type="text" class="form-control input-sm required" readonly="readonly" placeholder="Exchange rate" value="<?=$invoice->invoice_exchange_rate?>" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="invoice_currency">Currency</label></td>
+                                                        <td><input id="invoice_currency" name="invoice_currency" type="text" class="form-control input-sm required" readonly="readonly" placeholder="Currency" value="<?=strtoupper($invoice->invoice_currency)?>" /></td>
+                                                    </tr>
 												</table>
 											</div>
 											<div class="col-sm-1 col-xs-1">

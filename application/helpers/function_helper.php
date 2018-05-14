@@ -1416,7 +1416,7 @@ if (!function_exists('php_excel_export')) {
                 $letterArrNum++;
             }
         }
-        $objPHPExcel->getActiveSheet()->setTitle('User');
+        $objPHPExcel->getActiveSheet()->setTitle(ucfirst(explode('_', $name)[0]));
         $objPHPExcel->setActiveSheetIndex(0);
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
 

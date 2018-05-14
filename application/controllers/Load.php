@@ -64,6 +64,7 @@ class Load extends CI_Controller {
 		if($thisData){
 			echo '<script>';
 			echo 'function clientLoader(){';
+            echo '$("input[name=\'quotation_client_company_code\']").val("'.$thisData->client_company_code.'").css("display", "none").fadeIn();';
 			echo '$("input[name=\'quotation_client_company_name\']").val("'.$thisData->client_company_name.'").css("display", "none").fadeIn();';
 			echo '$("textarea[name=\'quotation_client_company_address\']").val("'.convert_nl($thisData->client_company_address).'").css("display", "none").fadeIn();';
 			echo '$("input[name=\'quotation_client_name\']").val("'.$thisData->client_firstname.' '.$thisData->client_lastname.'").css("display", "none").fadeIn();';
@@ -98,6 +99,7 @@ class Load extends CI_Controller {
 		if($thisData){
 			echo '<script>';
 			echo 'function vendorLoader(){';
+            echo '$("input[name=\'purchaseorder_vendor_company_code\']").val("'.$thisData->vendor_company_code.'").css("display", "none").fadeIn();';
 			echo '$("input[name=\'purchaseorder_vendor_company_name\']").val("'.$thisData->vendor_company_name.'").css("display", "none").fadeIn();';
 			echo '$("textarea[name=\'purchaseorder_vendor_company_address\']").val("'.convert_nl($thisData->vendor_company_address).'").css("display", "none").fadeIn();';
 			echo '$("input[name=\'purchaseorder_vendor_name\']").val("'.$thisData->vendor_firstname.' '.$thisData->vendor_lastname.'").css("display", "none").fadeIn();';
@@ -106,6 +108,7 @@ class Load extends CI_Controller {
 			echo '$("input[name=\'purchaseorder_vendor_email\']").val("'.$thisData->vendor_email.'").css("display", "none").fadeIn();';
             echo '$("input[name=\'purchaseorder_vendor_exchange_rate\']").val("'.$thisData2->currency_exchange_rate.'").css("display", "none").fadeIn();';
             echo '$("input[name=\'purchaseorder_vendor_currency\']").val("'.strtoupper($thisData2->currency_name).'").css("display", "none").fadeIn();';
+            echo '$("input[name=\'purchaseorder_currency\']").val("'.$thisData2->currency_name.'")';
 			echo '}';
 			echo '</script>';
 		}

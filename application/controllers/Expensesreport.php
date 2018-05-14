@@ -4,11 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Expensesreport extends CI_Controller {
 
     private $th_header = array(
-        'Customer',
+        'Vendor ID',
+        'Vendor',
         'PO No',
         'Deadline',
         'Total',
-        '汇率',
+        'Rate',
         'Total (HKD)',
         'PO date',
         'Sales'
@@ -17,6 +18,7 @@ class Expensesreport extends CI_Controller {
     private $td_body = array();
 
     private $th_footer = array(
+        '',
         '',
         '',
         '',
@@ -38,18 +40,19 @@ class Expensesreport extends CI_Controller {
         if( $rows && count($rows) ) {
             foreach ($rows as $key => $value) {
                 $row = array();
+                $row[] = $value->purchaseorder_vendor_company_code;
                 $row[] = $value->purchaseorder_vendor_company_name;
                 $row[] = '<a href="' . base_url('purchaseorder/select/purchaseorder_id/' . $value->purchaseorder_id) . '">' . $value->purchaseorder_number . '</a>';
                 $row[] = $value->purchaseorder_reminder_date;
-                $row[] = '外币';
-                $row[] = '汇率';
-                $total += $value->purchaseorder_total;
                 $row[] = strtoupper($value->purchaseorder_currency) . ' ' . money_format('%!n', $value->purchaseorder_total);
+                $row[] = $value->purchaseorder_vendor_exchange_rate;
+                $total += $value->purchaseorder_total * $value->purchaseorder_vendor_exchange_rate;
+                $row[] = strtoupper($value->purchaseorder_currency) . ' ' . money_format('%!n', $value->purchaseorder_total * $value->purchaseorder_vendor_exchange_rate);
                 $row[] = convert_datetime_to_date($value->purchaseorder_create);
                 $row[] = get_user($value->purchaseorder_quotation_user_id)->user_name;
                 $this->td_body[] = $row;
             }
-            $this->th_footer[5] = strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $total);
+            $this->th_footer[6] = strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $total);
         }
         $data['th_header'] = $this->th_header;
         $data['td_body'] = $this->td_body;

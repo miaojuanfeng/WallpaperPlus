@@ -4,10 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Incomereport extends CI_Controller {
 
     private $th_header = array(
+        'Customer ID',
         'Customer',
         'IN No',
         'Pay',
-        '汇率',
+        'Rate',
         'Pay (HKD)',
         'IN date',
         'Confirm',
@@ -17,6 +18,7 @@ class Incomereport extends CI_Controller {
     private $td_body = array();
 
     private $th_footer = array(
+        '',
         '',
         '',
         '',
@@ -38,18 +40,19 @@ class Incomereport extends CI_Controller {
         if( $rows && count($rows) ) {
             foreach ($rows as $key => $value) {
                 $row = array();
+                $row[] = $value->invoice_client_company_code;
                 $row[] = $value->invoice_client_company_name;
                 $row[] = '<a href="' . base_url('invoice/select/invoice_id/' . $value->invoice_id) . '">' . $value->invoice_number . '</a>';
-                $row[] = '外币';
-                $row[] = '汇率';
-                $total += $value->invoice_pay;
                 $row[] = strtoupper($value->invoice_currency) . ' ' . money_format('%!n', $value->invoice_pay);
+                $row[] = $value->invoice_exchange_rate;
+                $total += $value->invoice_pay * $value->invoice_exchange_rate;
+                $row[] = 'HKD ' . money_format('%!n', $value->invoice_pay * $value->invoice_exchange_rate);
                 $row[] = convert_datetime_to_date($value->invoice_create);
                 $row[] = convert_datetime_to_date($value->invoice_confirmed_date);
                 $row[] = get_user($value->invoice_quotation_user_id)->user_name;
                 $this->td_body[] = $row;
             }
-            $this->th_footer[4] = strtoupper($value->invoice_currency).' '.money_format('%!n', $total);
+            $this->th_footer[5] = strtoupper($value->invoice_currency).' '.money_format('%!n', $total);
         }
         $data['th_header'] = $this->th_header;
         $data['td_body'] = $this->td_body;

@@ -261,6 +261,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="salesorder_client_id" value="<?=$salesorder->salesorder_client_id?>" />
 							<input type="hidden" name="salesorder_project_name" value="<?=$salesorder->salesorder_project_name?>" />
 							<input type="hidden" name="salesorder_currency" value="<?=$salesorder->salesorder_currency?>" />
+                            <input type="hidden" name="salesorder_client_company_code" value="<?=$salesorder->salesorder_client_company_code?>" />
 							<input type="hidden" name="salesorder_client_company_name" value="<?=$salesorder->salesorder_client_company_name?>" />
 							<input type="hidden" name="salesorder_client_company_address" value="<?=$salesorder->salesorder_client_company_address?>" />
 							<input type="hidden" name="salesorder_client_company_phone" value="<?=$salesorder->salesorder_client_company_phone?>" />

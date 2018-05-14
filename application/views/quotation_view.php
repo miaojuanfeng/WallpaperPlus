@@ -192,6 +192,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					});
 				};
 			}
+
+			$('#quotation_currency').val('hkd');
+            $('#quotation_currency').trigger('chosen:updated');
+            $('#quotation_currency').change();
 		});
 
 		function document_display_number(){
@@ -391,6 +395,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<form method="post" enctype="multipart/form-data">
 							<input type="hidden" name="quotation_id" value="<?=$quotation->quotation_id?>" />
 							<input type="hidden" name="quotation_version" value="<?=$quotation->quotation_version?>" />
+                            <input type="hidden" name="quotation_client_company_code" value="<?=$quotation->quotation_client_company_code?>" />
 							<input type="hidden" name="quotation_serial" value="<?=$quotation->quotation_serial?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">

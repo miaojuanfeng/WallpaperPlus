@@ -23,6 +23,7 @@ class Invoice extends CI_Controller {
 		$this->load->model('salesorderitem_model');
 		$this->load->model('terms_model');
 		$this->load->model('z_role_user_model');
+        $this->load->model('currency_model');
 	}
 
 	public function index()
@@ -220,11 +221,11 @@ class Invoice extends CI_Controller {
 			$data['invoice']->invoice_balance = '0';
 
 			/* currency */
-			$data['currencys'] = (object)array(
-				(object)array('currency_name' => 'rmb'),
-				(object)array('currency_name' => 'hkd'),
-				(object)array('currency_name' => 'usd')
-			);
+            $thisSelect = array(
+                'where' => array('currency_name' => $data['invoice']->invoice_currency),
+                'return' => 'row'
+            );
+            $data['invoice']->invoice_exchange_rate = $this->currency_model->select($thisSelect)->currency_exchange_rate;
 
 			/* status */
 			$data['statuss'] = (object)array(

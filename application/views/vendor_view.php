@@ -118,8 +118,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
                                         <p class="form-group">
-                                            <label for="vendor_company_code">Company code</label>
-                                            <input id="vendor_company_code" name="vendor_company_code" type="text" class="form-control input-sm" placeholder="Company code" value="<?=$vendor->vendor_company_code?>" />
+                                            <label for="vendor_company_code">Company ID</label>
+                                            <input id="vendor_company_code" name="vendor_company_code" type="text" class="form-control input-sm" placeholder="Company ID" value="<?=$vendor->vendor_company_code?>" />
                                         </p>
 										<p class="form-group">
 											<label for="vendor_company_name">Company name</label>
@@ -323,6 +323,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														Last name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
+                                                <th>
+                                                    <a href="<?=get_order_link('vendor_company_code')?>">
+                                                        Company ID <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                                    </a>
+                                                </th>
 												<th>
 													<a href="<?=get_order_link('vendor_company_name')?>">
 														Company name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
@@ -352,6 +357,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td title="<?=$value->vendor_id?>"><?=$key+1?></td>
 												<td><?=$value->vendor_firstname?></td>
 												<td><?=$value->vendor_lastname?></td>
+                                                <td><?=$value->vendor_company_code?></td>
 												<td><?=$value->vendor_company_name?></td>
 												<td><a href="mailto:<?=$value->vendor_email?>"><?=$value->vendor_email?></a></td>
 												<td><?=convert_datetime_to_date($value->vendor_modify)?></td>

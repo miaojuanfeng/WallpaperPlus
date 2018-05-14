@@ -182,8 +182,8 @@ switch($purchaseorder->purchaseorder_currency){
 							<td><?=$purchaseorder->purchaseorder_terms?></td>
 						</tr>
 						<tr>
-							<td><b>Expire Date</b></td>
-							<td><?=$purchaseorder->purchaseorder_expire?></td>
+							<td><b>Reminder Date</b></td>
+							<td><?=$purchaseorder->purchaseorder_reminder_date?></td>
 						</tr>
 					</table>
 				</td>

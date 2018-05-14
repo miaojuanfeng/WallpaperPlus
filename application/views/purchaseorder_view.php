@@ -382,6 +382,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="purchaseorder_project_name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
 							<input type="hidden" name="purchaseorder_currency" value="<?=$purchaseorder->purchaseorder_currency?>" />
 							<input type="hidden" name="purchaseorder_number" value="" />
+                            <input type="hidden" name="purchaseorder_vendor_company_code" value="<?=$purchaseorder->purchaseorder_vendor_company_code?>" />
 							<input type="hidden" name="purchaseorder_vendor_company_name" value="<?=$purchaseorder->purchaseorder_vendor_company_name?>" />
 							<input type="hidden" name="purchaseorder_vendor_company_address" value="<?=$purchaseorder->purchaseorder_vendor_company_address?>" />
 							<input type="hidden" name="purchaseorder_vendor_company_phone" value="<?=$purchaseorder->purchaseorder_vendor_company_phone?>" />
@@ -390,6 +391,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="purchaseorder_issue" value="<?=$purchaseorder->purchaseorder_issue?>" />
 							<input type="hidden" name="purchaseorder_terms" value="<?=$purchaseorder->purchaseorder_terms?>" />
 							<input type="hidden" name="purchaseorder_reminder_date" value="<?=$purchaseorder->purchaseorder_reminder_date?>" />
+                            <input type="hidden" name="purchaseorder_currency" value="<?=$purchaseorder->purchaseorder_currency?>" />
 							<input type="hidden" name="salesorder_total" value="<?=$purchaseorder->purchaseorder_total?>" />
 							<input type="hidden" name="purchaseorder_user_id" value="<?=$purchaseorder->purchaseorder_user_id?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
@@ -435,21 +437,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="purchaseorder_project_name">Project name <span class="highlight">*</span></label>
 											<input id="purchaseorder_project_name" name="purchaseorder_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
 										</p>
-										<p class="form-group">
-											<label for="purchaseorder_currency">Currency</label>
-											<select id="purchaseorder_currency" name="purchaseorder_currency" data-placeholder="Currency" class="chosen-select required">
-												<option value></option>
-												<?php
-												if($purchaseorder->purchaseorder_currency == ''){
-													$purchaseorder->purchaseorder_currency = 'hkd';
-												}
-												foreach($currencys as $key => $value){
-													$selected = ($value->currency_name == $purchaseorder->purchaseorder_currency) ? ' selected="selected"' : "" ;
-													echo '<option value="'.$value->currency_name.'"'.$selected.'>'.strtoupper($value->currency_name).'</option>';
-												}
-												?>
-											</select>
-										</p>
+<!--										<p class="form-group">-->
+<!--											<label for="purchaseorder_currency">Currency</label>-->
+<!--											<select id="purchaseorder_currency" name="purchaseorder_currency" data-placeholder="Currency" class="chosen-select required">-->
+<!--												<option value></option>-->
+<!--												--><?php
+//												if($purchaseorder->purchaseorder_currency == ''){
+//													$purchaseorder->purchaseorder_currency = 'hkd';
+//												}
+//												foreach($currencys as $key => $value){
+//													$selected = ($value->currency_name == $purchaseorder->purchaseorder_currency) ? ' selected="selected"' : "" ;
+//													echo '<option value="'.$value->currency_name.'"'.$selected.'>'.strtoupper($value->currency_name).'</option>';
+//												}
+//												?>
+<!--											</select>-->
+<!--										</p>-->
 									</div>
 									<div class="col-sm-9 col-xs-12">
 										<h4 class="corpcolor-font">Purchase order</h4>
@@ -458,7 +460,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<table class="table table-condensed table-borderless">
 													<tr>
 														<td colspan="2">
-															<select id="purchaseorder_vendor_id" name="purchaseorder_vendor_id" data-placeholder="Vendor" class="chosen-select">
+															<select id="purchaseorder_vendor_id" name="purchaseorder_vendor_id" data-placeholder="Vendor" class="chosen-select required">
 																<option value></option>
 																<?php
 																foreach($vendors as $key1 => $value1){
@@ -495,7 +497,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
                                                     <tr>
                                                         <td><label for="purchaseorder_vendor_exchange_rate">Exchange rate</label></td>
-                                                        <td><input id="purchaseorder_vendor_exchange_rate" name="purchaseorder_vendor_exchange_rate" type="text" class="form-control input-sm required" readonly="readonly" value="<?=$purchaseorder->purchaseorder_vendor_exchange_rate?>" /></td>
+                                                        <td><input id="purchaseorder_vendor_exchange_rate" name="purchaseorder_vendor_exchange_rate" type="text" class="form-control input-sm required" readonly="readonly" placeholder="Exchange rate" value="<?=$purchaseorder->purchaseorder_vendor_exchange_rate?>" /></td>
                                                     </tr>
                                                     <tr>
                                                         <td><label for="purchaseorder_vendor_currency">Currency</label></td>

@@ -141,6 +141,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												?>
 											</select>
 										</p> -->
+                                        <p class="form-group">
+                                            <label for="client_company_code">Company ID</label>
+                                            <input id="client_company_code" name="client_company_code" type="text" class="form-control input-sm" placeholder="Company ID" value="<?=$client->client_company_code?>" />
+                                        </p>
 										<p class="form-group">
 											<label for="client_company_name">Company name</label>
 											<input id="client_company_name" name="client_company_name" type="text" class="form-control input-sm" placeholder="Company name" value="<?=$client->client_company_name?>" />
@@ -205,8 +209,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<input id="client_email" name="client_email" type="text" class="form-control input-sm required" placeholder="Email" value="<?=$client->client_email?>" />
 										</p>
 										<p class="form-group">
-											<label for="client_gender">Gender</label>
-											<select id="client_gender" name="client_gender" data-placeholder="Gender" class="chosen-select">
+											<label for="client_gender">Gender <span class="highlight">*</span></label>
+											<select id="client_gender" name="client_gender" data-placeholder="Gender" class="chosen-select required">
 												<option value></option>
 												<?php
 												foreach($genders as $key1 => $value1){
@@ -386,6 +390,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														Gender <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
+                                                <th>
+                                                    <a href="<?=get_order_link('client_company_code')?>">
+                                                        Company ID <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                                    </a>
+                                                </th>
 												<th>
 													<a href="<?=get_order_link('client_company_name')?>">
 														Company name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
@@ -422,6 +431,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->client_lastname?></td>
 												<td><?=$value->client_jobtitle?></td>
 												<td><?=$value->client_gender?></td>
+                                                <td><?=$value->client_company_code?></td>
 												<td><?=$value->client_company_name?></td>
 												<td>
 													<?php

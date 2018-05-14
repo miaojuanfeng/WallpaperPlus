@@ -126,11 +126,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<p class="form-group">
 											<label for="currency_name">Name <span class="highlight">*</span></label>
 											<input id="currency_name" name="currency_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$currency->currency_name?>" />
-                                            <small>Please enter lower case name</small>
+                                            <small>Please enter upper case name</small>
                                         </p>
                                         <p class="form-group">
                                             <label for="currency_exchange_rate">Exchange rate <span class="highlight">*</span></label>
-                                            <input id="currency_exchange_rate" name="currency_exchange_rate" type="number" min="0" class="form-control input-sm required" placeholder="Exchange rate" value="<?=$currency->currency_exchange_rate?>" />
+                                            <input id="currency_exchange_rate" name="currency_exchange_rate" type="text" class="form-control input-sm required" placeholder="Exchange rate" value="<?=$currency->currency_exchange_rate?>" />
                                         </p>
 									</div>
 									<div class="col-sm-4 col-xs-12">
@@ -304,6 +304,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</a>
 												</td>
 												<td class="text-right">
+                                                    <?php
+                                                    if($value->currency_id>3){
+                                                    ?>
 													<?php if(!check_permission('currency_delete', 'display')){ ?>
 													<a onclick="check_delete(<?=$value->currency_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('currency_delete', 'disable')?>">
 														<i class="glyphicon glyphicon-remove"></i>
@@ -311,6 +314,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<?php }else{ ?>
 													<i class="glyphicon glyphicon-remove"></i>
 													<?php } ?>
+                                                    <?php } ?>
 												</td>
 											</tr>
 											<?php } ?>

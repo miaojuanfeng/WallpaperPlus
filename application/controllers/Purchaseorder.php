@@ -230,6 +230,7 @@ class Purchaseorder extends CI_Controller {
 
 				$data['purchaseorder']->purchaseorder_vendor_id = '';
 				$data['purchaseorder']->purchaseorder_number = '';
+                $data['purchaseorder']->purchaseorder_vendor_company_code = '';
 				$data['purchaseorder']->purchaseorder_vendor_company_name = '';
 				$data['purchaseorder']->purchaseorder_vendor_company_address = '';
 				$data['purchaseorder']->purchaseorder_vendor_company_phone = '';
@@ -237,6 +238,9 @@ class Purchaseorder extends CI_Controller {
 				$data['purchaseorder']->purchaseorder_vendor_email = '';
 				$data['purchaseorder']->purchaseorder_vendor_name = '';
 				$data['purchaseorder']->purchaseorder_vendor_delivery_address = '';
+                $data['purchaseorder']->purchaseorder_vendor_exchange_rate = '';
+                $data['purchaseorder']->purchaseorder_vendor_currency = '';
+                $data['purchaseorder']->purchaseorder_reminder_date = '';
 			}
 
 			/* currency */
