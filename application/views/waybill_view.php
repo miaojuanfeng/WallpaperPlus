@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/jquery-ui.css'); ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.css'); ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/chosen.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-datetimepicker.css'); ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css"'); ?>" media="all">
 		
 		<script src="<?php echo base_url('assets/js/jquery-1.11.3.min.js'); ?>"></script>
@@ -25,6 +26,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/accounting.min.js'); ?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery.validate.js'); ?>"></script>
 		<script src="<?php echo base_url('assets/js/additional-methods.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/moment.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/bootstrap-datetimepicker.min.js'); ?>"></script>
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
@@ -34,6 +37,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+            /*--------- date mask ---------*/
+            $('.date-mask').mask('9999-99-99');
+
+            /*--------- datetimepicker ---------*/
+            $('.datetimepicker').datetimepicker({
+                format: 'Y-MM-DD'
+            });
 		});
 
 		function check_delete(id){
@@ -123,14 +134,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
-										<p class="form-group">
-											<label for="waybill_number">Number <span class="highlight">*</span></label>
-											<input id="waybill_number" name="waybill_number" type="text" class="form-control input-sm required" placeholder="Number" value="<?=$waybill->waybill_number?>" />
-										</p>
+                                        <p class="form-group">
+                                            <label for="waybill_number">Waybill number <span class="highlight">*</span></label>
+                                            <input id="waybill_number" name="waybill_number" class="form-control input-sm required" placeholder="Waybill number" value="<?=$waybill->waybill_number?>" />
+                                        </p>
+                                        <p class="form-group">
+                                            <label for="waybill_lot_number">Lot number</label>
+                                            <input id="waybill_lot_number" name="waybill_lot_number" type="text" class="form-control input-sm" placeholder="Lot number" value="<?=$waybill->waybill_number?>" />
+                                        </p>
 										<p class="form-group">
 											<label for="waybill_customs_number">Customs number <span class="highlight"></span></label>
 											<input id="waybill_customs_number" name="waybill_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$waybill->waybill_number?>" />
 										</p>
+                                        <p class="form-group">
+                                            <label for="waybill_express_company">Express company</label>
+                                            <input id="waybill_express_company" name="waybill_express_company" type="text" class="form-control input-sm" placeholder="Express company" value="<?=$waybill->waybill_number?>" />
+                                        </p>
+                                        <p class="form-group">
+                                            <label for="waybill_delivery_day">Delivery day</label>
+                                            <span class="input-group date datetimepicker">
+                                                <input id="waybill_delivery_day" name="waybill_delivery_day" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" value="<?=$waybill->waybill_number?>" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </span>
+                                        </p>
                                         <p class="form-group">
                                             <label for="waybill_remark">Remark</label>
                                             <textarea id="waybill_remark" name="waybill_remark" class="form-control input-sm" placeholder="Remark" rows="3"><?=$waybill->waybill_remark?></textarea>
@@ -139,7 +167,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Related information</h4>
                                         <p class="form-group">
-                                            <label for="waybill_po_id">PO</label>
+                                            <label for="waybill_po_id">PO <span class="highlight">*</span></label>
                                             <select id="waybill_po_id" name="waybill_po_id" data-placeholder="PO" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
@@ -153,34 +181,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 ?>
                                             </select>
                                         </p>
-                                        <p class="form-group">
-											<label for="invoice_client_company_name">批號</label>
-											<input id="invoice_client_company_name" name="invoice_client_company_name" type="text" class="form-control input-sm required" placeholder="Company/Domain/Client" value="<?=$waybill->waybill_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_company_address">waybill number</label>
-											<input id="invoice_client_company_address" name="invoice_client_company_address" class="form-control input-sm" placeholder="Address" value="<?=$waybill->waybill_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_email">報關號碼</label>
-											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybill->waybill_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_company_phone">速遞公司</label>
-											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybill->waybill_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_company_phone">速遞公司</label>
-											<input id="invoice_client_company_phone" name="invoice_client_company_phone" type="text" class="form-control input-sm" placeholder="Phone" value="<?=$waybill->waybill_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_phone">送货日子</label>
-											<input id="invoice_client_phone" name="invoice_client_phone" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$waybill->waybill_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="invoice_client_email">到货日子</label>
-											<input id="invoice_client_email" name="invoice_client_email" type="text" class="form-control input-sm" placeholder="Email" value="<?=$waybill->waybill_number?>" />
-										</p>
 									</div>
 								</div>
 
@@ -308,9 +308,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th>#</th>
 												<th>
 													<a href="<?=get_order_link('waybill_number')?>">
-														Number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+														Waybill number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
+                                                <th>
+                                                    <a href="<?=get_order_link('waybill_number')?>">
+                                                        Lot number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="<?=get_order_link('waybill_number')?>">
+                                                        Customs number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="<?=get_order_link('waybill_number')?>">
+                                                        Express company <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="<?=get_order_link('waybill_number')?>">
+                                                        Delivery day <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                                    </a>
+                                                </th>
 												<th>
 													<a href="<?=get_order_link('waybill_modify')?>">
 														Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
@@ -330,6 +350,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td title="<?=$value->waybill_id?>"><?=$key+1?></td>
 												<td><?=ucfirst($value->waybill_number)?></td>
+                                                <td><?=ucfirst($value->waybill_number)?></td>
+                                                <td><?=ucfirst($value->waybill_number)?></td>
+                                                <td><?=ucfirst($value->waybill_number)?></td>
+                                                <td><?=ucfirst($value->waybill_number)?></td>
 												<td><?=convert_datetime_to_date($value->waybill_modify)?></td>
 												<!-- <td class="text-right">
 													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->waybill_id?>">

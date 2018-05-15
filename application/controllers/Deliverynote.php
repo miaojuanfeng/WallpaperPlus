@@ -394,14 +394,14 @@ class Deliverynote extends CI_Controller {
 		);
 
         /* popup-list */
-        $thisSelect = array(
-            'where' => array('deliverynote_status' => 'complete'),
-            'group' => 'deliverynote_number',
-            'order' => 'deliverynote_confirmed_date',
-            'ascend' => 'desc',
-            'return' => 'result'
-        );
-        $data['popup_list'] = $this->deliverynote_model->select($thisSelect);
+//        $thisSelect = array(
+//            'where' => array('deliverynote_status' => 'complete'),
+//            'group' => 'deliverynote_number',
+//            'order' => 'deliverynote_confirmed_date',
+//            'ascend' => 'desc',
+//            'return' => 'result'
+//        );
+//        $data['popup_list'] = $this->deliverynote_model->select($thisSelect);
 
 		/* user */
 		$thisSelect = array(

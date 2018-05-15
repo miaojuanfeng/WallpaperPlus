@@ -131,7 +131,7 @@ switch($proformainvoice->proformainvoice_currency){
 		<table cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="85%">
-					<h1 class="corpcolor-font">【T】Top Excellent Consultants Limited <small><b>Your Business Partner</b></small></h1>
+					<h1 class="corpcolor-font">【Wallpaper+】 <small><b>Your Business Partner</b></small></h1>
 				</td>
 				<td width="15%" align="right"><h2>Proforma invoice</h2></td>
 			</tr>

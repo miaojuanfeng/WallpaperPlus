@@ -1021,14 +1021,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
             <?php if(isset($popup_list) && !empty($popup_list)){ ?>
                 <div class="popup-view">
-                    <div class="popup-header"><a href="javascript:" class="popup-close">Close</a></div>
+                    <div class="popup-header">出Stock已完成，SO未完成的单<a href="javascript:" class="popup-close">Close</a></div>
                     <div class="popup-list-area">
                         <form name="list">
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th>PO No</th>
-                                    <th>Confirmed</th>
+                                    <th>SO No</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
@@ -1036,7 +1036,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <?php foreach($popup_list as $key => $value){ ?>
                                     <tr>
                                         <td><a href="<?=base_url('purchaseorder/update/purchaseorder_id/'.$value->purchaseorder_id)?>" data-toggle="tooltip" title="Update"><?=$value->purchaseorder_number?></a></td>
-                                        <td><?=$value->purchaseorder_confirmed_date?></td>
+                                        <td><a href="<?=base_url('salesorder/update/salesorder_id/'.$value->purchaseorder_salesorder_id)?>" data-toggle="tooltip" title="Update"><?=get_salesorder($value->purchaseorder_salesorder_id)->salesorder_number?></a></td>
                                         <td><?=ucfirst($value->purchaseorder_status)?></td>
                                     </tr>
                                 <?php } ?>

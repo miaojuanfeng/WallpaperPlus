@@ -15,7 +15,7 @@ class Purchaseorder_model extends CI_Model {
 		$data['purchaseorder_modify'] = date('Y-m-d H:i:s');
 		$data = get_array_prefix('purchaseorder_', $data);
 		$this->db->where('purchaseorder_id', $data['purchaseorder_id']);
-		$thisResult = $this->db->update('purchaseorder', $data); 
+		$thisResult = $this->db->update('purchaseorder', $data);
 
 		$log_SQL = $this->session->userdata('log_SQL');
 		$log_SQL[] = array(
@@ -85,6 +85,7 @@ class Purchaseorder_model extends CI_Model {
 					case 'purchaseorder_project_name':
 					case 'purchaseorder_user_id':
 					case 'purchaseorder_status':
+                    case 'purchaseorder_arrive_status':
 					case 'purchaseorder_deleted':
 						$thisField = $key;
 						$this->db->where($thisField, urldecode($value));

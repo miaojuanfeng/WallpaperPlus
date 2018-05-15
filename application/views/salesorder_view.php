@@ -756,10 +756,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <div class="row">
                                                         <div class="col-sm-2"><h6>Purchase Order</h6></div>
                                                         <div class="col-sm-2">
-                                                            <input type="text" name="quotation_number_like" class="form-control input-sm" placeholder="PONo" value="" />
+                                                            <input type="text" name="purchase_number_like" class="form-control input-sm" placeholder="PONo" value="" />
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <select id="salesorder_status" name="salesorder_status" data-placeholder="PO Status" class="chosen-select">
+                                                            <select id="purchaseorder_status" name="purchaseorder_status" data-placeholder="PO Status" class="chosen-select">
                                                                 <option value></option>
                                                                 <?php foreach($statuss as $key => $value){ ?>
                                                                     <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
@@ -767,7 +767,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <select id="salesorder_status" name="salesorder_status" data-placeholder="Arrive Status" class="chosen-select">
+                                                            <select id="purchaseorder_arrive_status" name="purchaseorder_arrive_status" data-placeholder="Arrive Status" class="chosen-select">
                                                                 <option value></option>
                                                                 <?php foreach($statuss as $key => $value){ ?>
                                                                     <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
@@ -778,10 +778,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <div class="row">
                                                         <div class="col-sm-2"><h6>Invoice Order</h6></div>
                                                         <div class="col-sm-2">
-                                                            <input type="text" name="quotation_number_like" class="form-control input-sm" placeholder="INNo" value="" />
+                                                            <input type="text" name="invoice_number_like" class="form-control input-sm" placeholder="INNo" value="" />
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <select id="salesorder_status" name="salesorder_status" data-placeholder="IN Status" class="chosen-select">
+                                                            <select id="invoiceorder_status" name="invoiceorder_status" data-placeholder="IN Status" class="chosen-select">
                                                                 <option value></option>
                                                                 <?php foreach($statuss as $key => $value){ ?>
                                                                     <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
@@ -1031,7 +1031,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 											<?php if(!$salesorders){ ?>
 											<tr>
-												<td colspan="15">No record found</td>
+												<td colspan="16">No record found</td>
 											</tr>
 											<?php } ?>
 										</tbody>

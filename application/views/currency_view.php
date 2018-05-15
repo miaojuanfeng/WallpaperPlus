@@ -313,8 +313,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</a>
 													<?php }else{ ?>
 													<i class="glyphicon glyphicon-remove"></i>
-													<?php } ?>
-                                                    <?php } ?>
+													<?php }
+                                                    }else{
+                                                        ?>
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                        <?php
+                                                    }
+                                                    ?>
 												</td>
 											</tr>
 											<?php } ?>

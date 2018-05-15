@@ -407,14 +407,14 @@ class Salesorder extends CI_Controller {
 		);
 
         /* popup-list */
-        $thisSelect = array(
-            'where' => array('salesorder_status' => 'complete'),
-            'group' => 'salesorder_number',
-            'order' => 'salesorder_confirmed_date',
-            'ascend' => 'desc',
-            'return' => 'result'
-        );
-        $data['popup_list'] = $this->salesorder_model->select($thisSelect);
+//        $thisSelect = array(
+//            'where' => array('salesorder_status' => 'complete'),
+//            'group' => 'salesorder_number',
+//            'order' => 'salesorder_confirmed_date',
+//            'ascend' => 'desc',
+//            'return' => 'result'
+//        );
+//        $data['popup_list'] = $this->salesorder_model->select($thisSelect);
 
 		/* user */
 		$thisSelect = array(

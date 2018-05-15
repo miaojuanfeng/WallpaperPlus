@@ -371,27 +371,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12"><a href="<?=base_url('stockstatus')?>">Stock status management</a> > <?=($this->router->fetch_method() == 'update') ? 'Update' : 'Insert'?> stock status</h2>
+					<h2 class="col-sm-12"><a href="<?=base_url('purchaseorder')?>">Purchase order management</a> > <?=($this->router->fetch_method() == 'update') ? 'Update' : 'Insert'?> stock status</h2>
 
 					<div class="col-sm-12">
 						<form method="post" enctype="multipart/form-data">
 							<input type="hidden" name="purchaseorder_id" value="<?=$purchaseorder->purchaseorder_id?>" />
-							<input type="hidden" name="purchaseorder_quotation_user_id" value="<?=$purchaseorder->purchaseorder_quotation_user_id?>" />
-							<input type="hidden" name="purchaseorder_salesorder_id" value="<?=$purchaseorder->purchaseorder_salesorder_id?>" />
-							<input type="hidden" name="purchaseorder_vendor_id" value="<?=$purchaseorder->purchaseorder_vendor_id?>" />
-							<input type="hidden" name="purchaseorder_project_name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
-							<input type="hidden" name="purchaseorder_currency" value="<?=$purchaseorder->purchaseorder_currency?>" />
-							<input type="hidden" name="purchaseorder_number" value="" />
-							<input type="hidden" name="purchaseorder_vendor_company_name" value="<?=$purchaseorder->purchaseorder_vendor_company_name?>" />
-							<input type="hidden" name="purchaseorder_vendor_company_address" value="<?=$purchaseorder->purchaseorder_vendor_company_address?>" />
-							<input type="hidden" name="purchaseorder_vendor_company_phone" value="<?=$purchaseorder->purchaseorder_vendor_company_phone?>" />
-							<input type="hidden" name="purchaseorder_vendor_phone" value="<?=$purchaseorder->purchaseorder_vendor_phone?>" />
-							<input type="hidden" name="purchaseorder_vendor_name" value="<?=$purchaseorder->purchaseorder_vendor_name?>" />
-							<input type="hidden" name="purchaseorder_issue" value="<?=$purchaseorder->purchaseorder_issue?>" />
-							<input type="hidden" name="purchaseorder_terms" value="<?=$purchaseorder->purchaseorder_terms?>" />
-							<input type="hidden" name="purchaseorder_reminder_date" value="<?=$purchaseorder->purchaseorder_reminder_date?>" />
-							<input type="hidden" name="salesorder_total" value="<?=$purchaseorder->purchaseorder_total?>" />
-							<input type="hidden" name="purchaseorder_user_id" value="<?=$purchaseorder->purchaseorder_user_id?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
@@ -412,15 +396,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p>
 										<h4 class="corpcolor-font">Setting</h4>
 										<p class="form-group">
-											<label for="purchaseorder_status">Stock status</label>
-											<select id="purchaseorder_status" name="purchaseorder_status" data-placeholder="Status" class="chosen-select required">
+											<label for="purchaseorder_arrive_status">Stock status</label>
+											<select id="purchaseorder_arrive_status" name="purchaseorder_arrive_status" data-placeholder="Status" class="chosen-select required">
 												<option value></option>
 												<?php
-												if($purchaseorder->purchaseorder_status == ''){
-													$purchaseorder->purchaseorder_status = 'hkd';
-												}
 												foreach($statuss as $key => $value){
-													$selected = ($value->status_name == $purchaseorder->purchaseorder_status) ? ' selected="selected"' : "" ;
+													$selected = ($value->status_name == $purchaseorder->purchaseorder_arrive_status) ? ' selected="selected"' : "" ;
 													echo '<option value="'.$value->status_name.'"'.$selected.'>'.strtoupper($value->status_name).'</option>';
 												}
 												?>
@@ -431,12 +412,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<h4 class="corpcolor-font">Stock status</h4>
 										<div class="row">
 											<div class="col-sm-6 col-xs-6">
-												
 											</div>
 											<div class="col-sm-1 col-xs-1">
 											</div>
 											<div class="col-sm-5 col-xs-5">
-												
 											</div>
 										</div>
 										<div class="list-area">
@@ -507,7 +486,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<div>
-																<input id="purchaseorderitem_stock_quantity" name="purchaseorderitem_stock_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Arrived" value="<?=$value->purchaseorderitem_stock_quantity?>" />
+																<input id="purchaseorderitem_stock_arrive" name="purchaseorderitem_stock_arrive[]" type="number" min="0" class="form-control input-sm" placeholder="Arrived" value="<?=$value->purchaseorderitem_stock_arrive?>" />
 															</div>
 														</td>
 													</tr>

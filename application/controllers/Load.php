@@ -255,6 +255,30 @@ class Load extends CI_Controller {
 		}
 	}
 
+    public function invoiceProductLoader()
+    {
+        $this->load->model('product_model');
+
+        /* product */
+        $thisSelect = array(
+            'where' => array('product_id' => $this->input->post('thisRecordId')),
+            'return' => 'row'
+        );
+        $thisData = $this->product_model->select($thisSelect);
+
+        if($thisData){
+            echo '<script>';
+            echo 'function invoiceProductLoader(){';
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'invoiceitem_product_type_name[]\']").val("'.get_type($thisData->product_type_id)->type_name.'");';
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'invoiceitem_product_code[]\']").val("'.$thisData->product_code.'").css("display", "none").fadeIn();';
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'invoiceitem_product_name[]\']").val("'.$thisData->product_name.'").css("display", "none").fadeIn();';
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') textarea[name=\'invoiceitem_product_detail[]\']").val("'.convert_nl($thisData->product_detail).'").css("display", "none").fadeIn();';
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'invoiceitem_product_price[]\']").val("'.$thisData->{'product_price_'.strtolower($this->input->post('thisCurrency'))}.'").css("display", "none").fadeIn();';
+            echo '}';
+            echo '</script>';
+        }
+    }
+
 	public function termsLoader()
 	{
 		$this->load->model('terms_model');

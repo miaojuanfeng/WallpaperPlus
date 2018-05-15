@@ -34,22 +34,13 @@ class Stockstatus extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
-			$this->purchaseorder_model->update($thisPOST);
+            $this->purchaseorder_model->update($thisPOST);
 
 			$thisSalesorderitem = get_array_prefix('purchaseorderitem_', $thisPOST);
 			$thisSalesorderitem = convert_formArray_to_DBArray($thisSalesorderitem, 'purchaseorderitem_product_name');
-			$this->purchaseorderitem_model->delete($thisPOST);
 			foreach($thisSalesorderitem as $key => $value){
-				$value['purchaseorderitem_purchaseorder_id'] = $thisPOST['purchaseorder_id'];
-				$this->purchaseorderitem_model->insert($value);
+				$this->purchaseorderitem_model->update($value);
 			}
-
-			/* print as PDF */
-			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
-			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/purchaseorder/header/purchaseorder_id/'.$thisPOST['purchaseorder_id']).'"';
-			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/purchaseorder/content/purchaseorder_id/'.$thisPOST['purchaseorder_id']).'"';
-			$wkhtmltopdf .= ' assets/images/pdf/purchaseorder/'.$thisPOST['purchaseorder_number'].'.pdf';
-			$output = exec($wkhtmltopdf);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
 			$thisLog['log_permission_action'] = $this->router->fetch_method();

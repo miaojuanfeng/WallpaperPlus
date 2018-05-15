@@ -11,8 +11,11 @@ class Commissionreport extends CI_Controller {
         'IN date',
         'Sales',
         'IN total',
+        'Rate',
+        'IN total (HKD)',
         'Commission rate',
         'Commission',
+        'Commission (HKD)',
         'Commission to',
         'Status'
     );
@@ -22,11 +25,14 @@ class Commissionreport extends CI_Controller {
     private $th_footer = array(
         '',
         '',
-        'Total',
+        '',
+        '',
+        '',
         '',
         '',
         '',
         'IN total',
+        '',
         '',
         'Commission',
         '',
@@ -49,7 +55,6 @@ class Commissionreport extends CI_Controller {
                 $row = array();
                 $row[] = $value->salesorder_client_company_name;
                 $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->salesorder_id) . '">' . $value->salesorder_number . '</a>';
-                $total += $value->salesorder_total;
                 $row[] = strtoupper($value->salesorder_currency).' '.money_format('%!n', $value->salesorder_total);
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
@@ -69,7 +74,17 @@ class Commissionreport extends CI_Controller {
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
                     $temp .= '<div class="no-wrap">'.strtoupper($value1->invoice_currency).' '.money_format('%!n', $value1->invoice_pay).'<br/></div>';
-                    $subtotal += $value1->invoice_pay;
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.$value1->invoice_exchange_rate.'<br/></div>';
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.'HKD '.money_format('%!n', $value1->invoice_pay * $value1->invoice_exchange_rate).'<br/></div>';
+                    $subtotal += $value1->invoice_pay * $value1->invoice_exchange_rate;
                 }
                 $row[] = $temp;
                 $temp = '';
@@ -80,7 +95,12 @@ class Commissionreport extends CI_Controller {
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
                     $temp .= '<div class="no-wrap">'.strtoupper($value1->invoice_currency).' '.money_format('%!n', ($value1->invoice_pay * $value->salesorder_commission_rate / 100)).'<br/></div>';
-                    $commission_subtotal += ($value1->invoice_pay * $value->salesorder_commission_rate / 100);
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.'HKD '.money_format('%!n', ($value1->invoice_pay * $value->salesorder_commission_rate / 100) * $value1->invoice_exchange_rate).'<br/></div>';
+                    $commission_subtotal += ($value1->invoice_pay * $value->salesorder_commission_rate / 100) * $value1->invoice_exchange_rate;
                 }
                 $row[] = $temp;
                 $temp = '';
@@ -95,9 +115,8 @@ class Commissionreport extends CI_Controller {
                 $row[] = $temp;
                 $this->td_body[] = $row;
             }
-            $this->th_footer[2] = strtoupper('xxx').' '.money_format('%!n', $total);
-            $this->th_footer[6] = strtoupper('xxx').' '.money_format('%!n', $subtotal);
-            $this->th_footer[8] = strtoupper('xxx').' '.money_format('%!n', $commission_subtotal);
+            $this->th_footer[8] = 'HKD '.money_format('%!n', $subtotal);
+            $this->th_footer[11] = 'HKD '.money_format('%!n', $commission_subtotal);
         }
         $data['th_header'] = $this->th_header;
         $data['td_body'] = $this->td_body;

@@ -11,7 +11,9 @@ class Salesreport extends CI_Controller {
         'IN No',
         'IN date',
         'Sales',
-        'IN total'
+        'IN total',
+        'Rate',
+        'IN total (HKD)'
     );
 
     private $td_body = array();
@@ -20,11 +22,13 @@ class Salesreport extends CI_Controller {
         '',
         '',
         '',
-        'Total',
         '',
         '',
         '',
-        'IN total'
+        '',
+        '',
+        '',
+        'IN total (HKD)'
     );
 
     private $thisGET;
@@ -47,7 +51,6 @@ class Salesreport extends CI_Controller {
                 }
                 $row[] = $temp;
                 $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->salesorder_id) . '">' . $value->salesorder_number . '</a>';
-                $total += $value->salesorder_total;
                 $row[] = strtoupper($value->salesorder_currency).' '.money_format('%!n', $value->salesorder_total);
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
@@ -67,13 +70,22 @@ class Salesreport extends CI_Controller {
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
                     $temp .= '<div class="no-wrap">'.strtoupper($value1->invoice_currency).' '.money_format('%!n', $value1->invoice_pay).'<br/></div>';
-                    $subtotal += $value1->invoice_pay;
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.$value1->invoice_exchange_rate.'<br/></div>';
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.'HKD '.money_format('%!n', $value1->invoice_pay * $value1->invoice_exchange_rate).'<br/></div>';
+                    $subtotal += $value1->invoice_pay * $value1->invoice_exchange_rate;
                 }
                 $row[] = $temp;
                 $this->td_body[] = $row;
             }
-            $this->th_footer[3] = strtoupper('xxx').' '.money_format('%!n', $total);
-            $this->th_footer[7] = strtoupper('xxx').' '.money_format('%!n', $subtotal);
+            $this->th_footer[9] = 'HKD '.money_format('%!n', $subtotal);
         }
         $data['th_header'] = $this->th_header;
         $data['td_body'] = $this->td_body;

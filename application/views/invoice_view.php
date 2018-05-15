@@ -303,18 +303,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<h4 class="corpcolor-font">Setting</h4>
 										<p class="form-group">
 											<label for="invoice_status">Status</label>
-											<select id="invoice_status" name="invoice_status" data-placeholder="Status" class="chosen-select required">
-												<option value></option>
-												<?php
-												if($invoice->invoice_status == ''){
-													$invoice->invoice_status = 'hkd';
-												}
-												foreach($statuss as $key => $value){
-													$selected = ($value->status_name == $invoice->invoice_status) ? ' selected="selected"' : "" ;
-													echo '<option value="'.$value->status_name.'"'.$selected.'>'.strtoupper($value->status_name).'</option>';
-												}
-												?>
-											</select>
+                                            <?php
+                                            if( $invoice->invoice_status != 'complete' ) { ?>
+                                                <select id="invoice_status" name="invoice_status"
+                                                        data-placeholder="Status" class="chosen-select required">
+                                                    <option value></option>
+                                                    <?php
+                                                    foreach ($statuss as $key => $value) {
+                                                        $selected = ($value->status_name == $invoice->invoice_status) ? ' selected="selected"' : "";
+                                                        echo '<option value="' . $value->status_name . '"' . $selected . '>' . strtoupper($value->status_name) . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            <?php }else{ ?>
+                                                <input readonly="readonly" id="invoice_status" name="invoice_status" type="text" class="form-control input-sm" placeholder="Status" value="<?=strtoupper($invoice->invoice_status)?>" />
+                                            <?php } ?>
 										</p>
 									</div>
 									<div class="col-sm-9 col-xs-12">
@@ -445,12 +448,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<input id="invoiceitem_product_price" name="invoiceitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="<?=$value->invoiceitem_product_price?>" />
-															<div class="margin-top-10">
-																<label>Sold</label>
-															</div>
-															<div class="margin-top-10">
-																<label>SO total</label>
-															</div>
+<!--															<div class="margin-top-10">-->
+<!--																<label>Sold</label>-->
+<!--															</div>-->
+<!--															<div class="margin-top-10">-->
+<!--																<label>SO total</label>-->
+<!--															</div>-->
 														</td>
 														<td>
 															<?php
@@ -470,10 +473,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															?>
 															<!-- <input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="text" class="form-control input-sm" placeholder="Quantity" value="<?=($value->invoiceitem_quantity) ? $value->invoiceitem_quantity : '1'?>" /> -->
 															<input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$salesorder_quantity - $invoiceitem_sold?>" />
-															<div class="margin-top-10">
-																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sum of invoice item quantity" value="<?=$invoiceitem_sold?>" />
-																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sales order item quantity" value="<?=$salesorder_quantity?>" />
-															</div>
+<!--															<div class="margin-top-10">-->
+<!--																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sum of invoice item quantity" value="--><?//=$invoiceitem_sold?><!--" />-->
+<!--																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sales order item quantity" value="--><?//=$salesorder_quantity?><!--" />-->
+<!--															</div>-->
 														</td>
 														<td>
 															<input readonly="readonly" id="invoiceitem_subtotal" name="invoiceitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="<?=$value->invoiceitem_subtotal?>" />

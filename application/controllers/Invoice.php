@@ -395,14 +395,14 @@ class Invoice extends CI_Controller {
 		);
 
 		/* popup-list */
-        $thisSelect = array(
-            'where' => array('invoice_status' => 'complete'),
-            'group' => 'invoice_number',
-            'order' => 'invoice_confirmed_date',
-            'ascend' => 'desc',
-            'return' => 'result'
-        );
-        $data['popup_list'] = $this->invoice_model->select($thisSelect);
+//        $thisSelect = array(
+//            'where' => array('invoice_status' => 'complete'),
+//            'group' => 'invoice_number',
+//            'order' => 'invoice_confirmed_date',
+//            'ascend' => 'desc',
+//            'return' => 'result'
+//        );
+//        $data['popup_list'] = $this->invoice_model->select($thisSelect);
 
 		/* user */
 		$thisSelect = array(
