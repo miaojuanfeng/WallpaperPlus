@@ -917,22 +917,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <?php
                                                         switch($value1->purchaseorder_status){
                                                             case 'complete':
-                                                                echo '<a data-toggle="tooltip" title="Complete">';
+                                                                echo '<a data-toggle="tooltip" title="Payment Complete">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-ok-circle"></i></span>';
                                                                 echo '</a>';
                                                                 break;
                                                             case 'cancel':
-                                                                echo '<a data-toggle="tooltip" title="Cancel">';
+                                                                echo '<a data-toggle="tooltip" title="Payment Cancel">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-remove-circle"></i></span>';
                                                                 echo '</a>';
                                                                 break;
                                                             case 'partial':
-                                                                echo '<a data-toggle="tooltip" title="Partial">';
+                                                                echo '<a data-toggle="tooltip" title="Payment Partial">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-adjust"></i></span>';
                                                                 echo '</a>';
                                                                 break;
                                                             default:
-                                                                echo '<a data-toggle="tooltip" title="Processing">';
+                                                                echo '<a data-toggle="tooltip" title="Payment Processing">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-play-circle"></i></span>';
                                                                 echo '</a>';
                                                                 break;
@@ -940,22 +940,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         echo " ";
                                                         switch($value1->purchaseorder_arrive_status){
                                                             case 'complete':
-                                                                echo '<a data-toggle="tooltip" title="Complete">';
+                                                                echo '<a data-toggle="tooltip" title="Stock Complete">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-ok-circle"></i></span>';
                                                                 echo '</a>';
                                                                 break;
                                                             case 'cancel':
-                                                                echo '<a data-toggle="tooltip" title="Cancel">';
+                                                                echo '<a data-toggle="tooltip" title="Stock Cancel">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-remove-circle"></i></span>';
                                                                 echo '</a>';
                                                                 break;
                                                             case 'partial':
-                                                                echo '<a data-toggle="tooltip" title="Partial">';
+                                                                echo '<a data-toggle="tooltip" title="Stock Partial">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-adjust"></i></span>';
                                                                 echo '</a>';
                                                                 break;
                                                             default:
-                                                                echo '<a data-toggle="tooltip" title="Processing">';
+                                                                echo '<a data-toggle="tooltip" title="Stock Processing">';
                                                                 echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-play-circle"></i></span>';
                                                                 echo '</a>';
                                                                 break;
@@ -970,22 +970,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             <?php
                                                             switch($value1->invoice_status){
                                                                 case 'complete':
-                                                                    echo '<a data-toggle="tooltip" title="Complete">';
+                                                                    echo '<a data-toggle="tooltip" title="IN Complete">';
                                                                     echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-ok-circle"></i></span>';
                                                                     echo '</a>';
                                                                     break;
                                                                 case 'cancel':
-                                                                    echo '<a data-toggle="tooltip" title="Cancel">';
+                                                                    echo '<a data-toggle="tooltip" title="IN Cancel">';
                                                                     echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-remove-circle"></i></span>';
                                                                     echo '</a>';
                                                                     break;
                                                                 case 'partial':
-                                                                    echo '<a data-toggle="tooltip" title="Partial">';
+                                                                    echo '<a data-toggle="tooltip" title="IN Partial">';
                                                                     echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-adjust"></i></span>';
                                                                     echo '</a>';
                                                                     break;
                                                                 default:
-                                                                    echo '<a data-toggle="tooltip" title="Processing">';
+                                                                    echo '<a data-toggle="tooltip" title="IN Processing">';
                                                                     echo '<span class="corpcolor-font"><i class="glyphicon glyphicon-play-circle"></i></span>';
                                                                     echo '</a>';
                                                                     break;

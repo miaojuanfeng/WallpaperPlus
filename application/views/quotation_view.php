@@ -660,7 +660,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
-														<th width="8%">Quantity</th>
+														<th width="12%">Quantity</th>
                                                         <th width="8%" style="color:red">需不需要by item Discount？</th> <!-- michaelmiao -->
 														<th width="12%">Subtotal</th>
 													</tr>
@@ -715,8 +715,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<input id="quotationitem_product_price" name="quotationitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="<?=$value->quotationitem_product_price?>" />
 														</td>
 														<td>
-															<input id="quotationitem_quantity" name="quotationitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->quotationitem_quantity) ? $value->quotationitem_quantity : '1'?>" />
-														</td>
+                                                            <div class="input-group">
+                                                                <input id="quotationitem_quantity" name="quotationitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->quotationitem_quantity) ? $value->quotationitem_quantity : '1'?>" />
+                                                                <span class="input-group-addon">Unit</span>
+                                                            </div>
+                                                        </td>
                                                         <td></td>
 														<td>
 															<input readonly="readonly" id="quotationitem_subtotal" name="quotationitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="<?=$value->quotationitem_subtotal?>" />
@@ -730,9 +733,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
                                                         <th></th> <!-- michaelmiao -->
-														<th>Discount</th>
-														<th><input id="quotation_discount" name="quotation_discount" type="text" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" /></th>
+														<th>Discount%</th>
+														<th>
+                                                            <div class="input-group">
+                                                                <input id="quotation_discount" name="quotation_discount" type="text" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                        </th>
 													</tr>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th> <!-- michaelmiao -->
+                                                        <th>运费</th>
+                                                        <th><input id="quotation_discount" name="quotation_discount" type="text" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" /></th>
+                                                    </tr>
 													<tr>
 														<th width="10%">
 															<a class="btn btn-sm btn-primary quotationitem-insert-btn" data-toggle="tooltip" title="Insert">

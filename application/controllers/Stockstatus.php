@@ -70,6 +70,7 @@ class Stockstatus extends CI_Controller {
 			/* status */
 			$data['statuss'] = (object)array(
 				(object)array('status_name' => 'processing'),
+                (object)array('status_name' => 'partial'),
 				(object)array('status_name' => 'complete'),
 				(object)array('status_name' => 'cancel')
 			);

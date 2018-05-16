@@ -447,20 +447,20 @@ class Purchaseorder extends CI_Controller {
 		);
 
         /* popup-list */
-        $thisSelect = array(
-            'where' => array('purchaseorder_arrive_status' => 'complete'),
-            'group' => 'purchaseorder_number',
-            'order' => 'purchaseorder_confirmed_date',
-            'ascend' => 'desc',
-            'return' => 'result'
-        );
-        $popup_list = $this->purchaseorder_model->select($thisSelect);
-        $data['popup_list'] = array();
-        foreach ($popup_list as $key => $value){
-            if( get_salesorder($value->purchaseorder_salesorder_id)->salesorder_status == 'processing' ){
-                $data['popup_list'][] = $value;
-            }
-        }
+//        $thisSelect = array(
+//            'where' => array('purchaseorder_arrive_status' => 'complete'),
+//            'group' => 'purchaseorder_number',
+//            'order' => 'purchaseorder_confirmed_date',
+//            'ascend' => 'desc',
+//            'return' => 'result'
+//        );
+//        $popup_list = $this->purchaseorder_model->select($thisSelect);
+//        $data['popup_list'] = array();
+//        foreach ($popup_list as $key => $value){
+//            if( get_salesorder($value->purchaseorder_salesorder_id)->salesorder_status == 'processing' ){
+//                $data['popup_list'][] = $value;
+//            }
+//        }
 
 		/* user */
 		$thisSelect = array(

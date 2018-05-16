@@ -437,6 +437,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="purchaseorder_project_name">Project name <span class="highlight">*</span></label>
 											<input id="purchaseorder_project_name" name="purchaseorder_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
 										</p>
+                                        <p class="form-group">
+                                            <label for="purchaseorder_project_name">运送方法 <span class="highlight">*</span></label>
+                                            <input id="purchaseorder_project_name" name="purchaseorder_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
+                                        </p>
+                                        <p class="form-group">
+                                            <label for="purchaseorder_project_name">到货日子 <span class="highlight">*</span></label>
+                                            <input id="purchaseorder_project_name" name="purchaseorder_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
+                                        </p>
+                                        <p class="form-group">
+                                            <label for="purchaseorder_project_name">Delivery address <span class="highlight">*</span></label>
+                                            <textarea id="purchaseorder_vendor_company_address" name="purchaseorder_vendor_company_address" class="form-control input-sm" placeholder="Address"><?=$purchaseorder->purchaseorder_vendor_company_address?></textarea>
+                                        </p>
 <!--										<p class="form-group">-->
 <!--											<label for="purchaseorder_currency">Currency</label>-->
 <!--											<select id="purchaseorder_currency" name="purchaseorder_currency" data-placeholder="Currency" class="chosen-select required">-->

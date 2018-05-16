@@ -218,6 +218,11 @@ class Deliverynote extends CI_Controller {
 			// $data['deliverynote']->deliverynote_paid = '0';
 			$data['deliverynote']->deliverynote_pay = '0';
 			$data['deliverynote']->deliverynote_balance = '0';
+            $data['deliverynote']->deliverynote_lot_number = '';
+            $data['deliverynote']->deliverynote_waybill_number = '';
+            $data['deliverynote']->deliverynote_customs_number = '';
+            $data['deliverynote']->deliverynote_express_company = '';
+            $data['deliverynote']->deliverynote_delivery_day = '';
 
 			/* currency */
 			$data['currencys'] = (object)array(

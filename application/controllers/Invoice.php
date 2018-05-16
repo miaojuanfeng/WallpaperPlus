@@ -202,6 +202,8 @@ class Invoice extends CI_Controller {
 			$data['salesorder'] = $this->salesorder_model->select($thisSelect);
 			$data['invoice'] = convert_salesorder_to_invoice($data['salesorder']);
 
+            $data['invoice']->invoice_number = '';
+
 			/* invoice paid */
 			$thisSelect = array(
 				'select' => array(
