@@ -55,6 +55,9 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+ini_set('memory_limit', '5000M');
+ini_set('max_execution_time', '0');
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

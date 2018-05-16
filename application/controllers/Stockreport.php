@@ -4,18 +4,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Stockreport extends CI_Controller {
 
     private $th_header = array(
-        'Code',
-        'Name',
-        'WH0',
-        'WH1',
-        'WH2',
-        'WH3',
-        'Total'
+        'Type',
+        'Item ID',
+        'Item Name',
+        'Exchange',
+        'Quantity',
+        'Unit',
+        'Unit Cost',
+        'Item Value',
+        'Rate',
+        'Item Value (HKD)',
+        'Vendor',
+        'Remark',
+        'Handler',
+        'Create'
     );
 
     private $td_body = array();
 
     private $th_footer = array(
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
         '',
         '',
         '',
@@ -35,36 +49,41 @@ class Stockreport extends CI_Controller {
         $this->td_body = array();
         if( $rows && count($rows) ) {
             $total = 0;
-            $subtotal = 0;
             foreach ($rows as $key => $value) {
                 $row = array();
-                $row[] = $value->salesorder_client_company_name;
-                $temp = '';
-                foreach($value->purchaseorders as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">Customer PO ? <a href="'.base_url('purchaseorder/update/purchaseorder_id/'.$value1->purchaseorder_id).'">'.$value1->purchaseorder_number.'</a><br/></div>';
+                $row[] = 'Stock '.$value->exchange_type;
+                $thisProduct = get_product($value->exchange_product_id);
+                $thisUnit = get_unit($thisProduct->product_unit_id);
+                $thisVendor = get_vendor($thisProduct->product_vendor_id);
+                $row[] = $thisProduct->product_code;
+                $row[] = $thisProduct->product_name;
+                $thisWarehouse = '';
+                if(!empty(get_warehouse($value->exchange_warehouse_id_from))){
+                    $thisWarehouse .= get_warehouse($value->exchange_warehouse_id_from)->warehouse_name;
+                }else{
+                    $thisWarehouse .= 'Other';
                 }
-                $row[] = $temp;
-                $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->salesorder_id) . '">' . $value->salesorder_number . '</a>';
-                $total += $value->salesorder_total;
-                $row[] = strtoupper($value->salesorder_currency).' '.money_format('%!n', $value->salesorder_total);
-                $temp = '';
-                foreach($value->invoices as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.$value1->invoice_number.'<br/></div>';
+                $thisWarehouse .= ' >>> ';
+                if(!empty(get_warehouse($value->exchange_warehouse_id_to))){
+                    $thisWarehouse .= get_warehouse($value->exchange_warehouse_id_to)->warehouse_name;
+                }else{
+                    $thisWarehouse .= 'Other';
                 }
-                $row[] = $temp;
-                $temp = '';
-                foreach($value->invoices as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.convert_datetime_to_date($value1->invoice_create).'<br/></div>';
-                }
-                $row[] = $temp;
-                $temp = '';
-                foreach($value->invoices as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.ucfirst(get_user($value1->invoice_quotation_user_id)->user_name).'<br/></div>';
-                }
-                $row[] = $temp;
+                $row[] = $thisWarehouse;
+                $row[] = $value->exchange_quantity;
+                $row[] = $thisUnit->unit_name;
+                $row[] = strtoupper(get_currency($thisVendor->vendor_currency_id)->currency_name).' '.money_format('%!n', $thisProduct->product_cost);
+                $row[] = strtoupper(get_currency($thisVendor->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->exchange_quantity * $thisProduct->product_cost);
+                $row[] = get_currency($thisVendor->vendor_currency_id)->currency_exchange_rate;
+//                $total += $value->exchange_quantity * $thisProduct->product_cost * get_currency($thisVendor->vendor_currency_id)->currency_exchange_rate;
+                $row[] = 'HKD '.money_format('%!n', $value->exchange_quantity * $thisProduct->product_cost * get_currency($thisVendor->vendor_currency_id)->currency_exchange_rate);
+                $row[] = $thisVendor->vendor_company_name;
+                $row[] = $value->exchange_remark;
+                $row[] = get_user($value->exchange_user_id)->user_name;
+                $row[] = $value->exchange_create;
                 $this->td_body[] = $row;
             }
-            $this->th_footer[3] = strtoupper('xxx').' '.money_format('%!n', $total);
+//            $this->th_footer[9] = 'HKD '.money_format('%!n', $total);
         }
         $data['th_header'] = $this->th_header;
         $data['td_body'] = $this->td_body;
@@ -85,7 +104,7 @@ class Stockreport extends CI_Controller {
 		check_permission();
 
         $this->load->library('PHPExcel');
-		$this->load->model('salesorder_model');
+		$this->load->model('exchange_model');
 		$this->load->model('client_model');
 		$this->load->model('purchaseorder_model');
 		$this->load->model('invoice_model');
@@ -93,8 +112,6 @@ class Stockreport extends CI_Controller {
 
         $this->per_page = get_setting('per_page')->setting_value;
         $this->thisGET = $this->uri->uri_to_assoc();
-        $this->thisGET['salesorder_status_noteq'] = 'cancel';
-        $this->thisGET['salesorder_deleted'] = 'N';
 	}
 
 	public function index()
@@ -119,85 +136,36 @@ class Stockreport extends CI_Controller {
 
 	public function select()
 	{
-		$per_page = get_setting('per_page')->setting_value;
+        $thisSelect = array(
+            'where' => $this->thisGET,
+            'limit' => $this->per_page,
+            'return' => 'result'
+        );
+        $data['exchanges'] = $this->exchange_model->select($thisSelect);
 
-		$thisGET = $this->uri->uri_to_assoc();
-		$thisGET['salesorder_status_noteq'] = 'cancel';
-		$thisGET['salesorder_deleted'] = 'N';
+        $data = array_merge($data, $this->get_form_data($data['exchanges']));
 
-		/* check invoice */
-		if(isset($thisGET['invoice_number_like']) || isset($thisGET['invoice_create_greateq']) || isset($thisGET['invoice_create_smalleq'])){
-			$thisSelect = array(
-				'where' => $thisGET,
-				'return' => 'row'
-			);
-			$data['invoice'] = $this->invoice_model->select($thisSelect);
+        $thisSelect = array(
+            'where' => $this->thisGET,
+            'return' => 'num_rows'
+        );
+        $data['num_rows'] = $this->exchange_model->select($thisSelect);
 
-			if($data['invoice']){
-				$thisGET['salesorder_id'] = $data['invoice']->invoice_salesorder_id;
-			}else{
-				$thisGET['salesorder_id'] = 0;
-			}
-		}
-		/* check invoice */
+        /* type */
+        $data['types'] = (object)array(
+            (object)array('type_name' => 'in'),
+            (object)array('type_name' => 'transfer'),
+            (object)array('type_name' => 'out')
+        );
 
-		$thisSelect = array(
-			'where' => $thisGET,
-			'limit' => $per_page,
-			'return' => 'result'
-		);
-		$data['salesorders'] = $this->salesorder_model->select($thisSelect);
+        $thisSelect = array(
+            'group' => 'exchange_product_id',
+            'return' => 'result'
+        );
+        $data['exchange_product_ids'] = $this->exchange_model->select($thisSelect);
 
-		foreach($data['salesorders'] as $key => $value){
-			/* purchaseorder */
-			$thisSelect = array(
-				'where' => array(
-					'purchaseorder_salesorder_id' => $value->salesorder_id,
-					'purchaseorder_status_noteq' => 'cancel'
-				),
-				'return' => 'result'
-			);
-			$data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-			$data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
-		}
-
-		foreach($data['salesorders'] as $key => $value){
-			/* invoice */
-			$thisSelect = array(
-				'where' => array(
-					'invoice_salesorder_id' => $value->salesorder_id,
-					'invoice_status_noteq' => 'cancel'
-				),
-				'return' => 'result'
-			);
-			$data['invoices'] = $this->invoice_model->select($thisSelect);
-			$data['salesorders'][$key]->invoices = $data['invoices'];
-		}
-
-        $data = array_merge($data, $this->get_form_data($data['salesorders']));
-
-		$thisSelect = array(
-			'where' => $thisGET,
-			'group' => 'salesorder_number',
-			'return' => 'num_rows'
-		);
-		$data['num_rows'] = $this->salesorder_model->select($thisSelect);
-
-		/* status */
-		$data['statuss'] = (object)array(
-			(object)array('status_name' => 'processing'),
-			(object)array('status_name' => 'complete'),
-			(object)array('status_name' => 'cancel')
-		);
-
-		/* user */
-		$thisSelect = array(
-			'return' => 'result'
-		);
-		$data['users'] = $this->user_model->select($thisSelect);
-
-		/* pagination */
-		$this->pagination->initialize(get_pagination_config($per_page, $data['num_rows']));
+        /* pagination */
+        $this->pagination->initialize(get_pagination_config($this->per_page, $data['num_rows']));
 
 		$this->load->view('stockreport_view', $data);
 	}
@@ -209,35 +177,9 @@ class Stockreport extends CI_Controller {
             'limit' => $this->per_page,
             'return' => 'result'
         );
-        $data['salesorders'] = $this->salesorder_model->select($thisSelect);
+        $data['exchanges'] = $this->exchange_model->select($thisSelect);
 
-        foreach($data['salesorders'] as $key => $value){
-            /* purchaseorder */
-            $thisSelect = array(
-                'where' => array(
-                    'purchaseorder_salesorder_id' => $value->salesorder_id,
-                    'purchaseorder_status_noteq' => 'cancel'
-                ),
-                'return' => 'result'
-            );
-            $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-            $data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
-        }
-
-        foreach($data['salesorders'] as $key => $value){
-            /* invoice */
-            $thisSelect = array(
-                'where' => array(
-                    'invoice_salesorder_id' => $value->salesorder_id,
-                    'invoice_status_noteq' => 'cancel'
-                ),
-                'return' => 'result'
-            );
-            $data['invoices'] = $this->invoice_model->select($thisSelect);
-            $data['salesorders'][$key]->invoices = $data['invoices'];
-        }
-
-        $this->get_form_data($data['salesorders']);
+        $this->get_form_data($data['exchanges']);
 
         $fileName = 'Stock_report_'.date('YmdHis');
         php_excel_export($this->th_header, $this->td_body, $fileName);

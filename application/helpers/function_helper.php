@@ -69,6 +69,29 @@ if(!function_exists('get_vendor'))
 	}
 }
 
+if(!function_exists('get_currency'))
+{
+    function get_currency($thisId){
+        $CI =& get_instance();
+        $CI->load->model('currency_model');
+
+        /* vendor */
+        $thisSelect = array(
+            'where' => array(
+                'currency_id' => $thisId
+            ),
+            'return' => 'row'
+        );
+        $data = $CI->currency_model->select($thisSelect);
+
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+    }
+}
+
 if(!function_exists('get_product'))
 {
 	function get_product($thisId){
@@ -182,6 +205,29 @@ if(!function_exists('get_type'))
 			return false;
 		}
 	}
+}
+
+if(!function_exists('get_unit'))
+{
+    function get_unit($thisId){
+        $CI =& get_instance();
+        $CI->load->model('unit_model');
+
+        /* type */
+        $thisSelect = array(
+            'where' => array(
+                'unit_id' => $thisId
+            ),
+            'return' => 'row'
+        );
+        $data = $CI->unit_model->select($thisSelect);
+
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+    }
 }
 
 if(!function_exists('get_location'))

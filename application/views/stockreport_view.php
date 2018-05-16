@@ -158,118 +158,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 								<form salesorder="form" method="get">
 									<input type="hidden" name="salesorder_id" />
-									<table>
-										<tbody>
-											<tr>
-												<td width="90%">
-													<div class="row">
-														<div class="col-sm-2"><h6>Stock Order</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />
-														</div>
-														<div class="col-sm-2">
-															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_greateq" name="salesorder_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</span>
-														</div>
-														<div class="col-sm-2">
-															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_smalleq" name="salesorder_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</span>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Invoice</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="invoice_number_like" class="form-control input-sm" placeholder="INNo" value="" />
-														</div>
-														<div class="col-sm-2">
-															<span class="input-group date datetimepicker">
-																<input id="invoice_create_greateq" name="invoice_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</span>
-														</div>
-														<div class="col-sm-2">
-															<span class="input-group date datetimepicker">
-																<input id="invoice_create_smalleq" name="invoice_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
-																<span class="input-group-addon">
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-															</span>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Customer</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
-														</div>
-														<div class="col-sm-2">
-															<select id="salesorder_user_id" name="salesorder_user_id" data-placeholder="Stock" class="chosen-select">
-																<option value></option>
-																<?php foreach($users as $key => $value){ ?>
-																<option value="<?=$value->user_id?>"><?=ucfirst($value->user_name)?></option>
-																<?php } ?>
-															</select>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Vendor</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Vendor company name" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Project</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_project_name_like" class="form-control input-sm" placeholder="Project Name" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<!-- <div class="row">
-														<div class="col-sm-2"><h6>Product</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_code_like" class="form-control input-sm" placeholder="Item Code" value="" />
-														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
-														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div> -->
-												</td>
-												<td valign="top" width="10%" class="text-right">
-													<button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
-														<i class="glyphicon glyphicon-search"></i>
-													</button>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td width="90%">
+                                                <div class="row">
+                                                    <div class="col-sm-2"><h6>Exchange</h6></div>
+                                                    <div class="col-sm-2">
+                                                        <select id="exchange_type" name="exchange_type" data-placeholder="Type" class="chosen-select">
+                                                            <?php
+                                                            foreach($types as $key => $value){
+                                                                $selected = ($value->type_name == $this->uri->uri_to_assoc()['exchange_type']) ? ' selected="selected"' : "" ;
+                                                                echo '<option value="'.$value->type_name.'"'.$selected.'>Stock '.$value->type_name.'</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <select id="exchange_product_id" name="exchange_product_id" data-placeholder="Product" class="chosen-select">
+                                                            <option value></option>
+                                                            <?php foreach($exchange_product_ids as $key => $value){ ?>
+                                                                <option value="<?=$value->exchange_product_id?>">
+                                                                    <?php
+                                                                    $thisProduct = get_product($value->exchange_product_id);
+                                                                    echo $thisProduct->product_code.' - '.$thisProduct->product_name;
+                                                                    ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-2"></div>
+                                                    <div class="col-sm-2"></div>
+                                                    <div class="col-sm-2"></div>
+                                                    <div class="col-sm-2"></div>
+                                                </div>
+                                            </td>
+                                            <td valign="top" width="10%" class="text-right">
+                                                <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
 								</form>
 
 							</div> <!-- list-container -->

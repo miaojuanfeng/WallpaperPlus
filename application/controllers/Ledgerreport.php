@@ -7,15 +7,15 @@ class Ledgerreport extends CI_Controller {
         'Customer',
         'IN No',
         'Deadline',
-        'Pay',
-        '汇率',
-        'Pay (HKD)',
-        'Receive',
-        '汇率',
-        'Receive (HKD)',
+        'Debit Amt',
+        'Rate',
+        'Debit Amt (HKD)',
+        'Credit Amt',
+        'Rate',
+        'Credit Amt (HKD)',
+        'Balance',
         'IN date',
         'OUT date',
-        'Balance',
         'Sales'
     );
 
@@ -58,9 +58,9 @@ class Ledgerreport extends CI_Controller {
                 $row[] = '外币';
                 $row[] = '汇率';
                 $row[] = 'Receive';
+                $row[] = 'Balance';
                 $row[] = convert_datetime_to_date($value->invoice_create);
                 $row[] = 'OUT date';
-                $row[] = 'Balance';
                 $row[] = get_user($value->invoice_quotation_user_id)->user_name;
                 $this->td_body[] = $row;
             }
