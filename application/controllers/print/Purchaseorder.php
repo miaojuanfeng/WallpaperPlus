@@ -13,6 +13,8 @@ class Purchaseorder extends CI_Controller {
 
 		$this->load->model('purchaseorder_model');
 		$this->load->model('purchaseorderitem_model');
+        $this->load->model('invoice_model');
+        $this->load->model('invoiceitem_model');
 
 		setlocale(LC_MONETARY, 'en_HK');
 	}
@@ -46,12 +48,37 @@ class Purchaseorder extends CI_Controller {
 		);
 		$data['purchaseorder'] = $this->purchaseorder_model->select($thisSelect);
 		
-		/* purchaseorderitem */
-		$thisSelect = array(
-			'where' => $thisGET,
-			'return' => 'result'
-		);
-		$data['purchaseorderitems'] = $this->purchaseorderitem_model->select($thisSelect);
+//		/* purchaseorderitem */
+//		$thisSelect = array(
+//			'where' => $thisGET,
+//			'return' => 'result'
+//		);
+//		$data['purchaseorderitems'] = $this->purchaseorderitem_model->select($thisSelect);
+
+        $data['salesorder'] = get_salesorder($data['purchaseorder']->purchaseorder_salesorder_id);
+
+		/* invoice */
+        $thisSelect = array(
+            'where' => array(
+                'invoice_salesorder_id' => $data['salesorder']->salesorder_id,
+                'invoice_status_noteq' => 'cancel'
+            ),
+            'return' => 'result'
+        );
+        $data['invoices'] = $this->invoice_model->select($thisSelect);
+
+        /* invoiceitem */
+        foreach($data['invoices'] as $key => $value) {
+            $thisSelect = array(
+                'where' => array(
+                    'invoiceitem_invoice_id' => $value->invoice_id
+                ),
+                'return' => 'result'
+            );
+            $data['invoices'][$key]->invoiceitems = $this->invoiceitem_model->select($thisSelect);
+        }
+
+        $data['salesorder']->invoices = $data['invoices'];
 
 		$this->load->view('print/purchaseorder_view', $data);
 	}

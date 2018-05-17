@@ -119,6 +119,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				calc();
 			});
 			$(document).on('blur', 'input[name="quotation_discount"]', function(){
+			    if( $(this).val() < 70 && $('input[name="approval_code"]').val() == '' ){
+                    alert('Please enter Approval code');
+                }
 				calc();
 			});
 			$(document).on('change', 'select[name="quotation_currency"]', function(){
@@ -252,7 +255,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).find('input[name="quotationitem_subtotal[]"]').val(parseFloat($(this).find('input[name="quotationitem_product_price[]"]').val() * $(this).find('input[name="quotationitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 				total += parseFloat($(this).find('input[name="quotationitem_subtotal[]"]').val());
 			});
-			$('input[name="quotation_total"]').val(parseFloat(total - $('input[name="quotation_discount"]').val()).toFixed(2)).css('display', 'none').fadeIn();
+			$('input[name="quotation_total"]').val(parseFloat(total * ( $('input[name="quotation_discount"]').val() / 100 )).toFixed(2)).css('display', 'none').fadeIn();
 		}
 
 		function check_delete(id){
@@ -322,7 +325,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<input id="quotationitem_product_price" name="quotationitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
 			quotationitem_row += '</td>';
 			quotationitem_row += '<td>';
+            quotationitem_row += '<div class="input-group">';
 			quotationitem_row += '<input id="quotationitem_quantity" name="quotationitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            quotationitem_row += '<span class="input-group-addon">Unit</span>';
+            quotationitem_row += '</div>';
 			quotationitem_row += '</td>';
             quotationitem_row += '<td>'; <!-- michaelmiao -->
             quotationitem_row += '</td>'; <!-- michaelmiao -->
@@ -643,8 +649,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><input id="quotation_expire" name="quotation_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($quotation->quotation_expire != '' && $this->router->fetch_method() != 'duplicate') ? $quotation->quotation_expire : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
 													</tr>
 													<tr>
-														<td><label for="quotation_expire">Approval code</label></td>
-														<td><input id="quotation_expire" name="quotation_expire" type="text" class="form-control input-sm" placeholder="Approval code" value="" /></td>
+														<td><label for="approval_code">Approval code</label></td>
+														<td><input id="approval_code" name="approval_code" type="text" class="form-control input-sm" placeholder="Approval code" value="" /></td>
 													</tr>
 												</table>
 											</div>
@@ -661,8 +667,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th>Detail</th>
 														<th width="12%">Price</th>
 														<th width="12%">Quantity</th>
-                                                        <th width="8%" style="color:red">需不需要by item Discount？</th> <!-- michaelmiao -->
-														<th width="12%">Subtotal</th>
+                                                        <th width="12%" style="color:red">需不需要by item Discount？</th> <!-- michaelmiao -->
+														<th width="14%">Subtotal</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -685,15 +691,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<div>
-																<select id="quotationitem_product_id" name="quotationitem_product_id[]" data-placeholder="Product" class="chosen-select">
-																	<option value></option>
-																	<?php
-																	foreach($products as $key1 => $value1){
-																		$selected = ($value1->product_id == $value->quotationitem_product_id) ? ' selected="selected"' : "" ;
-																		echo '<option value="'.$value1->product_id.'"'.$selected.'>'.$value1->product_code.' - '.$value1->product_name.'</option>';
-																	}
-																	?>
-																</select>
+                                                                <span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="">
+																	<input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->quotationitem_product_id?>" />
+                                                                    <input type="button" class="form-control input-sm" value="Select a product" />
+                                                                </span>
 															</div>
 															<div class="margin-top-10">
 																<div class="input-group">
@@ -733,10 +734,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
                                                         <th></th> <!-- michaelmiao -->
-														<th>Discount%</th>
+														<th>Discount %</th>
 														<th>
                                                             <div class="input-group">
-                                                                <input id="quotation_discount" name="quotation_discount" type="text" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
+                                                                <input id="quotation_discount" name="quotation_discount" type="number" min="0" max="100" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '100'?>" />
                                                                 <span class="input-group-addon">%</span>
                                                             </div>
                                                         </th>
@@ -747,7 +748,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <th></th>
                                                         <th></th> <!-- michaelmiao -->
                                                         <th>运费</th>
-                                                        <th><input id="quotation_discount" name="quotation_discount" type="text" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" /></th>
+                                                        <th><input id="quotation_discount" name="quotation_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" /></th>
                                                     </tr>
 													<tr>
 														<th width="10%">
@@ -1406,3 +1407,160 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </html>
 
 <div class="scriptLoader"></div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+                <h4 class="modal-title corpcolor-font">Product list</h4>
+            </div>
+            <div class="modal-body">
+                <div class="fieldset">
+                    <div class="search-area">
+
+                        <form product="form" method="get">
+                            <input type="hidden" name="product_id" />
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td width="90%">
+                                        <div class="row">
+                                            <div class="col-sm-2"><h6>Product</h6></div>
+                                            <div class="col-sm-2">
+                                                <input type="text" name="product_id" class="form-control input-sm" placeholder="#" value="" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" name="product_code_like" class="form-control input-sm" placeholder="Product code" value="" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" name="product_wpp_code_like" class="form-control input-sm" placeholder="Product wpp code" value="" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" name="product_name_like" class="form-control input-sm" placeholder="Product name" value="" />
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-2"></div>
+                                        </div>
+                                    </td>
+                                    <td valign="top" width="10%" class="text-right">
+                                        <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+                    </div> <!-- list-container -->
+                </div>
+                <div class="fieldset">
+
+                    <div class="list-area">
+                        <form name="list" action="<?=base_url('product/delete')?>" method="post">
+                            <input type="hidden" name="product_id" />
+                            <input type="hidden" name="product_delete_reason" />
+                            <div class="page-area">
+                                <span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
+                                <?=$this->pagination->create_links()?>
+                            </div>
+                            <table id="product" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>
+                                        <a href="<?=get_order_link('product_code')?>">
+                                            Code <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="<?=get_order_link('product_wpp_code')?>">
+                                            WPP code <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="<?=get_order_link('product_name')?>">
+                                            Name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="<?=get_order_link('product_cost')?>">
+                                            Cost <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        Price <a><i class="glyphicon glyphicon-sort corpcolor-font"></i></a>
+                                        <a href="<?=get_order_link('product_price_rmb')?>">RMB</a>/<a href="<?=get_order_link('product_price_hkd')?>">HKD</a>/<a href="<?=get_order_link('product_price_usd')?>">USD</a>
+                                    </th>
+                                    <th>
+                                        <a href="<?=get_order_link('product_modify')?>">
+                                            Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                        </a>
+                                    </th>
+                                    <!-- <th width="40"></th> -->
+                                    <th width="40"></th>
+                                    <th width="40" class="text-right">
+                                        <a href="<?=base_url('product/insert')?>" data-toggle="tooltip" title="Insert">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($products as $key => $value){ ?>
+                                    <tr>
+                                        <td title="<?=$value->product_id?>"><?=$key+1?></td>
+                                        <td><?=$value->product_code?></td>
+                                        <td><?=$value->product_wpp_code?></td>
+                                        <td><?=$value->product_name?></td>
+                                        <td><?='HKD '.$value->product_cost?></td>
+                                        <td><?='RMB '.$value->product_price_rmb.' / HKD '.$value->product_price_hkd.' / USD '.$value->product_price_usd?></td>
+                                        <td><?=convert_datetime_to_date($value->product_modify)?></td>
+                                        <!-- <td class="text-right">
+													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->product_id?>">
+														<a data-toggle="tooltip" title="More">
+															<i class="glyphicon glyphicon-chevron-right"></i>
+														</a>
+													</span>
+												</td> -->
+                                        <td class="text-right">
+                                            <a href="<?=base_url('product/update/product_id/'.$value->product_id)?>" data-toggle="tooltip" title="Update">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            <?php if(!check_permission('product_delete', 'display')){ ?>
+                                                <a onclick="check_delete(<?=$value->product_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('product_delete', 'disable')?>">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                </a>
+                                            <?php }else{ ?>
+                                                <i class="glyphicon glyphicon-remove"></i>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                            <div class="page-area">
+                                <span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
+                                <?=$this->pagination->create_links()?>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- myModal -->

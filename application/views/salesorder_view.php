@@ -543,7 +543,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
-														<th width="8%">Quantity</th>
+														<th width="12%">Quantity</th>
 														<th width="12%">Subtotal</th>
 													</tr>
 												</thead>
@@ -591,8 +591,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<input id="salesorderitem_product_price" name="salesorderitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="<?=$value->salesorderitem_product_price?>" />
 														</td>
 														<td>
-															<input id="salesorderitem_quantity" name="salesorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->salesorderitem_quantity) ? $value->salesorderitem_quantity : '1'?>" />
-														</td>
+                                                            <div class="input-group">
+                                                                <input id="salesorderitem_quantity" name="salesorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->salesorderitem_quantity) ? $value->salesorderitem_quantity : '1'?>" />
+                                                                <span class="input-group-addon">Unit</span>
+                                                            </div>
+                                                        </td>
 														<td>
 															<input readonly="readonly" id="salesorderitem_subtotal" name="salesorderitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="<?=$value->salesorderitem_subtotal?>" />
 														</td>
@@ -604,8 +607,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
 														<th></th>
-														<th>Discount</th>
-														<th><input readonly="readonly" id="salesorder_discount" name="salesorder_discount" type="text" class="form-control input-sm required" placeholder="Discount" value="<?=($salesorder->salesorder_discount) ? $salesorder->salesorder_discount : '0'?>" /></th>
+														<th>Discount %</th>
+														<th>
+                                                            <div class="input-group">
+                                                                <input readonly="readonly" id="salesorder_discount" name="salesorder_discount" type="number" min="0" max="100" class="form-control input-sm required" placeholder="Discount" value="<?=($salesorder->salesorder_discount) ? $salesorder->salesorder_discount : 100?>" />
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
+                                                        </th>
 													</tr>
 													<tr>
 														<th width="10%">

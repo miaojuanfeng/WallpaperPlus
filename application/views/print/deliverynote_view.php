@@ -167,7 +167,7 @@ switch($deliverynote->deliverynote_currency){
 					<table cellpadding="0" cellspacing="0">
 						<tr>
 							<td width="40%"><b>Delivery note No.</b></td>
-							<td width="60%"><?=$deliverynote->deliverynote_number?>-v<?=$deliverynote->deliverynote_version?></td>
+							<td width="60%"><?=$deliverynote->deliverynote_number?>-v<?=$deliverynote->deliverynote_version?>/INV0000000</td>
 						</tr>
 						<tr>
 							<td><b>Date</b></td>
@@ -244,12 +244,12 @@ switch($deliverynote->deliverynote_currency){
 			<?php foreach($deliverynoteitems as $key => $value){ ?>
 			<tr class="padding-top-5">
 				<td width="12%"></td>
-				<td width="76%" valign="top"><b class="corpcolor-font"><?=$value->deliverynoteitem_product_name?></b></td>
+				<td width="76%"></td>
 				<td width="12%"></td>
 			</tr>
 			<tr class="padding-bottom-5">
 				<td valign="top"><div class="part_number"><?=$value->deliverynoteitem_product_code?></div></td>
-				<td valign="top"><?=nl2br($value->deliverynoteitem_product_detail)?></td>
+				<td valign="top"><?=$value->deliverynoteitem_product_code.' - '.$value->deliverynoteitem_product_name?></td>
 				<td valign="top" align="right"><?=$value->deliverynoteitem_quantity?></td>
 			</tr>
 			<?php } ?>
@@ -314,10 +314,7 @@ switch($deliverynote->deliverynote_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-20">
 				<tr>
 					<td width="40%">
-						<div><b>Received By</b></div>
-						<div><?=$deliverynote->deliverynote_client_company_name?></div>
-						<div class="sign-area"></div>
-						<div>Authority Signature & Co. Chop</div>
+
 					</td>
 					<td width="20%"></td>
 					<td width="40%">

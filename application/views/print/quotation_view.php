@@ -140,10 +140,18 @@ switch($quotation->quotation_currency){
 			<tr>
 				<td width="50%" valign="top">
 					<table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><b>Date</b></td>
+                            <td><?=$quotation->quotation_issue?></td>
+                        </tr>
 						<tr>
 							<td valign="top" width="24%"><b>To</b></td>
 							<td width="76%"><?=$quotation->quotation_client_company_name?></td>
 						</tr>
+                        <tr>
+                            <td valign="top"><b>Attn</b></td>
+                            <td><?=$quotation->quotation_client_name?></td>
+                        </tr>
 						<tr>
 							<td valign="top"><b>Address</b></td>
 							<td><?=$quotation->quotation_client_company_address?></td>
@@ -152,26 +160,18 @@ switch($quotation->quotation_currency){
 							<td valign="top"><b>Tel</b></td>
 							<td><?=$quotation->quotation_client_phone?></td>
 						</tr>
-						<tr>
-							<td valign="top"><b>Mobile</b></td>
-							<td><?=$quotation->quotation_client_phone?></td>
-						</tr>
-						<tr>
-							<td valign="top"><b>Attn</b></td>
-							<td><?=$quotation->quotation_client_name?></td>
-						</tr>
 					</table>
 				</td>
 				<td width="10%"></td>
 				<td width="40%" valign="top">
 					<table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td valign="top"><b>Email</b></td>
+                            <td><?=$quotation->quotation_client_email?></td>
+                        </tr>
 						<tr>
 							<td width="40%"><b>Quotation No.</b></td>
 							<td width="60%"><?=$quotation->quotation_number?>-v<?=$quotation->quotation_version?></td>
-						</tr>
-						<tr>
-							<td><b>Date</b></td>
-							<td><?=$quotation->quotation_issue?></td>
 						</tr>
 						<tr>
 							<td><b>Sales</b></td>
@@ -192,9 +192,10 @@ switch($quotation->quotation_currency){
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
 			<tr>
 				<td width="12%"><b>PART NO.</b></td>
-				<td width="55%"><b>DESCRIPTION</b></td>
+				<td width="12%"><b>CODE</b></td>
+                <td width="12%"><b>NAME</b></td>
+                <td width="8%" align="center"><b>QTY</b></td>
 				<td width="15%" align="right"><b>UNIT PRICE</b></td>
-				<td width="8%" align="center"><b>QTY</b></td>
 				<td width="10%" align="right"><b>AMOUNT</b></td>
 			</tr>
 		</table>
@@ -243,12 +244,16 @@ switch($quotation->quotation_currency){
 
 		<?php if($this->router->fetch_method() == 'content'){ ?>
 		<table cellspacing="0" cellpadding="0" class="content-table line-height-12 document-separator-bottom">
-			<?php foreach($quotationitems as $key => $value){ ?>
+			<?php
+                foreach($quotationitems as $key => $value){
+                    $thisProduct = get_product($value->quotationitem_product_id);
+                ?>
 			<tr class="padding-top-5">
 				<td width="12%"></td>
-				<td width="55%" valign="top"><b class="corpcolor-font"><?=$value->quotationitem_product_name?></b></td>
-				<td width="15%"></td>
+				<td width="12%"></td>
+                <td width="12%"></td>
 				<td width="8%"></td>
+				<td width="15%"></td>
 				<td width="10%"></td>
 			</tr>
 			<tr class="padding-bottom-5">
@@ -261,10 +266,11 @@ switch($quotation->quotation_currency){
 					}
 					?>
 				</td>
-				<td valign="top"><?=nl2br($value->quotationitem_product_detail)?></td>
-				<td valign="top" align="right"><?=money_format('%!n', $value->quotationitem_product_price)?></td>
-				<td valign="top" align="center"><?=$value->quotationitem_quantity?></td>
-				<td valign="top" align="right"><?=money_format('%!n', $value->quotationitem_product_price * $value->quotationitem_quantity)?></td>
+				<td valign="top"><?=$value->quotationitem_product_code?></td>
+                <td valign="top"><?=$value->quotationitem_product_name?></td>
+                <td valign="top" align="center"><?=$value->quotationitem_quantity.' '.get_unit($thisProduct->product_unit_id)->unit_name?></td>
+				<td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->quotationitem_product_price)?></td>
+				<td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->quotationitem_product_price * $value->quotationitem_quantity)?></td>
 			</tr>
 			<?php } ?>
 			<tr class="document-separator-bottom">
@@ -283,9 +289,18 @@ switch($quotation->quotation_currency){
 				<td width="55%"></td>
 				<td width="15%" align="right"><b>DISCOUNT</b></td>
 				<td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
-				<td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_discount)?></td>
+				<td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_total * (1 - $quotation->quotation_discount / 100))?></td>
 			</tr>
 			<?php } ?>
+            <?php if(1){ ?>
+            <tr>
+                <td width="12%"></td>
+                <td width="55%"></td>
+                <td width="15%" align="right"><b>FREIGHT CHARGES</b></td>
+                <td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
+                <td width="10%" align="right"><?=money_format('%!n', 0)?></td>
+            </tr>
+            <?php } ?>
 			<tr>
 				<td width="12%"></td>
 				<td width="55%"></td>

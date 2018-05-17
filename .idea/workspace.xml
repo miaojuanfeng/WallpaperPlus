@@ -3,14 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="a620b4db-c109-41ad-a8a2-26fd2cfd6aaa" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Deliverynote.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Deliverynote.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Invoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Purchaseorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Purchaseorder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Stockstatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Stockstatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Quotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Quotation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/._Purchaseorder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/print/Purchaseorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/print/Purchaseorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/deliverynote_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/deliverynote_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/invoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/invoice_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/purchaseorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/purchaseorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/quotation_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/quotation_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/print/salesorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/salesorder_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/purchaseorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/purchaseorder_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/quotation_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/quotation_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/salesorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/salesorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/pdf/invoice/INV1805005.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/pdf/invoice/INV1805005.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/pdf/invoice/INV1805009.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/pdf/invoice/INV1805009.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/pdf/invoice/INV1805010.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/pdf/invoice/INV1805010.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/images/pdf/quotation/QO1805002-v1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/pdf/quotation/QO1805002-v1.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/pdf/salesorder/SO1805001.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/pdf/salesorder/SO1805001.pdf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,12 +28,48 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="purchaseorder_view.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/purchaseorder_view.php">
+    <leaf>
+      <file leaf-file-name="quotation_view.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="444" column="88" selection-start-line="444" selection-start-column="88" selection-end-line="444" selection-end-column="88" />
+            <state relative-caret-position="-15734">
+              <caret line="695" column="136" selection-start-line="695" selection-start-column="136" selection-end-line="695" selection-end-column="136" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Receivablereport.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Receivablereport.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="485">
+              <caret line="137" column="76" lean-forward="true" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Quotation.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Quotation.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="547">
+              <caret line="212" column="95" selection-start-line="212" selection-start-column="95" selection-end-line="212" selection-end-column="95" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Product.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Product.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="708">
+              <caret line="208" column="91" lean-forward="true" selection-start-line="192" selection-start-column="8" selection-end-line="208" selection-end-column="91" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product_view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="540" column="30" lean-forward="true" selection-start-line="407" selection-start-column="24" selection-end-line="540" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -34,10 +78,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$vendors</find>
-      <find>order</find>
-      <find>$per_page</find>
-      <find>$thisGET</find>
       <find>View</find>
       <find>purchaseorder_expire</find>
       <find>$supplierarr</find>
@@ -60,10 +100,14 @@
       <find>currency</find>
       <find>Project name</find>
       <find>Discount</find>
-      <find>quotationitem_quantity</find>
       <find>Invoice#</find>
       <find>deliverynote_lot_number</find>
       <find>Deliv</find>
+      <find>quotationitem_quantity</find>
+      <find>myModal</find>
+      <find>purchaseordersubitem-insert-btn</find>
+      <find>quotation_expire</find>
+      <find>quotation_discount</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -75,12 +119,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/deliverynote_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Dashboard.php" />
         <option value="$PROJECT_DIR$/application/views/dashboard_view.php" />
         <option value="$PROJECT_DIR$/application/views/user_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Client.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Quotation.php" />
         <option value="$PROJECT_DIR$/application/models/Product_model.php" />
         <option value="$PROJECT_DIR$/application/views/incomereport_view.php" />
         <option value="$PROJECT_DIR$/application/views/expensesreport_view.php" />
@@ -106,12 +148,7 @@
         <option value="$PROJECT_DIR$/application/controllers/Salesreport.php" />
         <option value="$PROJECT_DIR$/application/controllers/Commissionreport.php" />
         <option value="$PROJECT_DIR$/application/views/waybill_view.php" />
-        <option value="$PROJECT_DIR$/application/views/print/deliverynote_view.php" />
-        <option value="$PROJECT_DIR$/application/views/print/invoice_view.php" />
         <option value="$PROJECT_DIR$/application/views/print/proformainvoice_view.php" />
-        <option value="$PROJECT_DIR$/application/views/print/purchaseorder_view.php" />
-        <option value="$PROJECT_DIR$/application/views/print/salesorder_view.php" />
-        <option value="$PROJECT_DIR$/application/views/print/quotation_view.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/application/controllers/Warehouse.php" />
         <option value="$PROJECT_DIR$/application/models/Z_product_warehouse_model.php" />
@@ -121,11 +158,18 @@
         <option value="$PROJECT_DIR$/application/controllers/Ledgerreport.php" />
         <option value="$PROJECT_DIR$/application/controllers/Stockstatus.php" />
         <option value="$PROJECT_DIR$/application/controllers/Purchaseorder.php" />
-        <option value="$PROJECT_DIR$/application/views/quotation_view.php" />
-        <option value="$PROJECT_DIR$/application/views/salesorder_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Deliverynote.php" />
         <option value="$PROJECT_DIR$/application/controllers/Invoice.php" />
         <option value="$PROJECT_DIR$/application/views/purchaseorder_view.php" />
+        <option value="$PROJECT_DIR$/application/views/salesorder_view.php" />
+        <option value="$PROJECT_DIR$/application/views/print/quotation_view.php" />
+        <option value="$PROJECT_DIR$/application/views/print/salesorder_view.php" />
+        <option value="$PROJECT_DIR$/application/controllers/print/Purchaseorder.php" />
+        <option value="$PROJECT_DIR$/application/views/print/purchaseorder_view.php" />
+        <option value="$PROJECT_DIR$/application/views/print/invoice_view.php" />
+        <option value="$PROJECT_DIR$/application/views/print/deliverynote_view.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Quotation.php" />
+        <option value="$PROJECT_DIR$/application/views/quotation_view.php" />
       </list>
     </option>
   </component>
@@ -139,7 +183,6 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="317" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="1057" />
@@ -152,6 +195,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -191,13 +235,19 @@
             </path>
             <path>
               <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaperplus" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="print" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,14 +298,16 @@
       <workItem from="1526356161568" duration="13896000" />
       <workItem from="1526384146308" duration="74000" />
       <workItem from="1526434982597" duration="2282000" />
+      <workItem from="1526521782956" duration="787000" />
+      <workItem from="1526522704748" duration="20727000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101363000" />
+    <option name="totallyTimeSpent" value="122877000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="23" width="1920" height="1057" extended-state="6" />
+    <frame x="-3" y="23" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -271,24 +323,12 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.1546287" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info id="Favorites" order="2" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,20 +338,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/payablereport_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1545">
-          <caret line="168" column="62" lean-forward="true" selection-start-line="168" selection-start-column="62" selection-end-line="168" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Expensesreport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="45" column="61" lean-forward="true" selection-start-line="45" selection-start-column="61" selection-end-line="45" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Payablereport.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -375,13 +401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Salesreport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1349">
-          <caret line="71" column="4" lean-forward="true" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Commissionreport.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="711">
@@ -403,38 +422,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/print/salesorder_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="133" column="59" selection-start-line="133" selection-start-column="59" selection-end-line="133" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/print/purchaseorder_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="133" column="58" lean-forward="true" selection-start-line="133" selection-start-column="58" selection-end-line="133" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/print/deliverynote_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="132" column="32" lean-forward="true" selection-start-line="132" selection-start-column="32" selection-end-line="132" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/print/proformainvoice_view.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
           <caret line="133" column="58" lean-forward="true" selection-start-line="133" selection-start-column="58" selection-end-line="133" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/print/invoice_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="718">
-          <caret line="133" column="108" lean-forward="true" selection-start-line="133" selection-start-column="108" selection-end-line="133" selection-end-column="108" />
         </state>
       </provider>
     </entry>
@@ -449,13 +440,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5890">
           <caret line="310" column="63" lean-forward="true" selection-start-line="310" selection-start-column="63" selection-end-line="310" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/print/quotation_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4484">
-          <caret line="236" selection-start-line="236" selection-end-line="236" />
         </state>
       </provider>
     </entry>
@@ -498,13 +482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="52" column="22" lean-forward="true" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Receivablereport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="137" column="76" lean-forward="true" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="76" />
         </state>
       </provider>
     </entry>
@@ -557,16 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Quotation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-250">
-          <caret line="20" column="50" lean-forward="true" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Exchange.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2527">
@@ -574,26 +541,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Document.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/print/Invoice.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-366" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="666" column="56" lean-forward="true" selection-start-line="666" selection-start-column="56" selection-end-line="666" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/salesorder_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="987" column="109" selection-start-line="987" selection-start-column="109" selection-end-line="987" selection-end-column="109" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/invoice_view.php">
@@ -638,10 +588,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/salesorder_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="606" column="65" lean-forward="true" selection-start-line="606" selection-start-column="65" selection-end-line="606" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/log_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1635">
+          <caret line="247" column="145" lean-forward="true" selection-start-line="247" selection-start-column="52" selection-end-line="247" selection-end-column="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/print/salesorder_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="293" column="100" lean-forward="true" selection-start-line="293" selection-start-column="100" selection-end-line="293" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/purchaseorder_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="444" column="88" selection-start-line="444" selection-start-column="88" selection-end-line="444" selection-end-column="88" />
+        <state relative-caret-position="63">
+          <caret line="678" column="64" selection-start-line="678" selection-start-column="64" selection-end-line="679" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/print/quotation_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="291" column="96" selection-start-line="291" selection-start-column="96" selection-end-line="291" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/print/Purchaseorder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="710">
+          <caret line="77" column="49" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/print/deliverynote_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="316" column="24" selection-start-line="316" selection-start-column="24" selection-end-line="316" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/print/invoice_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="354" selection-start-line="354" selection-end-line="354" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/print/purchaseorder_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="316" column="77" lean-forward="true" selection-start-line="316" selection-start-column="77" selection-end-line="316" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Salesreport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="179" column="25" lean-forward="true" selection-start-line="179" selection-start-column="25" selection-end-line="179" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="540" column="30" lean-forward="true" selection-start-line="407" selection-start-column="24" selection-end-line="540" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Receivablereport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="137" column="76" lean-forward="true" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="208" column="91" lean-forward="true" selection-start-line="192" selection-start-column="8" selection-end-line="208" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Quotation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="212" column="95" selection-start-line="212" selection-start-column="95" selection-end-line="212" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15734">
+          <caret line="695" column="136" selection-start-line="695" selection-start-column="136" selection-end-line="695" selection-end-column="136" />
         </state>
       </provider>
     </entry>

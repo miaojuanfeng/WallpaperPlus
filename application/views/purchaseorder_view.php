@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/chosen.css'); ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-datetimepicker.css'); ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css"'); ?>" media="all">
-		
+
 		<script src="<?php echo base_url('assets/js/jquery-1.11.3.min.js'); ?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery-ui.js'); ?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery-ui.multidatespicker.js'); ?>"></script>
@@ -235,15 +235,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '<input id="purchaseorderitem_product_price" name="purchaseorderitem_product_price[]" type="text" class="form-control input-sm" placeholder="Price" value="" />';
 			purchaseorderitem_row += '</td>';
 			purchaseorderitem_row += '<td>';
-			purchaseorderitem_row += '<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="text" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            purchaseorderitem_row += '<div class="input-group">';
+			purchaseorderitem_row += '<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            purchaseorderitem_row += '<span class="input-group-addon">Unit</span>';
+            purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</td>';
+            purchaseorderitem_row += '<td>';
+            purchaseorderitem_row += '<div class="input-group">';
+            purchaseorderitem_row += '<input id="purchaseorderitem_discount" name="purchaseorderitem_discount[]" type="number" min="0" max="100" class="form-control input-sm" placeholder="Discount" value="100" />';
+            purchaseorderitem_row += '<span class="input-group-addon">%</span>';
+            purchaseorderitem_row += '</div>';
+            purchaseorderitem_row += '</td>';
 			purchaseorderitem_row += '<td>';
 			purchaseorderitem_row += '<div>';
 			purchaseorderitem_row += '<input readonly="readonly" id="purchaseorderitem_subtotal" name="purchaseorderitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="" />';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '<div class="margin-top-10 text-right">';
 			purchaseorderitem_row += '<div class="btn-group">';
-			purchaseorderitem_row += '<button type="button" class="btn btn-sm btn-primary purchaseordersubitem-insert-btn"><i class="glyphicon glyphicon-plus"></i></button>';
+			// purchaseorderitem_row += '<button type="button" class="btn btn-sm btn-primary purchaseordersubitem-insert-btn"><i class="glyphicon glyphicon-plus"></i></button>';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</td>';
@@ -253,69 +262,69 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$('.chosen-select').chosen();
 		}
 
-		function add_purchaseordersubitem_row(thisRow){
-			purchaseordersubitem_row = '';
-			purchaseordersubitem_row += '<tr class="subitem-row">';
-			purchaseordersubitem_row += '<td>';
-			purchaseordersubitem_row += '<div>';
-			purchaseordersubitem_row += '<input name="purchaseorderitem_id[]" type="hidden" value="" />';
-			purchaseordersubitem_row += '<input name="purchaseorderitem_purchaseorder_id[]" type="hidden" value="" />';
-			purchaseordersubitem_row += '<input name="purchaseorderitem_type[]" type="hidden" value="sub item" />';
-			purchaseordersubitem_row += '<input name="purchaseorderitem_product_type_name[]" type="hidden" value="" />';
-			purchaseordersubitem_row += '<input id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '<div class="margin-top-10">';
-			purchaseordersubitem_row += '<div class="btn-group">';
-			purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary purchaseorderitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>';
-			purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>';
-			purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '</td>';
-			purchaseordersubitem_row += '<td>';
-			purchaseordersubitem_row += '<div>';
-			purchaseordersubitem_row += '<select id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" data-placeholder="Product" class="chosen-select">';
-			purchaseordersubitem_row += '<option value></option>';
-			<?php foreach($products as $key1 => $value1){ ?>
-			purchaseordersubitem_row += '<option value="<?=$value1->product_id?>"><?=$value1->product_code.' - '.$value1->product_name?></option>';
-			<?php } ?>
-			purchaseordersubitem_row += '</select>';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '<div class="margin-top-10">';
-			// purchaseordersubitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
-			purchaseordersubitem_row += '<div class="input-group">';
-			purchaseordersubitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
-			purchaseordersubitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '<div>';
-			purchaseordersubitem_row += '<textarea id="purchaseorderitem_product_detail" name="purchaseorderitem_product_detail[]" class="form-control input-sm" placeholder="Detail"></textarea>';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '</td>';
-			purchaseordersubitem_row += '<td>';
-			purchaseordersubitem_row += '<input id="purchaseorderitem_product_price" name="purchaseorderitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
-			purchaseordersubitem_row += '</td>';
-			purchaseordersubitem_row += '<td>';
-            purchaseordersubitem_row += '<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
-            purchaseordersubitem_row += '</td>';
-            purchaseordersubitem_row += '<td>';
-            purchaseordersubitem_row += '<input id="purchaseorderitem_discount" name="purchaseorderitem_discount[]" type="number" min="0" max="100" class="form-control input-sm" placeholder="Discount" value="0" />';
-            purchaseordersubitem_row += '</td>';
-			purchaseordersubitem_row += '<td>';
-			purchaseordersubitem_row += '<div>';
-			purchaseordersubitem_row += '<input readonly="readonly" id="purchaseorderitem_subtotal" name="purchaseorderitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="" />';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '<div class="margin-top-10 text-right">';
-			purchaseordersubitem_row += '<div class="btn-group">';
-			// purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary purchaseordersubitem-insert-btn"><i class="glyphicon glyphicon-plus"></i></button>';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '</div>';
-			purchaseordersubitem_row += '</td>';
-			purchaseordersubitem_row += '</tr>';
-
-			$(purchaseordersubitem_row).insertAfter('table.list tbody tr:eq(' + thisRow + ')');
-			$('.chosen-select').chosen();
-		}
+		//function add_purchaseordersubitem_row(thisRow){
+		//	purchaseordersubitem_row = '';
+		//	purchaseordersubitem_row += '<tr class="subitem-row">';
+		//	purchaseordersubitem_row += '<td>';
+		//	purchaseordersubitem_row += '<div>';
+		//	purchaseordersubitem_row += '<input name="purchaseorderitem_id[]" type="hidden" value="" />';
+		//	purchaseordersubitem_row += '<input name="purchaseorderitem_purchaseorder_id[]" type="hidden" value="" />';
+		//	purchaseordersubitem_row += '<input name="purchaseorderitem_type[]" type="hidden" value="sub item" />';
+		//	purchaseordersubitem_row += '<input name="purchaseorderitem_product_type_name[]" type="hidden" value="" />';
+		//	purchaseordersubitem_row += '<input id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '<div class="margin-top-10">';
+		//	purchaseordersubitem_row += '<div class="btn-group">';
+		//	purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary purchaseorderitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>';
+		//	purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>';
+		//	purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '</td>';
+		//	purchaseordersubitem_row += '<td>';
+		//	purchaseordersubitem_row += '<div>';
+		//	purchaseordersubitem_row += '<select id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" data-placeholder="Product" class="chosen-select">';
+		//	purchaseordersubitem_row += '<option value></option>';
+		//	<?php //foreach($products as $key1 => $value1){ ?>
+		//	purchaseordersubitem_row += '<option value="<?//=$value1->product_id?>//"><?//=$value1->product_code.' - '.$value1->product_name?>//</option>';
+		//	<?php //} ?>
+		//	purchaseordersubitem_row += '</select>';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '<div class="margin-top-10">';
+		//	// purchaseordersubitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
+		//	purchaseordersubitem_row += '<div class="input-group">';
+		//	purchaseordersubitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
+		//	purchaseordersubitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '<div>';
+		//	purchaseordersubitem_row += '<textarea id="purchaseorderitem_product_detail" name="purchaseorderitem_product_detail[]" class="form-control input-sm" placeholder="Detail"></textarea>';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '</td>';
+		//	purchaseordersubitem_row += '<td>';
+		//	purchaseordersubitem_row += '<input id="purchaseorderitem_product_price" name="purchaseorderitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
+		//	purchaseordersubitem_row += '</td>';
+		//	purchaseordersubitem_row += '<td>';
+         //   purchaseordersubitem_row += '<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+         //   purchaseordersubitem_row += '</td>';
+         //   purchaseordersubitem_row += '<td>';
+         //   purchaseordersubitem_row += '<input id="purchaseorderitem_discount" name="purchaseorderitem_discount[]" type="number" min="0" max="100" class="form-control input-sm" placeholder="Discount" value="0" />';
+         //   purchaseordersubitem_row += '</td>';
+		//	purchaseordersubitem_row += '<td>';
+		//	purchaseordersubitem_row += '<div>';
+		//	purchaseordersubitem_row += '<input readonly="readonly" id="purchaseorderitem_subtotal" name="purchaseorderitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="" />';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '<div class="margin-top-10 text-right">';
+		//	purchaseordersubitem_row += '<div class="btn-group">';
+		//	// purchaseordersubitem_row += '<button type="button" class="btn btn-sm btn-primary purchaseordersubitem-insert-btn"><i class="glyphicon glyphicon-plus"></i></button>';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '</div>';
+		//	purchaseordersubitem_row += '</td>';
+		//	purchaseordersubitem_row += '</tr>';
+        //
+		//	$(purchaseordersubitem_row).insertAfter('table.list tbody tr:eq(' + thisRow + ')');
+		//	$('.chosen-select').chosen();
+		//}
 		<?php } ?>
 		</script>
 	</head>
@@ -324,7 +333,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<?php $this->load->view('inc/header-area.php'); ?>
 
-		
+
 
 
 
@@ -398,7 +407,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
 								<div class="row">
-									
+
 									<div class="col-sm-3 col-xs-12 pull-right">
 										<blockquote>
 											<h4 class="corpcolor-font">Instructions</h4>
@@ -578,8 +587,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
-														<th width="8%">Quantity</th>
-														<th width="10%">Discount %</th>
+														<th width="12%">Quantity</th>
+														<th width="14%">Discount %</th>
 														<th width="12%">Subtotal</th>
 													</tr>
 												</thead>
@@ -626,12 +635,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<input id="purchaseorderitem_product_price" name="purchaseorderitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="<?=$value->purchaseorderitem_product_price?>" />
-															<div class="margin-top-10">
-																<label>Bought</label>
-															</div>
-															<div class="margin-top-10">
-																<label>SO total</label>
-															</div>
+<!--															<div class="margin-top-10">-->
+<!--																<label>Bought</label>-->
+<!--															</div>-->
+<!--															<div class="margin-top-10">-->
+<!--																<label>SO total</label>-->
+<!--															</div>-->
 														</td>
 														<td>
 															<?php
@@ -645,7 +654,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																	$purchaseorderitem_bought = 0;
 																}
 																if($purchaseorder->purchaseorder_id > 0){
-																	$thisPurchaseorderitemQuantity = $value->purchaseorderitem_quantity;	
+																	$thisPurchaseorderitemQuantity = $value->purchaseorderitem_quantity;
 																}else{
 																	$thisPurchaseorderitemQuantity = $salesorder_quantity - $purchaseorderitem_bought;
 																}
@@ -655,16 +664,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																$thisPurchaseorderitemQuantity = $salesorder_quantity - $purchaseorderitem_bought;
 															}
 															?>
-															<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$thisPurchaseorderitemQuantity?>" />
-															<div class="margin-top-10">
-																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sum of purchase order item quantity" value="<?=$purchaseorderitem_bought?>" />
-																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sales order item quantity" value="<?=$salesorder_quantity?>" />
-															</div>
+                                                            <div class="input-group">
+															    <input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$thisPurchaseorderitemQuantity?$thisPurchaseorderitemQuantity:1?>" />
+                                                                <span class="input-group-addon">Unit</span>
+                                                            </div>
+<!--															<div class="margin-top-10">-->
+<!--																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sum of purchase order item quantity" value="--><?//=$purchaseorderitem_bought?><!--" />-->
+<!--																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sales order item quantity" value="--><?//=$salesorder_quantity?><!--" />-->
+<!--															</div>-->
 														</td>
 														<td>
-															<div>
-																<input id="purchaseorderitem_discount" name="purchaseorderitem_discount[]" type="number" min="0" max="100" class="form-control input-sm" placeholder="Discount" value="<?=$value->purchaseorderitem_discount?>" />
-															</div>
+                                                            <div class="input-group">
+																<input id="purchaseorderitem_discount" name="purchaseorderitem_discount[]" type="number" min="0" max="100" class="form-control input-sm" placeholder="Discount" value="<?=$value->purchaseorderitem_discount?$value->purchaseorderitem_discount:100?>" />
+                                                                <span class="input-group-addon">%</span>
+                                                            </div>
 														</td>
 														<td>
 															<div>
@@ -754,7 +767,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<?php } ?>
 
-		
+
 
 
 

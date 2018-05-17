@@ -193,8 +193,8 @@ switch($invoice->invoice_currency){
 			<tr>
 				<td width="12%"><b>PART NO.</b></td>
 				<td width="55%"><b>DESCRIPTION</b></td>
-				<td width="15%" align="right"><b>UNIT PRICE</b></td>
-				<td width="8%" align="center"><b>QTY</b></td>
+                <td width="15%"><b>QTY</b></td>
+				<td width="12%"><b>UNIT PRICE</b></td>
 				<td width="10%" align="right"><b>AMOUNT</b></td>
 			</tr>
 		</table>
@@ -246,17 +246,17 @@ switch($invoice->invoice_currency){
 			<?php foreach($invoiceitems as $key => $value){ ?>
 			<tr class="padding-top-5">
 				<td width="12%"></td>
-				<td width="55%" valign="top"><b class="corpcolor-font"><?=$value->invoiceitem_product_name?></b></td>
+				<td width="55%"></td>
 				<td width="15%"></td>
-				<td width="8%"></td>
+				<td width="12%"></td>
 				<td width="10%"></td>
 			</tr>
 			<tr class="padding-bottom-5">
 				<td valign="top"><div class="part_number"><?=$value->invoiceitem_product_code?></div></td>
-				<td valign="top"><?=nl2br($value->invoiceitem_product_detail)?></td>
-				<td valign="top" align="right"><?=money_format('%!n', $value->invoiceitem_product_price)?></td>
-				<td valign="top" align="center"><?=$value->invoiceitem_quantity?></td>
-				<td valign="top" align="right"><?=money_format('%!n', $value->invoiceitem_product_price * $value->invoiceitem_quantity)?></td>
+				<td valign="top"><?=$value->invoiceitem_product_code.' - '.$value->invoiceitem_product_name?></td>
+                <td valign="top"><?=$value->invoiceitem_quantity?></td>
+				<td valign="top"><?=strtoupper($invoice->invoice_currency).' '.money_format('%!n', $value->invoiceitem_product_price)?></td>
+				<td valign="top" align="right"><?=strtoupper($invoice->invoice_currency).' '.money_format('%!n', $value->invoiceitem_product_price * $value->invoiceitem_quantity)?></td>
 			</tr>
 			<?php } ?>
 			<tr class="document-separator-bottom">
@@ -352,10 +352,7 @@ switch($invoice->invoice_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-20">
 				<tr>
 					<td width="40%">
-						<div><b>Received By</b></div>
-						<div><?=$invoice->invoice_client_company_name?></div>
-						<div class="sign-area"></div>
-						<div>Authority Signature & Co. Chop</div>
+
 					</td>
 					<td width="20%"></td>
 					<td width="40%">

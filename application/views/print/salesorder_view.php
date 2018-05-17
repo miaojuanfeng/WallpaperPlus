@@ -140,10 +140,18 @@ switch($salesorder->salesorder_currency){
 			<tr>
 				<td width="50%" valign="top">
 					<table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><b>Date</b></td>
+                            <td><?=$salesorder->salesorder_issue?></td>
+                        </tr>
 						<tr>
 							<td valign="top" width="24%"><b>To</b></td>
 							<td width="76%"><?=$salesorder->salesorder_client_company_name?></td>
 						</tr>
+                        <tr>
+                            <td valign="top"><b>Attn</b></td>
+                            <td><?=$salesorder->salesorder_client_name?></td>
+                        </tr>
 						<tr>
 							<td valign="top"><b>Address</b></td>
 							<td><?=$salesorder->salesorder_client_company_address?></td>
@@ -152,27 +160,20 @@ switch($salesorder->salesorder_currency){
 							<td valign="top"><b>Tel</b></td>
 							<td><?=$salesorder->salesorder_client_phone?></td>
 						</tr>
-						<tr>
-							<td valign="top"><b>Mobile</b></td>
-							<td><?=$salesorder->salesorder_client_phone?></td>
-						</tr>
-						<tr>
-							<td valign="top"><b>Attn</b></td>
-							<td><?=$salesorder->salesorder_client_name?></td>
-						</tr>
 					</table>
 				</td>
 				<td width="10%"></td>
 				<td width="40%" valign="top">
 					<table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td valign="top"><b>Email</b></td>
+                            <td><?=$salesorder->salesorder_client_email?></td>
+                        </tr>
 						<tr>
 							<td width="40%"><b>Sales order No.</b></td>
 							<td width="60%"><?=$salesorder->salesorder_number?>-v<?=$salesorder->salesorder_version?></td>
 						</tr>
-						<tr>
-							<td><b>Date</b></td>
-							<td><?=$salesorder->salesorder_issue?></td>
-						</tr>
+
 						<tr>
 							<td><b>Sales</b></td>
 							<td><?=$salesorder->salesorder_user_name?></td>
@@ -190,13 +191,14 @@ switch($salesorder->salesorder_currency){
 			</tr>
 		</table>
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
-			<tr>
-				<td width="12%"><b>PART NO.</b></td>
-				<td width="55%"><b>DESCRIPTION</b></td>
-				<td width="15%" align="right"><b>UNIT PRICE</b></td>
-				<td width="8%" align="center"><b>QTY</b></td>
-				<td width="10%" align="right"><b>AMOUNT</b></td>
-			</tr>
+            <tr>
+                <td width="12%"><b>PART NO.</b></td>
+                <td width="12%"><b>CODE</b></td>
+                <td width="12%"><b>NAME</b></td>
+                <td width="8%" align="center"><b>QTY</b></td>
+                <td width="15%" align="right"><b>UNIT PRICE</b></td>
+                <td width="10%" align="right"><b>AMOUNT</b></td>
+            </tr>
 		</table>
 		<?php } ?>
 
@@ -243,22 +245,27 @@ switch($salesorder->salesorder_currency){
 
 		<?php if($this->router->fetch_method() == 'content'){ ?>
 		<table cellspacing="0" cellpadding="0" class="content-table line-height-12 document-separator-bottom">
-			<?php foreach($salesorderitems as $key => $value){ ?>
+			<?php
+                foreach($salesorderitems as $key => $value){
+                    $thisProduct = get_product($value->salesorderitem_product_id);
+                ?>
 			<tr class="padding-top-5">
-				<td width="12%"></td>
-				<td width="55%" valign="top"><b class="corpcolor-font"><?=$value->salesorderitem_product_name?></b></td>
-				<td width="15%"></td>
-				<td width="8%"></td>
-				<td width="10%"></td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+                <td width="12%"></td>
+                <td width="8%"></td>
+                <td width="15%"></td>
+                <td width="10%"></td>
 			</tr>
 			<tr class="padding-bottom-5">
 				<td valign="top">
 					<div class="part_number"><?=$value->salesorderitem_product_code?></div>
 				</td>
-				<td valign="top"><?=nl2br($value->salesorderitem_product_detail)?></td>
-				<td valign="top" align="right"><?=money_format('%!n', $value->salesorderitem_product_price)?></td>
-				<td valign="top" align="center"><?=$value->salesorderitem_quantity?></td>
-				<td valign="top" align="right"><?=money_format('%!n', $value->salesorderitem_product_price * $value->salesorderitem_quantity)?></td>
+                <td valign="top"><?=$value->salesorderitem_product_code?></td>
+                <td valign="top"><?=$value->salesorderitem_product_name?></td>
+                <td valign="top" align="center"><?=$value->salesorderitem_quantity.' '.get_unit($thisProduct->product_unit_id)->unit_name?></td>
+                <td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->salesorderitem_product_price)?></td>
+                <td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->salesorderitem_product_price * $value->salesorderitem_quantity)?></td>
 			</tr>
 			<?php } ?>
 			<tr class="document-separator-bottom">
@@ -277,7 +284,7 @@ switch($salesorder->salesorder_currency){
 				<td width="55%"></td>
 				<td width="15%" align="right"><b>DISCOUNT</b></td>
 				<td width="8%" align="center"><?=strtoupper($salesorder->salesorder_currency)?></td>
-				<td width="10%" align="right"><?=money_format('%!n', $salesorder->salesorder_discount)?></td>
+                <td width="10%" align="right"><?=money_format('%!n', $salesorder->salesorder_total * (1 - $salesorder->salesorder_discount / 100))?></td>
 			</tr>
 			<?php } ?>
 			<tr>
