@@ -1074,6 +1074,26 @@ if(!function_exists('get_pagination_config'))
 	}
 }
 
+if(!function_exists('get_pagination_js_config'))
+{
+    function get_pagination_js_config($per_page, $num_rows){
+        $CI =& get_instance();
+        $page_link = $CI->uri->uri_to_assoc();
+        unset($page_link['page']);
+
+        $config['base_url'] = 'javascript:;';
+        $config['total_rows'] = $num_rows;
+        $config['per_page'] = $per_page;
+        $config['num_links'] = 1;
+        $config['first_link'] = '<<';
+        $config['last_link'] = '>>';
+        $config['full_tag_open'] = '<span class="pagination-area">';
+        $config['full_tag_close'] = '</span>';
+
+        return $config;
+    }
+}
+
 if(!function_exists('get_order_link'))
 {
 	function get_order_link($order_field){

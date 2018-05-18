@@ -1450,9 +1450,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </td>
                                     <td valign="top" width="10%" class="text-right">
-                                        <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
+                                        <a href="javascript:;" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
                                             <i class="glyphicon glyphicon-search"></i>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                                 </tbody>
