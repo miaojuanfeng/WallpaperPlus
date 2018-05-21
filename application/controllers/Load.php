@@ -157,6 +157,7 @@ class Load extends CI_Controller {
 	public function quotationProductLoader()
 	{
 		$this->load->model('product_model');
+        $this->load->model('currency_model');
 			
 		/* client */
 		$thisSelect = array(
@@ -164,6 +165,13 @@ class Load extends CI_Controller {
 			'return' => 'row'
 		);
 		$thisData = $this->product_model->select($thisSelect);
+
+        /* currency */
+        $thisSelect = array(
+            'where' => array('currency_name' => $this->input->post('thisCurrency')),
+            'return' => 'row'
+        );
+        $thisCurrency = $this->currency_model->select($thisSelect);
 
 		if($thisData){
 			echo '<script>';
@@ -177,7 +185,7 @@ class Load extends CI_Controller {
 			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_name[]\']").val("'.$thisData->product_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_link[]\']").val("'.$thisData->product_link.'").css("display", "none").fadeIn();';
 			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') textarea[name=\'quotationitem_product_detail[]\']").val("'.convert_nl($thisData->product_detail).'").css("display", "none").fadeIn();';
-			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_price[]\']").val("'.$thisData->{'product_price_'.$this->input->post('thisCurrency')}.'").css("display", "none").fadeIn();';
+			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_price[]\']").val("'.$thisData->product_price_hkd*$thisCurrency->currency_exchange_rate.'").css("display", "none").fadeIn();';
 			echo '}';
 			echo '</script>';
 		}

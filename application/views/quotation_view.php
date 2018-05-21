@@ -125,7 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				calc();
 			});
 			$(document).on('change', 'select[name="quotation_currency"]', function(){
-				$.each($('select[name="quotationitem_product_id[]"]'), function(key, val){
+				$.each($('input[name="quotationitem_product_id[]"]'), function(key, val){
 					product_loader($(this));
 				});
                 exchange_rate_loader($(this));
@@ -1429,8 +1429,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $(".trModal").on('click', '.showModal', function(){
         product_input = $(this).prev();
         $('.scriptLoader').load('/modal', {'thisTableId': 'product', 'thisUrl': 'page/0', 't': timestamp()}, function(data){
-
-            console.log(product_input);
             $(".modal-body").html(data);
             $("#popupModal").fadeIn(100, function(){
                 $(this).addClass("in");
