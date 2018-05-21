@@ -181,14 +181,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <span class="input-group-addon">HKD</span>
                                                 <input id="product_price_hkd" name="product_price_hkd" type="number" min="0" class="form-control input-sm" placeholder="Price HKD" value="<?=$product->product_price_hkd?>" />
                                             </div>
-                                            <div class="input-group">
-												<span class="input-group-addon">RMB</span>
-												<input id="product_price_rmb" name="product_price_rmb" type="number" min="0" class="form-control input-sm" placeholder="Price RMB" value="<?=$product->product_price_rmb?>" />
-											</div>
-											<div class="input-group">
-												<span class="input-group-addon">USD</span>
-												<input id="product_price_usd" name="product_price_usd" type="number" min="0" class="form-control input-sm" placeholder="Price USD" value="<?=$product->product_price_usd?>" />
-											</div>
 										</div>
                                         <div class="form-group">
                                             <label for="product_link">Link</label>
@@ -480,8 +472,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</a>
 												</th>
 												<th>
-													Price <a><i class="glyphicon glyphicon-sort corpcolor-font"></i></a>
-													<a href="<?=get_order_link('product_price_rmb')?>">RMB</a>/<a href="<?=get_order_link('product_price_hkd')?>">HKD</a>/<a href="<?=get_order_link('product_price_usd')?>">USD</a>
+													<a href="<?=get_order_link('product_price_hkd')?>">
+														Price <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+													</a>
 												</th>
 												<th>
 													<a href="<?=get_order_link('product_modify')?>">
@@ -505,7 +498,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<td><?=$value->product_wpp_code?></td>
 												<td><?=$value->product_name?></td>
 												<td><?='HKD '.$value->product_cost?></td>
-												<td><?='RMB '.$value->product_price_rmb.' / HKD '.$value->product_price_hkd.' / USD '.$value->product_price_usd?></td>
+												<td><?='HKD '.$value->product_price_hkd?></td>
 												<td><?=convert_datetime_to_date($value->product_modify)?></td>
 												<!-- <td class="text-right">
 													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->product_id?>">

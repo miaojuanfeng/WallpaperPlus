@@ -142,7 +142,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		function calc(){
 			var total = 0;
 			$.each($('table.list tbody tr'), function(key, val){
-			    var subtotal = parseFloat($(this).find('input[name="purchaseorderitem_product_price[]"]').val()) * parseInt($(this).find('input[name="purchaseorderitem_quantity[]"]').val());
+			    var subtotal = parseFloat($(this).find('input[name="purchaseorderitem_product_price[]"]').val()) * parseFloat($(this).find('input[name="purchaseorderitem_quantity[]"]').val());
                 var discount = parseFloat($(this).find('input[name="purchaseorderitem_discount[]"]').val())/100;
                 discount = discount?discount:1;
                 subtotal = subtotal?subtotal:0;

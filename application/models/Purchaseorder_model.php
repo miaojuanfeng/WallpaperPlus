@@ -119,6 +119,10 @@ class Purchaseorder_model extends CI_Model {
 						$thisField = str_replace('_in', '', $key);
 						$this->db->where($thisField.' in ('.implode(',', $value).')');
 						break;
+					case 'purchaseorder_status_in':
+						$thisField = str_replace('_in', '', $key);
+						$this->db->where($thisField.' in ("'.implode('","', $value).'")');
+						break;
 					case 'purchaseorder_id_greateq':
 					case 'purchaseorder_number_greateq':
 						$thisField = str_replace('_greateq', '', $key);

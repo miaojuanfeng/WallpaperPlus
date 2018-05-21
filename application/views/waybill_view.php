@@ -274,7 +274,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2">
 															<input type="text" name="waybill_number_like" class="form-control input-sm" placeholder="Waybill number" value="" />
 														</div>
-														<div class="col-sm-2"></div>
+														<div class="col-sm-2">
+															<input type="text" name="waybill_po_number_like" class="form-control input-sm" placeholder="PO number" value="" />
+														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>

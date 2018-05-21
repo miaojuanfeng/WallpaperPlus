@@ -73,9 +73,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			});
 
 			/* product loader */
-			$(document).on('change', 'select[name="quotationitem_product_id[]"]', function(){
-				product_loader($(this));
-			});
+			// $(document).on('change', 'input[name="quotationitem_product_id[]"]', function(){
+			// 	product_loader($(this));
+			// });
 
             $(document).on('change', 'select[name="quotation_display_code"]', function(){
                 $('select[name="quotationitem_product_id[]"]').each(function(){
@@ -298,9 +298,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<div>';
 			quotationitem_row += '<select id="quotationitem_product_id" name="quotationitem_product_id[]" data-placeholder="Product" class="chosen-select">';
 			quotationitem_row += '<option value></option>';
-			<?php foreach($products as $key1 => $value1){ ?>
+			<?php /*foreach($products as $key1 => $value1){ ?>
 			quotationitem_row += '<option value="<?=$value1->product_id?>"><?=$value1->product_code.' - '.$value1->product_name?></option>';
-			<?php } ?>
+			<?php }*/ ?>
 			quotationitem_row += '</select>';
 			quotationitem_row += '</div>';
 			quotationitem_row += '<div class="margin-top-10">';
@@ -499,7 +499,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="attachment">Business registration</label>
 											<input id="attachment" name="attachment" type="file" class="form-control input-sm" placeholder="Business registration" accept="image/*" />
 										</p> -->
-										<p class="form-group">
+										<!-- <p class="form-group">
 											<label for="attachment">
 												Business registration
 												<?php if(file_exists($_SERVER['DOCUMENT_ROOT'].'/assets/images/attachment/quotation/'.$quotation->quotation_id)){ ?>
@@ -507,7 +507,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<?php } ?>
 											</label>
 											<input id="attachment" name="attachment" type="file" class="form-control input-sm" placeholder="Business registration" accept="image/*, application/pdf" />
-										</p>
+										</p> -->
 										<?php
 										if($this->router->fetch_method() == 'update'){
 											switch(true){
@@ -641,10 +641,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 													</tr> -->
 													<tr>
-														<td><label for="quotation_terms">Payment terms</label></td>
-														<td><input id="quotation_terms" name="quotation_terms" type="text" class="form-control input-sm required" placeholder="Payment terms" value="<?=$quotation->quotation_terms?>" /></td>
-													</tr>
-													<tr>
 														<td><label for="quotation_expire">Expire Date</label></td>
 														<td><input id="quotation_expire" name="quotation_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($quotation->quotation_expire != '' && $this->router->fetch_method() != 'duplicate') ? $quotation->quotation_expire : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
 													</tr>
@@ -691,10 +687,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<div>
-                                                                <span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="">
+                                                                <!-- <span data-toggle="modal" data-target="#myModal" class="modal-btn" rel=""> -->
 																	<input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->quotationitem_product_id?>" />
-                                                                    <input type="button" class="form-control input-sm" value="Select a product" />
-                                                                </span>
+                                                                    <input type="button" class="form-control input-sm showModal" value="Select a product"/>
+                                                                <!-- </span> -->
 															</div>
 															<div class="margin-top-10">
 																<div class="input-group">
@@ -1409,155 +1405,112 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="scriptLoader"></div>
 
 
+<script>
+    var page = 0;
+    var order = '';
+    var ascend = '';
+    var search = '';
+    var product_input = null;
+
+    function getUrl(){
+        retval = '';
+        if( order && ascend ){
+            retval += 'order/'+order+'/ascend/'+ascend+'/';
+        }
+        if( search ){
+            retval += search;
+        }
+        retval += 'page/'+page;
+        return retval;
+    }
+
+    function loadData() {
+        $('.scriptLoader').load('/modal', {'thisTableId': 'product', 'thisUrl': getUrl(), 't': timestamp()}, function(data){
+            $(".modal-body").html(data);
+        });
+    }
+
+    $(".showModal").click(function(){
+        product_input = $(this).prev();
+        $('.scriptLoader').load('/modal', {'thisTableId': 'product', 'thisUrl': 'page/0', 't': timestamp()}, function(data){
+
+            console.log(product_input);
+            $(".modal-body").html(data);
+            $("#popupModal").fadeIn(100, function(){
+                $(this).addClass("in");
+            });
+        });
+    });
+
+    function hideModal(){
+        page = 0;
+        order = '';
+        ascend = '';
+        search = '';
+        product_input = null;
+        $("#popupModal").removeClass("in").fadeOut(100);
+    }
+
+    function changePage(p){
+        page = p;
+        loadData();
+    }
+
+    function changeSort(o){
+        if( order != o ){
+            ascend = 'desc';
+        }else if( ascend == 'desc' ){
+            ascend = 'asc';
+        }else if( ascend == 'asc' ){
+            ascend = 'desc';
+        }
+        order = o;
+        loadData();
+    }
+
+    function clickSearch(){
+        search = '';
+        $('.search-control input[type="text"]').each(function(){
+            var name = $(this).attr("name");
+            var value = $(this).val();
+            if( value != '' ){
+                search += name+'/'+value+'/';
+            }
+        });
+        loadData();
+    }
+
+    function clickRecord(product_id){
+        product_input.val(product_id);
+        product_loader(product_input);
+        hideModal();
+    }
+
+</script>
+
+<style type="text/css">
+.modal-body{
+	max-height: 500px;
+	overflow-y: auto; 
+}
+</style>
+
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="popupModal" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
+                <button type="button" class="close" onclick="hideModal()">
                     <i class="glyphicon glyphicon-remove"></i>
                 </button>
                 <h4 class="modal-title corpcolor-font">Product list</h4>
             </div>
             <div class="modal-body">
-                <div class="fieldset">
-                    <div class="search-area">
-
-                        <form product="form" method="get">
-                            <input type="hidden" name="product_id" />
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td width="90%">
-                                        <div class="row">
-                                            <div class="col-sm-2"><h6>Product</h6></div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_id" class="form-control input-sm" placeholder="#" value="" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_code_like" class="form-control input-sm" placeholder="Product code" value="" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_wpp_code_like" class="form-control input-sm" placeholder="Product wpp code" value="" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_name_like" class="form-control input-sm" placeholder="Product name" value="" />
-                                            </div>
-                                            <div class="col-sm-2"></div>
-                                            <div class="col-sm-2"></div>
-                                            <div class="col-sm-2"></div>
-                                        </div>
-                                    </td>
-                                    <td valign="top" width="10%" class="text-right">
-                                        <a href="javascript:;" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </form>
-
-                    </div> <!-- list-container -->
-                </div>
-                <div class="fieldset">
-
-                    <div class="list-area">
-                        <form name="list" action="<?=base_url('product/delete')?>" method="post">
-                            <input type="hidden" name="product_id" />
-                            <input type="hidden" name="product_delete_reason" />
-                            <div class="page-area">
-                                <span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
-                                <?=$this->pagination->create_links()?>
-                            </div>
-                            <table id="product" class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_code')?>">
-                                            Code <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_wpp_code')?>">
-                                            WPP code <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_name')?>">
-                                            Name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_cost')?>">
-                                            Cost <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        Price <a><i class="glyphicon glyphicon-sort corpcolor-font"></i></a>
-                                        <a href="<?=get_order_link('product_price_rmb')?>">RMB</a>/<a href="<?=get_order_link('product_price_hkd')?>">HKD</a>/<a href="<?=get_order_link('product_price_usd')?>">USD</a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_modify')?>">
-                                            Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <!-- <th width="40"></th> -->
-                                    <th width="40"></th>
-                                    <th width="40" class="text-right">
-                                        <a href="<?=base_url('product/insert')?>" data-toggle="tooltip" title="Insert">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                        </a>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach($products as $key => $value){ ?>
-                                    <tr>
-                                        <td title="<?=$value->product_id?>"><?=$key+1?></td>
-                                        <td><?=$value->product_code?></td>
-                                        <td><?=$value->product_wpp_code?></td>
-                                        <td><?=$value->product_name?></td>
-                                        <td><?='HKD '.$value->product_cost?></td>
-                                        <td><?='RMB '.$value->product_price_rmb.' / HKD '.$value->product_price_hkd.' / USD '.$value->product_price_usd?></td>
-                                        <td><?=convert_datetime_to_date($value->product_modify)?></td>
-                                        <!-- <td class="text-right">
-													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->product_id?>">
-														<a data-toggle="tooltip" title="More">
-															<i class="glyphicon glyphicon-chevron-right"></i>
-														</a>
-													</span>
-												</td> -->
-                                        <td class="text-right">
-                                            <a href="<?=base_url('product/update/product_id/'.$value->product_id)?>" data-toggle="tooltip" title="Update">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php if(!check_permission('product_delete', 'display')){ ?>
-                                                <a onclick="check_delete(<?=$value->product_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('product_delete', 'disable')?>">
-                                                    <i class="glyphicon glyphicon-remove"></i>
-                                                </a>
-                                            <?php }else{ ?>
-                                                <i class="glyphicon glyphicon-remove"></i>
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                                </tbody>
-                            </table>
-                            <div class="page-area">
-                                <span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
-                                <?=$this->pagination->create_links()?>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="hideModal()">Close</button>
             </div>
         </div>
 

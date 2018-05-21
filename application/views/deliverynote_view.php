@@ -292,27 +292,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="deliverynote_lot_number">Lot number</label>
 											<input id="deliverynote_lot_number" name="deliverynote_lot_number" type="text" class="form-control input-sm" placeholder="Lot number" value="<?=$deliverynote->deliverynote_lot_number?>" />
 										</p>
-										<p class="form-group">
-											<label for="deliverynote_waybill_number">Waybill number</label>
-											<input id="deliverynote_waybill_number" name="deliverynote_waybill_number" type="text" class="form-control input-sm" placeholder="Waybill number" value="<?=$deliverynote->deliverynote_waybill_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="deliverynote_customs_number">Customs number</label>
-											<input id="deliverynote_customs_number" name="deliverynote_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$deliverynote->deliverynote_customs_number?>" />
-										</p>
-										<p class="form-group">
-											<label for="deliverynote_express_company">Express company</label>
-											<input id="deliverynote_express_company" name="deliverynote_express_company" type="text" class="form-control input-sm" placeholder="Express company" value="<?=$deliverynote->deliverynote_express_company?>" />
-										</p>
-										<p class="form-group">
-											<label for="deliverynote_delivery_day">Delivery day</label>
-                                            <span class="input-group date datetimepicker">
-                                                <input id="deliverynote_delivery_day" name="deliverynote_delivery_day" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" value="<?=$deliverynote->deliverynote_delivery_day?>" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </span>
-										</p>
                                         <p class="form-group">
                                             <label for="deliverynote_status">Status</label>
                                             <select id="deliverynote_status" name="deliverynote_status" data-placeholder="Status" class="chosen-select required">

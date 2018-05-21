@@ -1076,19 +1076,53 @@ if(!function_exists('get_pagination_config'))
 
 if(!function_exists('get_pagination_js_config'))
 {
-    function get_pagination_js_config($per_page, $num_rows){
+    function get_pagination_js_config($url, $per_page, $num_rows){
         $CI =& get_instance();
-        $page_link = $CI->uri->uri_to_assoc();
+        $page_link = $url;
+        $current_page = $page_link['page'];
+        $total_page = ceil($num_rows/$per_page);
         unset($page_link['page']);
 
-        $config['base_url'] = 'javascript:;';
-        $config['total_rows'] = $num_rows;
-        $config['per_page'] = $per_page;
-        $config['num_links'] = 1;
-        $config['first_link'] = '<<';
-        $config['last_link'] = '>>';
-        $config['full_tag_open'] = '<span class="pagination-area">';
-        $config['full_tag_close'] = '</span>';
+        // $config['base_url'] = 'javascript:;';
+        // $config['total_rows'] = $num_rows;
+        // $config['per_page'] = $per_page;
+        // $config['num_links'] = 1;
+        // $config['first_link'] = '<<';
+        // $config['last_link'] = '>>';
+        // $config['cur_tag_open'] = '<strong class="btn btn-sm btn-primary disabled">';
+        // $config['cur_tag_close'] = '</strong>';
+        // $config['attributes'] = array('class' => 'btn btn-sm btn-primary', 'onclick' => 'changePage()');
+        // $config['full_tag_open'] = '<span class="pagination-area">';
+        // $config['full_tag_close'] = '</span>';
+
+        $config = '';
+        $config .= '<div class="page-area">';
+        $config .= '<span class="btn btn-sm btn-default">'.$num_rows.'</span>';
+        $config .= '<span class="pagination-area">';
+        if( $current_page >= $per_page * 2 ){
+        	$config .= '<a href="javascript:;" class="btn btn-sm btn-primary" onclick="changePage(0)">&lt;&lt;</a>';
+        }
+        if( $current_page >= $per_page ){
+        	$config .= '<a href="javascript:;" class="btn btn-sm btn-primary" onclick="changePage('.($current_page-$per_page).')">&lt;</a>';
+        }
+        for ($i=1; $i <= $total_page; $i++) { 
+        	$p_num = ($i-1)*$per_page;
+        	if( $p_num == $current_page ){
+        		$config .= '<strong class="btn btn-sm btn-primary disabled">'.$i.'</strong>';
+        	}else{
+        		if( $p_num == ($current_page-$per_page) || $p_num == ($current_page+$per_page) ){
+        			$config .= '<a href="javascript:;" class="btn btn-sm btn-primary" onclick="changePage('.$p_num.')">'.$i.'</a>';
+        		}
+        	}
+        }
+        if( $current_page <= $num_rows - $per_page  ){
+        	$config .= '<a href="javascript:;" class="btn btn-sm btn-primary" onclick="changePage('.($current_page+$per_page).')">&gt;</a>';
+        }
+        if( $current_page <= $num_rows - $per_page * 2 ){
+			$config .= '<a href="javascript:;" class="btn btn-sm btn-primary" onclick="changePage('.(($total_page -1 ) * $per_page).')">&gt;&gt;</a>';
+		}
+        $config .= '</span>';
+        $config .= '</div>';
 
         return $config;
     }
