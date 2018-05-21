@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// });
 
             $(document).on('change', 'select[name="quotation_display_code"]', function(){
-                $('select[name="quotationitem_product_id[]"]').each(function(){
+                $('input[name="quotationitem_product_id[]"]').each(function(){
                     product_code_loader($(this));
                 });
             });
@@ -296,12 +296,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '</td>';
 			quotationitem_row += '<td>';
 			quotationitem_row += '<div>';
-			quotationitem_row += '<select id="quotationitem_product_id" name="quotationitem_product_id[]" data-placeholder="Product" class="chosen-select">';
-			quotationitem_row += '<option value></option>';
-			<?php /*foreach($products as $key1 => $value1){ ?>
-			quotationitem_row += '<option value="<?=$value1->product_id?>"><?=$value1->product_code.' - '.$value1->product_name?></option>';
-			<?php }*/ ?>
-			quotationitem_row += '</select>';
+            quotationitem_row += '<input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
+            quotationitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
 			quotationitem_row += '</div>';
 			quotationitem_row += '<div class="margin-top-10">';
             // quotationitem_row += '<input id="quotationitem_product_name" name="quotationitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
@@ -667,7 +663,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th width="14%">Subtotal</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody class="trModal">
 													<?php foreach($quotationitems as $key => $value){ ?>
 													<tr>
 														<td>
@@ -1430,7 +1426,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
     }
 
-    $(".showModal").click(function(){
+    $(".trModal").on('click', '.showModal', function(){
         product_input = $(this).prev();
         $('.scriptLoader').load('/modal', {'thisTableId': 'product', 'thisUrl': 'page/0', 't': timestamp()}, function(data){
 

@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a620b4db-c109-41ad-a8a2-26fd2cfd6aaa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Quotation.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Quotation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Waybill.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Waybill.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/helpers/function_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/helpers/function_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Purchaseorder_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Purchaseorder_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/deliverynote_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/deliverynote_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/product_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/product_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/purchaseorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/purchaseorder_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/quotation_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/quotation_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/waybill_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/waybill_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/pdf/deliverynote/DN1805002.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/pdf/deliverynote/DN1805002.pdf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,18 +12,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="product_view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/modal/product_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
+            <state relative-caret-position="1786">
               <caret line="94" column="51" selection-start-line="94" selection-start-column="51" selection-end-line="94" selection-end-column="51" />
-              <folding>
-                <element signature="e#3#9#0" expanded="true" />
-                <element signature="e#9#15#0" expanded="true" />
-                <element signature="e#15#21#0" expanded="true" />
-                <element signature="e#21#27#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -41,8 +25,8 @@
       <file leaf-file-name="quotation_view.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="1485" column="20" selection-start-line="1485" selection-start-column="20" selection-end-line="1485" selection-end-column="20" />
+            <state relative-caret-position="322">
+              <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -51,10 +35,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>expi</find>
-      <find>Currency</find>
-      <find>invoice_currency</find>
-      <find>currencys</find>
       <find>purchaseorder</find>
       <find>invoiceProductLoader</find>
       <find>SO total</find>
@@ -81,6 +61,10 @@
       <find>product_id</find>
       <find>product_loader</find>
       <find>products</find>
+      <find>quotationitem_product_id</find>
+      <find>quotationitem_product_id[]</find>
+      <find>showModal</find>
+      <find>quotation_display_code</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -256,14 +240,15 @@
       <workItem from="1526522704748" duration="20727000" />
       <workItem from="1526610846649" duration="2314000" />
       <workItem from="1526867633366" duration="7479000" />
+      <workItem from="1526900993036" duration="2508000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132670000" />
+    <option name="totallyTimeSpent" value="135178000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="23" width="1920" height="1057" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -345,21 +330,15 @@
     <entry file="file://$PROJECT_DIR$/application/controllers/Product.php" />
     <entry file="file://$PROJECT_DIR$/application/views/modal/product_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="1786">
           <caret line="94" column="51" selection-start-line="94" selection-start-column="51" selection-end-line="94" selection-end-column="51" />
-          <folding>
-            <element signature="e#3#9#0" expanded="true" />
-            <element signature="e#9#15#0" expanded="true" />
-            <element signature="e#15#21#0" expanded="true" />
-            <element signature="e#21#27#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="1485" column="20" selection-start-line="1485" selection-start-column="20" selection-end-line="1485" selection-end-column="20" />
+        <state relative-caret-position="322">
+          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
         </state>
       </provider>
     </entry>
