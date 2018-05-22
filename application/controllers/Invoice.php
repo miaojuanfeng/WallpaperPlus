@@ -152,6 +152,26 @@ class Invoice extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 
+            $thisSelect = array(
+                'where' => array('invoice_salesorder_id' => $thisPOST['invoice_salesorder_id']),
+                'return' => 'row'
+            );
+            $data['exists_invoice'] = $this->invoice_model->select($thisSelect);
+
+            if( !$data['exists_invoice'] ){
+                if( strtolower($thisPOST['invoice_currency']) == 'hkd' || strtolower($thisPOST['invoice_currency']) == 'usd' ){
+                    $invoice_code = 'DEP';
+                }else if( strtolower($thisPOST['invoice_currency']) == 'rmb' ) {
+                    $invoice_code = 'CDEP';
+                }
+            }else{
+                if( strtolower($thisPOST['invoice_currency']) == 'hkd' || strtolower($thisPOST['invoice_currency']) == 'usd' ) {
+                    $invoice_code = 'INV';
+                }else if( strtolower($thisPOST['invoice_currency']) == 'rmb' ) {
+                    $invoice_code = 'CINV';
+                }
+            }
+
 			/* salesorder */
 			$thisPOST['salesorder_id'] = $thisPOST['invoice_salesorder_id'];
 			// $thisPOST['salesorder_status'] = 'processing';
@@ -160,7 +180,7 @@ class Invoice extends CI_Controller {
 
 			/* invoice */
 			$thisPOST['invoice_serial'] = sprintf("%03s", (get_invoice_serial() + 1));
-			$thisPOST['invoice_number'] = 'INV'.date('ym').$thisPOST['invoice_serial'];
+			$thisPOST['invoice_number'] = $this->session->userdata('user_order_prefix').$invoice_code.date('ym').$thisPOST['invoice_serial'];
 			$thisPOST['invoice_version'] = 1;
 			$thisPOST['invoice_status'] = 'processing';
 			$thisPOST['invoice_id'] = $thisInsertId = $this->invoice_model->insert($thisPOST);

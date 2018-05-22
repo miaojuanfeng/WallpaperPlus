@@ -184,7 +184,7 @@ class Quotation_model extends CI_Model {
 		if(isset($data['order'])){
 			$this->db->order_by($data['order'], $data['ascend']);
 		}else{
-			$this->db->order_by('quotation_number', 'desc');
+			$this->db->order_by('quotation_id', 'desc');
 		}
 
 		/* limit */

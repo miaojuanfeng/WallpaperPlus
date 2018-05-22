@@ -155,7 +155,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <option value></option>
                                                 <?php
                                                 foreach($teams as $key => $value){
-                                                    $selected = (in_array($value->team_id, $user->user_team_id)) ? ' selected="selected"' : "" ;
+                                                    $selected = $value->team_id == $user->user_team_id ? ' selected="selected"' : "" ;
                                                     ?>
                                                     <option value="<?=$value->team_id?>"<?=$selected?>><?=ucfirst($value->team_name)?></option>
                                                 <?php } ?>

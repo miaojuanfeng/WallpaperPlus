@@ -215,8 +215,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<small>Show stock status report</small>
 									</blockquote>
 								</div>
-								<div class="col-md-3 col-sm-12"></div>
-								<div class="col-md-3 col-sm-12"></div>
+                                <div class="col-md-3 col-sm-12">
+                                    <blockquote>
+                                        <i class="glyphicon glyphicon-check"></i>
+                                        <a href="<?=base_url('xxx')?>">xxx</a>
+                                        <small>Show xxx report</small>
+                                    </blockquote>
+                                </div>
+								<div class="col-md-3 col-sm-12">
+                                    <blockquote>
+                                        <i class="glyphicon glyphicon-check"></i>
+                                        <a href="<?=base_url('xxx')?>">Closing stock report</a>
+                                        <small>Show closing stock report</small>
+                                    </blockquote>
+                                </div>
 								<div class="col-md-3 col-sm-12"></div>
 							</div>
 

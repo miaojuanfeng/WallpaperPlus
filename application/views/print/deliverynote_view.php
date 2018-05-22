@@ -178,13 +178,10 @@ switch($deliverynote->deliverynote_currency){
 							<td><?=$deliverynote->deliverynote_user_name?></td>
 						</tr>
 						<tr>
-							<td><b>Payment Term</b></td>
-							<td><?=$deliverynote->deliverynote_terms?></td>
-						</tr>
-						<tr>
 							<td><b>Expire Date</b></td>
 							<td><?=$deliverynote->deliverynote_expire?></td>
 						</tr>
+                        <tr></tr>
 					</table>
 				</td>
 			</tr>

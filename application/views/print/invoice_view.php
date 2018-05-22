@@ -178,13 +178,10 @@ switch($invoice->invoice_currency){
 							<td><?=$invoice->invoice_user_name?></td>
 						</tr>
 						<tr>
-							<td><b>Payment Term</b></td>
-							<td><?=$invoice->invoice_terms?></td>
-						</tr>
-						<tr>
 							<td><b>Expire Date</b></td>
 							<td><?=$invoice->invoice_expire?></td>
 						</tr>
+                        <tr></tr>
 					</table>
 				</td>
 			</tr>

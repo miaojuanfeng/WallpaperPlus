@@ -171,7 +171,7 @@ class Purchaseorder extends CI_Controller {
 
 			/* purchaseorder */
 			$thisPOST['purchaseorder_serial'] = sprintf("%03s", (get_purchaseorder_serial() + 1));
-			$thisPOST['purchaseorder_number'] = 'PO'.date('ym').$thisPOST['purchaseorder_serial'];
+			$thisPOST['purchaseorder_number'] = $this->session->userdata('user_order_prefix').'PO'.date('ym').$thisPOST['purchaseorder_serial'];
 			$thisPOST['purchaseorder_version'] = 1;
 			$thisPOST['purchaseorder_status'] = 'processing';
 			$thisPOST['purchaseorder_id'] = $thisInsertId = $this->purchaseorder_model->insert($thisPOST);

@@ -326,13 +326,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th></th>
                                                 <th>DN No</th>
-												<th>Lot number</th>
-												<th>Waybill number</th>
-												<th>Customs number</th>
-												<th>Express company</th>
-												<th>Delivery day</th>
-												<th>Status</th>
-												<th>Remark</th>
+                                                <th>SO No</th>
+                                                <th>Create</th>
+                                                <th>Customer</th>
+                                                <th>Project</th>
+                                                <th>Sales</th>
+                                                <th>Status</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -344,13 +343,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<?=$value->deliverynote_number?>
 													</a>
 												</td>
-												<th><?=$value->deliverynote_lot_number?></th>
-                                                <td><?=$value->deliverynote_waybill_number?></td>
-                                                <td><?=$value->deliverynote_customs_number?></td>
-                                                <td><?=$value->deliverynote_express_company?></td>
-												<td><?=convert_datetime_to_date($value->deliverynote_delivery_day)?></td>
-												<td><?=$value->deliverynote_status?></td>
-												<td><?=($value->deliverynote_remark) ? $value->deliverynote_remark : 'N/A'?></td>
+                                                <td><a href="<?=base_url('salesorder/update/salesorder_id/'.$value->deliverynote_salesorder_id)?>"><?=get_salesorder($value->deliverynote_salesorder_id)->salesorder_number?></a></td>
+                                                <td><?=convert_datetime_to_date($value->deliverynote_create)?></td>
+                                                <td><?=$value->deliverynote_client_company_name?></td>
+                                                <td><?=$value->deliverynote_project_name?></td>
+												<td><?=ucfirst(get_user($value->deliverynote_user_id)->user_name)?></td>
+												<td><?=ucfirst($value->deliverynote_status)?></td>
 											</tr>
 											<?php } ?>
 

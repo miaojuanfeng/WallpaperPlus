@@ -259,7 +259,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="deliverynote_client_phone" value="<?=$deliverynote->deliverynote_client_phone?>" />
 							<input type="hidden" name="deliverynote_client_name" value="<?=$deliverynote->deliverynote_client_name?>" />
 							<input type="hidden" name="deliverynote_issue" value="<?=$deliverynote->deliverynote_issue?>" />
-							<input type="hidden" name="deliverynote_terms" value="<?=$deliverynote->deliverynote_terms?>" />
 							<input type="hidden" name="deliverynote_expire" value="<?=$deliverynote->deliverynote_expire?>" />
 							<input type="hidden" name="salesorder_total" value="<?=$deliverynote->deliverynote_total?>" />
 							<input type="hidden" name="deliverynote_user_id" value="<?=$deliverynote->deliverynote_user_id?>" />
@@ -358,10 +357,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr>
 														<td><label for="deliverynote_user_name">Sales</label></td>
 														<td><input readonly="readonly" id="deliverynote_user_name" name="deliverynote_user_name" type="text" class="form-control input-sm required" placeholder="Saleman" value="<?=$user->user_name?>" /></td>
-													</tr>
-													<tr>
-														<td><label for="deliverynote_terms">Payment terms</label></td>
-														<td><input id="deliverynote_terms" name="deliverynote_terms" type="text" class="form-control input-sm required" placeholder="Payment terms" value="<?=$deliverynote->deliverynote_terms?>" /></td>
 													</tr>
 													<tr>
 														<td><label for="deliverynote_expire">Expire Date</label></td>

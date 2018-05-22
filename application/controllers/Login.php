@@ -50,10 +50,17 @@ class Login extends CI_Controller {
 				);
 				$permissions = convert_object_to_array($this->login_model->get_permission($thisSelect), 'permission_name');
 
+				if( $user->user_team_id == 2 ){
+				    $user_order_prefix = 'E';
+                }else{
+                    $user_order_prefix = '';
+                }
+
 				/* save session */
 				$this->session->set_userdata('user_id', $user->user_id);
 				$this->session->set_userdata('role', $roles);
 				$this->session->set_userdata('permission', $permissions);
+                $this->session->set_userdata('user_order_prefix', $user_order_prefix);
 
 				//$thisReferrer = $this->uri->uri_to_assoc();
 				if($this->uri->uri_to_assoc()){

@@ -394,7 +394,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="purchaseorder_vendor_phone" value="<?=$purchaseorder->purchaseorder_vendor_phone?>" />
 							<input type="hidden" name="purchaseorder_vendor_name" value="<?=$purchaseorder->purchaseorder_vendor_name?>" />
 							<input type="hidden" name="purchaseorder_issue" value="<?=$purchaseorder->purchaseorder_issue?>" />
-							<input type="hidden" name="purchaseorder_terms" value="<?=$purchaseorder->purchaseorder_terms?>" />
 							<input type="hidden" name="purchaseorder_reminder_date" value="<?=$purchaseorder->purchaseorder_reminder_date?>" />
                             <input type="hidden" name="purchaseorder_currency" value="<?=$purchaseorder->purchaseorder_currency?>" />
 							<input type="hidden" name="salesorder_total" value="<?=$purchaseorder->purchaseorder_total?>" />
@@ -560,10 +559,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr>
 														<td><label for="purchaseorder_user_name">Sales</label></td>
 														<td><input readonly="readonly" id="purchaseorder_user_name" name="purchaseorder_user_name" type="text" class="form-control input-sm required" placeholder="Saleman" value="<?=$user->user_name?>" /></td>
-													</tr>
-													<tr>
-														<td><label for="purchaseorder_terms">Payment terms</label></td>
-														<td><input id="purchaseorder_terms" name="purchaseorder_terms" type="text" class="form-control input-sm required" placeholder="Payment terms" value="<?=$purchaseorder->purchaseorder_terms?>" /></td>
 													</tr>
 													<tr>
 														<td><label for="purchaseorder_reminder_date">Reminder date</label></td>

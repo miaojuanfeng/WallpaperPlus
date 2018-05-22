@@ -179,13 +179,10 @@ switch($salesorder->salesorder_currency){
 							<td><?=$salesorder->salesorder_user_name?></td>
 						</tr>
 						<tr>
-							<td><b>Payment Term</b></td>
-							<td><?=$salesorder->salesorder_terms?></td>
-						</tr>
-						<tr>
 							<td><b>Expire Date</b></td>
 							<td><?=$salesorder->salesorder_expire?></td>
 						</tr>
+                        <tr></tr>
 					</table>
 				</td>
 			</tr>

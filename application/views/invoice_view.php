@@ -272,7 +272,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="invoice_client_phone" value="<?=$invoice->invoice_client_phone?>" />
 							<input type="hidden" name="invoice_client_name" value="<?=$invoice->invoice_client_name?>" />
 							<input type="hidden" name="invoice_issue" value="<?=$invoice->invoice_issue?>" />
-							<input type="hidden" name="invoice_terms" value="<?=$invoice->invoice_terms?>" />
 							<input type="hidden" name="invoice_expire" value="<?=$invoice->invoice_expire?>" />
 							<input type="hidden" name="salesorder_total" value="<?=$invoice->invoice_total?>" />
 							<input type="hidden" name="invoice_user_id" value="<?=$invoice->invoice_user_id?>" />
@@ -378,10 +377,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr>
 														<td><label for="invoice_user_name">Sales</label></td>
 														<td><input readonly="readonly" id="invoice_user_name" name="invoice_user_name" type="text" class="form-control input-sm required" placeholder="Saleman" value="<?=$user->user_name?>" /></td>
-													</tr>
-													<tr>
-														<td><label for="invoice_terms">Payment terms</label></td>
-														<td><input id="invoice_terms" name="invoice_terms" type="text" class="form-control input-sm required" placeholder="Payment terms" value="<?=$invoice->invoice_terms?>" /></td>
 													</tr>
 													<tr>
 														<td><label for="invoice_expire">Expire Date</label></td>
