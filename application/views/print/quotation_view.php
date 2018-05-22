@@ -178,13 +178,10 @@ switch($quotation->quotation_currency){
 							<td><?=$quotation->quotation_user_name?></td>
 						</tr>
 						<tr>
-							<td><b>Payment Term</b></td>
-							<td><?=$quotation->quotation_terms?></td>
-						</tr>
-						<tr>
 							<td><b>Expire Date</b></td>
 							<td><?=$quotation->quotation_expire?></td>
 						</tr>
+                        <tr></tr>
 					</table>
 				</td>
 			</tr>

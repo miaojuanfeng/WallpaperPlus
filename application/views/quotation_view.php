@@ -126,7 +126,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			});
 			$(document).on('change', 'select[name="quotation_currency"]', function(){
 				$.each($('input[name="quotationitem_product_id[]"]'), function(key, val){
-					product_loader($(this));
+				    if( $(this).val() != "" ) {
+                        product_loader($(this));
+                    }
 				});
                 exchange_rate_loader($(this));
 			});
@@ -602,7 +604,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td>
 															<div class="input-group">
 																<input readonly="readonly" id="quotation_number" name="quotation_number" type="text" class="form-control input-sm" placeholder="Quotation#" value="<?=$quotation->quotation_number?>" />
-																<span class="input-group-addon"><?='v'.$quotation->quotation_version?></span>
+																<span class="input-group-addon"><?='r'.$quotation->quotation_version?></span>
 															</div>
 														</td>
 													</tr>
@@ -998,7 +1000,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td><a href="<?=base_url('quotation/update/quotation_id/'.$value->quotation_id)?>" data-toggle="tooltip" title="Update"><?=$value->quotation_number?></a></td>
 												<td>
-													V<?=$value->quotation_version?>
+													R<?=$value->quotation_version?>
 													<a href="javascript:void(0)" id="more-<?=$value->quotation_number?>">
 														<i class="glyphicon glyphicon-chevron-right"></i>
 													</a>
@@ -1421,15 +1423,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 
     function loadData() {
-        $('.scriptLoader').load('/modal', {'thisTableId': 'product', 'thisUrl': getUrl(), 't': timestamp()}, function(data){
-            $(".modal-body").html(data);
+        $('.modal-body').load('/modal', {'thisTableId': 'product', 'thisUrl': getUrl(), 't': timestamp()}, function(data){
+            // $(".modal-body").html(data);
         });
     }
 
     $(".trModal").on('click', '.showModal', function(){
         product_input = $(this).prev();
-        $('.scriptLoader').load('/modal', {'thisTableId': 'product', 'thisUrl': 'page/0', 't': timestamp()}, function(data){
-            $(".modal-body").html(data);
+        $('.modal-body').load('/modal', {'thisTableId': 'product', 'thisUrl': 'page/0', 't': timestamp()}, function(data){
+            // $(".modal-body").html(data);
             $("#popupModal").fadeIn(100, function(){
                 $(this).addClass("in");
             });
@@ -1510,4 +1512,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     </div>
 </div>
-<!-- myModal -->
+<!-- Modal -->

@@ -86,6 +86,10 @@ class Product_model extends CI_Model {
 						$thisField = str_replace('_noteq', '', $key);
 						$this->db->where($thisField.' !=', urldecode($value));
 						break;
+                    case 'product_vendor_id_in':
+                        $thisField = str_replace('_in', '', $key);
+                        $this->db->where($thisField.' in ('.implode(',', $value).')');
+                        break;
 					case 'order':
 						$data['order'] = $value;
 						break;

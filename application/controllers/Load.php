@@ -34,7 +34,7 @@ class Load extends CI_Controller {
 		foreach($thisData as $key => $value){
 			echo '<tr class="more-'.$this->input->post('thisRecordId').' more-area">';
 			echo '<td><a href="'.base_url('quotation/update/quotation_id/'.$value->quotation_id).'" data-toggle="tooltip" title="Update">'.$value->quotation_number.'</a></td>';
-			echo '<td>V'.$value->quotation_version.'</td>';
+			echo '<td>R'.$value->quotation_version.'</td>';
 			echo '<td>'.convert_datetime_to_date($value->quotation_create).'</td>';
 			echo '<td>'.$value->quotation_client_company_name.'</td>';
 			echo '<td>'.$value->quotation_client_name.'</td>';

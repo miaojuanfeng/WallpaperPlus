@@ -19,6 +19,7 @@ class Modal extends CI_Controller {
 	public function product()
 	{
 		$this->load->model('product_model');
+        $this->load->model('vendor_model');
 			
 		$per_page = get_setting('per_page')->setting_value;
 
@@ -34,7 +35,24 @@ class Modal extends CI_Controller {
 				}
 			}
 		}
-		var_dump($url);
+		
+        /* check vendor */
+        if( isset($url['vendor_company_name_like']) ){
+            $thisSelect = array(
+                'where' => $url,
+                'return' => 'result'
+            );
+            $data['vendors'] = $this->vendor_model->select($thisSelect);
+
+            if($data['vendors']){
+                foreach($data['vendors'] as $key => $value){
+                    $url['product_vendor_id_in'][] = $value->vendor_id;
+                }
+            }else{
+                $url['product_vendor_id_in'] = array(0);
+            }
+        }
+        /* check vendor */
 
 		$thisSelect = array(
 			'where' => $url,

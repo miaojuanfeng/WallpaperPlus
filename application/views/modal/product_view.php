@@ -21,7 +21,9 @@
                             <div class="col-sm-2">
                                 <input type="text" name="product_name_like" class="form-control input-sm" placeholder="Product name" value="" />
                             </div>
-                            <div class="col-sm-2"></div>
+                            <div class="col-sm-2">
+                                <input type="text" name="vendor_company_name_like" class="form-control input-sm" placeholder="Vendor company name" value="" />
+                            </div>
                             <div class="col-sm-2"></div>
                             <div class="col-sm-2"></div>
                         </div>
