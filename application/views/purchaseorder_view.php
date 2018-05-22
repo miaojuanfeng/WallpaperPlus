@@ -212,14 +212,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</td>';
 			purchaseorderitem_row += '<td>';
-			purchaseorderitem_row += '<div>';
-			purchaseorderitem_row += '<select id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" data-placeholder="Product" class="chosen-select">';
-			purchaseorderitem_row += '<option value></option>';
-			<?php foreach($products as $key1 => $value1){ ?>
-			purchaseorderitem_row += '<option value="<?=$value1->product_id?>"><?=$value1->product_code.' - '.$value1->product_name?></option>';
-			<?php } ?>
-			purchaseorderitem_row += '</select>';
-			purchaseorderitem_row += '</div>';
+            purchaseorderitem_row += '<div>';
+            purchaseorderitem_row += '<input id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
+            purchaseorderitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '<div class="margin-top-10">';
 			// purchaseorderitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			purchaseorderitem_row += '<div class="input-group">';
@@ -592,7 +588,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th width="12%">Subtotal</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody class="trModal">
 													<?php foreach($purchaseorderitems as $key => $value){ ?>
 													<tr<?=($value->purchaseorderitem_type == 'sub item') ? ' class="subitem-row"' : ''?>>
 														<td>
@@ -612,17 +608,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 														</td>
 														<td>
-															<div>
-																<select id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" data-placeholder="Product" class="chosen-select">
-																	<option value></option>
-																	<?php
-																	foreach($products as $key1 => $value1){
-																		$selected = ($value1->product_id == $value->purchaseorderitem_product_id) ? ' selected="selected"' : "" ;
-																		echo '<option value="'.$value1->product_id.'"'.$selected.'>'.$value1->product_code.' - '.$value1->product_name.'</option>';
-																	}
-																	?>
-																</select>
-															</div>
+                                                            <div>
+                                                                <input id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->purchaseorderitem_product_id?>" />
+                                                                <input type="button" class="form-control input-sm showModal" value="Select a product"/>
+                                                            </div>
 															<div class="margin-top-10">
 																<div class="input-group">
 																	<span class="input-group-addon corpcolor-font">Title</span>
@@ -1123,3 +1112,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </html>
 
 <div class="scriptLoader"></div>
+
+
+<!-- Modal -->
+<script src="<?php echo base_url('assets/js/product-modal.js'); ?>"></script>
+<div class="modal fade" id="popupModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="hideModal()">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+                <h4 class="modal-title corpcolor-font">Product list</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="hideModal()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->

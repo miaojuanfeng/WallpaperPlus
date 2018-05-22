@@ -163,14 +163,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '</div>';
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
-			salesorderitem_row += '<div>';
-			salesorderitem_row += '<select id="salesorderitem_product_id" name="salesorderitem_product_id[]" data-placeholder="Product" class="chosen-select">';
-			salesorderitem_row += '<option value></option>';
-			<?php foreach($products as $key1 => $value1){ ?>
-			salesorderitem_row += '<option value="<?=$value1->product_id?>"><?=$value1->product_code.' - '.$value1->product_name?></option>';
-			<?php } ?>
-			salesorderitem_row += '</select>';
-			salesorderitem_row += '</div>';
+            salesorderitem_row += '<div>';
+            salesorderitem_row += '<input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
+            salesorderitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            salesorderitem_row += '</div>';
 			salesorderitem_row += '<div class="margin-top-10">';
 			// salesorderitem_row += '<input id="salesorderitem_product_name" name="salesorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			salesorderitem_row += '<div class="input-group">';
@@ -186,7 +182,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '<input id="salesorderitem_product_price" name="salesorderitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
-			salesorderitem_row += '<input id="salesorderitem_quantity" name="salesorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            salesorderitem_row += '<div class="input-group">';
+            salesorderitem_row += '<input id="salesorderitem_quantity" name="salesorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            salesorderitem_row += '<span class="input-group-addon">Unit</span>';
+            salesorderitem_row += '</div>';
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
 			salesorderitem_row += '<input readonly="readonly" id="salesorderitem_subtotal" name="salesorderitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="" />';
@@ -547,7 +546,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th width="12%">Subtotal</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody class="trModal">
 													<?php foreach($salesorderitems as $key => $value){ ?>
 													<tr>
 														<td>
@@ -567,19 +566,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<div>
-<!--																<select id="salesorderitem_product_id" name="salesorderitem_product_id[]" data-placeholder="Product" class="chosen-select">-->
-<!--																	<option value></option>-->
-<!--																	--><?php
-//																	foreach($products as $key1 => $value1){
-//																		$selected = ($value1->product_id == $value->salesorderitem_product_id) ? ' selected="selected"' : "" ;
-//																		echo '<option value="'.$value1->product_id.'"'.$selected.'>'.$value1->product_code.' - '.$value1->product_name.'</option>';
-//																	}
-//																	?>
-<!--																</select>-->
-                                                                <span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="">
-																	<input id="salesorderitem_product_id" name="salesorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->salesorderitem_product_id?>" />
-                                                                    <input type="button" class="form-control input-sm" value="Select a product" />
-                                                                </span>
+                                                                <input id="salesorderitem_product_id" name="salesorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->salesorderitem_product_id?>" />
+                                                                <input type="button" class="form-control input-sm showModal" value="Select a product"/>
 															</div>
 															<div class="margin-top-10">
 																<div class="input-group">
@@ -1164,157 +1152,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<script src="<?php echo base_url('assets/js/product-modal.js'); ?>"></script>
+<div class="modal fade" id="popupModal" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
+                <button type="button" class="close" onclick="hideModal()">
                     <i class="glyphicon glyphicon-remove"></i>
                 </button>
                 <h4 class="modal-title corpcolor-font">Product list</h4>
             </div>
             <div class="modal-body">
-                <div class="fieldset">
-                    <div class="search-area">
 
-                        <form product="form" method="get">
-                            <input type="hidden" name="product_id" />
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td width="90%">
-                                        <div class="row">
-                                            <div class="col-sm-2"><h6>Product</h6></div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_id" class="form-control input-sm" placeholder="#" value="" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_code_like" class="form-control input-sm" placeholder="Product code" value="" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_wpp_code_like" class="form-control input-sm" placeholder="Product wpp code" value="" />
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" name="product_name_like" class="form-control input-sm" placeholder="Product name" value="" />
-                                            </div>
-                                            <div class="col-sm-2"></div>
-                                            <div class="col-sm-2"></div>
-                                            <div class="col-sm-2"></div>
-                                        </div>
-                                    </td>
-                                    <td valign="top" width="10%" class="text-right">
-                                        <a href="javascript:;" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </form>
-
-                    </div> <!-- list-container -->
-                </div>
-                <div class="fieldset">
-
-                    <div class="list-area">
-                        <form name="list" action="<?=base_url('product/delete')?>" method="post">
-                            <input type="hidden" name="product_id" />
-                            <input type="hidden" name="product_delete_reason" />
-                            <div class="page-area">
-                                <span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
-                                <?=$this->pagination->create_links()?>
-                            </div>
-                            <table id="product" class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_code')?>">
-                                            Code <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_wpp_code')?>">
-                                            WPP code <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_name')?>">
-                                            Name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_cost')?>">
-                                            Cost <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        Price <a><i class="glyphicon glyphicon-sort corpcolor-font"></i></a>
-                                        <a href="<?=get_order_link('product_price_rmb')?>">RMB</a>/<a href="<?=get_order_link('product_price_hkd')?>">HKD</a>/<a href="<?=get_order_link('product_price_usd')?>">USD</a>
-                                    </th>
-                                    <th>
-                                        <a href="<?=get_order_link('product_modify')?>">
-                                            Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                        </a>
-                                    </th>
-                                    <!-- <th width="40"></th> -->
-                                    <th width="40"></th>
-                                    <th width="40" class="text-right">
-                                        <a href="<?=base_url('product/insert')?>" data-toggle="tooltip" title="Insert">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                        </a>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach($products as $key => $value){ ?>
-                                    <tr>
-                                        <td title="<?=$value->product_id?>"><?=$key+1?></td>
-                                        <td><?=$value->product_code?></td>
-                                        <td><?=$value->product_wpp_code?></td>
-                                        <td><?=$value->product_name?></td>
-                                        <td><?='HKD '.$value->product_cost?></td>
-                                        <td><?='RMB '.$value->product_price_rmb.' / HKD '.$value->product_price_hkd.' / USD '.$value->product_price_usd?></td>
-                                        <td><?=convert_datetime_to_date($value->product_modify)?></td>
-                                        <!-- <td class="text-right">
-													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->product_id?>">
-														<a data-toggle="tooltip" title="More">
-															<i class="glyphicon glyphicon-chevron-right"></i>
-														</a>
-													</span>
-												</td> -->
-                                        <td class="text-right">
-                                            <a href="<?=base_url('product/update/product_id/'.$value->product_id)?>" data-toggle="tooltip" title="Update">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php if(!check_permission('product_delete', 'display')){ ?>
-                                                <a onclick="check_delete(<?=$value->product_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('product_delete', 'disable')?>">
-                                                    <i class="glyphicon glyphicon-remove"></i>
-                                                </a>
-                                            <?php }else{ ?>
-                                                <i class="glyphicon glyphicon-remove"></i>
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                                </tbody>
-                            </table>
-                            <div class="page-area">
-                                <span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
-                                <?=$this->pagination->create_links()?>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="hideModal()">Close</button>
             </div>
         </div>
 
     </div>
 </div>
-<!-- myModal -->
+<!-- Modal -->

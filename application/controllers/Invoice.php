@@ -91,12 +91,6 @@ class Invoice extends CI_Controller {
 				(object)array('commission_name' => '40')
 			);
 
-			/* product */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['products'] = $this->product_model->select($thisSelect);
-
 			/* user */
 			$thisSelect = array(
 				'where' => array(
@@ -244,12 +238,6 @@ class Invoice extends CI_Controller {
 				(object)array('commission_name' => '20'),
 				(object)array('commission_name' => '40')
 			);
-
-			/* product */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['products'] = $this->product_model->select($thisSelect);
 
 			/* user */
 			$thisSelect = array(

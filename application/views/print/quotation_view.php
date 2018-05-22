@@ -171,7 +171,7 @@ switch($quotation->quotation_currency){
                         </tr>
 						<tr>
 							<td width="40%"><b>Quotation No.</b></td>
-							<td width="60%"><?=$quotation->quotation_number?>-v<?=$quotation->quotation_version?></td>
+							<td width="60%"><?=$quotation->quotation_number?><?=$quotation->quotation_version?'-R'.$quotation->quotation_version:''?></td>
 						</tr>
 						<tr>
 							<td><b>Sales</b></td>

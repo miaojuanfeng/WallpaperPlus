@@ -169,14 +169,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '</div>';
 			invoiceitem_row += '</td>';
 			invoiceitem_row += '<td>';
-			invoiceitem_row += '<div>';
-			invoiceitem_row += '<select id="invoiceitem_product_id" name="invoiceitem_product_id[]" data-placeholder="Product" class="chosen-select">';
-			invoiceitem_row += '<option value></option>';
-			<?php foreach($products as $key1 => $value1){ ?>
-			invoiceitem_row += '<option value="<?=$value1->product_id?>"><?=$value1->product_code.' - '.$value1->product_name?></option>';
-			<?php } ?>
-			invoiceitem_row += '</select>';
-			invoiceitem_row += '</div>';
+            invoiceitem_row += '<div>';
+            invoiceitem_row += '<input id="invoiceitem_product_id" name="invoiceitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
+            invoiceitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            invoiceitem_row += '</div>';
 			invoiceitem_row += '<div class="margin-top-10">';
 			// invoiceitem_row += '<input id="invoiceitem_product_name" name="invoiceitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			invoiceitem_row += '<div class="input-group">';
@@ -192,7 +188,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '<input id="invoiceitem_product_price" name="invoiceitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
 			invoiceitem_row += '</td>';
 			invoiceitem_row += '<td>';
+            invoiceitem_row += '<div class="input-group">';
 			invoiceitem_row += '<input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            invoiceitem_row += '<span class="input-group-addon">Unit</span>';
+            invoiceitem_row += '</div>';
 			invoiceitem_row += '</td>';
 			invoiceitem_row += '<td>';
 			invoiceitem_row += '<input readonly="readonly" id="invoiceitem_subtotal" name="invoiceitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="" />';
@@ -402,11 +401,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
-														<th width="8%">Quantity</th>
+														<th width="12%">Quantity</th>
 														<th width="12%">Subtotal</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody class="trModal">
 													<?php foreach($invoiceitems as $key => $value){ ?>
 													<tr>
 														<td>
@@ -425,17 +424,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 														</td>
 														<td>
-															<div>
-																<select id="invoiceitem_product_id" name="invoiceitem_product_id[]" data-placeholder="Product" class="chosen-select">
-																	<option value></option>
-																	<?php
-																	foreach($products as $key1 => $value1){
-																		$selected = ($value1->product_id == $value->invoiceitem_product_id) ? ' selected="selected"' : "" ;
-																		echo '<option value="'.$value1->product_id.'"'.$selected.'>'.$value1->product_code.' - '.$value1->product_name.'</option>';
-																	}
-																	?>
-																</select>
-															</div>
+                                                            <div>
+                                                                <input id="invoiceitem_product_id" name="invoiceitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->invoiceitem_product_id?>" />
+                                                                <input type="button" class="form-control input-sm showModal" value="Select a product"/>
+                                                            </div>
 															<div class="margin-top-10">
 																<div class="input-group">
 																	<span class="input-group-addon corpcolor-font">Title</span>
@@ -471,12 +463,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																$thisInvoiceitemQuantity = $salesorder_quantity - $invoiceitem_sold;
 															}
 															?>
-															<!-- <input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="text" class="form-control input-sm" placeholder="Quantity" value="<?=($value->invoiceitem_quantity) ? $value->invoiceitem_quantity : '1'?>" /> -->
-															<input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$salesorder_quantity - $invoiceitem_sold?>" />
-<!--															<div class="margin-top-10">-->
-<!--																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sum of invoice item quantity" value="--><?//=$invoiceitem_sold?><!--" />-->
-<!--																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sales order item quantity" value="--><?//=$salesorder_quantity?><!--" />-->
-<!--															</div>-->
+                                                            <div class="input-group">
+                                                                <input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$salesorder_quantity - $invoiceitem_sold?>" />
+                                                                <span class="input-group-addon">Unit</span>
+                                                            </div>
 														</td>
 														<td>
 															<input readonly="readonly" id="invoiceitem_subtotal" name="invoiceitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="<?=$value->invoiceitem_subtotal?>" />
@@ -894,3 +884,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </html>
 
 <div class="scriptLoader"></div>
+
+
+<!-- Modal -->
+<script src="<?php echo base_url('assets/js/product-modal.js'); ?>"></script>
+<div class="modal fade" id="popupModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="hideModal()">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+                <h4 class="modal-title corpcolor-font">Product list</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="hideModal()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->

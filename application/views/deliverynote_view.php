@@ -162,17 +162,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '</td>';
 			deliverynoteitem_row += '<td colspan="2">';
-			deliverynoteitem_row += '<div>';
-			deliverynoteitem_row += '<select id="deliverynoteitem_product_id" name="deliverynoteitem_product_id[]" data-placeholder="Product" class="chosen-select">';
-			deliverynoteitem_row += '<option value></option>';
-			<?php foreach($products as $key1 => $value1){ ?>
-			deliverynoteitem_row += '<option value="<?=$value1->product_id?>"><?=$value1->product_code.' - '.$value1->product_name?></option>';
-			<?php } ?>
-			deliverynoteitem_row += '</select>';
-			deliverynoteitem_row += '</div>';
+            deliverynoteitem_row += '<div>';
+            deliverynoteitem_row += '<input id="deliverynoteitem_product_id" name="deliverynoteitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
+            deliverynoteitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '<div class="margin-top-10">';
 			// deliverynoteitem_row += '<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
-			deliverynoteitem_row += '<div class="input-group">';
+			deliverynoteitem_row += '<div class="input-group width100percent">';
 			deliverynoteitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
 			deliverynoteitem_row += '<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			deliverynoteitem_row += '</div>';
@@ -182,7 +178,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '</td>';
 			deliverynoteitem_row += '<td>';
-			deliverynoteitem_row += '<input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="text" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            deliverynoteitem_row += '<div class="input-group">';
+			deliverynoteitem_row += '<input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+            deliverynoteitem_row += '<span class="input-group-addon">Unit</span>';
+            deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '</td>';
 			deliverynoteitem_row += '</tr>';
 
@@ -385,7 +384,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th width="12%">Quantity</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody class="trModal">
 													<?php foreach($deliverynoteitems as $key => $value){ ?>
 													<tr>
 														<td>
@@ -404,17 +403,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 														</td>
 														<td colspan="2">
-															<div>
-																<select id="deliverynoteitem_product_id" name="deliverynoteitem_product_id[]" data-placeholder="Product" class="chosen-select">
-																	<option value></option>
-																	<?php
-																	foreach($products as $key1 => $value1){
-																		$selected = ($value1->product_id == $value->deliverynoteitem_product_id) ? ' selected="selected"' : "" ;
-																		echo '<option value="'.$value1->product_id.'"'.$selected.'>'.$value1->product_code.' - '.$value1->product_name.'</option>';
-																	}
-																	?>
-																</select>
-															</div>
+                                                            <div>
+                                                                <input id="deliverynoteitem_product_id" name="deliverynoteitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->deliverynoteitem_product_id?>" />
+                                                                <input type="button" class="form-control input-sm showModal" value="Select a product"/>
+                                                            </div>
 															<div class="margin-top-10">
 																<div class="input-group width100percent">
 																	<span class="input-group-addon corpcolor-font">Title</span>
@@ -426,8 +418,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 														</td>
 														<td>
-															<input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->deliverynoteitem_quantity) ? $value->deliverynoteitem_quantity : '1'?>" />
-														</td>
+                                                            <div class="input-group">
+                                                                <input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->deliverynoteitem_quantity) ? $value->deliverynoteitem_quantity : '1'?>" />
+                                                                <span class="input-group-addon">Unit</span>
+                                                            </div>
+                                                        </td>
 													</tr>
 													<?php } ?>
 												</tbody>
@@ -785,3 +780,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </html>
 
 <div class="scriptLoader"></div>
+
+
+<!-- Modal -->
+<script src="<?php echo base_url('assets/js/product-modal.js'); ?>"></script>
+<div class="modal fade" id="popupModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="hideModal()">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+                <h4 class="modal-title corpcolor-font">Product list</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="hideModal()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->

@@ -89,28 +89,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				document_display_number();
 			});
 
-			/* terms loader */
-			// $(document).on('change', 'select[name="remark"]', function(){
-			// 	$('.scriptLoader').load('/load', {'thisTableId': 'termsLoader', 'thisTableField': 'quotation_remark', 'thisRecordId': $(this).val(), 't': timestamp()}, function(){
-			// 		termsLoader();
-			// 	});
-			// });
-			// $(document).on('change', 'select[name="warranty"]', function(){
-			// 	$('.scriptLoader').load('/load', {'thisTableId': 'termsLoader', 'thisTableField': 'quotation_warranty', 'thisRecordId': $(this).val(), 't': timestamp()}, function(){
-			// 		termsLoader();
-			// 	});
-			// });
-			// $(document).on('change', 'select[name="delivery"]', function(){
-			// 	$('.scriptLoader').load('/load', {'thisTableId': 'termsLoader', 'thisTableField': 'quotation_delivery', 'thisRecordId': $(this).val(), 't': timestamp()}, function(){
-			// 		termsLoader();
-			// 	});
-			// });
-			// $(document).on('change', 'select[name="payment"]', function(){
-			// 	$('.scriptLoader').load('/load', {'thisTableId': 'termsLoader', 'thisTableField': 'quotation_payment', 'thisRecordId': $(this).val(), 't': timestamp()}, function(){
-			// 		termsLoader();
-			// 	});
-			// });
-
 			/* trigger calc */
 			$(document).on('blur', 'input[name="quotationitem_product_price[]"]', function(){
 				calc();
@@ -328,8 +306,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             quotationitem_row += '<span class="input-group-addon">Unit</span>';
             quotationitem_row += '</div>';
 			quotationitem_row += '</td>';
-            quotationitem_row += '<td>'; <!-- michaelmiao -->
-            quotationitem_row += '</td>'; <!-- michaelmiao -->
 			quotationitem_row += '<td>';
 			quotationitem_row += '<input readonly="readonly" id="quotationitem_subtotal" name="quotationitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="" />';
 			quotationitem_row += '</td>';
@@ -604,7 +580,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td>
 															<div class="input-group">
 																<input readonly="readonly" id="quotation_number" name="quotation_number" type="text" class="form-control input-sm" placeholder="Quotation#" value="<?=$quotation->quotation_number?>" />
-																<span class="input-group-addon"><?='r'.$quotation->quotation_version?></span>
+                                                                <span class="input-group-addon"><?=$quotation->quotation_version?'R'.$quotation->quotation_version:'N/A'?></span>
 															</div>
 														</td>
 													</tr>
@@ -661,7 +637,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th>Detail</th>
 														<th width="12%">Price</th>
 														<th width="12%">Quantity</th>
-                                                        <th width="12%" style="color:red">需不需要by item Discount？</th> <!-- michaelmiao -->
 														<th width="14%">Subtotal</th>
 													</tr>
 												</thead>
@@ -685,10 +660,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<div>
-                                                                <!-- <span data-toggle="modal" data-target="#myModal" class="modal-btn" rel=""> -->
-																	<input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->quotationitem_product_id?>" />
-                                                                    <input type="button" class="form-control input-sm showModal" value="Select a product"/>
-                                                                <!-- </span> -->
+                                                                <input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->quotationitem_product_id?>" />
+                                                                <input type="button" class="form-control input-sm showModal" value="Select a product"/>
 															</div>
 															<div class="margin-top-10">
 																<div class="input-group">
@@ -715,7 +688,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                 <span class="input-group-addon">Unit</span>
                                                             </div>
                                                         </td>
-                                                        <td></td>
 														<td>
 															<input readonly="readonly" id="quotationitem_subtotal" name="quotationitem_subtotal[]" type="text" class="form-control input-sm" placeholder="Subtotal" value="<?=$value->quotationitem_subtotal?>" />
 														</td>
@@ -727,7 +699,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
 														<th></th>
-                                                        <th></th> <!-- michaelmiao -->
 														<th>Discount %</th>
 														<th>
                                                             <div class="input-group">
@@ -740,7 +711,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
-                                                        <th></th> <!-- michaelmiao -->
                                                         <th>运费</th>
                                                         <th><input id="quotation_discount" name="quotation_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" /></th>
                                                     </tr>
@@ -752,7 +722,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</th>
 														<th></th>
 														<th></th>
-                                                        <th></th> <!-- michaelmiao -->
 														<th>Grand total</th>
 														<th><input readonly="readonly" id="quotation_total" name="quotation_total" type="text" class="form-control input-sm" placeholder="Grand total" value="<?=($quotation->quotation_total) ? $quotation->quotation_total : '0'?>" /></th>
 													</tr>
@@ -764,26 +733,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="quotation_remark">Remark</label>
 											<textarea id="quotation_remark" name="quotation_remark" class="form-control input-sm" placeholder="Remark"><?=$quotation->quotation_remark?></textarea>
 										</p>
-										<!-- <p class="form-group">
-											<label for="quotation_warranty">Warranty</label>
-											<textarea id="quotation_warranty" name="quotation_warranty" class="form-control input-sm" placeholder="Warranty"><?=$quotation->quotation_warranty?></textarea>
-										</p>
-										<p class="form-group">
-											<label for="quotation_delivery">Delivery</label>
-											<textarea id="quotation_delivery" name="quotation_delivery" class="form-control input-sm" placeholder="Delivery"><?=$quotation->quotation_delivery?></textarea>
-										</p> -->
 										<p class="form-group">
 											<label for="quotation_payment">Payment</label>
 											<textarea id="quotation_payment" name="quotation_payment" class="form-control input-sm" placeholder="Payment"><?=$quotation->quotation_payment?></textarea>
 										</p>
 									</div>
 								</div>
-
-								<!-- <div class="row">
-									<div class="col-xs-12">
-										<button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
-									</div>
-								</div> -->
 
 							</div>
 						</form>
@@ -1000,10 +955,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td><a href="<?=base_url('quotation/update/quotation_id/'.$value->quotation_id)?>" data-toggle="tooltip" title="Update"><?=$value->quotation_number?></a></td>
 												<td>
-													R<?=$value->quotation_version?>
-													<a href="javascript:void(0)" id="more-<?=$value->quotation_number?>">
-														<i class="glyphicon glyphicon-chevron-right"></i>
-													</a>
+                                                    <?php if( $value->quotation_version ) { ?>
+                                                        <?= 'R' . $value->quotation_version ?>
+                                                        <a href="javascript:void(0)"
+                                                           id="more-<?= $value->quotation_number ?>">
+                                                            <i class="glyphicon glyphicon-chevron-right"></i>
+                                                        </a>
+                                                    <?php }else{ ?>
+                                                        N/A
+                                                    <?php } ?>
 												</td>
 												<td><?=convert_datetime_to_date($value->quotation_create)?></td>
 												<td><?=$value->quotation_client_company_name?></td>
@@ -1403,95 +1363,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="scriptLoader"></div>
 
 
-<script>
-    var page = 0;
-    var order = '';
-    var ascend = '';
-    var search = '';
-    var product_input = null;
-
-    function getUrl(){
-        retval = '';
-        if( order && ascend ){
-            retval += 'order/'+order+'/ascend/'+ascend+'/';
-        }
-        if( search ){
-            retval += search;
-        }
-        retval += 'page/'+page;
-        return retval;
-    }
-
-    function loadData() {
-        $('.modal-body').load('/modal', {'thisTableId': 'product', 'thisUrl': getUrl(), 't': timestamp()}, function(data){
-            // $(".modal-body").html(data);
-        });
-    }
-
-    $(".trModal").on('click', '.showModal', function(){
-        product_input = $(this).prev();
-        $('.modal-body').load('/modal', {'thisTableId': 'product', 'thisUrl': 'page/0', 't': timestamp()}, function(data){
-            // $(".modal-body").html(data);
-            $("#popupModal").fadeIn(100, function(){
-                $(this).addClass("in");
-            });
-        });
-    });
-
-    function hideModal(){
-        page = 0;
-        order = '';
-        ascend = '';
-        search = '';
-        product_input = null;
-        $("#popupModal").removeClass("in").fadeOut(100);
-    }
-
-    function changePage(p){
-        page = p;
-        loadData();
-    }
-
-    function changeSort(o){
-        if( order != o ){
-            ascend = 'desc';
-        }else if( ascend == 'desc' ){
-            ascend = 'asc';
-        }else if( ascend == 'asc' ){
-            ascend = 'desc';
-        }
-        order = o;
-        loadData();
-    }
-
-    function clickSearch(){
-        search = '';
-        $('.search-control input[type="text"]').each(function(){
-            var name = $(this).attr("name");
-            var value = $(this).val();
-            if( value != '' ){
-                search += name+'/'+value+'/';
-            }
-        });
-        loadData();
-    }
-
-    function clickRecord(product_id){
-        product_input.val(product_id);
-        product_loader(product_input);
-        hideModal();
-    }
-
-</script>
-
-<style type="text/css">
-.modal-body{
-	max-height: 500px;
-	overflow-y: auto; 
-}
-</style>
-
 <!-- Modal -->
+<script src="<?php echo base_url('assets/js/product-modal.js'); ?>"></script>
 <div class="modal fade" id="popupModal" role="dialog">
     <div class="modal-dialog">
 

@@ -105,27 +105,6 @@ class Salesorder extends CI_Controller {
 			);
 			$data['clients'] = $this->client_model->select($thisSelect);
 
-//			/* product */
-//			$thisSelect = array(
-//				'return' => 'result'
-//			);
-//			$data['products'] = $this->product_model->select($thisSelect);
-
-            /* product */
-            $per_page = get_setting('per_page')->setting_value;
-            $thisSelect = array(
-                'where' => $this->uri->uri_to_assoc(),
-                'limit' => $per_page,
-                'return' => 'result'
-            );
-            $data['products'] = $this->product_model->select($thisSelect);
-            $thisSelect = array(
-                'where' => $this->uri->uri_to_assoc(),
-                'return' => 'num_rows'
-            );
-            $data['num_rows'] = $this->product_model->select($thisSelect);
-            $this->pagination->initialize(get_pagination_js_config($per_page, $data['num_rows']));
-
 			/* user */
 			$thisSelect = array(
 				'where' => array(
@@ -257,27 +236,6 @@ class Salesorder extends CI_Controller {
 				(object)array('commission_name' => '20'),
 				(object)array('commission_name' => '40')
 			);
-
-//			/* product */
-//			$thisSelect = array(
-//				'return' => 'result'
-//			);
-//			$data['products'] = $this->product_model->select($thisSelect);
-
-            /* product */
-            $per_page = get_setting('per_page')->setting_value;
-            $thisSelect = array(
-                'where' => $this->uri->uri_to_assoc(),
-                'limit' => $per_page,
-                'return' => 'result'
-            );
-            $data['products'] = $this->product_model->select($thisSelect);
-            $thisSelect = array(
-                'where' => $this->uri->uri_to_assoc(),
-                'return' => 'num_rows'
-            );
-            $data['num_rows'] = $this->product_model->select($thisSelect);
-            $this->pagination->initialize(get_pagination_js_config($per_page, $data['num_rows']));
 
 			/* user */
 			$thisSelect = array(

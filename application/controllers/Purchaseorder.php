@@ -84,12 +84,6 @@ class Purchaseorder extends CI_Controller {
 				(object)array('status_name' => 'cancel')
 			);
 
-			/* product */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['products'] = $this->product_model->select($thisSelect);
-
 			/* vendor */
 			$thisSelect = array(
 				'return' => 'result'
@@ -257,12 +251,6 @@ class Purchaseorder extends CI_Controller {
 				(object)array('status_name' => 'complete'),
 				(object)array('status_name' => 'cancel')
 			);
-
-			/* product */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['products'] = $this->product_model->select($thisSelect);
 
 			/* vendor */
 			$thisSelect = array(

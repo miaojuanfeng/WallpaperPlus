@@ -54,6 +54,8 @@ class Modal extends CI_Controller {
         }
         /* check vendor */
 
+//        var_dump($url);
+
 		$thisSelect = array(
 			'where' => $url,
 			'limit' => $per_page,
