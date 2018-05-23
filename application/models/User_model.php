@@ -86,6 +86,7 @@ class User_model extends CI_Model {
 					case 'user_name':
 					case 'user_email':
 					case 'user_user_id':
+                    case 'user_code':
 						$thisField = $key;
 						$this->db->where($thisField, urldecode($value));
 						break;

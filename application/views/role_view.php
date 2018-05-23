@@ -302,11 +302,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</td>
 												<td class="text-right">
 													<?php
-													if($value->role_id>3){
+													if($value->role_id>4){
 													?>
-													<a href="<?=base_url('role/update')?>" data-toggle="tooltip" title="Remove">
-														<i class="glyphicon glyphicon-remove"></i>
-													</a>
+                                                    <a onclick="check_delete(<?=$value->role_id?>);" data-toggle="tooltip" title="Remove">
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                    </a>
 													<?php
 													}else{
                                                     ?>

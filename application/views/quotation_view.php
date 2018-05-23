@@ -398,7 +398,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											?>
 										</blockquote>
 										<p class="form-group">
-											<button<?=($quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate') ? ' disabled="disabled"' : ''?> type="submit" name="action" value="save" class="btn btn-sm btn-primary btn-block"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+                                            <?php if( $quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate' ) { ?>
+                                                <button type="submit" name="action" value="approval" class="btn btn-sm btn-primary btn-block" data-toggle="tooltip" title="Only can update Date and Discount with Approval code"><i class="glyphicon glyphicon-floppy-disk"></i> Approval</button>
+                                            <?php }else{ ?>
+                                                <button<?=($quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate') ? ' disabled="disabled"' : ''?> type="submit" name="action" value="save" class="btn btn-sm btn-primary btn-block"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+                                            <?php } ?>
 										</p>
 										<?php if($this->router->fetch_method() == 'update'){ ?>
 										<p class="form-group">

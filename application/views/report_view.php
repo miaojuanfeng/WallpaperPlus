@@ -206,7 +206,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							<div class="hr"></div>
 
-							<h4>Warehouse</h4>
+							<h4>Operation</h4>
 							<div class="row">
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
@@ -218,14 +218,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-3 col-sm-12">
                                     <blockquote>
                                         <i class="glyphicon glyphicon-check"></i>
-                                        <a href="<?=base_url('xxx')?>">xxx</a>
+                                        <a href="<?=base_url('quantityreport')?>">Quantity report</a>
                                         <small>Show xxx report</small>
                                     </blockquote>
                                 </div>
 								<div class="col-md-3 col-sm-12">
                                     <blockquote>
                                         <i class="glyphicon glyphicon-check"></i>
-                                        <a href="<?=base_url('xxx')?>">Closing stock report</a>
+                                        <a href="<?=base_url('closingreport')?>">Closing stock report</a>
                                         <small>Show closing stock report</small>
                                     </blockquote>
                                 </div>

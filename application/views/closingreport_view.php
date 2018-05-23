@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>General Ledger report</title>
+		<title>Closing stock report</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -148,7 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12">General Ledger report</h2>
+					<h2 class="col-sm-12">Closing stock report</h2>
 
 					<div class="content-column-area col-md-12 col-sm-12">
 
@@ -162,57 +162,55 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<tbody>
 											<tr>
 												<td width="90%">
-													<div class="row">
-														<div class="col-sm-2"><h6>Sales Order</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />
-														</div>
-														<div class="col-sm-2">
+                                                    <div class="row">
+                                                        <div class="col-sm-2"><h6>Delivery Note</h6></div>
+                                                        <div class="col-sm-2">
+                                                            <input type="text" name="deliverynote_number_like" class="form-control input-sm" placeholder="DNNo" value="" />
+                                                        </div>
+                                                        <div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_greateq" name="salesorder_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<input id="deliverynote_create_greateq" name="deliverynote_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
 															</span>
-														</div>
-														<div class="col-sm-2">
+                                                        </div>
+                                                        <div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_smalleq" name="salesorder_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<input id="deliverynote_create_smalleq" name="deliverynote_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
 															</span>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Customer</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
-														</div>
-														<div class="col-sm-2">
-															<select id="salesorder_user_id" name="salesorder_user_id" data-placeholder="Sales" class="chosen-select">
-																<option value></option>
-																<?php foreach($users as $key => $value){ ?>
-																<option value="<?=$value->user_id?>"><?=ucfirst($value->user_name)?></option>
-																<?php } ?>
-															</select>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Project</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_project_name_like" class="form-control input-sm" placeholder="Project Name" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
+                                                        </div>
+                                                        <div class="col-sm-2"></div>
+                                                        <div class="col-sm-2"></div>
+                                                    </div>
+<!--													<div class="row">-->
+<!--														<div class="col-sm-2"><h6>Sales Order</h6></div>-->
+<!--														<div class="col-sm-2">-->
+<!--															<input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />-->
+<!--														</div>-->
+<!--														<div class="col-sm-2">-->
+<!--															<span class="input-group date datetimepicker">-->
+<!--																<input id="salesorder_create_greateq" name="salesorder_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />-->
+<!--																<span class="input-group-addon">-->
+<!--																	<span class="glyphicon glyphicon-calendar"></span>-->
+<!--																</span>-->
+<!--															</span>-->
+<!--														</div>-->
+<!--														<div class="col-sm-2">-->
+<!--															<span class="input-group date datetimepicker">-->
+<!--																<input id="salesorder_create_smalleq" name="salesorder_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />-->
+<!--																<span class="input-group-addon">-->
+<!--																	<span class="glyphicon glyphicon-calendar"></span>-->
+<!--																</span>-->
+<!--															</span>-->
+<!--														</div>-->
+<!--														<div class="col-sm-2"></div>-->
+<!--														<div class="col-sm-2"></div>-->
+<!--													</div>-->
+
 													<!-- <div class="row">
 														<div class="col-sm-2"><h6>Product</h6></div>
 														<div class="col-sm-2">
@@ -249,7 +247,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
-                                        <a href="<?=base_url('ledgerreport/export'.get_uri_string_parameters($this->uri->uri_string()))?>" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" data-original-title="Export">
+                                        <a href="<?=base_url('closingreport/export'.get_uri_string_parameters($this->uri->uri_string()))?>" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" data-original-title="Export">
                                             <i class="glyphicon glyphicon-export"></i>
                                         </a>
 									</div>
@@ -299,10 +297,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</form>
 							</div>
 						</div>
-					</div>
-					<div class="blue">
-						<!-- <p>Is it <b>completed</b> SO show in this report?</p>
-						<p>Customer PO ?</p> -->
 					</div>
 				</div>
 			</div>
