@@ -115,7 +115,7 @@ class Z_waybill_purchaseorder_model extends CI_Model {
 			".$where."
 		";
 		$query = $this->db->query($sql);
-		// echo $this->db->last_query();
+//		 echo $this->db->last_query();
 		// exit;
 
 		/* return */

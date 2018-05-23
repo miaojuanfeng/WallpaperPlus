@@ -81,6 +81,10 @@ class Waybill_model extends CI_Model {
 						$thisField = str_replace('_noteq', '', $key);
 						$this->db->where($thisField.' !=', urldecode($value));
 						break;
+                    case 'waybill_id_in':
+                        $thisField = str_replace('_in', '', $key);
+                        $this->db->where($thisField.' in ('.implode(',', $value).')');
+                        break;
 					case 'order':
 						$data['order'] = $value;
 						break;
@@ -114,7 +118,7 @@ class Waybill_model extends CI_Model {
 		$this->db->where('waybill_deleted', 'N');
 		$this->db->from('waybill');
 		$query = $this->db->get();
-		// echo $this->db->last_query();
+//		 echo $this->db->last_query();
 		// exit;
 
 		/* return */

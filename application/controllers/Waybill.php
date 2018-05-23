@@ -135,15 +135,47 @@ class Waybill extends CI_Controller {
 	{
 		$per_page = get_setting('per_page')->setting_value;
 
+        $thisGET = $this->uri->uri_to_assoc();
+
+        /* check purchaseorder */
+        if(isset($thisGET['purchaseorder_number_like'])){
+            $thisSelect = array(
+                'where' => $thisGET,
+                'return' => 'result'
+            );
+            $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+
+            if($data['purchaseorders']){
+                foreach($data['purchaseorders'] as $key => $value){
+                    $thisGET['purchaseorder_id_in'][] = $value->purchaseorder_id;
+                }
+            }else{
+                $thisGET['purchaseorder_id_in'] = array(0);
+            }
+
+            $thisSelect = array(
+                'where' => array('purchaseorder_id_in' => $thisGET['purchaseorder_id_in']),
+                'return' => 'result'
+            );
+            $waybill_id_in = convert_object_to_array($this->z_waybill_purchaseorder_model->select($thisSelect), 'z_waybill_purchaseorder_waybill_id');
+
+            if( $waybill_id_in ){
+                $thisGET['waybill_id_in'] = $waybill_id_in;
+            }else{
+                $thisGET['waybill_id_in'] = array(0);
+            }
+        }
+        /* check purchaseorder */
+
 		$thisSelect = array(
-			'where' => $this->uri->uri_to_assoc(),
+			'where' => $thisGET,
 			'limit' => $per_page,
 			'return' => 'result'
 		);
 		$data['waybills'] = $this->waybill_model->select($thisSelect);
 
 		$thisSelect = array(
-			'where' => $this->uri->uri_to_assoc(),
+			'where' => $thisGET,
 			'return' => 'num_rows'
 		);
 		$data['num_rows'] = $this->waybill_model->select($thisSelect);

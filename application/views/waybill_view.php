@@ -272,7 +272,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<input type="text" name="waybill_number_like" class="form-control input-sm" placeholder="Waybill number" value="" />
 														</div>
 														<div class="col-sm-2">
-															<input type="text" name="waybill_po_number_like" class="form-control input-sm" placeholder="PO number" value="" />
+															<input type="text" name="purchaseorder_number_like" class="form-control input-sm" placeholder="PO number" value="" />
 														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
@@ -305,36 +305,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<thead>
 											<tr>
 												<th>#</th>
-												<th>
-													<a href="<?=get_order_link('waybill_number')?>">
-														Waybill number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-													</a>
-												</th>
-                                                <th>
-                                                    <a href="<?=get_order_link('waybill_number')?>">
-                                                        Lot number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                                    </a>
-                                                </th>
-                                                <th>
-                                                    <a href="<?=get_order_link('waybill_number')?>">
-                                                        Customs number <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                                    </a>
-                                                </th>
-                                                <th>
-                                                    <a href="<?=get_order_link('waybill_number')?>">
-                                                        Express company <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                                    </a>
-                                                </th>
-                                                <th>
-                                                    <a href="<?=get_order_link('waybill_number')?>">
-                                                        Delivery day <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                                                    </a>
-                                                </th>
-												<th>
-													<a href="<?=get_order_link('waybill_modify')?>">
-														Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-													</a>
-												</th>
+												<th>Waybill number</th>
+                                                <th>Lot number</th>
+                                                <th>Customs number</th>
+                                                <th>Express company</th>
+                                                <th>Delivery day</th>
+												<th>Modify</th>
 												<!-- <th width="40"></th> -->
 												<th width="40"></th>
 												<th width="40" class="text-right">
@@ -377,6 +353,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</td>
 											</tr>
 											<?php } ?>
+                                            <?php if(!$waybills){ ?>
+                                                <tr>
+                                                    <td colspan="15">No record found</td>
+                                                </tr>
+                                            <?php } ?>
 										</tbody>
 									</table>
 									<div class="page-area">
@@ -440,25 +421,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	</body>
 </html>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<i class="glyphicon glyphicon-remove"></i>
-				</button>
-				<h4 class="modal-title corpcolor-font">Detail</h4>
-			</div>
-			<div class="modal-body">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-
-	</div>
-</div>
-<!-- myModal -->
