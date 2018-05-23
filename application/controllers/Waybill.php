@@ -13,6 +13,7 @@ class Waybill extends CI_Controller {
 
 		$this->load->model('waybill_model');
 		$this->load->model('purchaseorder_model');
+		$this->load->model('z_waybill_purchaseorder_model');
 	}
 
 	public function index()
@@ -25,6 +26,8 @@ class Waybill extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$this->waybill_model->update($thisPOST);
+            $this->z_waybill_purchaseorder_model->delete($thisPOST);
+            $this->z_waybill_purchaseorder_model->insert($thisPOST);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
 			$thisLog['log_permission_action'] = $this->router->fetch_method();
@@ -40,14 +43,31 @@ class Waybill extends CI_Controller {
 			);
 			$data['waybill'] = $this->waybill_model->select($thisSelect);
 
+            /* not avaliable purchaseorders */
+            $thisSelect = array(
+                'where' => array(
+                    'waybill_id_not_in' => array($data['waybill']->waybill_id)
+                ),
+                'return' => 'result'
+            );
+            $z_waybill_purchaseorder_purchaseorder_ids = convert_object_to_array($this->z_waybill_purchaseorder_model->select($thisSelect), 'z_waybill_purchaseorder_purchaseorder_id');
+
             /* purchaseorder */
             $thisSelect = array(
             	'where' => array(
+                    'purchaseorder_id_not_in' => $z_waybill_purchaseorder_purchaseorder_ids,
 					'purchaseorder_status_in' => array('processing', 'partial')
 				),
                 'return' => 'result'
             );
             $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+
+            /* get waybill purchaseorders */
+            $thisSelect = array(
+                'where' => $this->uri->uri_to_assoc(),
+                'return' => 'result'
+            );
+            $data['z_waybill_purchaseorder_purchaseorder_ids'] = convert_object_to_array($this->z_waybill_purchaseorder_model->select($thisSelect), 'z_waybill_purchaseorder_purchaseorder_id');
 
 			$this->load->view('waybill_view', $data);
 		}
@@ -71,6 +91,8 @@ class Waybill extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$thisInsertId = $this->waybill_model->insert($thisPOST);
+            $thisPOST['purchaseorder_id'] = $thisInsertId;
+            $this->z_waybill_purchaseorder_model->insert($thisPOST);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
 			$thisLog['log_permission_action'] = $this->router->fetch_method();
@@ -86,14 +108,24 @@ class Waybill extends CI_Controller {
 			}
 			$data['waybill'] = (object)$thisArray;
 
+            /* not avaliable purchaseorders */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $z_waybill_purchaseorder_purchaseorder_ids = convert_object_to_array($this->z_waybill_purchaseorder_model->select($thisSelect), 'z_waybill_purchaseorder_purchaseorder_id');
+
             /* purchaseorder */
             $thisSelect = array(
             	'where' => array(
+            	    'purchaseorder_id_not_in' => $z_waybill_purchaseorder_purchaseorder_ids,
 					'purchaseorder_status_in' => array('processing', 'partial')
 				),
                 'return' => 'result'
             );
             $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+
+            /* get waybill purchaseorders */
+            $data['z_waybill_purchaseorder_purchaseorder_ids'] = array();
 
 			$this->load->view('waybill_view', $data);
 		}

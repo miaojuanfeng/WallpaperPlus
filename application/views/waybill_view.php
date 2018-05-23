@@ -140,20 +140,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </p>
                                         <p class="form-group">
                                             <label for="waybill_lot_number">Lot number</label>
-                                            <input id="waybill_lot_number" name="waybill_lot_number" type="text" class="form-control input-sm" placeholder="Lot number" value="<?=$waybill->waybill_number?>" />
+                                            <input id="waybill_lot_number" name="waybill_lot_number" type="text" class="form-control input-sm" placeholder="Lot number" value="<?=$waybill->waybill_lot_number?>" />
                                         </p>
 										<p class="form-group">
 											<label for="waybill_customs_number">Customs number <span class="highlight"></span></label>
-											<input id="waybill_customs_number" name="waybill_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$waybill->waybill_number?>" />
+											<input id="waybill_customs_number" name="waybill_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$waybill->waybill_customs_number?>" />
 										</p>
                                         <p class="form-group">
                                             <label for="waybill_express_company">Express company</label>
-                                            <input id="waybill_express_company" name="waybill_express_company" type="text" class="form-control input-sm" placeholder="Express company" value="<?=$waybill->waybill_number?>" />
+                                            <input id="waybill_express_company" name="waybill_express_company" type="text" class="form-control input-sm" placeholder="Express company" value="<?=$waybill->waybill_express_company?>" />
                                         </p>
                                         <p class="form-group">
                                             <label for="waybill_delivery_day">Delivery day</label>
                                             <span class="input-group date datetimepicker">
-                                                <input id="waybill_delivery_day" name="waybill_delivery_day" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" value="<?=$waybill->waybill_number?>" />
+                                                <input id="waybill_delivery_day" name="waybill_delivery_day" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" value="<?=$waybill->waybill_delivery_day?>" />
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
@@ -167,15 +167,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Related information</h4>
                                         <p class="form-group">
-                                            <label for="waybill_po_id">PO <span class="highlight">*</span></label>
-                                            <select id="waybill_po_id" name="waybill_po_id" data-placeholder="PO" class="chosen-select required" multiple="multiple">
+                                            <label for="z_waybill_purchaseorder_purchaseorder_id">PO <span class="highlight">*</span></label>
+                                            <select id="z_waybill_purchaseorder_purchaseorder_id" name="z_waybill_purchaseorder_purchaseorder_id[]" data-placeholder="PO" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
-                                                if($purchaseorder->waybill_po_id == ''){
-                                                    $purchaseorder->waybill_po_id = 'hkd';
-                                                }
                                                 foreach($purchaseorders as $key => $value){
-                                                    $selected = ($value->currency_name == $purchaseorder->waybill_po_id) ? ' selected="selected"' : "" ;
+                                                    $selected = (in_array($value->purchaseorder_id, $z_waybill_purchaseorder_purchaseorder_ids)) ? ' selected="selected"' : "" ;
                                                     echo '<option value="'.$value->purchaseorder_id.'"'.$selected.'>'.strtoupper($value->purchaseorder_number).'</option>';
                                                 }
                                                 ?>
@@ -352,10 +349,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td title="<?=$value->waybill_id?>"><?=$key+1?></td>
 												<td><?=ucfirst($value->waybill_number)?></td>
-                                                <td><?=ucfirst($value->waybill_number)?></td>
-                                                <td><?=ucfirst($value->waybill_number)?></td>
-                                                <td><?=ucfirst($value->waybill_number)?></td>
-                                                <td><?=ucfirst($value->waybill_number)?></td>
+                                                <td><?=ucfirst($value->waybill_lot_number)?></td>
+                                                <td><?=ucfirst($value->waybill_customs_number)?></td>
+                                                <td><?=ucfirst($value->waybill_express_company)?></td>
+                                                <td><?=ucfirst($value->waybill_delivery_day)?></td>
 												<td><?=convert_datetime_to_date($value->waybill_modify)?></td>
 												<!-- <td class="text-right">
 													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->waybill_id?>">
