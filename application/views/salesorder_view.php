@@ -744,7 +744,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2">
 															<select id="salesorder_status" name="salesorder_status" data-placeholder="Status" class="chosen-select">
 																<option value></option>
-																<?php foreach($statuss as $key => $value){ ?>
+																<?php foreach($salesorder_statuss as $key => $value){ ?>
 																<option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
 																<?php } ?>
 															</select>
@@ -753,12 +753,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <div class="row">
                                                         <div class="col-sm-2"><h6>Purchase Order</h6></div>
                                                         <div class="col-sm-2">
-                                                            <input type="text" name="purchase_number_like" class="form-control input-sm" placeholder="PONo" value="" />
+                                                            <input type="text" name="purchaseorder_number_like" class="form-control input-sm" placeholder="PONo" value="" />
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <select id="purchaseorder_status" name="purchaseorder_status" data-placeholder="PO Status" class="chosen-select">
                                                                 <option value></option>
-                                                                <?php foreach($statuss as $key => $value){ ?>
+                                                                <?php foreach($purchaseorder_statuss as $key => $value){ ?>
                                                                     <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
                                                                 <?php } ?>
                                                             </select>
@@ -766,7 +766,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <div class="col-sm-2">
                                                             <select id="purchaseorder_arrive_status" name="purchaseorder_arrive_status" data-placeholder="Arrive Status" class="chosen-select">
                                                                 <option value></option>
-                                                                <?php foreach($statuss as $key => $value){ ?>
+                                                                <?php foreach($purchaseorder_arrive_statuss as $key => $value){ ?>
                                                                     <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
                                                                 <?php } ?>
                                                             </select>
@@ -778,9 +778,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             <input type="text" name="invoice_number_like" class="form-control input-sm" placeholder="INNo" value="" />
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <select id="invoiceorder_status" name="invoiceorder_status" data-placeholder="IN Status" class="chosen-select">
+                                                            <select id="invoice_status" name="invoiceorder_status" data-placeholder="IN Status" class="chosen-select">
                                                                 <option value></option>
-                                                                <?php foreach($statuss as $key => $value){ ?>
+                                                                <?php foreach($invoice_statuss as $key => $value){ ?>
                                                                     <option value="<?=$value->status_name?>"><?=ucfirst($value->status_name)?></option>
                                                                 <?php } ?>
                                                             </select>

@@ -349,6 +349,44 @@ class Salesorder extends CI_Controller {
 		}
 		/* check quotationitem */
 
+        /* check purchaseorder */
+        if(isset($thisGET['purchaseorder_number_like']) || isset($thisGET['purchaseorder_status']) || isset($thisGET['purchaseorder_arrive_status'])){
+            $thisGET['purchaseorder_status_noteq'] = 'cancel';
+            $thisSelect = array(
+                'where' => $thisGET,
+                'return' => 'result'
+            );
+            $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+
+            if($data['purchaseorders']){
+                foreach($data['purchaseorders'] as $key => $value){
+                    $thisGET['salesorder_id_in'][] = $value->purchaseorder_salesorder_id;
+                }
+            }else{
+                $thisGET['salesorder_id_in'] = array(0);
+            }
+        }
+        /* check purchaseorder */
+
+        /* check invoice */
+        if(isset($thisGET['invoice_number_like']) || isset($thisGET['invoice_status']) ){
+            $thisGET['invoice_status_noteq'] = 'cancel';
+            $thisSelect = array(
+                'where' => $thisGET,
+                'return' => 'result'
+            );
+            $data['invoices'] = $this->invoice_model->select($thisSelect);
+
+            if($data['invoices']){
+                foreach($data['invoices'] as $key => $value){
+                    $thisGET['salesorder_id_in'][] = $value->invoice_salesorder_id;
+                }
+            }else{
+                $thisGET['salesorder_id_in'] = array(0);
+            }
+        }
+        /* check invoice */
+
 		$thisSelect = array(
 			'where' => $thisGET,
 			'group' => 'salesorder_number',
@@ -387,12 +425,33 @@ class Salesorder extends CI_Controller {
 		);
 		$data['num_rows'] = $this->salesorder_model->select($thisSelect);
 
-		/* status */
-		$data['statuss'] = (object)array(
+		/* salesorder status */
+		$data['salesorder_statuss'] = (object)array(
 			(object)array('status_name' => 'processing'),
 			(object)array('status_name' => 'complete'),
 			(object)array('status_name' => 'cancel')
 		);
+
+        /* purchaseorder status */
+        $data['purchaseorder_statuss'] = (object)array(
+            (object)array('status_name' => 'processing'),
+            (object)array('status_name' => 'partial'),
+            (object)array('status_name' => 'complete')
+        );
+
+        /* purchaseorder status */
+        $data['purchaseorder_arrive_statuss'] = (object)array(
+            (object)array('status_name' => 'processing'),
+            (object)array('status_name' => 'partial'),
+            (object)array('status_name' => 'complete')
+        );
+
+        /* invoice status */
+        $data['invoice_statuss'] = (object)array(
+            (object)array('status_name' => 'processing'),
+            (object)array('status_name' => 'partial'),
+            (object)array('status_name' => 'complete')
+        );
 
         /* popup-list */
 //        $thisSelect = array(

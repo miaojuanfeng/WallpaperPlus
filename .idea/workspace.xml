@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a620b4db-c109-41ad-a8a2-26fd2cfd6aaa" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/print/quotation_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/print/quotation_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/quotation_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/quotation_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/pdf/quotation/EQ1805007-v0.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/pdf/quotation/EQ1805007-v0.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Salesorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Salesorder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/salesorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/salesorder_view.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +15,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="commissionreport_view.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/commissionreport_view.php">
+      <file leaf-file-name="salesorder_view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/salesorder_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="304" column="63" selection-start-line="304" selection-start-column="63" selection-end-line="304" selection-end-column="63" />
+            <state relative-caret-position="571">
+              <caret line="783" column="136" lean-forward="true" selection-start-line="783" selection-start-column="136" selection-end-line="783" selection-end-column="136" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Salesorder.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Salesorder.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="398" column="31" lean-forward="true" selection-start-line="398" selection-start-column="31" selection-end-line="398" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -85,7 +93,6 @@
         <option value="$PROJECT_DIR$/application/controllers/Modal.php" />
         <option value="$PROJECT_DIR$/assets/css/style.css" />
         <option value="$PROJECT_DIR$/assets/js/product-modal.js" />
-        <option value="$PROJECT_DIR$/application/controllers/Salesorder.php" />
         <option value="$PROJECT_DIR$/application/controllers/Deliverynote.php" />
         <option value="$PROJECT_DIR$/application/views/user_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Login.php" />
@@ -113,7 +120,6 @@
         <option value="$PROJECT_DIR$/application/views/quantityreport_view.php" />
         <option value="$PROJECT_DIR$/application/models/User_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Quotation.php" />
-        <option value="$PROJECT_DIR$/application/views/salesorder_view.php" />
         <option value="$PROJECT_DIR$/application/views/purchaseorder_view.php" />
         <option value="$PROJECT_DIR$/application/views/invoice_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Load.php" />
@@ -121,6 +127,8 @@
         <option value="$PROJECT_DIR$/application/views/quotation_view.php" />
         <option value="$PROJECT_DIR$/application/views/print/quotation_view.php" />
         <option value="$PROJECT_DIR$/application/views/commissionreport_view.php" />
+        <option value="$PROJECT_DIR$/application/views/salesorder_view.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Salesorder.php" />
       </list>
     </option>
   </component>
@@ -157,6 +165,12 @@
               <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
               <item name="wallpaperplus" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaperplus" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wallpaperplus" type="b2602c69:ProjectViewProjectNode" />
@@ -243,7 +257,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="179040000" />
+    <option name="totallyTimeSpent" value="181193000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
@@ -566,13 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Salesorder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-318">
-          <caret line="364" column="37" lean-forward="true" selection-start-line="364" selection-start-column="37" selection-end-line="364" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Purchaseorder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2131">
@@ -584,13 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="237" column="46" lean-forward="true" selection-start-line="237" selection-start-column="46" selection-end-line="237" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/salesorder_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
-          <caret line="190" column="41" lean-forward="true" selection-start-line="190" selection-start-column="41" selection-end-line="190" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -631,8 +631,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/commissionreport_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="304" column="63" selection-start-line="304" selection-start-column="63" selection-end-line="304" selection-end-column="63" />
+        <state relative-caret-position="295">
+          <caret line="295" column="49" lean-forward="true" selection-start-line="295" selection-start-column="49" selection-end-line="295" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/salesorder_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="783" column="136" lean-forward="true" selection-start-line="783" selection-start-column="136" selection-end-line="783" selection-end-column="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Salesorder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="398" column="31" lean-forward="true" selection-start-line="398" selection-start-column="31" selection-end-line="398" selection-end-column="31" />
         </state>
       </provider>
     </entry>
