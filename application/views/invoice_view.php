@@ -190,7 +190,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '<td>';
             invoiceitem_row += '<div class="input-group">';
 			invoiceitem_row += '<input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
-            invoiceitem_row += '<span class="input-group-addon">Unit</span>';
+            invoiceitem_row += '<input id="invoiceitem_unit" name="invoiceitem_unit[]" type="hidden" />';
+            invoiceitem_row += '<span class="input-group-addon invoiceitem_unit">Unit</span>';
             invoiceitem_row += '</div>';
 			invoiceitem_row += '</td>';
 			invoiceitem_row += '<td>';
@@ -460,7 +461,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															?>
                                                             <div class="input-group">
                                                                 <input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$salesorder_quantity - $invoiceitem_sold?>" />
-                                                                <span class="input-group-addon">Unit</span>
+                                                                <input id="invoiceitem_unit" name="invoiceitem_unit[]" type="hidden" value="<?=$value->invoiceitem_unit?>" />
+                                                                <span class="input-group-addon invoiceitem_unit"><?=($value->invoiceitem_unit) ? $value->invoiceitem_unit : 'Unit'?></span>
                                                             </div>
 														</td>
 														<td>

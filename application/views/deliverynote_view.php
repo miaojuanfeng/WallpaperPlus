@@ -180,7 +180,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			deliverynoteitem_row += '<td>';
             deliverynoteitem_row += '<div class="input-group">';
 			deliverynoteitem_row += '<input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
-            deliverynoteitem_row += '<span class="input-group-addon">Unit</span>';
+            deliverynoteitem_row += '<input id="deliverynoteitem_unit" name="deliverynoteitem_unit[]" type="hidden" />';
+            deliverynoteitem_row += '<span class="input-group-addon deliverynoteitem_unit">Unit</span>';
             deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '</td>';
 			deliverynoteitem_row += '</tr>';
@@ -415,7 +416,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td>
                                                             <div class="input-group">
                                                                 <input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->deliverynoteitem_quantity) ? $value->deliverynoteitem_quantity : '1'?>" />
-                                                                <span class="input-group-addon">Unit</span>
+                                                                <input id="deliverynoteitem_unit" name="deliverynoteitem_unit[]" type="hidden" value="<?=$value->deliverynoteitem_unit?>" />
+                                                                <span class="input-group-addon deliverynoteitem_unit"><?=($value->deliverynoteitem_unit) ? $value->deliverynoteitem_unit : 'Unit'?></span>
                                                             </div>
                                                         </td>
 													</tr>

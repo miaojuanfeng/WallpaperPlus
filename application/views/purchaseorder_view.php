@@ -233,7 +233,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '<td>';
             purchaseorderitem_row += '<div class="input-group">';
 			purchaseorderitem_row += '<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
-            purchaseorderitem_row += '<span class="input-group-addon">Unit</span>';
+            purchaseorderitem_row += '<input id="purchaseorderitem_unit" name="purchaseorderitem_unit[]" type="hidden" />';
+            purchaseorderitem_row += '<span class="input-group-addon purchaseorderitem_unit">Unit</span>';
             purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</td>';
             purchaseorderitem_row += '<td>';
@@ -650,7 +651,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															?>
                                                             <div class="input-group">
 															    <input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$thisPurchaseorderitemQuantity?$thisPurchaseorderitemQuantity:1?>" />
-                                                                <span class="input-group-addon">Unit</span>
+                                                                <input id="purchaseorderitem_unit" name="purchaseorderitem_unit[]" type="hidden" value="<?=$value->purchaseorderitem_unit?>" />
+                                                                <span class="input-group-addon purchaseorderitem_unit"><?=($value->purchaseorderitem_unit) ? $value->purchaseorderitem_unit : 'Unit'?></span>
                                                             </div>
 <!--															<div class="margin-top-10">-->
 <!--																<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Sum of purchase order item quantity" value="--><?//=$purchaseorderitem_bought?><!--" />-->

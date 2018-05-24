@@ -303,7 +303,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<td>';
             quotationitem_row += '<div class="input-group">';
 			quotationitem_row += '<input id="quotationitem_quantity" name="quotationitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
-            quotationitem_row += '<span class="input-group-addon">Unit</span>';
+            quotationitem_row += '<input id="quotationitem_unit" name="quotationitem_unit[]" type="hidden" />';
+			quotationitem_row += '<span class="input-group-addon quotationitem_unit">Unit</span>';
             quotationitem_row += '</div>';
 			quotationitem_row += '</td>';
 			quotationitem_row += '<td>';
@@ -689,7 +690,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td>
                                                             <div class="input-group">
                                                                 <input id="quotationitem_quantity" name="quotationitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->quotationitem_quantity) ? $value->quotationitem_quantity : '1'?>" />
-                                                                <span class="input-group-addon">Unit</span>
+                                                                <input id="quotationitem_unit" name="quotationitem_unit[]" type="hidden" value="<?=$value->quotationitem_unit?>" />
+                                                                <span class="input-group-addon quotationitem_unit"><?=($value->quotationitem_unit) ? $value->quotationitem_unit : 'Unit'?></span>
                                                             </div>
                                                         </td>
 														<td>

@@ -164,7 +164,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
             salesorderitem_row += '<div>';
-            salesorderitem_row += '<input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
+            salesorderitem_row += '<input id="salesorderitem_product_id" name="salesorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
             salesorderitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
             salesorderitem_row += '</div>';
 			salesorderitem_row += '<div class="margin-top-10">';
@@ -184,7 +184,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '<td>';
             salesorderitem_row += '<div class="input-group">';
             salesorderitem_row += '<input id="salesorderitem_quantity" name="salesorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
-            salesorderitem_row += '<span class="input-group-addon">Unit</span>';
+            salesorderitem_row += '<input id="salesorderitem_unit" name="salesorderitem_unit[]" type="hidden" />';
+            salesorderitem_row += '<span class="input-group-addon salesorderitem_unit">Unit</span>';
             salesorderitem_row += '</div>';
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
@@ -580,7 +581,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td>
                                                             <div class="input-group">
                                                                 <input id="salesorderitem_quantity" name="salesorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->salesorderitem_quantity) ? $value->salesorderitem_quantity : '1'?>" />
-                                                                <span class="input-group-addon">Unit</span>
+                                                                <input id="salesorderitem_unit" name="salesorderitem_unit[]" type="hidden" value="<?=$value->salesorderitem_unit?>" />
+                                                                <span class="input-group-addon salesorderitem_unit"><?=($value->salesorderitem_unit) ? $value->salesorderitem_unit : 'Unit'?></span>
                                                             </div>
                                                         </td>
 														<td>
