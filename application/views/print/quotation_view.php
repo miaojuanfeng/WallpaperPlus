@@ -286,16 +286,16 @@ switch($quotation->quotation_currency){
 				<td width="55%"></td>
 				<td width="15%" align="right"><b>DISCOUNT</b></td>
 				<td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
-				<td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_total * (1 - $quotation->quotation_discount / 100))?></td>
+				<td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_discount)?></td>
 			</tr>
 			<?php } ?>
             <?php if(1){ ?>
             <tr>
                 <td width="12%"></td>
                 <td width="55%"></td>
-                <td width="15%" align="right"><b>FREIGHT CHARGES</b></td>
+                <td width="15%" align="right"><b>FREIGHT</b></td>
                 <td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
-                <td width="10%" align="right"><?=money_format('%!n', 0)?></td>
+                <td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_freight)?></td>
             </tr>
             <?php } ?>
 			<tr>

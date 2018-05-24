@@ -97,11 +97,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				calc();
 			});
 			$(document).on('blur', 'input[name="quotation_discount"]', function(){
-			    if( $(this).val() < 70 && $('input[name="approval_code"]').val() == '' ){
-                    alert('Please enter Approval code');
-                }
 				calc();
 			});
+            $(document).on('blur', 'input[name="quotation_freight"]', function(){
+                calc();
+            });
 			$(document).on('change', 'select[name="quotation_currency"]', function(){
 				$.each($('input[name="quotationitem_product_id[]"]'), function(key, val){
 				    if( $(this).val() != "" ) {
@@ -235,7 +235,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).find('input[name="quotationitem_subtotal[]"]').val(parseFloat($(this).find('input[name="quotationitem_product_price[]"]').val() * $(this).find('input[name="quotationitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 				total += parseFloat($(this).find('input[name="quotationitem_subtotal[]"]').val());
 			});
-			$('input[name="quotation_total"]').val(parseFloat(total * ( $('input[name="quotation_discount"]').val() / 100 )).toFixed(2)).css('display', 'none').fadeIn();
+			$('input[name="quotation_total"]').val(parseFloat(total - parseFloat($('input[name="quotation_discount"]').val()) + parseFloat($('input[name="quotation_freight"]').val()) ).toFixed(2)).css('display', 'none').fadeIn();
 		}
 
 		function check_delete(id){
@@ -400,7 +400,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</blockquote>
 										<p class="form-group">
                                             <?php if( $quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate' ) { ?>
-                                                <button type="submit" name="action" value="approval" class="btn btn-sm btn-primary btn-block" data-toggle="tooltip" title="Only can update Date and Discount with Approval code"><i class="glyphicon glyphicon-floppy-disk"></i> Approval</button>
+                                                <button type="submit" name="action" value="approval" class="btn btn-sm btn-primary btn-block" data-toggle="tooltip" title="Can only be updated with approved code"><i class="glyphicon glyphicon-floppy-disk"></i> Approval</button>
                                             <?php }else{ ?>
                                                 <button<?=($quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate') ? ' disabled="disabled"' : ''?> type="submit" name="action" value="save" class="btn btn-sm btn-primary btn-block"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                                             <?php } ?>
@@ -625,7 +625,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="approval_code">Approval code</label></td>
-														<td><input id="approval_code" name="approval_code" type="text" class="form-control input-sm" placeholder="Approval code" value="" /></td>
+														<td><input id="approval_code" name="approval_code" type="text" class="form-control input-sm <?php if( $quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate' ) { echo "required"; }?>" placeholder="Approval code" value="" /></td>
 													</tr>
 												</table>
 											</div>
@@ -705,20 +705,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
 														<th></th>
-														<th>Discount %</th>
+														<th>Discount</th>
 														<th>
-                                                            <div class="input-group">
-                                                                <input id="quotation_discount" name="quotation_discount" type="number" min="0" max="100" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '100'?>" />
-                                                                <span class="input-group-addon">%</span>
-                                                            </div>
+                                                            <input id="quotation_discount" name="quotation_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
                                                         </th>
 													</tr>
                                                     <tr>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
-                                                        <th>运费</th>
-                                                        <th><input id="quotation_discount" name="quotation_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" /></th>
+                                                        <th>Freight</th>
+                                                        <th><input id="quotation_freight" name="quotation_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($quotation->quotation_freight) ? $quotation->quotation_freight : '0'?>" /></th>
                                                     </tr>
 													<tr>
 														<th width="10%">

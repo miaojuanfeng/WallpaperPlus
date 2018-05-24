@@ -302,7 +302,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                         <?php if(!$td_body){ ?>
                                             <tr>
-                                                <td colspan="11">No record found</td>
+                                                <td colspan="14">No record found</td>
                                             </tr>
                                         <?php } ?>
                                         </tbody>
