@@ -563,7 +563,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td>
 															<div>
                                                                 <input id="salesorderitem_product_id" name="salesorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="<?=$value->salesorderitem_product_id?>" />
-                                                                <input type="button" class="form-control input-sm showModal" value="Select a product"/>
+                                                                <input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product"/>
 															</div>
 															<div class="margin-top-10">
 																<div class="input-group">

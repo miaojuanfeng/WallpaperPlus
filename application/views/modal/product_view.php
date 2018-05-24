@@ -81,13 +81,6 @@
                             Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
                         </a>
                     </th>
-                    <!-- <th width="40"></th> -->
-                    <th width="40"></th>
-                    <th width="40" class="text-right">
-                        <a href="<?=base_url('product/insert')?>" data-toggle="tooltip" title="Insert">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </a>
-                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -102,27 +95,6 @@
                         <td><?='HKD '.$value->product_cost?></td>
                         <td><?='HKD '.$value->product_price_hkd?></td>
                         <td><?=convert_datetime_to_date($value->product_modify)?></td>
-                        <!-- <td class="text-right">
-									<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->product_id?>">
-										<a data-toggle="tooltip" title="More">
-											<i class="glyphicon glyphicon-chevron-right"></i>
-										</a>
-									</span>
-								</td> -->
-                        <td class="text-right">
-                            <a href="<?=base_url('product/update/product_id/'.$value->product_id)?>" data-toggle="tooltip" title="Update">
-                                <i class="glyphicon glyphicon-edit"></i>
-                            </a>
-                        </td>
-                        <td class="text-right">
-                            <?php if(!check_permission('product_delete', 'display')){ ?>
-                                <a onclick="check_delete(<?=$value->product_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('product_delete', 'disable')?>">
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </a>
-                            <?php }else{ ?>
-                                <i class="glyphicon glyphicon-remove"></i>
-                            <?php } ?>
-                        </td>
                     </tr>
                 <?php } ?>
                 </tbody>

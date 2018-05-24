@@ -17,14 +17,14 @@ function getUrl(){
 }
 
 function loadData() {
-    $('.modal-body').load('/modal', {'thisTableId': 'product', 'thisUrl': getUrl(), 't': timestamp()}, function(data){
+    $('.modal-body').load('/modal', {'thisTableId': $(this).attr('modal'), 'thisUrl': getUrl(), 't': timestamp()}, function(data){
         // $(".modal-body").html(data);
     });
 }
 
 $(".trModal").on('click', '.showModal', function(){
     product_input = $(this).prev();
-    $('.modal-body').load('/modal', {'thisTableId': 'product', 'thisUrl': 'page/0', 't': timestamp()}, function(data){
+    $('.modal-body').load('/modal', {'thisTableId': $(this).attr('modal'), 'thisUrl': 'page/0', 't': timestamp()}, function(data){
         // $(".modal-body").html(data);
         $("#popupModal").fadeIn(100, function(){
             $(this).addClass("in");
@@ -40,6 +40,10 @@ function hideModal(){
     product_input = null;
     $("#popupModal").removeClass("in").fadeOut(100);
 }
+
+/*
+*   select
+*/
 
 function changePage(p){
     page = p;
@@ -75,3 +79,8 @@ function clickRecord(product_id){
     product_loader(product_input);
     hideModal();
 }
+
+/*
+*   insert-update
+*/
+

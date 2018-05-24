@@ -16,25 +16,30 @@ class Modal extends CI_Controller {
 		$this->{$this->input->post('thisTableId')}();
 	}
 
-	public function product()
+	private function getUrl(){
+        $url = array();
+        if( !empty($this->input->post('thisUrl')) ){
+            $t = explode('/', $this->input->post('thisUrl'));
+            $k = '';
+            foreach ($t as $key => $value) {
+                if(!($key%2)){
+                    $k = $value;
+                }else{
+                    $url[$k] = $value;
+                }
+            }
+        }
+        return $url;
+    }
+
+	public function product_select()
 	{
 		$this->load->model('product_model');
         $this->load->model('vendor_model');
 			
 		$per_page = get_setting('per_page')->setting_value;
 
-		$url = array();
-		if( !empty($this->input->post('thisUrl')) ){
-			$t = explode('/', $this->input->post('thisUrl'));
-			$k = '';
-			foreach ($t as $key => $value) {
-				if(!($key%2)){
-					$k = $value;
-				}else{
-					$url[$k] = $value;
-				}
-			}
-		}
+		$url = $this->getUrl();
 		
         /* check vendor */
         if( isset($url['vendor_company_name_like']) ){
@@ -74,6 +79,148 @@ class Modal extends CI_Controller {
 
 		echo $this->load->view('modal/product_view', $data, true);
 	}
+
+    public function product_update()
+    {
+        $this->load->model('product_model');
+        $this->load->model('vendor_model');
+        $this->load->model('brand_model');
+        $this->load->model('unit_model');
+        $this->load->model('team_model');
+        $this->load->model('team_model');
+        $this->load->model('type_model');
+
+        $url = $this->getUrl();
+
+        if( isset($url['update']) ){
+            $thisPOST = $url;
+            $this->product_model->update($thisPOST);
+
+            $thisLog['log_permission_class'] = $this->router->fetch_class();
+            $thisLog['log_permission_action'] = $this->router->fetch_method();
+            $thisLog['log_record_id'] = $thisPOST['product_id'];
+            set_log($thisLog);
+        }else{
+            /* product */
+            $thisSelect = array(
+                'where' => $url,
+                'return' => 'row'
+            );
+            $data['product'] = $this->product_model->select($thisSelect);
+
+            /* products */
+            $thisSelect = array(
+                'where' => array(
+                    'product_code_noteq' => $data['product']->product_code
+                ),
+                'return' => 'result'
+            );
+            $data['products'] = $this->product_model->select($thisSelect);
+
+            /* vendor */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['vendors'] = $this->vendor_model->select($thisSelect);
+
+            /* brand */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['brands'] = $this->brand_model->select($thisSelect);
+
+            /* unit */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['units'] = $this->unit_model->select($thisSelect);
+
+            /* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
+
+            /* type */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['types'] = $this->type_model->select($thisSelect);
+
+            echo $this->load->view('modal/product_insert_update_view', $data, true);
+        }
+    }
+
+    public function product_insert()
+    {
+        $this->load->model('product_model');
+        $this->load->model('vendor_model');
+        $this->load->model('brand_model');
+        $this->load->model('unit_model');
+        $this->load->model('team_model');
+        $this->load->model('team_model');
+        $this->load->model('type_model');
+
+        $url = $this->getUrl();
+
+        if( isset($url['insert']) ){
+            $thisPOST = $url;
+            $thisInsertId = $this->product_model->insert($thisPOST);
+
+            $thisLog['log_permission_class'] = $this->router->fetch_class();
+            $thisLog['log_permission_action'] = $this->router->fetch_method();
+            $thisLog['log_record_id'] = $thisPOST['product_id'];
+            set_log($thisLog);
+        }else{
+            /* preset empty data */
+            $thisArray = array();
+            foreach($this->product_model->structure() as $key => $value){
+                $thisArray[$value->Field] = '';
+            }
+            $data['product'] = (object)$thisArray;
+
+            /* products */
+            $thisSelect = array(
+                'where' => array(
+                    'product_code_noteq' => $data['product']->product_code
+                ),
+                'return' => 'result'
+            );
+            $data['products'] = $this->product_model->select($thisSelect);
+
+            /* vendor */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['vendors'] = $this->vendor_model->select($thisSelect);
+
+            /* brand */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['brands'] = $this->brand_model->select($thisSelect);
+
+            /* unit */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['units'] = $this->unit_model->select($thisSelect);
+
+            /* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
+
+            /* type */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['types'] = $this->type_model->select($thisSelect);
+
+            echo $this->load->view('modal/product_insert_update_view', $data, true);
+        }
+    }
 
 
 	////////
