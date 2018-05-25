@@ -1365,7 +1365,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="scriptLoader"></div>
 
-
 <!-- Modal -->
 <script src="<?php echo base_url('assets/js/product-modal.js'); ?>"></script>
 <div class="modal fade" id="popupModal" role="dialog">

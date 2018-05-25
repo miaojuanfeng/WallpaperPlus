@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Attribute_model extends CI_Model {
+class Category_model extends CI_Model {
 	
 	function __construct()
 	{
@@ -11,10 +11,10 @@ class Attribute_model extends CI_Model {
 
 	function update($data = array())
 	{
-		$data['attribute_modify'] = date('Y-m-d H:i:s');
-		$data = get_array_prefix('attribute_', $data);
-		$this->db->where('attribute_id', $data['attribute_id']);
-		$thisResult = $this->db->update('attribute', $data);
+		$data['category_modify'] = date('Y-m-d H:i:s');
+		$data = get_array_prefix('category_', $data);
+		$this->db->where('category_id', $data['category_id']);
+		$thisResult = $this->db->update('category', $data);
 
 		$log_SQL = $this->session->userdata('log_SQL');
 		$log_SQL[] = array(
@@ -26,11 +26,11 @@ class Attribute_model extends CI_Model {
 
 	function delete($data = array())
 	{
-		$data['attribute_modify'] = date('Y-m-d H:i:s');
-		$data['attribute_deleted'] = 'Y';
-		$data = get_array_prefix('attribute_', $data);
-		$this->db->where('attribute_id', $data['attribute_id']);
-		$thisResult = $this->db->update('attribute', $data);
+		$data['category_modify'] = date('Y-m-d H:i:s');
+		$data['category_deleted'] = 'Y';
+		$data = get_array_prefix('category_', $data);
+		$this->db->where('category_id', $data['category_id']);
+		$thisResult = $this->db->update('category', $data);
 
 		$log_SQL = $this->session->userdata('log_SQL');
 		$log_SQL[] = array(
@@ -42,11 +42,11 @@ class Attribute_model extends CI_Model {
 
 	function insert($data = array())
 	{
-		$data['attribute_create'] = date('Y-m-d H:i:s');
-		$data['attribute_modify'] = date('Y-m-d H:i:s');
-		$data['attribute_deleted'] = 'N';
-		$data = get_array_prefix('attribute_', $data);
-		$thisResult = $this->db->insert('attribute', $data);
+		$data['category_create'] = date('Y-m-d H:i:s');
+		$data['category_modify'] = date('Y-m-d H:i:s');
+		$data['category_deleted'] = 'N';
+		$data = get_array_prefix('category_', $data);
+		$thisResult = $this->db->insert('category', $data);
 		$thisInsertId = $this->db->insert_id();
 
 		$log_SQL = $this->session->userdata('log_SQL');
@@ -66,21 +66,18 @@ class Attribute_model extends CI_Model {
 		if(isset($data['where'])){
 			foreach($data['where'] as $key => $value){
 				switch($key){
-					case 'attribute_id':
-					case 'attribute_name':
-                    case 'attribute_type':
+					case 'category_id':
+					case 'category_name':
 						$thisField = $key;
 						$this->db->where($thisField, urldecode($value));
 						break;
-					case 'attribute_id_like':
-					case 'attribute_name_like':
-                    case 'attribute_type_like':
+					case 'category_id_like':
+					case 'category_name_like':
 						$thisField = str_replace('_like', '', $key);
 						$this->db->like($thisField, urldecode($value));
 						break;
-					case 'attribute_id_noteq':
-					case 'attribute_name_noteq':
-                    case 'attribute_type_noteq':
+					case 'category_id_noteq':
+					case 'category_name_noteq':
 						$thisField = str_replace('_noteq', '', $key);
 						$this->db->where($thisField.' !=', urldecode($value));
 						break;
@@ -114,8 +111,8 @@ class Attribute_model extends CI_Model {
 			}
 		}
 
-		$this->db->where('attribute_deleted', 'N');
-		$this->db->from('attribute');
+		$this->db->where('category_deleted', 'N');
+		$this->db->from('category');
 		$query = $this->db->get();
 		// echo $this->db->last_query();
 		// exit;
@@ -138,7 +135,7 @@ class Attribute_model extends CI_Model {
 
 	function structure()
 	{
-		$query = $this->db->query("show full columns from attribute");
+		$query = $this->db->query("show full columns from category");
 		return $query->result();
 	}
  

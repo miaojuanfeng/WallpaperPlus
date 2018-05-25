@@ -13,11 +13,13 @@ class Product extends CI_Controller {
 
 		$this->load->model('product_model');
 		$this->load->model('brand_model');
-//		$this->load->model('category_model');
+		$this->load->model('category_model');
         $this->load->model('vendor_model');
-		$this->load->model('type_model');
+//		$this->load->model('type_model');
 		$this->load->model('unit_model');
         $this->load->model('team_model');
+        $this->load->model('attribute_model');
+        $this->load->model('z_product_attribute_model');
 	}
 
 	public function index()
@@ -30,6 +32,8 @@ class Product extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$this->product_model->update($thisPOST);
+            $this->z_product_attribute_model->delete($thisPOST);
+            $this->z_product_attribute_model->insert($thisPOST);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
 			$thisLog['log_permission_action'] = $this->router->fetch_method();
@@ -45,14 +49,21 @@ class Product extends CI_Controller {
 			);
 			$data['product'] = $this->product_model->select($thisSelect);
 			
-			/* products */
-			$thisSelect = array(
-				'where' => array(
-					'product_code_noteq' => $data['product']->product_code
-				),
-				'return' => 'result'
-			);
-			$data['products'] = $this->product_model->select($thisSelect);
+//			/* products */
+//			$thisSelect = array(
+//				'where' => array(
+//					'product_code_noteq' => $data['product']->product_code
+//				),
+//				'return' => 'result'
+//			);
+//			$data['products'] = $this->product_model->select($thisSelect);
+
+            /* z_product_attribute */
+            $thisSelect = array(
+                'where' => $this->uri->uri_to_assoc(),
+                'return' => 'result'
+            );
+            $data['z_product_attribute_ids'] = convert_object_to_array($this->z_product_attribute_model->select($thisSelect), 'z_product_attribute_attribute_id');
 
             /* vendor */
             $thisSelect = array(
@@ -60,11 +71,17 @@ class Product extends CI_Controller {
             );
             $data['vendors'] = $this->vendor_model->select($thisSelect);
 
-			/* brand */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['brands'] = $this->brand_model->select($thisSelect);
+            /* brand */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['brands'] = $this->brand_model->select($thisSelect);
+
+            /* category */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['categorys'] = $this->category_model->select($thisSelect);
 
 			/* unit */
 			$thisSelect = array(
@@ -78,23 +95,59 @@ class Product extends CI_Controller {
             );
             $data['teams'] = $this->team_model->select($thisSelect);
 
-			/* category */
-//			$thisSelect = array(
-//				'return' => 'result'
-//			);
-//			$data['categorys'] = $this->category_model->select($thisSelect);
-
 			/* vendor */
 			// $thisSelect = array(
 			// 	'return' => 'result'
 			// );
 			// $data['vendors'] = $this->vendor_model->select($thisSelect);
 
-			/* type */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['types'] = $this->type_model->select($thisSelect);
+//			/* type */
+//			$thisSelect = array(
+//				'return' => 'result'
+//			);
+//			$data['types'] = $this->type_model->select($thisSelect);
+
+            /* size */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'size'),
+                'return' => 'result'
+            );
+            $data['sizes'] = $this->attribute_model->select($thisSelect);
+
+            /* color */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'color'),
+                'return' => 'result'
+            );
+            $data['colors'] = $this->attribute_model->select($thisSelect);
+
+            /* style */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'style'),
+                'return' => 'result'
+            );
+            $data['styles'] = $this->attribute_model->select($thisSelect);
+
+            /* usage */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'usage'),
+                'return' => 'result'
+            );
+            $data['usages'] = $this->attribute_model->select($thisSelect);
+
+            /* material */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'material'),
+                'return' => 'result'
+            );
+            $data['materials'] = $this->attribute_model->select($thisSelect);
+
+            /* keyword */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'keyword'),
+                'return' => 'result'
+            );
+            $data['keywords'] = $this->attribute_model->select($thisSelect);
 
 			$this->load->view('product_view', $data);
 		}
@@ -118,6 +171,8 @@ class Product extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$thisInsertId = $this->product_model->insert($thisPOST);
+            $thisPOST['product_id'] = $thisInsertId;
+            $this->z_product_attribute_model->insert($thisPOST);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
 			$thisLog['log_permission_action'] = $this->router->fetch_method();
@@ -133,14 +188,14 @@ class Product extends CI_Controller {
 			}
 			$data['product'] = (object)$thisArray;
 			
-			/* products */
-			$thisSelect = array(
-				'where' => array(
-					'product_code_noteq' => $data['product']->product_code
-				),
-				'return' => 'result'
-			);
-			$data['products'] = $this->product_model->select($thisSelect);
+//			/* products */
+//			$thisSelect = array(
+//				'where' => array(
+//					'product_code_noteq' => $data['product']->product_code
+//				),
+//				'return' => 'result'
+//			);
+//			$data['products'] = $this->product_model->select($thisSelect);
 
             /* vendor */
             $thisSelect = array(
@@ -148,11 +203,17 @@ class Product extends CI_Controller {
             );
             $data['vendors'] = $this->vendor_model->select($thisSelect);
 
-			/* brand */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['brands'] = $this->brand_model->select($thisSelect);
+            /* brand */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['brands'] = $this->brand_model->select($thisSelect);
+
+            /* category */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['categorys'] = $this->category_model->select($thisSelect);
 
 			/* unit */
 			$thisSelect = array(
@@ -166,23 +227,59 @@ class Product extends CI_Controller {
             );
             $data['teams'] = $this->team_model->select($thisSelect);
 
-			/* category */
-//			$thisSelect = array(
-//				'return' => 'result'
-//			);
-//			$data['categorys'] = $this->category_model->select($thisSelect);
-
 			/* vendor */
 			// $thisSelect = array(
 			// 	'return' => 'result'
 			// );
 			// $data['vendors'] = $this->vendor_model->select($thisSelect);
 
-			/* type */
-			$thisSelect = array(
-				'return' => 'result'
-			);
-			$data['types'] = $this->type_model->select($thisSelect);
+//			/* type */
+//			$thisSelect = array(
+//				'return' => 'result'
+//			);
+//			$data['types'] = $this->type_model->select($thisSelect);
+
+            /* size */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'size'),
+                'return' => 'result'
+            );
+            $data['sizes'] = $this->attribute_model->select($thisSelect);
+
+            /* color */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'color'),
+                'return' => 'result'
+            );
+            $data['colors'] = $this->attribute_model->select($thisSelect);
+
+            /* style */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'style'),
+                'return' => 'result'
+            );
+            $data['styles'] = $this->attribute_model->select($thisSelect);
+
+            /* usage */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'usage'),
+                'return' => 'result'
+            );
+            $data['usages'] = $this->attribute_model->select($thisSelect);
+
+            /* material */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'material'),
+                'return' => 'result'
+            );
+            $data['materials'] = $this->attribute_model->select($thisSelect);
+
+            /* keyword */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'keyword'),
+                'return' => 'result'
+            );
+            $data['keywords'] = $this->attribute_model->select($thisSelect);
 
 			$this->load->view('product_view', $data);
 		}

@@ -34,6 +34,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+            $(document).on('change', 'select[name="product_vendor_id"]', function(){
+                product_vendor_loader();
+            });
 		});
 
 		function check_delete(id){
@@ -52,6 +56,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$('input[name="act"]').val('login_as');
 			$('form[name="list"]').submit();
 		}
+
+        function product_vendor_loader(){
+            $('.scriptLoader').load('/load', {'thisTableId': 'productVendorLoader', 'thisRecordId': $('select[name="product_vendor_id"]').val(), 't': timestamp()}, function(){
+                productVendorLoader();
+            });
+        }
 		</script>
 	</head>
 
@@ -171,7 +181,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<div class="form-group">
 											<label for="product_cost">Cost</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon">currency</span>
+                                                <span class="input-group-addon product-currency"><?=$product->product_vendor_id?get_currency(get_vendor($product->product_vendor_id)->vendor_currency_id)->currency_name:'HKD'?></span>
 											    <input id="product_cost" name="product_cost" type="number" min="0" class="form-control input-sm" placeholder="Cost" value="<?=$product->product_cost?>" />
                                             </div>
                                         </div>
@@ -214,89 +224,89 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</select>
 										</p>
                                         <p class="form-group">
-                                            <label for="product_color_id">Color <span class="highlight">*</span></label>
-                                            <select id="product_color_id" name="product_color_id" data-placeholder="Color" class="chosen-select required" multiple="multiple">
+                                            <label for="z_product_attribute_attribute_id">Size <span class="highlight">*</span></label>
+                                            <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Size" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
-                                                foreach($categorys as $key1 => $value1){
-                                                    $selected = ($value1->category_id == $product->product_category_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->category_id.'"'.$selected.'>'.$value1->category_name.'</option>';
+                                                foreach($sizes as $key1 => $value1){
+                                                    $selected = in_array($value1->attribute_id, $z_product_attribute_ids) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value1->attribute_id.'"'.$selected.'>'.$value1->attribute_name.'</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="product_style_id">Style <span class="highlight">*</span></label>
-                                            <select id="product_style_id" name="product_style_id" data-placeholder="Style" class="chosen-select required" multiple="multiple">
+                                            <label for="z_product_attribute_attribute_id">Color <span class="highlight">*</span></label>
+                                            <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Color" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
-                                                foreach($categorys as $key1 => $value1){
-                                                    $selected = ($value1->category_id == $product->product_category_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->category_id.'"'.$selected.'>'.$value1->category_name.'</option>';
+                                                foreach($colors as $key1 => $value1){
+                                                    $selected = in_array($value1->attribute_id, $z_product_attribute_ids) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value1->attribute_id.'"'.$selected.'>'.$value1->attribute_name.'</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="product_usage_id">Usage <span class="highlight">*</span></label>
-                                            <select id="product_usage_id" name="product_usage_id" data-placeholder="Usage" class="chosen-select required">
+                                            <label for="z_product_attribute_attribute_id">Style <span class="highlight">*</span></label>
+                                            <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Style" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
-                                                foreach($categorys as $key1 => $value1){
-                                                    $selected = ($value1->category_id == $product->product_category_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->category_id.'"'.$selected.'>'.$value1->category_name.'</option>';
+                                                foreach($styles as $key1 => $value1){
+                                                    $selected = in_array($value1->attribute_id, $z_product_attribute_ids) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value1->attribute_id.'"'.$selected.'>'.$value1->attribute_name.'</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="product_material_id">Material <span class="highlight">*</span></label>
-                                            <select id="product_material_id" name="product_material_id" data-placeholder="Material" class="chosen-select required">
+                                            <label for="z_product_attribute_attribute_id">Usage <span class="highlight">*</span></label>
+                                            <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Usage" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
-                                                foreach($categorys as $key1 => $value1){
-                                                    $selected = ($value1->category_id == $product->product_category_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->category_id.'"'.$selected.'>'.$value1->category_name.'</option>';
+                                                foreach($usages as $key1 => $value1){
+                                                    $selected = in_array($value1->attribute_id, $z_product_attribute_ids) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value1->attribute_id.'"'.$selected.'>'.$value1->attribute_name.'</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="product_keyword_id">Keyword <span class="highlight">*</span></label>
-                                            <select id="product_keyword_id" name="product_keyword_id" data-placeholder="Keyword" class="chosen-select required" multiple="multiple">
+                                            <label for="z_product_attribute_attribute_id">Material <span class="highlight">*</span></label>
+                                            <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Material" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
-                                                foreach($categorys as $key1 => $value1){
-                                                    $selected = ($value1->category_id == $product->product_category_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->category_id.'"'.$selected.'>'.$value1->category_name.'</option>';
+                                                foreach($materials as $key1 => $value1){
+                                                    $selected = in_array($value1->attribute_id, $z_product_attribute_ids) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value1->attribute_id.'"'.$selected.'>'.$value1->attribute_name.'</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="product_size_id">Size <span class="highlight">*</span></label>
-                                            <select id="product_size_id" name="product_size_id" data-placeholder="Size" class="chosen-select required">
+                                            <label for="z_product_attribute_attribute_id">Keyword <span class="highlight">*</span></label>
+                                            <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Keyword" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
-                                                foreach($categorys as $key1 => $value1){
-                                                    $selected = ($value1->category_id == $product->product_category_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->category_id.'"'.$selected.'>'.$value1->category_name.'</option>';
+                                                foreach($keywords as $key1 => $value1){
+                                                    $selected = in_array($value1->attribute_id, $z_product_attribute_ids) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value1->attribute_id.'"'.$selected.'>'.$value1->attribute_name.'</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </p>
-                                        <p class="form-group">
-                                            <label for="product_type_id">Type <span class="highlight">*</span></label>
-                                            <select id="product_type_id" name="product_type_id" data-placeholder="Type" class="chosen-select required">
-                                                <option value></option>
-                                                <?php
-                                                foreach($types as $key1 => $value1){
-                                                    $selected = ($value1->type_id == $product->product_type_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->type_id.'"'.$selected.'>'.$value1->type_name.'</option>';
-                                                }
-                                                ?>
-                                            </select>
-                                        </p>
+<!--                                        <p class="form-group">-->
+<!--                                            <label for="product_type_id">Type <span class="highlight">*</span></label>-->
+<!--                                            <select id="product_type_id" name="product_type_id" data-placeholder="Type" class="chosen-select required">-->
+<!--                                                <option value></option>-->
+<!--                                                --><?php
+//                                                foreach($types as $key1 => $value1){
+//                                                    $selected = ($value1->type_id == $product->product_type_id) ? ' selected="selected"' : "" ;
+//                                                    echo '<option value="'.$value1->type_id.'"'.$selected.'>'.$value1->type_name.'</option>';
+//                                                }
+//                                                ?>
+<!--                                            </select>-->
+<!--                                        </p>-->
                                         <p class="form-group">
                                             <label for="product_team_id">Team <span class="highlight">*</span></label>
                                             <select id="product_team_id" name="product_team_id" data-placeholder="Team" class="chosen-select required">
@@ -586,6 +596,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	</body>
 </html>
+
+<div class="scriptLoader"></div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">

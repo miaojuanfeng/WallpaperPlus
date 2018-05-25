@@ -118,6 +118,34 @@ class Load extends CI_Controller {
 		}
 	}
 
+    public function productVendorLoader()
+    {
+        $this->load->model('vendor_model');
+        $this->load->model('currency_model');
+
+        /* vendor */
+        $thisSelect = array(
+            'where' => array('vendor_id' => $this->input->post('thisRecordId')),
+            'return' => 'row'
+        );
+        $thisData = $this->vendor_model->select($thisSelect);
+
+        /* currency */
+        $thisSelect = array(
+            'where' => array('currency_id' => $thisData->vendor_currency_id),
+            'return' => 'row'
+        );
+        $thisData2 = $this->currency_model->select($thisSelect);
+
+        if($thisData){
+            echo '<script>';
+            echo 'function productVendorLoader(){';
+            echo '$(".product-currency").html("'.$thisData2->currency_name.'")';
+            echo '}';
+            echo '</script>';
+        }
+    }
+
 	public function exchangeRateLoader(){
         $this->load->model('currency_model');
 
