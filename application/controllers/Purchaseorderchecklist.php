@@ -64,6 +64,28 @@ class Purchaseorderchecklist extends CI_Controller {
 		// $thisGET['purchaseorder_status'] = 'processing';
 		$thisGET['purchaseorder_deleted'] = 'N';
 
+        /* client */
+        switch(true){
+            case in_array('3', $this->session->userdata('role')): // sales manager
+                /* get own & downline client */
+                $thisSelect = array(
+                    'where' => array(
+                        'OWN_USER_ID_AND_DOWNLINE_USER_ID' => $this->session->userdata('user_id')
+                    ),
+                    'return' => 'result'
+                );
+                $data['user_ids'] = convert_object_to_array($this->user_model->select($thisSelect), 'user_id');
+
+                $thisGET['purchaseorder_user_id_in'] = $data['user_ids'];
+                break;
+            case in_array('4', $this->session->userdata('role')): // sales
+                /* get own client */
+                $thisGET['purchaseorder_user_id'] = $this->session->userdata('user_id');
+                break;
+            default:
+                break;
+        }
+
 		/* check salesorder */
 		if(isset($thisGET['salesorder_number_like'])){
 			$thisSelect = array(
