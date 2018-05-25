@@ -1376,7 +1376,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <button type="button" class="close" onclick="hideModal()">
                     <i class="glyphicon glyphicon-remove"></i>
                 </button>
-                <h4 class="modal-title corpcolor-font">Product list</h4>
+                <h4 class="modal-title corpcolor-font">Product</h4>
             </div>
             <div class="modal-body">
                 

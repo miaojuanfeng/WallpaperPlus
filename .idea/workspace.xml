@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a620b4db-c109-41ad-a8a2-26fd2cfd6aaa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/application/views/modal/product_insert_update_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/Modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/deliverynote_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/deliverynote_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/invoice_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/invoice_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/modal/product_view.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/purchaseorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/purchaseorder_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/modal/product_insert_update_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/modal/product_insert_update_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/product_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/product_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/quotation_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/quotation_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/salesorder_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/salesorder_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/product-modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/product-modal.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,12 +17,56 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="quotation_view.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="482">
+              <caret line="668" column="147" selection-start-line="668" selection-start-column="147" selection-end-line="668" selection-end-column="147" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product-modal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/product-modal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-812">
+              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product_view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="156" column="71" lean-forward="true" selection-start-line="156" selection-start-column="71" selection-end-line="156" selection-end-column="71" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product_insert_update_view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/modal/product_insert_update_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1712">
+              <caret line="94" column="36" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Modal.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Modal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-18">
+              <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>quotationitem_product_id</find>
-      <find>quotationitem_product_id[]</find>
       <find>showModal</find>
       <find>quotation_display_code</find>
       <find>console.log</find>
@@ -55,6 +95,8 @@
       <find>quotation_discount</find>
       <find>code</find>
       <find>brand_model</find>
+      <find>chosen-select</find>
+      <find>add_quotationitem_row</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -66,8 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/print/proformainvoice_view.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/application/controllers/Warehouse.php" />
         <option value="$PROJECT_DIR$/application/models/Z_product_warehouse_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Stockreport.php" />
@@ -109,13 +149,15 @@
         <option value="$PROJECT_DIR$/application/views/print/quotation_view.php" />
         <option value="$PROJECT_DIR$/application/views/commissionreport_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Salesorder.php" />
-        <option value="$PROJECT_DIR$/assets/js/product-modal.js" />
         <option value="$PROJECT_DIR$/application/views/modal/product_view.php" />
         <option value="$PROJECT_DIR$/application/views/salesorder_view.php" />
         <option value="$PROJECT_DIR$/application/views/purchaseorder_view.php" />
         <option value="$PROJECT_DIR$/application/views/invoice_view.php" />
         <option value="$PROJECT_DIR$/application/views/deliverynote_view.php" />
+        <option value="$PROJECT_DIR$/application/views/product_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Modal.php" />
+        <option value="$PROJECT_DIR$/application/views/modal/product_insert_update_view.php" />
+        <option value="$PROJECT_DIR$/assets/js/product-modal.js" />
         <option value="$PROJECT_DIR$/application/views/quotation_view.php" />
       </list>
     </option>
@@ -254,14 +296,16 @@
       <workItem from="1527043021995" duration="6072000" />
       <workItem from="1527128396742" duration="4232000" />
       <workItem from="1527160246659" duration="2015000" />
+      <workItem from="1527215959054" duration="5975000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183208000" />
+    <option name="totallyTimeSpent" value="189183000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
+    <frame x="1" y="23" width="1920" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -291,13 +335,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/print/invoice_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="183" column="28" selection-start-line="183" selection-start-column="28" selection-end-line="183" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/print/deliverynote_view.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
@@ -558,38 +595,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="342" column="14" lean-forward="true" selection-start-line="103" selection-start-column="8" selection-end-line="342" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Load.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="920">
           <caret line="395" column="29" lean-forward="true" selection-start-line="395" selection-start-column="29" selection-end-line="395" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/modal/product_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="90" column="29" lean-forward="true" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/modal/product_insert_update_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="142" column="126" selection-start-line="142" selection-start-column="126" selection-end-line="142" selection-end-column="126" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/product-modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1059">
-          <caret line="57" column="32" lean-forward="true" selection-start-line="57" selection-start-column="32" selection-end-line="57" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -621,24 +630,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Modal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="95" column="29" lean-forward="true" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/application/views/quotation_view_20180318.php">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
+    <entry file="file://$PROJECT_DIR$/application/views/modal/product_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="668" column="146" selection-start-line="668" selection-start-column="146" selection-end-line="668" selection-end-column="146" />
+        <state relative-caret-position="578">
+          <caret line="90" column="29" lean-forward="true" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="187" column="9" lean-forward="true" selection-start-line="117" selection-start-column="8" selection-end-line="187" selection-end-column="9" />
+        <state relative-caret-position="592">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Modal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/modal/product_insert_update_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1712">
+          <caret line="94" column="36" selection-start-line="94" selection-start-column="36" selection-end-line="94" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/product_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="156" column="71" lean-forward="true" selection-start-line="156" selection-start-column="71" selection-end-line="156" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/product-modal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-812">
+          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/quotation_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="668" column="147" selection-start-line="668" selection-start-column="147" selection-end-line="668" selection-end-column="147" />
         </state>
       </provider>
     </entry>

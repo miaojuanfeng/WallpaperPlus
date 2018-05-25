@@ -16,20 +16,25 @@ class Modal extends CI_Controller {
 		$this->{$this->input->post('thisTableId')}();
 	}
 
-	private function getUrl(){
-        $url = array();
-        if( !empty($this->input->post('thisUrl')) ){
-            $t = explode('/', $this->input->post('thisUrl'));
+	private function getData(){
+        $thisData = array();
+        if( !empty($this->input->post('thisGet')) ){
+            $t = explode('/', $this->input->post('thisGet'));
             $k = '';
             foreach ($t as $key => $value) {
                 if(!($key%2)){
                     $k = $value;
                 }else{
-                    $url[$k] = $value;
+                    $thisData[$k] = $value;
                 }
             }
         }
-        return $url;
+        if( !empty($this->input->post('thisPost')) ){
+            foreach ($this->input->post('thisPost') as $key => $value) {
+                $thisData[$key] = $value;
+            }
+        }
+        return $thisData;
     }
 
 	public function product_select()
@@ -39,43 +44,43 @@ class Modal extends CI_Controller {
 			
 		$per_page = get_setting('per_page')->setting_value;
 
-		$url = $this->getUrl();
+		$thisGet = $this->getData();
 		
         /* check vendor */
-        if( isset($url['vendor_company_name_like']) ){
+        if( isset($thisGet['vendor_company_name_like']) ){
             $thisSelect = array(
-                'where' => $url,
+                'where' => $thisGet,
                 'return' => 'result'
             );
             $data['vendors'] = $this->vendor_model->select($thisSelect);
 
             if($data['vendors']){
                 foreach($data['vendors'] as $key => $value){
-                    $url['product_vendor_id_in'][] = $value->vendor_id;
+                    $thisGet['product_vendor_id_in'][] = $value->vendor_id;
                 }
             }else{
-                $url['product_vendor_id_in'] = array(0);
+                $thisGet['product_vendor_id_in'] = array(0);
             }
         }
         /* check vendor */
 
-//        var_dump($url);
+//        var_dump($thisGet);
 
 		$thisSelect = array(
-			'where' => $url,
+			'where' => $thisGet,
 			'limit' => $per_page,
 			'return' => 'result'
 		);
 		$data['products'] = $this->product_model->select($thisSelect);
 
 		$thisSelect = array(
-			'where' => $url,
+			'where' => $thisGet,
 			'return' => 'num_rows'
 		);
 		$data['num_rows'] = $this->product_model->select($thisSelect);
 
 		/* pagination */
-		$data['pagination'] = get_pagination_js_config($url, $per_page, $data['num_rows']);
+		$data['pagination'] = get_pagination_js_config($thisGet, $per_page, $data['num_rows']);
 
 		echo $this->load->view('modal/product_view', $data, true);
 	}
@@ -90,10 +95,9 @@ class Modal extends CI_Controller {
         $this->load->model('team_model');
         $this->load->model('type_model');
 
-        $url = $this->getUrl();
+        $thisPOST = $this->getData();
 
-        if( isset($url['update']) ){
-            $thisPOST = $url;
+        if( isset($thisPOST['action']) && $thisPOST['action'] == 'update' ){
             $this->product_model->update($thisPOST);
 
             $thisLog['log_permission_class'] = $this->router->fetch_class();
@@ -103,7 +107,7 @@ class Modal extends CI_Controller {
         }else{
             /* product */
             $thisSelect = array(
-                'where' => $url,
+                'where' => $thisPOST,
                 'return' => 'row'
             );
             $data['product'] = $this->product_model->select($thisSelect);
@@ -161,10 +165,9 @@ class Modal extends CI_Controller {
         $this->load->model('team_model');
         $this->load->model('type_model');
 
-        $url = $this->getUrl();
+        $thisPOST = $this->getData();
 
-        if( isset($url['insert']) ){
-            $thisPOST = $url;
+        if( isset($thisPOST['action']) && $thisPOST['action'] == 'insert' ){
             $thisInsertId = $this->product_model->insert($thisPOST);
 
             $thisLog['log_permission_class'] = $this->router->fetch_class();

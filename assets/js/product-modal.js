@@ -3,6 +3,7 @@ var order = '';
 var ascend = '';
 var search = '';
 var product_input = null;
+var modal = null;
 
 function getUrl(){
     retval = '';
@@ -17,14 +18,28 @@ function getUrl(){
 }
 
 function loadData() {
-    $('.modal-body').load('/modal', {'thisTableId': $(this).attr('modal'), 'thisUrl': getUrl(), 't': timestamp()}, function(data){
+    $('.modal-body').load('/modal', {'thisTableId': modal, 'thisGet': getUrl(), 't': timestamp()}, function(data){
         // $(".modal-body").html(data);
+    });
+}
+
+function postData(data) {
+    $.post('/modal', {'thisTableId': modal, 'thisPost': data, 't': timestamp()}, function(data){
+        hideModal();
     });
 }
 
 $(".trModal").on('click', '.showModal', function(){
     product_input = $(this).prev();
-    $('.modal-body').load('/modal', {'thisTableId': $(this).attr('modal'), 'thisUrl': 'page/0', 't': timestamp()}, function(data){
+    modal = $(this).attr('modal');
+    var row = $(this).attr('row');
+    var data = '';
+    if( row ){
+        data = 'product_id/'+row;
+    }else{
+        data = 'page/0';
+    }
+    $('.modal-body').load('/modal', {'thisTableId': modal, 'thisGet': data, 't': timestamp()}, function(data){
         // $(".modal-body").html(data);
         $("#popupModal").fadeIn(100, function(){
             $(this).addClass("in");
@@ -38,6 +53,7 @@ function hideModal(){
     ascend = '';
     search = '';
     product_input = null;
+    modal = null;
     $("#popupModal").removeClass("in").fadeOut(100);
 }
 
@@ -84,3 +100,15 @@ function clickRecord(product_id){
 *   insert-update
 */
 
+function clickSave(action) {
+    var post_data = {};
+    post_data['action'] = action;
+    $('#insert-update input, #insert-update textarea, #insert-update select').each(function () {
+        if( $(this).attr('name') != undefined ){
+            // alert($(this).attr('name')+':'+$(this).val());
+            post_data[$(this).attr('name')] = $(this).val();
+        }
+    });
+    // console.log(post_data);
+    postData(post_data);
+}

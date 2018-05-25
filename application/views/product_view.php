@@ -152,8 +152,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<textarea id="product_detail" name="product_detail" class="form-control input-sm required" placeholder="Detail" rows="5"><?=$product->product_detail?></textarea>
 										</div>
 										<div class="form-group">
-                                            <label for="product_unit">Unit</label>
-                                            <select id="product_unit" name="product_unit" data-placeholder="Unit" class="chosen-select required">
+                                            <label for="product_unit_id">Unit</label>
+                                            <select id="product_unit_id" name="product_unit_id" data-placeholder="Unit" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
                                                 foreach($units as $key => $value){
