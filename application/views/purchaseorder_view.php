@@ -429,7 +429,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<option value></option>
 												<?php
 												if($purchaseorder->purchaseorder_status == ''){
-													$purchaseorder->purchaseorder_status = 'hkd';
+													$purchaseorder->purchaseorder_status = 'processing';
 												}
 												foreach($statuss as $key => $value){
 													$selected = ($value->status_name == $purchaseorder->purchaseorder_status) ? ' selected="selected"' : "" ;

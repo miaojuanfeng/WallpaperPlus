@@ -180,19 +180,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-3 col-sm-12">
                                     <blockquote>
                                         <i class="glyphicon glyphicon-th-list"></i>
-                                        <a href="<?=base_url('attribute/select/7')?>">Category</a>
+                                        <a href="<?=base_url('category')?>">Category</a>
                                     </blockquote>
                                 </div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-adjust"></i>
-										<a href="<?=base_url('attribute/select/1')?>">Color</a>
+										<a href="<?=base_url('attribute/select/attribute_type/color')?>">Color</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-tint"></i>
-										<a href="<?=base_url('attribute/select/2')?>">Style</a>
+										<a href="<?=base_url('attribute/select/attribute_type/style')?>">Style</a>
 									</blockquote>
 								</div>
 							</div>
@@ -200,25 +200,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-gift"></i>
-										<a href="<?=base_url('attribute/select/3')?>">Usage</a>
+										<a href="<?=base_url('attribute/select/attribute_type/usage')?>">Usage</a>
 									</blockquote>
 								</div>
                                 <div class="col-md-3 col-sm-12">
                                     <blockquote>
                                         <i class="glyphicon glyphicon-leaf"></i>
-                                        <a href="<?=base_url('attribute/select/4')?>">Material</a>
+                                        <a href="<?=base_url('attribute/select/attribute_type/material')?>">Material</a>
                                     </blockquote>
                                 </div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-search"></i>
-										<a href="<?=base_url('attribute/select/5')?>">Keyword</a>
+										<a href="<?=base_url('attribute/select/attribute_type/keyword')?>">Keyword</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-resize-horizontal"></i>
-										<a href="<?=base_url('attribute/select/6')?>">Size</a>
+										<a href="<?=base_url('attribute/select/attribute_type/size')?>">Size</a>
 									</blockquote>
 								</div>
 							</div>

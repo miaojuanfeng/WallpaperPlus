@@ -39,6 +39,16 @@ class Attribute extends CI_Controller {
             );
             $data['attribute'] = $this->attribute_model->select($thisSelect);
 
+            /* type */
+            $data['types'] = (object)array(
+                (object)array('type_name' => 'color'),
+                (object)array('type_name' => 'style'),
+                (object)array('type_name' => 'usage'),
+                (object)array('type_name' => 'material'),
+                (object)array('type_name' => 'keyword'),
+                (object)array('type_name' => 'size')
+            );
+
             $this->load->view('attribute_view', $data);
         }
     }
@@ -76,13 +86,23 @@ class Attribute extends CI_Controller {
             }
             $data['attribute'] = (object)$thisArray;
 
+            /* type */
+            $data['types'] = (object)array(
+                (object)array('type_name' => 'color'),
+                (object)array('type_name' => 'style'),
+                (object)array('type_name' => 'usage'),
+                (object)array('type_name' => 'material'),
+                (object)array('type_name' => 'keyword'),
+                (object)array('type_name' => 'size')
+            );
+
             $this->load->view('attribute_view', $data);
         }
     }
 
     public function select()
     {
-        $per_page = 3;
+        $per_page = get_setting('per_page')->setting_value;
 
         $thisSelect = array(
             'where' => $this->uri->uri_to_assoc(),

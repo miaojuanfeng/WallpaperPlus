@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Attribute management</title>
+		<title>Category management</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<script>
 		$(function(){
-			$('input[name="attribute_id"]').focus();
+			$('input[name="category_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
@@ -39,8 +39,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		function check_delete(id){
 			var answer = prompt("Confirm delete?");
 			if(answer){
-				$('input[name="attribute_id"]').val(id);
-				$('input[name="attribute_delete_reason"]').val(encodeURI(answer));
+				$('input[name="category_id"]').val(id);
+				$('input[name="category_delete_reason"]').val(encodeURI(answer));
 				$('form[name="list"]').submit();
 			}else{
 				return false;
@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 		function login_as(id){
-			$('input[name="attribute_id"]').val(id);
+			$('input[name="category_id"]').val(id);
 			$('input[name="act"]').val('login_as');
 			$('form[name="list"]').submit();
 		}
@@ -106,11 +106,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12"><a href="<?=base_url('attribute')?>">Attribute management</a> > <?=($this->router->fetch_method() == 'update') ? 'Upate' : 'Insert'?> attribute</h2>
+					<h2 class="col-sm-12"><a href="<?=base_url('category')?>">Category management</a> > <?=($this->router->fetch_method() == 'update') ? 'Upate' : 'Insert'?> category</h2>
 
 					<div class="col-sm-12">
 						<form method="post" enctype="multipart/form-data">
-							<input type="hidden" name="attribute_id" value="<?=$attribute->attribute_id?>" />
+							<input type="hidden" name="category_id" value="<?=$category->category_id?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<div class="row">
@@ -124,27 +124,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
-											<label for="attribute_name">Name <span class="highlight">*</span></label>
-											<input id="attribute_name" name="attribute_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$attribute->attribute_name?>" />
+											<label for="category_name">Name <span class="highlight">*</span></label>
+											<input id="category_name" name="category_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$category->category_name?>" />
 										</p>
 									</div>
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Related information</h4>
-                                        <p class="form-group">
-                                            <label for="attribute_type">Type</label>
-                                            <select id="attribute_type" name="attribute_type" data-placeholder="Status" class="chosen-select required">
-                                                <option value></option>
-                                                <?php
-                                                if($attribute->attribute_type == ''){
-                                                    $attribute->attribute_type = 'hkd';
-                                                }
-                                                foreach($types as $key => $value){
-                                                    $selected = ($value->type_name == $attribute->attribute_type) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value->type_name.'"'.$selected.'>'.strtoupper($value->type_name).'</option>';
-                                                }
-                                                ?>
-                                            </select>
-                                        </p>
 									</div>
 								</div>
 
@@ -217,27 +202,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="container-fluid">
 				<div class="row">
 
-					<h2 class="col-sm-12">Attribute management</h2>
+					<h2 class="col-sm-12">Category management</h2>
 
 					<div class="content-column-area col-md-12 col-sm-12">
 
 						<div class="fieldset">
 							<div class="search-area">
 
-								<form attribute="form" method="get">
-									<input type="hidden" name="attribute_id" />
-                                    <input type="hidden" name="attribute_type" value="<?=$this->uri->segment(4)?>" />
+								<form category="form" method="get">
+									<input type="hidden" name="category_id" />
 									<table>
 										<tbody>
 											<tr>
 												<td width="90%">
 													<div class="row">
-														<div class="col-sm-2"><h6>Attribute</h6></div>
+														<div class="col-sm-2"><h6>Category</h6></div>
 														<div class="col-sm-2">
-															<input type="text" name="attribute_id" class="form-control input-sm" placeholder="#" value="" />
+															<input type="text" name="category_id" class="form-control input-sm" placeholder="#" value="" />
 														</div>
 														<div class="col-sm-2">
-															<input type="text" name="attribute_name_like" class="form-control input-sm" placeholder="Attribute name" value="" />
+															<input type="text" name="category_name_like" class="form-control input-sm" placeholder="Category name" value="" />
 														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
@@ -260,57 +244,57 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="fieldset">
 
 							<div class="list-area">
-								<form name="list" action="<?=base_url('attribute/delete')?>" method="post">
-									<input type="hidden" name="attribute_id" />
-									<input type="hidden" name="attribute_delete_reason" />
+								<form name="list" action="<?=base_url('category/delete')?>" method="post">
+									<input type="hidden" name="category_id" />
+									<input type="hidden" name="category_delete_reason" />
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
 										<?=$this->pagination->create_links()?>
 									</div>
-									<table id="attribute" class="table table-striped table-bordered">
+									<table id="category" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>#</th>
 												<th>
-													<a href="<?=get_order_link('attribute_name')?>">
+													<a href="<?=get_order_link('category_name')?>">
 														Name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<th>
-													<a href="<?=get_order_link('attribute_modify')?>">
+													<a href="<?=get_order_link('category_modify')?>">
 														Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
 												<!-- <th width="40"></th> -->
 												<th width="40"></th>
 												<th width="40" class="text-right">
-													<a href="<?=base_url('attribute/insert')?>" data-toggle="tooltip" title="Insert">
+													<a href="<?=base_url('category/insert')?>" data-toggle="tooltip" title="Insert">
 														<i class="glyphicon glyphicon-plus"></i>
 													</a>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php foreach($attributes as $key => $value){ ?>
+											<?php foreach($categorys as $key => $value){ ?>
 											<tr>
-												<td title="<?=$value->attribute_id?>"><?=$key+1?></td>
-												<td><?=ucfirst($value->attribute_name)?></td>
-												<td><?=convert_datetime_to_date($value->attribute_modify)?></td>
+												<td title="<?=$value->category_id?>"><?=$key+1?></td>
+												<td><?=ucfirst($value->category_name)?></td>
+												<td><?=convert_datetime_to_date($value->category_modify)?></td>
 												<!-- <td class="text-right">
-													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->attribute_id?>">
+													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->category_id?>">
 														<a data-toggle="tooltip" title="More">
 															<i class="glyphicon glyphicon-chevron-right"></i>
 														</a>
 													</span>
 												</td> -->
 												<td class="text-right">
-													<a href="<?=base_url('attribute/update/attribute_id/'.$value->attribute_id)?>" data-toggle="tooltip" title="Update">
+													<a href="<?=base_url('category/update/category_id/'.$value->category_id)?>" data-toggle="tooltip" title="Update">
 														<i class="glyphicon glyphicon-edit"></i>
 													</a>
 												</td>
 												<td class="text-right">
-													<?php if(!check_permission('attribute_delete', 'display')){ ?>
-													<a onclick="check_delete(<?=$value->attribute_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('attribute_delete', 'disable')?>">
+													<?php if(!check_permission('category_delete', 'display')){ ?>
+													<a onclick="check_delete(<?=$value->category_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('category_delete', 'disable')?>">
 														<i class="glyphicon glyphicon-remove"></i>
 													</a>
 													<?php }else{ ?>
