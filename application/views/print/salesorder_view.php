@@ -171,7 +171,7 @@ switch($salesorder->salesorder_currency){
                         </tr>
 						<tr>
 							<td width="40%"><b>Sales order No.</b></td>
-							<td width="60%"><?=$salesorder->salesorder_number?>-v<?=$salesorder->salesorder_version?></td>
+							<td width="60%"><?=$salesorder->salesorder_number?></td>
 						</tr>
 
 						<tr>

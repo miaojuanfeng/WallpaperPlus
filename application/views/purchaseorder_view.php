@@ -443,16 +443,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<input id="purchaseorder_project_name" name="purchaseorder_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
 										</p>
                                         <p class="form-group">
-                                            <label for="purchaseorder_project_name">运送方法 <span class="highlight">*</span></label>
-                                            <input id="purchaseorder_project_name" name="purchaseorder_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
+                                            <label for="purchaseorder_shipment">Shipment <span class="highlight">*</span></label>
+                                            <input id="purchaseorder_shipment" name="purchaseorder_shipment" type="text" class="form-control input-sm required" placeholder="Shipment" value="<?=$purchaseorder->purchaseorder_shipment?>" />
                                         </p>
                                         <p class="form-group">
-                                            <label for="purchaseorder_project_name">到货日子 <span class="highlight">*</span></label>
-                                            <input id="purchaseorder_project_name" name="purchaseorder_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$purchaseorder->purchaseorder_project_name?>" />
+                                            <label for="purchaseorder_arrive_date">Arrive date <span class="highlight">*</span></label>
+                                            <input id="purchaseorder_arrive_date" name="purchaseorder_arrive_date" type="text" class="form-control input-sm date-mask required" placeholder="Arrive date" value="<?=$purchaseorder->purchaseorder_arrive_date?>" />
                                         </p>
                                         <p class="form-group">
-                                            <label for="purchaseorder_project_name">Delivery address <span class="highlight">*</span></label>
-                                            <textarea id="purchaseorder_vendor_company_address" name="purchaseorder_vendor_company_address" class="form-control input-sm" placeholder="Address"><?=$purchaseorder->purchaseorder_vendor_company_address?></textarea>
+                                            <label for="purchaseorder_delivery_invoice_no">Delivery Invoice no. <span class="highlight"></span></label>
+                                            <input id="purchaseorder_delivery_invoice_no" name="purchaseorder_delivery_invoice_no" type="text" class="form-control input-sm" placeholder="Delivery Invoice no." value="<?=$purchaseorder->purchaseorder_delivery_invoice_no?>" />
+                                        </p>
+                                        <p class="form-group">
+                                            <label for="purchaseorder_delivery_address">Delivery address <span class="highlight"></span></label>
+                                            <textarea id="purchaseorder_delivery_address" name="purchaseorder_delivery_address" class="form-control input-sm" placeholder="Delivery address"><?=$purchaseorder->purchaseorder_delivery_address?></textarea>
                                         </p>
 <!--										<p class="form-group">-->
 <!--											<label for="purchaseorder_currency">Currency</label>-->
@@ -565,6 +569,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><label for="purchaseorder_reminder_date">Reminder date</label></td>
 														<td><input id="purchaseorder_reminder_date" name="purchaseorder_reminder_date" type="text" class="form-control input-sm date-mask" placeholder="Reminder date" value="<?=($purchaseorder->purchaseorder_reminder_date != '' && $this->router->fetch_method() != 'duplicate') ? $purchaseorder->purchaseorder_reminder_date : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
 													</tr>
+                                                    <tr>
+                                                        <td><label for="purchaseorder_tel_no">Tel. No.</label></td>
+                                                        <td><input id="purchaseorder_tel_no" name="purchaseorder_tel_no" type="text" class="form-control input-sm" placeholder="Tel. No." value="<?=$purchaseorder->purchaseorder_tel_no?>" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="purchaseorder_fax_no">Fax No.</label></td>
+                                                        <td><input id="purchaseorder_fax_no" name="purchaseorder_fax_no" type="text" class="form-control input-sm" placeholder="Fax No." value="<?=$purchaseorder->purchaseorder_fax_no?>" /></td>
+                                                    </tr>
 												</table>
 											</div>
 										</div>

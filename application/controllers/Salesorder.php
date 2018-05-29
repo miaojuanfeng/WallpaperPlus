@@ -175,7 +175,7 @@ class Salesorder extends CI_Controller {
 			/* salesorder */
 			$thisPOST['salesorder_serial'] = sprintf("%03s", (get_salesorder_serial() + 1));
 			$thisPOST['salesorder_number'] = 'SO'.date('ym').$thisPOST['salesorder_serial'];
-			$thisPOST['salesorder_version'] = 1;
+			$thisPOST['salesorder_version'] = 0;
 			$thisPOST['salesorder_status'] = 'processing';
 			$thisPOST['salesorder_id'] = $thisInsertId = $this->salesorder_model->insert($thisPOST);
 

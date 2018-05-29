@@ -508,7 +508,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td>
 															<div class="input-group">
 																<input readonly="readonly" id="salesorder_number" name="salesorder_number" type="text" class="form-control input-sm" placeholder="Sales order#" value="<?=$salesorder->salesorder_number?>" />
-																<span class="input-group-addon"><?='v'.$salesorder->salesorder_version?></span>
+																<span class="input-group-addon"><?=$salesorder->salesorder_version?'R'.$salesorder->salesorder_version:'N/A'?></span>
 															</div>
 														</td>
 													</tr>

@@ -158,15 +158,15 @@ switch($purchaseorder->purchaseorder_currency){
                         </tr>
                         <tr>
                             <td valign="top"><b>Shipment</b></td>
-                            <td>xxx</td>
+                            <td><?=$purchaseorder->purchaseorder_shipment?></td>
                         </tr>
                         <tr>
                             <td valign="top"><b>Delivery Invoice No.</b></td>
-                            <td>xxx</td>
+                            <td><?=$purchaseorder->purchaseorder_delivery_invoice_no?></td>
                         </tr>
                         <tr>
                             <td valign="top"><b>Delivered To</b></td>
-                            <td colspan="3">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                            <td colspan="3"><?=$purchaseorder->purchaseorder_delivery_address?></td>
                         </tr>
 					</table>
 				</td>
@@ -175,7 +175,7 @@ switch($purchaseorder->purchaseorder_currency){
 					<table cellpadding="0" cellspacing="0">
                         <tr>
                             <td width="40%"><b>Purchase order No.</b></td>
-                            <td width="60%"><?=$purchaseorder->purchaseorder_number?>-v<?=$purchaseorder->purchaseorder_version?></td>
+                            <td width="60%"><?=$purchaseorder->purchaseorder_number?></td>
                         </tr>
                         <tr>
                             <td><b>Sales</b></td>
@@ -187,15 +187,15 @@ switch($purchaseorder->purchaseorder_currency){
 						</tr>
                         <tr>
                             <td><b>Arrival Date</b></td>
-                            <td><?=$purchaseorder->purchaseorder_issue?></td>
+                            <td><?=$purchaseorder->purchaseorder_arrive_date?></td>
                         </tr>
 						<tr>
 							<td><b>Tel. No.</b></td>
-							<td>xxxxx</td>
+							<td><?=$purchaseorder->purchaseorder_tel_no?></td>
 						</tr>
 						<tr>
 							<td><b>Fax No.</b></td>
-							<td>xxxxx</td>
+							<td><?=$purchaseorder->purchaseorder_fax_no?></td>
 						</tr>
 					</table>
 				</td>
@@ -206,7 +206,6 @@ switch($purchaseorder->purchaseorder_currency){
 				<td width="12%"><b>Our ref.</b></td>
 				<td width="20%"><b>DESCRIPTION</b></td>
                 <td width="15%"><b>QUANTITY</b></td>
-                <td width="15%"><b>WEIGHT</b></td>
 				<td width="15%"><b>LIST PRICE</b></td>
 				<td width="8%"><b>NET PRICE</b></td>
 				<td width="10%" align="right"><b>AMOUNT</b></td>
@@ -268,7 +267,6 @@ switch($purchaseorder->purchaseorder_currency){
                 <td width="20%"></td>
                 <td width="15%"></td>
                 <td width="15%"></td>
-                <td width="15%"></td>
                 <td width="8%"></td>
                 <td width="10%"></td>
 			</tr>
@@ -285,14 +283,7 @@ switch($purchaseorder->purchaseorder_currency){
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
                         $quantity_count += $value1->invoiceitem_quantity;
-                        echo '<div>'.$value1->invoiceitem_quantity.'</div>';
-                    }
-                    ?>
-                </td>
-                <td valign="top">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.'xxx'.'</div>';
+                        echo '<div>'.$value1->invoiceitem_quantity.' '.$value1->invoiceitem_unit.'</div>';
                     }
                     ?>
                 </td>
@@ -325,7 +316,6 @@ switch($purchaseorder->purchaseorder_currency){
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
                 <td></td>
                 <td></td>
 			</tr>
@@ -336,7 +326,6 @@ switch($purchaseorder->purchaseorder_currency){
                 <td width="12%"></td>
                 <td width="20%"></td>
                 <td width="15%"><?=$quantity_count?></td>
-                <td width="15%">xxx</td>
                 <td width="15%"><b>GRAND TOTAL</b></td>
                 <td width="8%"><?=strtoupper($purchaseorder->purchaseorder_currency)?></td>
                 <td width="10%" align="right"><?=money_format('%!n', $total)?></td>

@@ -167,7 +167,7 @@ switch($invoice->invoice_currency){
 					<table cellpadding="0" cellspacing="0">
 						<tr>
 							<td width="40%"><b>Invoice No.</b></td>
-							<td width="60%"><?=$invoice->invoice_number?>-v<?=$invoice->invoice_version?></td>
+							<td width="60%"><?=$invoice->invoice_number?></td>
 						</tr>
 						<tr>
 							<td><b>Date</b></td>

@@ -235,6 +235,12 @@ class Purchaseorder extends CI_Controller {
                 $data['purchaseorder']->purchaseorder_vendor_exchange_rate = '';
                 $data['purchaseorder']->purchaseorder_vendor_currency = '';
                 $data['purchaseorder']->purchaseorder_reminder_date = '';
+                $data['purchaseorder']->purchaseorder_shipment = '';
+                $data['purchaseorder']->purchaseorder_arrive_date = '';
+                $data['purchaseorder']->purchaseorder_delivery_invoice_no = '';
+                $data['purchaseorder']->purchaseorder_fax_no = '';
+                $data['purchaseorder']->purchaseorder_tel_no = '';
+                $data['purchaseorder']->purchaseorder_delivery_address = '';
 			}
 
 			/* currency */
