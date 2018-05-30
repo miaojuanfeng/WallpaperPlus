@@ -345,6 +345,29 @@ if(!function_exists('get_setting'))
 	}
 }
 
+if(!function_exists('get_team'))
+{
+    function get_team($thisId){
+        $CI =& get_instance();
+        $CI->load->model('team_model');
+
+        /* team */
+        $thisSelect = array(
+            'where' => array(
+                'team_id' => $thisId
+            ),
+            'return' => 'row'
+        );
+        $data = $CI->team_model->select($thisSelect);
+
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+    }
+}
+
 if(!function_exists('get_expire_period'))
 {
 	function get_expire_period($thisExpire){

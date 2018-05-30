@@ -12,6 +12,7 @@ class Category extends CI_Controller {
 		check_permission();
 
 		$this->load->model('category_model');
+        $this->load->model('team_model');
 	}
 
 	public function index()
@@ -38,6 +39,12 @@ class Category extends CI_Controller {
 				'return' => 'row'
 			);
 			$data['category'] = $this->category_model->select($thisSelect);
+
+            /* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
 
 			$this->load->view('category_view', $data);
 		}
@@ -75,6 +82,12 @@ class Category extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['category'] = (object)$thisArray;
+
+            /* team */
+            $thisSelect = array(
+                'return' => 'result'
+            );
+            $data['teams'] = $this->team_model->select($thisSelect);
 
 			$this->load->view('category_view', $data);
 		}

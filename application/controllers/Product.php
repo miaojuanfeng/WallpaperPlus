@@ -17,7 +17,6 @@ class Product extends CI_Controller {
         $this->load->model('vendor_model');
 //		$this->load->model('type_model');
 		$this->load->model('unit_model');
-        $this->load->model('team_model');
         $this->load->model('attribute_model');
         $this->load->model('z_product_attribute_model');
 	}
@@ -88,12 +87,6 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['units'] = $this->unit_model->select($thisSelect);
-
-            /* team */
-            $thisSelect = array(
-                'return' => 'result'
-            );
-            $data['teams'] = $this->team_model->select($thisSelect);
 
 			/* vendor */
 			// $thisSelect = array(
@@ -220,12 +213,6 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['units'] = $this->unit_model->select($thisSelect);
-
-            /* team */
-            $thisSelect = array(
-                'return' => 'result'
-            );
-            $data['teams'] = $this->team_model->select($thisSelect);
 
 			/* vendor */
 			// $thisSelect = array(

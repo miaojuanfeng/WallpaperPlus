@@ -130,6 +130,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Related information</h4>
+                                        <p class="form-group">
+                                            <label for="category_team_id">Team <span class="highlight">*</span></label>
+                                            <select id="category_team_id" name="category_team_id" data-placeholder="Team" class="chosen-select required">
+                                                <option value></option>
+                                                <?php
+                                                foreach($teams as $key => $value){
+                                                    $selected = ($value->team_id == $category->category_team_id) ? ' selected="selected"' : "" ;
+                                                    echo '<option value="'.$value->team_id.'"'.$selected.'>'.$value->team_name.'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </p>
 									</div>
 								</div>
 
@@ -260,6 +272,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														Name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
 													</a>
 												</th>
+                                                <th>
+                                                    <a href="<?=get_order_link('category_team_id')?>">
+                                                        Team <i class="glyphicon glyphicon-sort corpcolor-font"></i>
+                                                    </a>
+                                                </th>
 												<th>
 													<a href="<?=get_order_link('category_modify')?>">
 														Modify <i class="glyphicon glyphicon-sort corpcolor-font"></i>
@@ -279,6 +296,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td title="<?=$value->category_id?>"><?=$key+1?></td>
 												<td><?=ucfirst($value->category_name)?></td>
+                                                <td><?=ucfirst(get_team($value->category_team_id)->team_name)?></td>
 												<td><?=convert_datetime_to_date($value->category_modify)?></td>
 												<!-- <td class="text-right">
 													<span data-toggle="modal" data-target="#myModal" class="modal-btn" rel="<?=$value->category_id?>">

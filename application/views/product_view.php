@@ -158,11 +158,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<input id="product_name" name="product_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$product->product_name?>" />
 										</div>
 										<div class="form-group">
-											<label for="product_detail">Detail <span class="highlight">*</span></label>
-											<textarea id="product_detail" name="product_detail" class="form-control input-sm required" placeholder="Detail" rows="5"><?=$product->product_detail?></textarea>
-										</div>
-										<div class="form-group">
-                                            <label for="product_unit_id">Unit</label>
+                                            <label for="product_unit_id">Unit <span class="highlight">*</span></label>
                                             <select id="product_unit_id" name="product_unit_id" data-placeholder="Unit" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
@@ -175,8 +171,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                         <div class="form-group">
                                             <label for="product_weight">Weight</label>
-                                            <input id="product_weight" name="product_weight" type="text" class="form-control input-sm required" placeholder="Weight" value="<?=$product->product_weight?>" />
-                                            <small>Eg: 1kg, 1g</small>
+                                            <input id="product_weight" name="product_weight" type="text" class="form-control input-sm" placeholder="Weight" value="<?=$product->product_weight?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="product_repeat">Repeat</label>
+                                            <input id="product_repeat" name="product_repeat" type="text" class="form-control input-sm" placeholder="Repeat" value="<?=$product->product_repeat?>" />
                                         </div>
 										<div class="form-group">
 											<label for="product_cost">Cost</label>
@@ -196,12 +195,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <label for="product_link">Link</label>
                                             <input id="product_link" name="product_link" type="text" class="form-control input-sm" placeholder="Link" value="<?=$product->product_link?>" />
                                         </div>
+                                        <div class="form-group">
+                                            <label for="product_remark">Remark <span class="highlight"></span></label>
+                                            <textarea id="product_remark" name="product_remark" class="form-control input-sm" placeholder="Remark" rows="5"><?=$product->product_remark?></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="product_surcharge">Surcharge <span class="highlight"></span></label>
+                                            <textarea id="product_surcharge" name="product_surcharge" class="form-control input-sm" placeholder="Surcharge" rows="5"><?=$product->product_surcharge?></textarea>
+                                        </div>
 									</div>
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Related information</h4>
 										<p class="form-group">
-											<label for="product_brand_id">Brand <span class="highlight">*</span></label>
-											<select id="product_brand_id" name="product_brand_id" data-placeholder="Brand" class="chosen-select required">
+											<label for="product_brand_id">Brand <span class="highlight"></span></label>
+											<select id="product_brand_id" name="product_brand_id" data-placeholder="Brand" class="chosen-select">
 												<option value></option>
 												<?php
 												foreach($brands as $key1 => $value1){
@@ -236,7 +243,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="z_product_attribute_attribute_id">Color <span class="highlight">*</span></label>
+                                            <label for="z_product_attribute_attribute_id">Color <span class="highlight"></span></label>
                                             <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Color" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
@@ -248,7 +255,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="z_product_attribute_attribute_id">Style <span class="highlight">*</span></label>
+                                            <label for="z_product_attribute_attribute_id">Style <span class="highlight"></span></label>
                                             <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Style" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
@@ -260,7 +267,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="z_product_attribute_attribute_id">Usage <span class="highlight">*</span></label>
+                                            <label for="z_product_attribute_attribute_id">Usage <span class="highlight"></span></label>
                                             <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Usage" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
@@ -272,7 +279,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="z_product_attribute_attribute_id">Material <span class="highlight">*</span></label>
+                                            <label for="z_product_attribute_attribute_id">Material <span class="highlight"></span></label>
                                             <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Material" class="chosen-select required">
                                                 <option value></option>
                                                 <?php
@@ -284,7 +291,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             </select>
                                         </p>
                                         <p class="form-group">
-                                            <label for="z_product_attribute_attribute_id">Keyword <span class="highlight">*</span></label>
+                                            <label for="z_product_attribute_attribute_id">Keyword <span class="highlight"></span></label>
                                             <select id="z_product_attribute_attribute_id" name="z_product_attribute_attribute_id[]" data-placeholder="Keyword" class="chosen-select required" multiple="multiple">
                                                 <option value></option>
                                                 <?php
@@ -307,18 +314,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //                                                ?>
 <!--                                            </select>-->
 <!--                                        </p>-->
-                                        <p class="form-group">
-                                            <label for="product_team_id">Team <span class="highlight">*</span></label>
-                                            <select id="product_team_id" name="product_team_id" data-placeholder="Team" class="chosen-select required">
-                                                <option value></option>
-                                                <?php
-                                                foreach($teams as $key1 => $value1){
-                                                    $selected = ($value1->team_id == $product->product_team_id) ? ' selected="selected"' : "" ;
-                                                    echo '<option value="'.$value1->team_id.'"'.$selected.'>'.$value1->team_name.'</option>';
-                                                }
-                                                ?>
-                                            </select>
-                                        </p>
 										<!-- <p class="form-group">
 											<label for="product_vendor_id">Vendor <span class="highlight">*</span></label>
 											<select id="product_vendor_id" name="product_vendor_id" data-placeholder="Vendor" class="chosen-select required">
