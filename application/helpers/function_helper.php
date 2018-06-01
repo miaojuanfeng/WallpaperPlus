@@ -69,6 +69,29 @@ if(!function_exists('get_vendor'))
 	}
 }
 
+if(!function_exists('get_category'))
+{
+    function get_category($thisId){
+        $CI =& get_instance();
+        $CI->load->model('category_model');
+
+        /* category */
+        $thisSelect = array(
+            'where' => array(
+                'category_id' => $thisId
+            ),
+            'return' => 'row'
+        );
+        $data = $CI->category_model->select($thisSelect);
+
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+    }
+}
+
 if(!function_exists('get_currency'))
 {
     function get_currency($thisId){

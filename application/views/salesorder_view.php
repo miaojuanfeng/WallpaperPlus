@@ -505,7 +505,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="salesorder_issue">Date</label></td>
-														<td><input id="salesorder_issue" name="salesorder_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($salesorder->salesorder_issue != '') ? $salesorder->salesorder_issue : date('Y-m-d')?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="salesorder_issue" name="salesorder_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($salesorder->salesorder_issue != '') ? $salesorder->salesorder_issue : date('Y-m-d')?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
 													<tr>
 														<td><label for="salesorder_user_name">Sales</label></td>
@@ -513,7 +520,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="salesorder_expire">Expire Date</label></td>
-														<td><input id="salesorder_expire" name="salesorder_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($salesorder->salesorder_expire != '' && $this->router->fetch_method() != 'duplicate') ? $salesorder->salesorder_expire : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="salesorder_expire" name="salesorder_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($salesorder->salesorder_expire != '' && $this->router->fetch_method() != 'duplicate') ? $salesorder->salesorder_expire : date('Y-m-d', strtotime('+14 days', time()))?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
 												</table>
 											</div>

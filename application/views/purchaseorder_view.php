@@ -448,7 +448,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </p>
                                         <p class="form-group">
                                             <label for="purchaseorder_arrive_date">Arrive date <span class="highlight">*</span></label>
-                                            <input id="purchaseorder_arrive_date" name="purchaseorder_arrive_date" type="text" class="form-control input-sm date-mask required" placeholder="Arrive date" value="<?=$purchaseorder->purchaseorder_arrive_date?>" />
+	                                        <span class="input-group date datetimepicker">
+	                                            <input id="purchaseorder_arrive_date" name="purchaseorder_arrive_date" type="text" class="form-control input-sm date-mask required" placeholder="Arrive date" value="<?=$purchaseorder->purchaseorder_arrive_date?>" />
+	                                        	<span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</span>
                                         </p>
                                         <p class="form-group">
                                             <label for="purchaseorder_delivery_invoice_no">Delivery Invoice no. <span class="highlight"></span></label>
@@ -559,7 +564,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="purchaseorder_issue">Date</label></td>
-														<td><input id="purchaseorder_issue" name="purchaseorder_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($purchaseorder->purchaseorder_issue != '') ? $purchaseorder->purchaseorder_issue : date('Y-m-d')?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="purchaseorder_issue" name="purchaseorder_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($purchaseorder->purchaseorder_issue != '') ? $purchaseorder->purchaseorder_issue : date('Y-m-d')?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
 													<tr>
 														<td><label for="purchaseorder_user_name">Sales</label></td>
@@ -567,7 +579,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="purchaseorder_reminder_date">Reminder date</label></td>
-														<td><input id="purchaseorder_reminder_date" name="purchaseorder_reminder_date" type="text" class="form-control input-sm date-mask" placeholder="Reminder date" value="<?=($purchaseorder->purchaseorder_reminder_date != '' && $this->router->fetch_method() != 'duplicate') ? $purchaseorder->purchaseorder_reminder_date : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="purchaseorder_reminder_date" name="purchaseorder_reminder_date" type="text" class="form-control input-sm date-mask" placeholder="Reminder date" value="<?=($purchaseorder->purchaseorder_reminder_date != '' && $this->router->fetch_method() != 'duplicate') ? $purchaseorder->purchaseorder_reminder_date : date('Y-m-d', strtotime('+14 days', time()))?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
                                                     <tr>
                                                         <td><label for="purchaseorder_tel_no">Tel. No.</label></td>

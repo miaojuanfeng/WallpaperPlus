@@ -76,6 +76,10 @@ class Category_model extends CI_Model {
 						$thisField = str_replace('_like', '', $key);
 						$this->db->like($thisField, urldecode($value));
 						break;
+					case 'category_id_in':
+						$thisField = str_replace('_in', '', $key);
+						$this->db->where_in($thisField, $value);
+						break;
 					case 'category_id_noteq':
 					case 'category_name_noteq':
 						$thisField = str_replace('_noteq', '', $key);

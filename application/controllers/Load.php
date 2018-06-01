@@ -209,6 +209,7 @@ class Load extends CI_Controller {
 			echo '<script>';
 			echo 'function quotationProductLoader(){';
 //			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_type_name[]\']").val("'.get_type($thisData->product_type_id)->type_name.'");';
+			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_category_id[]\']").val("'.$thisData->product_category_id.'").css("display", "none").fadeIn();';
 			echo 'if( $("select[name=\'quotation_display_code\']").val() == "code" ){';
                 echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_code[]\']").val("'.$thisData->product_code.'").css("display", "none").fadeIn();';
             echo '}else {';
@@ -220,6 +221,7 @@ class Load extends CI_Controller {
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') .quotationitem_unit").html("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
 			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') textarea[name=\'quotationitem_product_detail[]\']").val("'.convert_nl(get_product_size($thisData->product_id)->attribute_name.'\n'.$thisData->product_repeat).'").css("display", "none").fadeIn();';
 			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd*$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
+			echo 'category_discount();';
 			echo '}';
 			echo '</script>';
 		}
@@ -248,6 +250,41 @@ class Load extends CI_Controller {
             echo '</script>';
         }
     }
+
+    public function quotationCategoryDiscountLoader()
+	{
+		$this->load->model('category_model');
+
+		$thisRecordId = $this->input->post('thisRecordId')?$this->input->post('thisRecordId'):array(0);
+		/* salesorder */
+		$thisSelect = array(
+			'where' => array('category_id_in' => $thisRecordId),
+			'return' => 'result'
+		);
+		$thisData = $this->category_model->select($thisSelect);
+
+		$existsId = $this->input->post('existsRecordId')?$this->input->post('existsRecordId'):array();
+		$categoryId = $thisData?convert_object_to_array($thisData, 'category_id'):array();
+
+		echo '<script>';
+		echo 'function quotationCategoryDiscountLoader(){';
+		if($thisData){
+			foreach ($thisData as $key => $value) {
+				if( !in_array($value->category_id, $existsId) ){
+					echo '$("#category_discount_name").prepend("<p id=\"category_name_'.$value->category_id.'\">'.$value->category_name.'</p>");';
+					echo '$("#category_discount_value").prepend("<input id=\"category_discount_'.$value->category_id.'\" exists=\"'.$value->category_id.'\" name=\"category_discount[]\" type=\"number\" min=\"0\" class=\"form-control input-sm required\" placeholder=\"Discount\" value=\"0\" />");';
+				}
+			}
+		}
+		foreach ($existsId as $key => $value) {
+			if( !in_array($value, $categoryId) ){
+				echo '$("#category_name_'.$value.'").remove();';
+				echo '$("#category_discount_'.$value.'").remove();';
+			}
+		}
+		echo '}';
+		echo '</script>';
+	}
 
 	public function salesorderProductLoader()
 	{

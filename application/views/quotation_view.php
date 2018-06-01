@@ -58,6 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$(document).on('click', '.quotationitem-delete-btn', function(){
 				if(confirm('Confirm delete?')){
 					$(this).closest('tr').remove();
+					category_discount();
 					calc();
 				}else{
 					return false;
@@ -95,6 +96,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			});
 			$(document).on('blur', 'input[name="quotationitem_quantity[]"]', function(){
 				calc();
+			});
+			$(document).on('blur', 'input[name="category_discount[]"]', function(){
+				var category_discount_total = 0;
+				$('#category_discount_value input[name="category_discount[]"]').each(function(){
+                	category_discount_total += parseFloat($(this).val());
+                });
+                $('input[name="quotation_discount"]').val(category_discount_total).blur();
 			});
 			$(document).on('blur', 'input[name="quotation_discount"]', function(){
 				calc();
@@ -249,6 +257,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 
+		function category_discount(){
+			// console.log(id+name);
+			// if( !category_list[id] ){
+			// 	category_list[id] = name;
+			// 	console.log(category_list);
+			// 	$('#category_discount_name').append('<p id="category_name_'+id+'">'+name+'</p>');
+			// 	$('#category_discount_value').append('<input id="category_discount_'+id+'" name="category_discount[]" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="0" />');
+			// }
+			var category_discount_id = new Array();
+			$('input[name="quotationitem_category_id[]"]').each(function(key){
+				category_discount_id[key] = $(this).val();
+			});
+			var exists_discount_id = new Array();
+			$('#category_discount_value input[name="category_discount[]"]').each(function(key){
+				exists_discount_id[key] = $(this).attr('exists');
+			});
+			$('.scriptLoader').load('/load', {'thisTableId': 'quotationCategoryDiscountLoader', 'thisRecordId': category_discount_id, 'existsRecordId': exists_discount_id, 't': timestamp()}, function(){
+                quotationCategoryDiscountLoader();
+                var category_discount_total = 0;
+                $('#category_discount_value input[name="category_discount[]"]').each(function(){
+                	category_discount_total += parseFloat($(this).val());
+                });
+                $('input[name="quotation_discount"]').val(category_discount_total).blur();
+            });
+		}
+
 		<?php if($this->router->fetch_method() == 'update' || $this->router->fetch_method() == 'insert' || $this->router->fetch_method() == 'duplicate'){ ?>
 		function add_quotationitem_row(){
 			quotationitem_row = '';
@@ -257,6 +291,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<div>';
 			quotationitem_row += '<input name="quotationitem_id[]" type="hidden" value="" />';
 			quotationitem_row += '<input name="quotationitem_quotation_id[]" type="hidden" value="" />';
+			quotationitem_row += '<input name="quotationitem_category_id[]" type="hidden" value="" />';
 			quotationitem_row += '<input name="quotationitem_product_type_name[]" type="hidden" value="" />';
 			quotationitem_row += '<input id="quotationitem_product_code_' + quotationitem_row_id + '" name="quotationitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="" />';
 			quotationitem_row_id -= 1;
@@ -591,7 +626,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="quotation_issue">Date</label></td>
-														<td><input id="quotation_issue" name="quotation_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($quotation->quotation_issue != '') ? $quotation->quotation_issue : date('Y-m-d')?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="quotation_issue" name="quotation_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($quotation->quotation_issue != '') ? $quotation->quotation_issue : date('Y-m-d')?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
 													<tr>
 														<td><label for="quotation_user_name">Sales</label></td>
@@ -621,7 +663,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr> -->
 													<tr>
 														<td><label for="quotation_expire">Expire Date</label></td>
-														<td><input id="quotation_expire" name="quotation_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($quotation->quotation_expire != '' && $this->router->fetch_method() != 'duplicate') ? $quotation->quotation_expire : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="quotation_expire" name="quotation_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($quotation->quotation_expire != '' && $this->router->fetch_method() != 'duplicate') ? $quotation->quotation_expire : date('Y-m-d', strtotime('+14 days', time()))?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
 													<tr>
 														<td><label for="approval_code">Approval code</label></td>
@@ -652,6 +701,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<div>
 																<input name="quotationitem_id[]" type="hidden" value="<?=$value->quotationitem_id?>" />
 																<input name="quotationitem_quotation_id[]" type="hidden" value="<?=$value->quotationitem_quotation_id?>" />
+																<input name="quotationitem_category_id[]" type="hidden" value="<?=$value->quotationitem_category_id?>" />
 																<input name="quotationitem_product_type_name[]" type="hidden" value="<?=$value->quotationitem_product_type_name?>" />
 																<input id="quotationitem_product_code_<?=$key?>" name="quotationitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$value->quotationitem_product_code?>" />
                                                             </div>
@@ -705,9 +755,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
 														<th></th>
-														<th>Discount</th>
 														<th>
-                                                            <input id="quotation_discount" name="quotation_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
+															<span id="category_discount_name">
+																<p>Discount</p>
+															</span>
+															
+														</th>
+														<th>
+															<span id="category_discount_value">
+																<input id="quotation_discount" name="quotation_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
+															</span>
                                                         </th>
 													</tr>
                                                     <tr>

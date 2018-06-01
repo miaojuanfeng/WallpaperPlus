@@ -353,7 +353,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="deliverynote_issue">Date</label></td>
-														<td><input id="deliverynote_issue" name="deliverynote_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($deliverynote->deliverynote_issue != '') ? $deliverynote->deliverynote_issue : date('Y-m-d')?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="deliverynote_issue" name="deliverynote_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($deliverynote->deliverynote_issue != '') ? $deliverynote->deliverynote_issue : date('Y-m-d')?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
 													<tr>
 														<td><label for="deliverynote_user_name">Sales</label></td>
@@ -361,7 +368,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="deliverynote_expire">Expire Date</label></td>
-														<td><input id="deliverynote_expire" name="deliverynote_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($deliverynote->deliverynote_expire != '' && $this->router->fetch_method() != 'duplicate') ? $deliverynote->deliverynote_expire : date('Y-m-d', strtotime('+14 days', time()))?>" /></td>
+														<td>
+															<span class="input-group date datetimepicker">
+																<input id="deliverynote_expire" name="deliverynote_expire" type="text" class="form-control input-sm date-mask" placeholder="Expire Date" value="<?=($deliverynote->deliverynote_expire != '' && $this->router->fetch_method() != 'duplicate') ? $deliverynote->deliverynote_expire : date('Y-m-d', strtotime('+14 days', time()))?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</td>
 													</tr>
 												</table>
 											</div>
