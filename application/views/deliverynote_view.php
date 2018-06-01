@@ -164,7 +164,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			deliverynoteitem_row += '<td colspan="2">';
             deliverynoteitem_row += '<div>';
             deliverynoteitem_row += '<input id="deliverynoteitem_product_id" name="deliverynoteitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
-            deliverynoteitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            deliverynoteitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
             deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '<div class="margin-top-10">';
 			// deliverynoteitem_row += '<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
@@ -600,9 +600,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2">
 															<input type="text" name="salesorderitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
 														</div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorderitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
+														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>

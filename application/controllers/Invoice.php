@@ -234,7 +234,8 @@ class Invoice extends CI_Controller {
 			$data['invoice']->invoice_salesorder_id = $data['salesorder']->salesorder_id;
 			// $data['invoice']->invoice_paid = '0';
 			$data['invoice']->invoice_pay = '0';
-			$data['invoice']->invoice_balance = '0';
+			// $data['invoice']->invoice_balance = '0';
+			$data['invoice']->invoice_balance = $data['invoice']->invoice_total - $data['invoice']->invoice_paid;
 
 			/* currency */
             $thisSelect = array(

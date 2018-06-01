@@ -345,6 +345,56 @@ if(!function_exists('get_setting'))
 	}
 }
 
+
+if(!function_exists('get_product_size'))
+{
+    function get_product_size($thisId){
+        $CI =& get_instance();
+        $CI->load->model('z_product_attribute_model');
+        $CI->load->model('attribute_model');
+
+        $data = null;
+
+        /* product */
+        $thisSelect = array(
+            'where' => array(
+                'product_id' => $thisId
+            ),
+            'return' => 'result'
+        );
+        $z_product_attribute_attribute_ids = convert_object_to_array($CI->z_product_attribute_model->select($thisSelect), 'z_product_attribute_attribute_id');
+
+//        echo "ok";
+//        var_dump($z_product_attribute_attribute_ids);
+
+        if( $z_product_attribute_attribute_ids ){
+            /* size */
+            $thisSelect = array(
+                'where' => array('attribute_type' => 'size'),
+                'return' => 'result'
+            );
+            $sizes = $CI->attribute_model->select($thisSelect);
+
+            foreach ($sizes as $key => $value){
+                if( in_array($value->attribute_id, $z_product_attribute_attribute_ids) ){
+                    $data = $value;
+                    break;
+                }
+            }
+        }
+
+        if( !$data ){
+            $thisArray = array();
+            foreach($CI->attribute_model->structure() as $key => $value){
+                $thisArray[$value->Field] = '';
+            }
+            $data = (object)$thisArray;
+        }
+
+        return $data;
+    }
+}
+
 if(!function_exists('get_team'))
 {
     function get_team($thisId){

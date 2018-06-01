@@ -117,6 +117,7 @@
 														case 'salesreport':
 														case 'commissionreport':
                                                         case 'stockreport':
+                                                        case 'quantityreport':
                                                         case 'closingreport':
 														case 'log':
 															$thisCSS = ' class="active"';

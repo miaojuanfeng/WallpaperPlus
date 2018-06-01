@@ -277,7 +277,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<td>';
 			quotationitem_row += '<div>';
             quotationitem_row += '<input id="quotationitem_product_id" name="quotationitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
-            quotationitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            quotationitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
 			quotationitem_row += '</div>';
 			quotationitem_row += '<div class="margin-top-10">';
             // quotationitem_row += '<input id="quotationitem_product_name" name="quotationitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
@@ -897,9 +897,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2">
 															<input type="text" name="quotationitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
 														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
+														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 													</div>

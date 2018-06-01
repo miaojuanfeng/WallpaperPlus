@@ -113,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).find('input[name="invoiceitem_subtotal[]"]').val(parseFloat($(this).find('input[name="invoiceitem_product_price[]"]').val() * $(this).find('input[name="invoiceitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 				total += parseFloat($(this).find('input[name="invoiceitem_subtotal[]"]').val());
 			});
-			$('input[name="invoice_pay"]').val(parseFloat(total).toFixed(2));
+			// $('input[name="invoice_pay"]').val(parseFloat(parseFloat(total)-parseFloat($('input[name="invoice_paid"]').val())).toFixed(2));
 			// $('input[name="invoice_total"]').val(parseFloat(total - $('input[name="invoice_discount"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 			// $('input[name="invoice_balance"]').val(parseFloat(total - $('input[name="invoice_discount"]').val() - $('input[name="invoice_paid"]').val() - $('input[name="invoice_pay"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 		}
@@ -171,7 +171,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '<td>';
             invoiceitem_row += '<div>';
             invoiceitem_row += '<input id="invoiceitem_product_id" name="invoiceitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
-            invoiceitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            invoiceitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
             invoiceitem_row += '</div>';
 			invoiceitem_row += '<div class="margin-top-10">';
 			// invoiceitem_row += '<input id="invoiceitem_product_name" name="invoiceitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
@@ -677,9 +677,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2">
 															<input type="text" name="salesorderitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
 														</div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorderitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
+														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>

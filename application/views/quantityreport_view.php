@@ -162,30 +162,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <tbody>
                                     <tr>
                                         <td width="90%">
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-sm-2"><h6>Invoice</h6></div>-->
-<!--                                                <div class="col-sm-2">-->
-<!--                                                    <input type="text" name="invoice_number_like" class="form-control input-sm" placeholder="INNo" value="" />-->
-<!--                                                </div>-->
-<!--                                                <div class="col-sm-2">-->
-<!--															<span class="input-group date datetimepicker">-->
-<!--																<input id="invoice_create_greateq" name="invoice_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />-->
-<!--																<span class="input-group-addon">-->
-<!--																	<span class="glyphicon glyphicon-calendar"></span>-->
-<!--																</span>-->
-<!--															</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-sm-2">-->
-<!--															<span class="input-group date datetimepicker">-->
-<!--																<input id="invoice_create_smalleq" name="invoice_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />-->
-<!--																<span class="input-group-addon">-->
-<!--																	<span class="glyphicon glyphicon-calendar"></span>-->
-<!--																</span>-->
-<!--															</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-sm-2"></div>-->
-<!--                                                <div class="col-sm-2"></div>-->
-<!--                                            </div>-->
+                                            <div class="row">
+                                                <div class="col-sm-2"><h6>Sales Order</h6></div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />
+                                                </div>
+                                                <div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="salesorder_create_greateq" name="salesorder_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+                                               </div>
+                                               <div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="salesorder_create_smalleq" name="salesorder_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+                                                </div>
+                                                <div class="col-sm-2"></div>
+                                               <div class="col-sm-2"></div>
+                                           </div>
 <!--                                            <div class="row">-->
 <!--                                                <div class="col-sm-2"><h6>Purchase order</h6></div>-->
 <!--                                                <div class="col-sm-2">-->

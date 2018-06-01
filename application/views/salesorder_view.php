@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).find('input[name="salesorderitem_subtotal[]"]').val(parseFloat($(this).find('input[name="salesorderitem_product_price[]"]').val() * $(this).find('input[name="salesorderitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 				total += parseFloat($(this).find('input[name="salesorderitem_subtotal[]"]').val());
 			});
-			$('input[name="salesorder_total"]').val(parseFloat(total - $('input[name="salesorder_discount"]').val()).toFixed(2)).css('display', 'none').fadeIn();
+			$('input[name="salesorder_total"]').val(parseFloat(total - parseFloat($('input[name="salesorder_discount"]').val()) + parseFloat($('input[name="salesorder_freight"]').val()) ).toFixed(2)).css('display', 'none').fadeIn();
 			
 			/* grand total checker */
 			if(parseFloat($('input[name="salesorder_total"]').val()) != parseFloat($('input[name="quotation_total"]').val())){
@@ -165,7 +165,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '<td>';
             salesorderitem_row += '<div>';
             salesorderitem_row += '<input id="salesorderitem_product_id" name="salesorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
-            salesorderitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            salesorderitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
             salesorderitem_row += '</div>';
 			salesorderitem_row += '<div class="margin-top-10">';
 			// salesorderitem_row += '<input id="salesorderitem_product_name" name="salesorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
@@ -326,15 +326,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												?>
 											</select>
 										</p>
-										<p class="form-group">
-											<label for="attachment">
-												Customer PO
-												<?php if(file_exists($_SERVER['DOCUMENT_ROOT'].'/assets/images/attachment/salesorder/'.$salesorder->salesorder_id)){ ?>
-												<a target="_blank" href="<?=base_url('assets/images/attachment/salesorder/'.$salesorder->salesorder_id)?>"><i class="glyphicon glyphicon-picture"></i></a></span>
-												<?php } ?>
-											</label>
-											<input id="attachment" name="attachment" type="file" class="form-control input-sm" placeholder="Customer PO" accept="image/*, application/pdf" />
-										</p>
 										<?php
 										if($this->router->fetch_method() == 'update'){
 											switch(true){
@@ -389,7 +380,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p>
 										<!--
 										<p class="form-group">
-											<label for="salesorder_commission_user_id">Commission to</label>
+											<label for="salesorder_commission_user_id">salesorder_id</label>
 											<select id="salesorder_commission_user_id" name="salesorder_commission_user_id" data-placeholder="Commission to" class="chosen-select required">
 												<option value></option>
 												<?php
@@ -596,14 +587,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
 														<th></th>
-														<th>Discount %</th>
+														<th>Discount</th>
 														<th>
-                                                            <div class="input-group">
-                                                                <input readonly="readonly" id="salesorder_discount" name="salesorder_discount" type="number" min="0" max="100" class="form-control input-sm required" placeholder="Discount" value="<?=($salesorder->salesorder_discount) ? $salesorder->salesorder_discount : 100?>" />
-                                                                <span class="input-group-addon">%</span>
-                                                            </div>
+                                                            <input readonly="readonly" id="salesorder_discount" name="salesorder_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($salesorder->salesorder_discount) ? $salesorder->salesorder_discount : 100?>" />
                                                         </th>
 													</tr>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th>Freight</th>
+                                                        <th>
+                                                            <input readonly="readonly" id="salesorder_freight" name="salesorder_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($salesorder->salesorder_freight) ? $salesorder->salesorder_freight : 100?>" />
+                                                        </th>
+                                                    </tr>
 													<tr>
 														<th width="10%">
 															<a class="btn btn-sm btn-primary salesorderitem-insert-btn" data-toggle="tooltip" title="Insert">
@@ -845,9 +842,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2">
 															<input type="text" name="quotationitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
 														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
+														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>

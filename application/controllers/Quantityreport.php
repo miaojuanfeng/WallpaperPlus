@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Quantityreport extends CI_Controller {
 
     private $th_header = array(
+        'SO No',
         'IN No',
         'IN Qty',
         'PO No',
         'PO Qty',
-        'Reason',
         'IN - PO'
     );
 
@@ -27,18 +27,20 @@ class Quantityreport extends CI_Controller {
     private $per_page;
 
     private function make_form_data(&$data){
-        /* check invoice */
-        if(isset($thisGET['invoice_number_like']) || isset($thisGET['invoice_create_greateq']) || isset($thisGET['invoice_create_smalleq'])){
+        /* check salesorders */
+        if(isset($this->thisGET['salesorder_number_like']) || isset($this->thisGET['salesorder_create_greateq']) || isset($this->thisGET['salesorder_create_smalleq'])){
             $thisSelect = array(
-                'where' => $thisGET,
-                'return' => 'row'
+                'where' => $this->thisGET,
+                'return' => 'result'
             );
-            $data['invoice'] = $this->invoice_model->select($thisSelect);
+            $data['salesorders'] = $this->salesorder_model->select($thisSelect);
 
-            if($data['invoice']){
-                $thisGET['salesorder_id'] = $data['invoice']->invoice_salesorder_id;
+            if($data['salesorders']){
+                foreach($data['salesorders'] as $key => $value){
+                    $this->thisGET['salesorder_id_in'][] = $value->salesorder_id;
+                }
             }else{
-                $thisGET['salesorder_id'] = 0;
+                $this->thisGET['salesorder_id_in'] = array(0);
             }
         }
         /* check invoice */
@@ -113,6 +115,9 @@ class Quantityreport extends CI_Controller {
             $subtotal = 0;
             foreach ($rows as $key => $value) {
                 $row = array();
+
+                $row[] = '<div class="no-wrap"><a href="' . base_url('salesorder/update/salesorder_id/' . $value->salesorder_id) . '">' . $value->salesorder_number . '</a><br/></div>';
+
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
                     $temp .= '<div class="no-wrap"><a href="' . base_url('invoice/update/invoice_id/' . $value1->invoice_id) . '">' . $value1->invoice_number . '</a><br/></div>';
@@ -149,7 +154,6 @@ class Quantityreport extends CI_Controller {
                 }
                 $row[] = $temp;
 
-                $row[] = '';
                 $row[] = $invoiceitems_qty_total - $purchaseorderitems_qty_total;
 
 //                $row[] = strtoupper($value->salesorder_currency).' '.money_format('%!n', $value->salesorder_total);

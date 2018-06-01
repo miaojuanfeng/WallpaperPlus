@@ -150,8 +150,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<input id="product_code" name="product_code" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$product->product_code?>" />
 										</p>
                                         <p class="form-group">
-                                            <label for="product_wpp_code">WPP code <span class="highlight">*</span></label>
-                                            <input id="product_wpp_code" name="product_wpp_code" type="text" class="form-control input-sm required" placeholder="WPP code" value="<?=$product->product_wpp_code?>" />
+                                            <label for="product_wpp_code">WPP code <span class="highlight"></span></label>
+                                            <input id="product_wpp_code" name="product_wpp_code" type="text" class="form-control input-sm" placeholder="WPP code" value="<?=$product->product_wpp_code?>" />
                                         </p>
 										<div class="form-group">
 											<label for="product_name">Name <span class="highlight">*</span></label>
@@ -502,7 +502,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <td><?=$value->product_code?></td>
 												<td><?=$value->product_wpp_code?></td>
 												<td><?=$value->product_name?></td>
-												<td><?='HKD '.$value->product_cost?></td>
+												<td><?=get_currency(get_vendor($value->product_vendor_id)->vendor_currency_id)->currency_name.' '.$value->product_cost?></td>
 												<td><?='HKD '.$value->product_price_hkd?></td>
 												<td><?=convert_datetime_to_date($value->product_modify)?></td>
 												<!-- <td class="text-right">

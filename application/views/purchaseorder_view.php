@@ -214,7 +214,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '<td>';
             purchaseorderitem_row += '<div>';
             purchaseorderitem_row += '<input id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
-            purchaseorderitem_row += '<input type="button" class="form-control input-sm showModal" value="Select a product" />';
+            purchaseorderitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
             purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '<div class="margin-top-10">';
 			// purchaseorderitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
@@ -232,14 +232,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '</td>';
 			purchaseorderitem_row += '<td>';
             purchaseorderitem_row += '<div class="input-group">';
-			purchaseorderitem_row += '<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1" />';
+			purchaseorderitem_row += '<input id="purchaseorderitem_quantity" name="purchaseorderitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="1.00" />';
             purchaseorderitem_row += '<input id="purchaseorderitem_unit" name="purchaseorderitem_unit[]" type="hidden" />';
             purchaseorderitem_row += '<span class="input-group-addon purchaseorderitem_unit">Unit</span>';
             purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</td>';
             purchaseorderitem_row += '<td>';
             purchaseorderitem_row += '<div class="input-group">';
-            purchaseorderitem_row += '<input id="purchaseorderitem_discount" name="purchaseorderitem_discount[]" type="number" min="0" max="100" class="form-control input-sm" placeholder="Discount" value="100" />';
+            purchaseorderitem_row += '<input id="purchaseorderitem_discount" name="purchaseorderitem_discount[]" type="number" min="0" max="100" class="form-control input-sm" placeholder="Discount" value="100.00" />';
             purchaseorderitem_row += '<span class="input-group-addon">%</span>';
             purchaseorderitem_row += '</div>';
             purchaseorderitem_row += '</td>';
@@ -901,9 +901,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2">
 															<input type="text" name="salesorderitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
 														</div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorderitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
+														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
