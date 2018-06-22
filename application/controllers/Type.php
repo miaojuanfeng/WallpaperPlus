@@ -82,7 +82,7 @@ class Type extends CI_Controller {
 
 	public function select()
 	{
-		$per_page = 3;
+		$per_page = get_setting('per_page')->setting_value;
 
 		$thisSelect = array(
 			'where' => $this->uri->uri_to_assoc(),

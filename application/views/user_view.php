@@ -28,12 +28,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
+		var users = <?=(!empty($users)) ? json_encode($users) : '[]'?>;
+
 		$(function(){
 			$('input[name="user_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("userUsernameCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(users).each(function(key, val){
+					if(value.toUpperCase() == val.user_username.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
 		});
 
 		function check_delete(id){
@@ -123,7 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p>
 										<p class="form-group">
 											<label for="user_username">Username <span class="highlight">*</span></label>
-											<input id="user_username" name="user_username" type="text" class="form-control input-sm required" placeholder="Username" value="<?=$user->user_username?>" />
+											<input id="user_username" name="user_username" type="text" class="form-control input-sm required userUsernameCheckDuplicate" placeholder="Username" value="<?=$user->user_username?>" />
 										</p>
 										<p class="form-group">
 											<label for="user_password">Password</label>

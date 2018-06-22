@@ -40,6 +40,14 @@ class Vendor extends CI_Controller {
 			);
 			$data['vendor'] = $this->vendor_model->select($thisSelect);
 
+			$thisSelect = array(
+				'where' => array(
+					'vendor_id_noteq' => $data['vendor']->vendor_id
+				),
+				'return' => 'result'
+			);
+			$data['vendors'] = $this->vendor_model->select($thisSelect);
+
             /* currency */
             $thisSelect = array(
                 'return' => 'result'
@@ -82,6 +90,14 @@ class Vendor extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['vendor'] = (object)$thisArray;
+
+			$thisSelect = array(
+				'where' => array(
+					'vendor_id_noteq' => $data['vendor']->vendor_id
+				),
+				'return' => 'result'
+			);
+			$data['vendors'] = $this->vendor_model->select($thisSelect);
 
             /* currency */
             $thisSelect = array(

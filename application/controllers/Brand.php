@@ -39,6 +39,14 @@ class Brand extends CI_Controller {
 			);
 			$data['brand'] = $this->brand_model->select($thisSelect);
 
+			$thisSelect = array(
+				'where' => array(
+					'brand_id_noteq' => $data['brand']->brand_id
+				),
+				'return' => 'result'
+			);
+			$data['brands'] = $this->brand_model->select($thisSelect);
+
 			$this->load->view('brand_view', $data);
 		}
 	}
@@ -75,6 +83,14 @@ class Brand extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['brand'] = (object)$thisArray;
+
+			$thisSelect = array(
+				'where' => array(
+					'brand_id_noteq' => $data['brand']->brand_id
+				),
+				'return' => 'result'
+			);
+			$data['brands'] = $this->brand_model->select($thisSelect);
 
 			$this->load->view('brand_view', $data);
 		}

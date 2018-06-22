@@ -39,6 +39,14 @@ class Attribute extends CI_Controller {
             );
             $data['attribute'] = $this->attribute_model->select($thisSelect);
 
+            $thisSelect = array(
+                'where' => array(
+                    'attribute_id_noteq' => $data['attribute']->attribute_id
+                ),
+                'return' => 'result'
+            );
+            $data['attributes'] = $this->attribute_model->select($thisSelect);
+
             /* type */
             $data['types'] = (object)array(
                 (object)array('type_name' => 'color'),
@@ -85,6 +93,14 @@ class Attribute extends CI_Controller {
                 $thisArray[$value->Field] = '';
             }
             $data['attribute'] = (object)$thisArray;
+
+            $thisSelect = array(
+                'where' => array(
+                    'attribute_id_noteq' => $data['attribute']->attribute_id
+                ),
+                'return' => 'result'
+            );
+            $data['attributes'] = $this->attribute_model->select($thisSelect);
 
             /* type */
             $data['types'] = (object)array(

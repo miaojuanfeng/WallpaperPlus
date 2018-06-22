@@ -43,6 +43,14 @@ class Role extends CI_Controller {
 			);
 			$data['role'] = $this->role_model->select($thisSelect)[0];
 
+			$thisSelect = array(
+				'where' => array(
+					'role_id_noteq' => $data['role']->role_id
+				),
+				'return' => 'result'
+			);
+			$data['roles'] = $this->role_model->select($thisSelect);
+
 			/* permission */
 			$thisSelect = array(
 				'group' => array('permission_class'),
@@ -101,6 +109,14 @@ class Role extends CI_Controller {
 			}
 			$data['role'] = (object)$thisArray;
 
+			$thisSelect = array(
+				'where' => array(
+					'role_id_noteq' => $data['role']->role_id
+				),
+				'return' => 'result'
+			);
+			$data['roles'] = $this->role_model->select($thisSelect);
+
 			/* permission */
 			$thisSelect = array(
 				'group' => array('permission_class'),
@@ -122,7 +138,7 @@ class Role extends CI_Controller {
 
 	public function select()
 	{
-		$per_page = 12;
+		$per_page = get_setting('per_page')->setting_value;
 
 		$thisSelect = array(
 			'where' => $this->uri->uri_to_assoc(),

@@ -18,6 +18,7 @@ class Quotation extends CI_Controller {
 		$this->load->model('quotationitem_model');
 		$this->load->model('terms_model');
 		$this->load->model('z_client_user_model');
+		$this->load->model('currency_model');
 		// $this->load->model('salesorder_model');
 		// $this->load->model('salesorderitem_model');
 
@@ -161,11 +162,17 @@ class Quotation extends CI_Controller {
 			);
 
 			/* currency */
-			$data['currencys'] = (object)array(
-                (object)array('currency_name' => 'hkd'),
-				(object)array('currency_name' => 'rmb'),
-				(object)array('currency_name' => 'usd')
+			$thisSelect = array(
+				'where' => array('currency_name_in' => array('hkd', 'rmb', 'usd')),
+				'return' => 'result'
 			);
+			$data['currencys'] = $this->currency_model->select($thisSelect);
+			// var_dump($data['currencys']);
+			// $data['currencys'] = (object)array(
+   //              (object)array('currency_name' => 'hkd'),
+			// 	(object)array('currency_name' => 'rmb'),
+			// 	(object)array('currency_name' => 'usd')
+			// );
 
 			/* display_number */
 			$data['display_numbers'] = (object)array(
@@ -302,11 +309,16 @@ class Quotation extends CI_Controller {
 			);
 
 			/* currency */
-			$data['currencys'] = (object)array(
-                (object)array('currency_name' => 'hkd'),
-				(object)array('currency_name' => 'rmb'),
-				(object)array('currency_name' => 'usd')
+			$thisSelect = array(
+				'where' => array('currency_name_in' => array('hkd', 'rmb', 'usd')),
+				'return' => 'result'
 			);
+			$data['currencys'] = $this->currency_model->select($thisSelect);
+			// $data['currencys'] = (object)array(
+   //              (object)array('currency_name' => 'hkd'),
+			// 	(object)array('currency_name' => 'rmb'),
+			// 	(object)array('currency_name' => 'usd')
+			// );
 
 			/* display_number */
 			$data['display_numbers'] = (object)array(

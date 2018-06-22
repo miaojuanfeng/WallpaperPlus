@@ -47,6 +47,14 @@ class Product extends CI_Controller {
 				'return' => 'row'
 			);
 			$data['product'] = $this->product_model->select($thisSelect);
+
+            $thisSelect = array(
+                'where' => array(
+                    'product_id_noteq' => $data['product']->product_id
+                ),
+                'return' => 'result'
+            );
+            $data['products'] = $this->product_model->select($thisSelect);
 			
 //			/* products */
 //			$thisSelect = array(
@@ -180,6 +188,14 @@ class Product extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['product'] = (object)$thisArray;
+
+            $thisSelect = array(
+                'where' => array(
+                    'product_id_noteq' => $data['product']->product_id
+                ),
+                'return' => 'result'
+            );
+            $data['products'] = $this->product_model->select($thisSelect);
 			
 //			/* products */
 //			$thisSelect = array(

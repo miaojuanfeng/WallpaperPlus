@@ -52,6 +52,14 @@ class Client extends CI_Controller {
 			);
 			$data['client'] = $this->client_model->select($thisSelect);
 
+			$thisSelect = array(
+				'where' => array(
+					'client_id_noteq' => $data['client']->client_id
+				),
+				'return' => 'result'
+			);
+			$data['clients'] = $this->client_model->select($thisSelect);
+
 			/* gender */
 			$data['genders'] = (object)array(
 				(object)array('gender_name' => 'M'),
@@ -127,6 +135,14 @@ class Client extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['client'] = (object)$thisArray;
+
+			$thisSelect = array(
+				'where' => array(
+					'client_id_noteq' => $data['client']->client_id
+				),
+				'return' => 'result'
+			);
+			$data['clients'] = $this->client_model->select($thisSelect);
 
 			/* gender */
 			$data['genders'] = (object)array(

@@ -28,12 +28,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
+		var roles = <?=(!empty($roles)) ? json_encode($roles) : '[]'?>;
+
 		$(function(){
 			$('input[name="role_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("roleNameCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(roles).each(function(key, val){
+					if(value.toUpperCase() == val.role_name.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
 		});
 
 		function check_delete(id){
@@ -125,7 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
 											<label for="role_name">Name <span class="highlight">*</span></label>
-											<input id="role_name" name="role_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$role->role_name?>" />
+											<input id="role_name" name="role_name" type="text" class="form-control input-sm required roleNameCheckDuplicate" placeholder="Name" value="<?=$role->role_name?>" />
 										</p>
 									</div>
 									<div class="col-sm-4 col-xs-12">

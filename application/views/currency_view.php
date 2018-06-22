@@ -28,12 +28,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
+		var currencys = <?=(!empty($currencys)) ? json_encode($currencys) : '[]'?>;
+
 		$(function(){
 			$('input[name="currency_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("currencyNameCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(currencys).each(function(key, val){
+					if(value.toUpperCase() == val.currency_name.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
 		});
 
 		function check_delete(id){
@@ -125,7 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
 											<label for="currency_name">Name <span class="highlight">*</span></label>
-											<input id="currency_name" name="currency_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$currency->currency_name?>" />
+											<input id="currency_name" name="currency_name" type="text" class="form-control input-sm required currencyNameCheckDuplicate" placeholder="Name" value="<?=$currency->currency_name?>" />
                                             <small>Please enter upper case name</small>
                                         </p>
                                         <p class="form-group">

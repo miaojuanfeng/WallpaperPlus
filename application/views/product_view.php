@@ -28,12 +28,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
+        var products = <?=(!empty($products)) ? json_encode($products) : '[]'?>;
+
 		$(function(){
 			$('input[name="product_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+            /*--------- jQuery validator ---------*/
+            jQuery.validator.addMethod("productNameCheckDuplicate", function(value, element) {
+                thisResult = true;
+                $(products).each(function(key, val){
+                    if(value.toUpperCase() == val.product_name.toUpperCase()){
+                        thisResult = false;
+                    }
+                });
+                return this.optional(element) || thisResult;
+            }, "This field is duplicated.");
+            /*--------- jQuery validator ————*/
+
+            /*--------- jQuery validator ---------*/
+            jQuery.validator.addMethod("productCodeCheckDuplicate", function(value, element) {
+                thisResult = true;
+                $(products).each(function(key, val){
+                    if(value.toUpperCase() == val.product_code.toUpperCase()){
+                        thisResult = false;
+                    }
+                });
+                return this.optional(element) || thisResult;
+            }, "This field is duplicated.");
+            /*--------- jQuery validator ————*/
+
+            /*--------- jQuery validator ---------*/
+            jQuery.validator.addMethod("productWppCodeCheckDuplicate", function(value, element) {
+                thisResult = true;
+                $(products).each(function(key, val){
+                    if(value.toUpperCase() == val.product_wpp_code.toUpperCase()){
+                        thisResult = false;
+                    }
+                });
+                return this.optional(element) || thisResult;
+            }, "This field is duplicated.");
+            /*--------- jQuery validator ————*/
 
             $(document).on('change', 'select[name="product_vendor_id"]', function(){
                 product_vendor_loader();
@@ -147,15 +185,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </p>
 										<p class="form-group">
 											<label for="product_code">Code <span class="highlight">*</span></label>
-											<input id="product_code" name="product_code" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$product->product_code?>" />
+											<input id="product_code" name="product_code" type="text" class="form-control input-sm required productCodeCheckDuplicate" placeholder="Code" value="<?=$product->product_code?>" />
 										</p>
                                         <p class="form-group">
                                             <label for="product_wpp_code">WPP code <span class="highlight"></span></label>
-                                            <input id="product_wpp_code" name="product_wpp_code" type="text" class="form-control input-sm" placeholder="WPP code" value="<?=$product->product_wpp_code?>" />
+                                            <input id="product_wpp_code" name="product_wpp_code" type="text" class="form-control input-sm productWppCodeCheckDuplicate" placeholder="WPP code" value="<?=$product->product_wpp_code?>" />
                                         </p>
 										<div class="form-group">
 											<label for="product_name">Name <span class="highlight">*</span></label>
-											<input id="product_name" name="product_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$product->product_name?>" />
+											<input id="product_name" name="product_name" type="text" class="form-control input-sm required productNameCheckDuplicate" placeholder="Name" value="<?=$product->product_name?>" />
 										</div>
 										<div class="form-group">
                                             <label for="product_unit_id">Unit <span class="highlight">*</span></label>

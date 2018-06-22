@@ -28,12 +28,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
+		var clients = <?=(!empty($clients)) ? json_encode($clients) : '[]'?>;
+
 		$(function(){
 			$('input[name="client_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("clientNameCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(clients).each(function(key, val){
+					if(value.toUpperCase() == val.client_company_name.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("clientCodeCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(clients).each(function(key, val){
+					if(value.toUpperCase() == val.client_company_code.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
 		});
 
 		function check_delete(id){
@@ -142,12 +168,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</select>
 										</p> -->
                                         <p class="form-group">
-                                            <label for="client_company_code">Company ID</label>
-                                            <input id="client_company_code" name="client_company_code" type="text" class="form-control input-sm" placeholder="Company ID" value="<?=$client->client_company_code?>" />
+                                            <label for="client_company_code">Company ID <span class="highlight">*</span></label>
+                                            <input id="client_company_code" name="client_company_code" type="text" class="form-control input-sm required clientCodeCheckDuplicate" placeholder="Company ID" value="<?=$client->client_company_code?>" />
                                         </p>
 										<p class="form-group">
-											<label for="client_company_name">Company name</label>
-											<input id="client_company_name" name="client_company_name" type="text" class="form-control input-sm" placeholder="Company name" value="<?=$client->client_company_name?>" />
+											<label for="client_company_name">Company name <span class="highlight">*</span></label>
+											<input id="client_company_name" name="client_company_name" type="text" class="form-control input-sm required clientNameCheckDuplicate" placeholder="Company name" value="<?=$client->client_company_name?>" />
 										</p>
 										<!-- <p class="form-group">
 											<label for="client_company_scope">Service scope</label>

@@ -76,6 +76,11 @@ class Currency_model extends CI_Model {
 						$thisField = str_replace('_like', '', $key);
 						$this->db->like($thisField, urldecode($value));
 						break;
+					case 'currency_id_in':
+					case 'currency_name_in':
+						$thisField = str_replace('_in', '', $key);
+						$this->db->where_in($thisField, $value);
+						break;
 					case 'currency_id_noteq':
 					case 'currency_name_noteq':
 						$thisField = str_replace('_noteq', '', $key);

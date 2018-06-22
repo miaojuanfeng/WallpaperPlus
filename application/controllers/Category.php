@@ -40,6 +40,14 @@ class Category extends CI_Controller {
 			);
 			$data['category'] = $this->category_model->select($thisSelect);
 
+			$thisSelect = array(
+				'where' => array(
+					'category_id_noteq' => $data['category']->category_id
+				),
+				'return' => 'result'
+			);
+			$data['categorys'] = $this->category_model->select($thisSelect);
+
             /* team */
             $thisSelect = array(
                 'return' => 'result'
@@ -82,6 +90,14 @@ class Category extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['category'] = (object)$thisArray;
+
+			$thisSelect = array(
+				'where' => array(
+					'category_id_noteq' => $data['category']->category_id
+				),
+				'return' => 'result'
+			);
+			$data['categorys'] = $this->category_model->select($thisSelect);
 
             /* team */
             $thisSelect = array(

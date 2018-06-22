@@ -184,9 +184,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				};
 			}
 
-			$('#quotation_currency').val('hkd');
-            $('#quotation_currency').trigger('chosen:updated');
-            $('#quotation_currency').change();
+			// $('#quotation_currency').val('hkd');
+   //          $('#quotation_currency').trigger('chosen:updated');
+   //          $('#quotation_currency').change();
 		});
 
 		function document_display_number(){
@@ -477,19 +477,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p> -->
                                         <p class="form-group">
                                             <label for="quotation_exchange_rate">Exchange rate <span class="highlight">*</span></label>
-                                            <input id="quotation_exchange_rate" name="quotation_exchange_rate" type="text" readonly="readonly" class="form-control input-sm required" placeholder="Exchange rate" value="<?=$quotation->quotation_exchange_rate?>" />
+                                            <input id="quotation_exchange_rate" name="quotation_exchange_rate" type="text" readonly="readonly" class="form-control input-sm required" placeholder="Exchange rate" value="<?=$quotation->quotation_exchange_rate?$quotation->quotation_exchange_rate:'1.00'?>" />
                                         </p>
 										<p class="form-group">
 											<label for="quotation_currency">Currency</label>
 											<select id="quotation_currency" name="quotation_currency" data-placeholder="Currency" class="chosen-select required">
 												<option value></option>
 												<?php
-//												if($quotation->quotation_currency == ''){
-//													$quotation->quotation_currency = 'hkd';
-//												}
+												if($quotation->quotation_currency == ''){
+													$quotation->quotation_currency = 'hkd';
+												}
 												foreach($currencys as $key => $value){
-													$selected = ($value->currency_name == $quotation->quotation_currency) ? ' selected="selected"' : "" ;
-													echo '<option value="'.$value->currency_name.'"'.$selected.'>'.strtoupper($value->currency_name).'</option>';
+													$selected = (strtolower($value->currency_name) == $quotation->quotation_currency) ? ' selected="selected"' : "" ;
+													echo '<option value="'.strtolower($value->currency_name).'"'.$selected.'>'.strtoupper($value->currency_name).'</option>';
 												}
 												?>
 											</select>

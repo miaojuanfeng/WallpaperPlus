@@ -28,12 +28,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
+		var brands = <?=(!empty($brands)) ? json_encode($brands) : '[]'?>;
+
 		$(function(){
 			$('input[name="brand_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("brandNameCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(brands).each(function(key, val){
+					if(value.toUpperCase() == val.brand_name.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
 		});
 
 		function check_delete(id){
@@ -125,7 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<h4 class="corpcolor-font">Basic information</h4>
 										<p class="form-group">
 											<label for="brand_name">Name <span class="highlight">*</span></label>
-											<input id="brand_name" name="brand_name" type="text" class="form-control input-sm required" placeholder="Name" value="<?=$brand->brand_name?>" />
+											<input id="brand_name" name="brand_name" type="text" class="form-control input-sm required brandNameCheckDuplicate" placeholder="Name" value="<?=$brand->brand_name?>" />
 										</p>
 									</div>
 									<div class="col-sm-4 col-xs-12">

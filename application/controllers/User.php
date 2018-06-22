@@ -44,6 +44,14 @@ class User extends CI_Controller {
 			);
 			$data['user'] = $this->user_model->select($thisSelect)[0];
 
+			$thisSelect = array(
+				'where' => array(
+					'user_id_noteq' => $data['user']->user_id
+				),
+				'return' => 'result'
+			);
+			$data['users'] = $this->user_model->select($thisSelect);
+
 			/* role */
 			$thisSelect = array(
 				'return' => 'result'
@@ -72,14 +80,14 @@ class User extends CI_Controller {
             );
             $data['teams'] = $this->team_model->select($thisSelect);
 
-			$thisSelect = array(
-				'where' => array(
-					// 'user_id_noteq' => $this->session->userdata('user_id'),
-					'user_id_in' => $data['z_role_user_user_ids']
-				),
-				'return' => 'result'
-			);
-			$data['users'] = $this->user_model->select($thisSelect);
+			// $thisSelect = array(
+			// 	'where' => array(
+			// 		// 'user_id_noteq' => $this->session->userdata('user_id'),
+			// 		'user_id_in' => $data['z_role_user_user_ids']
+			// 	),
+			// 	'return' => 'result'
+			// );
+			// $data['sales_users'] = $this->user_model->select($thisSelect);
 			/* get sales manager user */
 
 			$this->load->view('user_view', $data);
@@ -121,6 +129,14 @@ class User extends CI_Controller {
 			}
 			$data['user'] = (object)$thisArray;
 
+			$thisSelect = array(
+				'where' => array(
+					'user_id_noteq' => $data['user']->user_id
+				),
+				'return' => 'result'
+			);
+			$data['users'] = $this->user_model->select($thisSelect);
+
 			/* role */
 			$thisSelect = array(
 				'return' => 'result'
@@ -145,14 +161,14 @@ class User extends CI_Controller {
             );
             $data['teams'] = $this->team_model->select($thisSelect);
 
-			$thisSelect = array(
-				'where' => array(
-					// 'user_id_noteq' => $this->session->userdata('user_id'),
-					'user_id_in' => $data['z_role_user_user_ids']
-				),
-				'return' => 'result'
-			);
-			$data['users'] = $this->user_model->select($thisSelect);
+			// $thisSelect = array(
+			// 	'where' => array(
+			// 		// 'user_id_noteq' => $this->session->userdata('user_id'),
+			// 		'user_id_in' => $data['z_role_user_user_ids']
+			// 	),
+			// 	'return' => 'result'
+			// );
+			// $data['sales_users'] = $this->user_model->select($thisSelect);
 			/* get sales manager user */
 
 			$this->load->view('user_view', $data);
@@ -161,7 +177,7 @@ class User extends CI_Controller {
 
 	public function select()
 	{
-		$per_page = 12;
+		$per_page = get_setting('per_page')->setting_value;
 
 		/* user */
 		$thisSelect = array(

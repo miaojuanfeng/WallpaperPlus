@@ -39,6 +39,14 @@ class Currency extends CI_Controller {
 			);
 			$data['currency'] = $this->currency_model->select($thisSelect);
 
+			$thisSelect = array(
+				'where' => array(
+					'currency_id_noteq' => $data['currency']->currency_id
+				),
+				'return' => 'result'
+			);
+			$data['currencys'] = $this->currency_model->select($thisSelect);
+
 			$this->load->view('currency_view', $data);
 		}
 	}
@@ -75,6 +83,14 @@ class Currency extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['currency'] = (object)$thisArray;
+
+			$thisSelect = array(
+				'where' => array(
+					'currency_id_noteq' => $data['currency']->currency_id
+				),
+				'return' => 'result'
+			);
+			$data['currencys'] = $this->currency_model->select($thisSelect);
 
 			$this->load->view('currency_view', $data);
 		}

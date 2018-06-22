@@ -28,12 +28,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
+		var vendors = <?=(!empty($vendors)) ? json_encode($vendors) : '[]'?>;
+
 		$(function(){
 			$('input[name="vendor_id"]').focus();
 
 			/* pagination */
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("vendorNameCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(vendors).each(function(key, val){
+					if(value.toUpperCase() == val.vendor_company_name.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
+
+			/*--------- jQuery validator ---------*/
+			jQuery.validator.addMethod("vendorCodeCheckDuplicate", function(value, element) {
+				thisResult = true;
+				$(vendors).each(function(key, val){
+					if(value.toUpperCase() == val.vendor_company_code.toUpperCase()){
+						thisResult = false;
+					}
+				});
+				return this.optional(element) || thisResult;
+			}, "This field is duplicated.");
+			/*--------- jQuery validator ————*/
 		});
 
 		function check_delete(id){
@@ -118,12 +144,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Basic information</h4>
                                         <p class="form-group">
-                                            <label for="vendor_company_code">Company ID</label>
-                                            <input id="vendor_company_code" name="vendor_company_code" type="text" class="form-control input-sm" placeholder="Company ID" value="<?=$vendor->vendor_company_code?>" />
+                                            <label for="vendor_company_code">Company ID <span class="highlight">*</span></label>
+                                            <input id="vendor_company_code" name="vendor_company_code" type="text" class="form-control input-sm required vendorCodeCheckDuplicate" placeholder="Company ID" value="<?=$vendor->vendor_company_code?>" />
                                         </p>
 										<p class="form-group">
-											<label for="vendor_company_name">Company name</label>
-											<input id="vendor_company_name" name="vendor_company_name" type="text" class="form-control input-sm" placeholder="Company name" value="<?=$vendor->vendor_company_name?>" />
+											<label for="vendor_company_name">Company name <span class="highlight">*</span></label>
+											<input id="vendor_company_name" name="vendor_company_name" type="text" class="form-control input-sm required vendorNameCheckDuplicate" placeholder="Company name" value="<?=$vendor->vendor_company_name?>" />
 										</p>
 										<!-- <p class="form-group">
 											<label for="vendor_company_scope">Service scope</label>
