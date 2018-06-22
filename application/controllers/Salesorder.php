@@ -93,10 +93,11 @@ class Salesorder extends CI_Controller {
 
 			/* commission */
 			$data['commissions'] = (object)array(
-				(object)array('commission_name' => '8'),
-				(object)array('commission_name' => '15'),
-				(object)array('commission_name' => '20'),
-				(object)array('commission_name' => '40')
+				(object)array('commission_name' => '2.5')
+				// (object)array('commission_name' => '8'),
+				// (object)array('commission_name' => '15'),
+				// (object)array('commission_name' => '20'),
+				// (object)array('commission_name' => '40')
 			);
 
 			/* client */
@@ -231,10 +232,11 @@ class Salesorder extends CI_Controller {
 
 			/* commission */
 			$data['commissions'] = (object)array(
-				(object)array('commission_name' => '8'),
-				(object)array('commission_name' => '15'),
-				(object)array('commission_name' => '20'),
-				(object)array('commission_name' => '40')
+				(object)array('commission_name' => '2.5')
+				// (object)array('commission_name' => '8'),
+				// (object)array('commission_name' => '15'),
+				// (object)array('commission_name' => '20'),
+				// (object)array('commission_name' => '40')
 			);
 
 			/* user */

@@ -204,6 +204,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '<input id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '<div class="margin-top-10">';
+			purchaseorderitem_row += '<input id="purchaseorderitem_product_color_code" name="purchaseorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+            purchaseorderitem_row += '</div>';
+			purchaseorderitem_row += '<div class="margin-top-10">';
 			purchaseorderitem_row += '<div class="btn-group">';
 			purchaseorderitem_row += '<button type="button" class="btn btn-sm btn-primary purchaseorderitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>';
 			purchaseorderitem_row += '<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>';
@@ -537,7 +540,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<table class="table table-condensed table-borderless">
 													<tr>
 														<td><label for="purchaseorder_number">Purchase order#</label></td>
-														<td><input readonly="readonly" id="purchaseorder_number" name="purchaseorder_number" type="text" class="form-control input-sm" placeholder="Purchase order#" value="<?=$purchaseorder->purchaseorder_number?>" /></td>
+														<td>
+															<div class="input-group">
+																<span class="input-group-addon" style="padding:0;border:none;text-align:left;min-width:60px;">
+																	<select id="number_prefix" name="number_prefix" data-placeholder="Prefix" class="chosen-select required">
+																		<option value="PO" <?php if( strpos($purchaseorder->purchaseorder_number, 'EPO') === false || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>PO</option>
+																		<option value="EPO" <?php if( strpos($purchaseorder->purchaseorder_number, 'EPO') !== false || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>EPO</option>
+																	</select>
+																</span>
+																<input readonly="readonly" id="purchaseorder_number" name="purchaseorder_number" type="text" class="form-control input-sm" placeholder="Purchase order#" value="<?=str_replace(array('E', 'PO'), '', $purchaseorder->purchaseorder_number)?>" />
+															</div>
+														</td>
 													</tr>
 													<tr>
 														<td><label for="purchaseorder_salesorder_id">Sales order#</label></td>
@@ -626,6 +639,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input name="purchaseorderitem_product_type_name[]" type="hidden" value="<?=$value->purchaseorderitem_product_type_name?>" />
 																<input id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->purchaseorderitem_product_code?>" />
 															</div>
+															<div class="margin-top-10">
+																<input id="purchaseorderitem_product_color_code_<?=$key?>" name="purchaseorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->purchaseorderitem_product_color_code?>" />
+                                                            </div>
 															<div class="margin-top-10">
 																<div class="btn-group">
 																	<button type="button" class="btn btn-sm btn-primary purchaseorderitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>

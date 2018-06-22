@@ -294,8 +294,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<input name="quotationitem_category_id[]" type="hidden" value="" />';
 			quotationitem_row += '<input name="quotationitem_product_type_name[]" type="hidden" value="" />';
 			quotationitem_row += '<input id="quotationitem_product_code_' + quotationitem_row_id + '" name="quotationitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="" />';
-			quotationitem_row_id -= 1;
 			quotationitem_row += '</div>';
+			quotationitem_row += '<div class="margin-top-10">';
+			quotationitem_row += '<input id="quotationitem_product_color_code_' + quotationitem_row_id + '" name="quotationitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+            quotationitem_row += '</div>';
+            quotationitem_row_id -= 1;
 			// quotationitem_row += '<div class="margin-top-10">';
 			// quotationitem_row += '<a class="btn btn-sm btn-primary quotationitem-delete-btn" data-toggle="tooltip" title="Delete">';
 			// quotationitem_row += '<i class="glyphicon glyphicon-remove"></i>';
@@ -619,7 +622,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><label for="quotation_number">Quotation#</label></td>
 														<td>
 															<div class="input-group">
-																<input readonly="readonly" id="quotation_number" name="quotation_number" type="text" class="form-control input-sm" placeholder="Quotation#" value="<?=$quotation->quotation_number?>" />
+																<span class="input-group-addon" style="padding:0;border:none;text-align:left;min-width:60px;">
+																	<select id="number_prefix" name="number_prefix" data-placeholder="Prefix" class="chosen-select required">
+																		<option value="Q" <?php if( strpos($quotation->quotation_number, 'EQ') === false || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>Q</option>
+																		<option value="EQ" <?php if( strpos($quotation->quotation_number, 'EQ') !== false || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>EQ</option>
+																	</select>
+																</span>
+																<input readonly="readonly" id="quotation_number" name="quotation_number" type="text" class="form-control input-sm" placeholder="Quotation#" value="<?=str_replace(array('E', 'Q'), '', $quotation->quotation_number)?>" />
                                                                 <span class="input-group-addon"><?=$quotation->quotation_version?'R'.$quotation->quotation_version:'N/A'?></span>
 															</div>
 														</td>
@@ -637,7 +646,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<tr>
 														<td><label for="quotation_user_name">Sales</label></td>
-														<td><input readonly="readonly" id="quotation_user_name" name="quotation_user_name" type="text" class="form-control input-sm required" placeholder="Sales" value="<?=$user->user_name?>" /></td>
+														<td><input id="quotation_user_name" name="quotation_user_name" type="text" class="form-control input-sm required" placeholder="Sales" value="<?=$user->user_name?>" /></td>
 													</tr>
 													<!-- <tr>
 														<td><label for="quotation_user_phone">Phone</label></td>
@@ -704,6 +713,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input name="quotationitem_category_id[]" type="hidden" value="<?=$value->quotationitem_category_id?>" />
 																<input name="quotationitem_product_type_name[]" type="hidden" value="<?=$value->quotationitem_product_type_name?>" />
 																<input id="quotationitem_product_code_<?=$key?>" name="quotationitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$value->quotationitem_product_code?>" />
+                                                            </div>
+                                                            <div class="margin-top-10">
+																<input id="quotationitem_product_color_code_<?=$key?>" name="quotationitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->quotationitem_product_color_code?>" />
                                                             </div>
 															<div class="margin-top-10">
 																<div class="btn-group">

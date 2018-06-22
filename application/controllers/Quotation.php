@@ -37,6 +37,7 @@ class Quotation extends CI_Controller {
 			switch($thisPOST['action']){
 				// case 'confirm':
 				case 'save':
+					$thisPOST['quotation_number'] = $thisPOST['number_prefix'].$thisPOST['quotation_number'];
 					$this->quotation_model->update($thisPOST);
 
 					$thisQuotationitem = get_array_prefix('quotationitem_', $thisPOST);
@@ -261,7 +262,7 @@ class Quotation extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$thisPOST['quotation_serial'] = sprintf("%03s", (get_quotation_serial() + 1));
-			$thisPOST['quotation_number'] = $this->session->userdata('user_order_prefix').'Q'.date('ym').$thisPOST['quotation_serial'];
+			$thisPOST['quotation_number'] = $thisPOST['number_prefix'].date('ym').$thisPOST['quotation_serial'];
 			$thisPOST['quotation_version'] = 0;
 			$thisPOST['quotation_id'] = $thisInsertId = $this->quotation_model->insert($thisPOST);
 

@@ -155,6 +155,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '<input id="salesorderitem_product_code" name="salesorderitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="" />';
 			salesorderitem_row += '</div>';
 			salesorderitem_row += '<div class="margin-top-10">';
+			salesorderitem_row += '<input id="salesorderitem_product_color_code" name="salesorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+            salesorderitem_row += '</div>';
+			salesorderitem_row += '<div class="margin-top-10">';
 			salesorderitem_row += '<div class="btn-group">';
 			salesorderitem_row += '<button type="button" class="btn btn-sm btn-primary salesorderitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>';
 			salesorderitem_row += '<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>';
@@ -557,6 +560,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input name="salesorderitem_product_type_name[]" type="hidden" value="<?=$value->salesorderitem_product_type_name?>" />
 																<input id="salesorderitem_product_code" name="salesorderitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$value->salesorderitem_product_code?>" />
 															</div>
+															<div class="margin-top-10">
+																<input id="salesorderitem_product_color_code_<?=$key?>" name="salesorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->salesorderitem_product_color_code?>" />
+                                                            </div>
 															<div class="margin-top-10">
 																<div class="btn-group">
 																	<button type="button" class="btn btn-sm btn-primary salesorderitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>

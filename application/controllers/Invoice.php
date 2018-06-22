@@ -35,6 +35,7 @@ class Invoice extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
+			$thisPOST['invoice_number'] = $thisPOST['number_prefix'].$thisPOST['invoice_number'];
 			$this->invoice_model->update($thisPOST);
 
 			$thisInvoiceitem = get_array_prefix('invoiceitem_', $thisPOST);
@@ -67,6 +68,21 @@ class Invoice extends CI_Controller {
 				'return' => 'row'
 			);
 			$data['invoice'] = $this->invoice_model->select($thisSelect);
+
+			if( strpos($data['invoice']->invoice_number, 'DEP') !== false ){
+				if( strtolower($data['invoice']->invoice_currency) == 'hkd' || strtolower($data['invoice']->invoice_currency) == 'usd' ){
+                    $invoice_code = 'DEP';
+                }else if( strtolower($data['invoice']->invoice_currency) == 'rmb' ) {
+                    $invoice_code = 'CDEP';
+                }
+			}else{
+				if( strtolower($data['invoice']->invoice_currency) == 'hkd' || strtolower($data['invoice']->invoice_currency) == 'usd' ) {
+                    $invoice_code = 'INV';
+                }else if( strtolower($data['invoice']->invoice_currency) == 'rmb' ) {
+                    $invoice_code = 'CINV';
+                }
+			}
+			$data['number_prefix'] = $invoice_code;
 
 			/* currency */
 			$data['currencys'] = (object)array(
@@ -158,19 +174,19 @@ class Invoice extends CI_Controller {
             );
             $data['exists_invoice'] = $this->invoice_model->select($thisSelect);
 
-            if( !$data['exists_invoice'] ){
-                if( strtolower($thisPOST['invoice_currency']) == 'hkd' || strtolower($thisPOST['invoice_currency']) == 'usd' ){
-                    $invoice_code = 'DEP';
-                }else if( strtolower($thisPOST['invoice_currency']) == 'rmb' ) {
-                    $invoice_code = 'CDEP';
-                }
-            }else{
-                if( strtolower($thisPOST['invoice_currency']) == 'hkd' || strtolower($thisPOST['invoice_currency']) == 'usd' ) {
-                    $invoice_code = 'INV';
-                }else if( strtolower($thisPOST['invoice_currency']) == 'rmb' ) {
-                    $invoice_code = 'CINV';
-                }
-            }
+            // if( !$data['exists_invoice'] ){
+            //     if( strtolower($thisPOST['invoice_currency']) == 'hkd' || strtolower($thisPOST['invoice_currency']) == 'usd' ){
+            //         $invoice_code = 'DEP';
+            //     }else if( strtolower($thisPOST['invoice_currency']) == 'rmb' ) {
+            //         $invoice_code = 'CDEP';
+            //     }
+            // }else{
+            //     if( strtolower($thisPOST['invoice_currency']) == 'hkd' || strtolower($thisPOST['invoice_currency']) == 'usd' ) {
+            //         $invoice_code = 'INV';
+            //     }else if( strtolower($thisPOST['invoice_currency']) == 'rmb' ) {
+            //         $invoice_code = 'CINV';
+            //     }
+            // }
 
 			/* salesorder */
 			$thisPOST['salesorder_id'] = $thisPOST['invoice_salesorder_id'];
@@ -180,7 +196,7 @@ class Invoice extends CI_Controller {
 
 			/* invoice */
 			$thisPOST['invoice_serial'] = sprintf("%03s", (get_invoice_serial() + 1));
-			$thisPOST['invoice_number'] = $this->session->userdata('user_order_prefix').$invoice_code.date('ym').$thisPOST['invoice_serial'];
+			$thisPOST['invoice_number'] = $thisPOST['number_prefix'].date('ym').$thisPOST['invoice_serial'];
 			$thisPOST['invoice_version'] = 1;
 			$thisPOST['invoice_status'] = 'processing';
 			$thisPOST['invoice_id'] = $thisInsertId = $this->invoice_model->insert($thisPOST);
@@ -215,6 +231,28 @@ class Invoice extends CI_Controller {
 			);
 			$data['salesorder'] = $this->salesorder_model->select($thisSelect);
 			$data['invoice'] = convert_salesorder_to_invoice($data['salesorder']);
+
+
+			$thisSelect = array(
+                'where' => array('invoice_salesorder_id' => $data['salesorder']->salesorder_id),
+                'return' => 'row'
+            );
+            $data['exists_invoice'] = $this->invoice_model->select($thisSelect);
+            if( !$data['exists_invoice'] ){
+                if( strtolower($data['invoice']->invoice_currency) == 'hkd' || strtolower($data['invoice']->invoice_currency) == 'usd' ){
+                    $invoice_code = 'DEP';
+                }else if( strtolower($data['invoice']->invoice_currency) == 'rmb' ) {
+                    $invoice_code = 'CDEP';
+                }
+            }else{
+                if( strtolower($data['invoice']->invoice_currency) == 'hkd' || strtolower($data['invoice']->invoice_currency) == 'usd' ) {
+                    $invoice_code = 'INV';
+                }else if( strtolower($data['invoice']->invoice_currency) == 'rmb' ) {
+                    $invoice_code = 'CINV';
+                }
+            }
+            $data['number_prefix'] = $invoice_code;
+
 
             $data['invoice']->invoice_number = '';
 

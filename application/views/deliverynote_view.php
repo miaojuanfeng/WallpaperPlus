@@ -154,6 +154,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			deliverynoteitem_row += '<input id="deliverynoteitem_product_code" name="deliverynoteitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
 			deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '<div class="margin-top-10">';
+			deliverynoteitem_row += '<input id="deliverynoteitem_product_color_code" name="deliverynoteitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+            deliverynoteitem_row += '</div>';
+			deliverynoteitem_row += '<div class="margin-top-10">';
 			deliverynoteitem_row += '<div class="btn-group">';
 			deliverynoteitem_row += '<button type="button" class="btn btn-sm btn-primary deliverynoteitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>';
 			deliverynoteitem_row += '<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>';
@@ -404,6 +407,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input name="deliverynoteitem_product_type_name[]" type="hidden" value="<?=$value->deliverynoteitem_product_type_name?>" />
 																<input id="deliverynoteitem_product_code" name="deliverynoteitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->deliverynoteitem_product_code?>" />
 															</div>
+															<div class="margin-top-10">
+																<input id="deliverynoteitem_product_color_code_<?=$key?>" name="deliverynoteitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->deliverynoteitem_product_color_code?>" />
+                                                            </div>
 															<div class="margin-top-10">
 																<div class="btn-group">
 																	<button type="button" class="btn btn-sm btn-primary deliverynoteitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>

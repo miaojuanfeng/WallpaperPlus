@@ -1211,7 +1211,7 @@ if(!function_exists('get_pagination_js_config'))
         		}
         	}
         }
-        if( $current_page <= $num_rows - $per_page  ){
+        if( $current_page < $num_rows - $per_page  ){
         	$config .= '<a href="javascript:;" class="btn btn-sm btn-primary" onclick="changePage('.($current_page+$per_page).')">&gt;</a>';
         }
         if( $current_page <= $num_rows - $per_page * 2 ){

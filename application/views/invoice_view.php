@@ -161,6 +161,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '<input id="invoiceitem_product_code" name="invoiceitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
 			invoiceitem_row += '</div>';
 			invoiceitem_row += '<div class="margin-top-10">';
+			invoiceitem_row += '<input id="invoiceitem_product_color_code" name="invoiceitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+            invoiceitem_row += '</div>';
+			invoiceitem_row += '<div class="margin-top-10">';
 			invoiceitem_row += '<div class="btn-group">';
 			invoiceitem_row += '<button type="button" class="btn btn-sm btn-primary invoiceitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>';
 			invoiceitem_row += '<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>';
@@ -366,8 +369,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><label for="invoice_number">Invoice#</label></td>
 														<td>
 															<div class="input-group">
-																<input readonly="readonly" id="invoice_number" name="invoice_number" type="text" class="form-control input-sm" placeholder="Invoice#" value="<?=$invoice->invoice_number?>" />
-																<span class="input-group-addon"><?='v'.$invoice->invoice_version?></span>
+																<span class="input-group-addon" style="padding:0;border:none;text-align:left;min-width:60px;">
+																	<select id="number_prefix" name="number_prefix" data-placeholder="Prefix" class="chosen-select required">
+																		<option value="<?=$number_prefix?>" <?php if( strpos($invoice->invoice_number, 'E'.$number_prefix) === false || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>><?=$number_prefix?></option>
+																		<option value="E<?=$number_prefix?>" <?php if( strpos($invoice->invoice_number, 'E'.$number_prefix) !== false || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>E<?=$number_prefix?></option>
+																	</select>
+																</span>
+																<input readonly="readonly" id="invoice_number" name="invoice_number" type="text" class="form-control input-sm" placeholder="Invoice#" value="<?=str_replace(array('DEP', 'INV', 'E', 'C'), '', $invoice->invoice_number)?>" />
+																<!-- <span class="input-group-addon"><?=$invoice->invoice_version?'V'.$invoice->invoice_version:'N/A'?></span> -->
 															</div>
 														</td>
 													</tr>
@@ -425,6 +434,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input name="invoiceitem_product_type_name[]" type="hidden" value="<?=$value->invoiceitem_product_type_name?>" />
 																<input id="invoiceitem_product_code" name="invoiceitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->invoiceitem_product_code?>" />
 															</div>
+															<div class="margin-top-10">
+																<input id="invoiceitem_product_color_code_<?=$key?>" name="invoiceitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->invoiceitem_product_color_code?>" />
+                                                            </div>
 															<div class="margin-top-10">
 																<div class="btn-group">
 																	<button type="button" class="btn btn-sm btn-primary invoiceitem-delete-btn"><i class="glyphicon glyphicon-remove"></i></button>

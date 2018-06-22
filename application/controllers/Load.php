@@ -213,7 +213,8 @@ class Load extends CI_Controller {
 			echo 'if( $("select[name=\'quotation_display_code\']").val() == "code" ){';
                 echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_code[]\']").val("'.$thisData->product_code.'").css("display", "none").fadeIn();';
             echo '}else {';
-                echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_code[]\']").val("'.$thisData->product_wpp_code.'").css("display", "none").fadeIn();';
+            	$product_code = $thisData->product_wpp_code?$thisData->product_wpp_code:$thisData->product_code;
+                echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_code[]\']").val("'.$product_code.'").css("display", "none").fadeIn();';
             echo '}';
 			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_name[]\']").val("'.$thisData->product_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_link[]\']").val("'.$thisData->product_link.'").css("display", "none").fadeIn();';
@@ -244,7 +245,8 @@ class Load extends CI_Controller {
             echo 'if( $("select[name=\'quotation_display_code\']").val() == "code" ){';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_code[]\']").val("'.$thisData->product_code.'").css("display", "none").fadeIn();';
             echo '}else {';
-            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_code[]\']").val("'.$thisData->product_wpp_code.'").css("display", "none").fadeIn();';
+            $product_code = $thisData->product_wpp_code?$thisData->product_wpp_code:$thisData->product_code;
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_code[]\']").val("'.$product_code.'").css("display", "none").fadeIn();';
             echo '}';
             echo '}';
             echo '</script>';
