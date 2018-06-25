@@ -273,14 +273,28 @@ class Load extends CI_Controller {
 		if($thisData){
 			foreach ($thisData as $key => $value) {
 				if( !in_array($value->category_id, $existsId) ){
-					echo '$("#category_discount_name").prepend("<p id=\"category_name_'.$value->category_id.'\">'.$value->category_name.'</p>");';
-					echo '$("#category_discount_value").prepend("<input id=\"category_discount_'.$value->category_id.'\" exists=\"'.$value->category_id.'\" name=\"category_discount[]\" type=\"number\" min=\"0\" class=\"form-control input-sm required\" placeholder=\"Discount\" value=\"0\" />");';
+					$code = '<tr id=\"category_discount_'.$value->category_id.'\"> \
+								<th></th> \
+								<th></th> \
+								<td></td> \
+								<th> \
+								<input name=\"category_id[]\" type=\"hidden\" value=\"'.$value->category_id.'\" /> \
+								<input name=\"category_name[]\" type=\"hidden\" value=\"'.$value->category_name.'\" /> \
+								'.$value->category_name.' discount</th> \
+								<th> \
+									<input exists=\"'.$value->category_id.'\" name=\"category_discount[]\" type=\"number\" min=\"0\" step=\"0.01\" class=\"form-control input-sm required\" placeholder=\"Discount\" value=\"0\" /> \
+                                </th> \
+							</tr>';
+					echo '$("#category_discount").prepend("'.$code.'");';
+					// echo '$("#category_discount_name").prepend("<p id=\"category_name_'.$value->category_id.'\">'.$value->category_name.'</p>");';
+					// echo '$("#category_discount_value").prepend("<input id=\"category_discount_'.$value->category_id.'\" exists=\"'.$value->category_id.'\" name=\"category_discount[]\" type=\"number\" min=\"0\" class=\"form-control input-sm required\" placeholder=\"Discount\" value=\"0\" />");';
 				}
 			}
 		}
 		foreach ($existsId as $key => $value) {
 			if( !in_array($value, $categoryId) ){
-				echo '$("#category_name_'.$value.'").remove();';
+				// echo '$("#category_name_'.$value.'").remove();';
+				// echo '$("#category_discount_'.$value.'").remove();';
 				echo '$("#category_discount_'.$value.'").remove();';
 			}
 		}

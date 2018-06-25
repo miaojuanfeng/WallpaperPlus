@@ -108,7 +108,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).find('input[name="salesorderitem_subtotal[]"]').val(parseFloat($(this).find('input[name="salesorderitem_product_price[]"]').val() * $(this).find('input[name="salesorderitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 				total += parseFloat($(this).find('input[name="salesorderitem_subtotal[]"]').val());
 			});
-			$('input[name="salesorder_total"]').val(parseFloat(total - parseFloat($('input[name="salesorder_discount"]').val()) + parseFloat($('input[name="salesorder_freight"]').val()) ).toFixed(2)).css('display', 'none').fadeIn();
+			var category_discount_total = 0;
+            $('#category_discount input[name="category_discount[]"]').each(function(){
+            	category_discount_total += parseFloat($(this).val());
+            });
+			$('input[name="salesorder_total"]').val(parseFloat(total - category_discount_total - parseFloat($('input[name="salesorder_discount"]').val()) + parseFloat($('input[name="salesorder_freight"]').val()) ).toFixed(2)).css('display', 'none').fadeIn();
 			
 			/* grand total checker */
 			if(parseFloat($('input[name="salesorder_total"]').val()) != parseFloat($('input[name="quotation_total"]').val())){
@@ -155,7 +159,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '<input id="salesorderitem_product_code" name="salesorderitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="" />';
 			salesorderitem_row += '</div>';
 			salesorderitem_row += '<div class="margin-top-10">';
-			salesorderitem_row += '<input id="salesorderitem_product_color_code" name="salesorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+			salesorderitem_row += '<input id="salesorderitem_product_color_code" name="salesorderitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="" />';
             salesorderitem_row += '</div>';
 			salesorderitem_row += '<div class="margin-top-10">';
 			salesorderitem_row += '<div class="btn-group">';
@@ -561,7 +565,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input id="salesorderitem_product_code" name="salesorderitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$value->salesorderitem_product_code?>" />
 															</div>
 															<div class="margin-top-10">
-																<input id="salesorderitem_product_color_code_<?=$key?>" name="salesorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->salesorderitem_product_color_code?>" />
+																<input id="salesorderitem_product_color_code_<?=$key?>" name="salesorderitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="<?=$value->salesorderitem_product_color_code?>" />
                                                             </div>
 															<div class="margin-top-10">
 																<div class="btn-group">
@@ -602,14 +606,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<?php } ?>
 												</tbody>
-												<tfoot>
+												<tfoot id="category_discount">
+													<?php foreach ($salesorder_category_discount as $key => $value) { ?>
+													<tr id="category_discount_<?=$value->category_id?>">
+														<th></th>
+														<th></th>
+														<td></td>
+														<th>
+															<input name="category_id[]" type="hidden" value="<?=$value->category_id?>" />
+															<input name="category_name[]" type="hidden" value="<?=$value->category_name?>" />
+															<?=$value->category_name?> discount
+														</th>
+														<th>
+															<input readonly="readonly" exists="<?=$value->category_id?>" name="category_discount[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=$value->category_discount?>" />
+						                                </th>
+													</tr>
+													<?php } ?>
 													<tr>
 														<th></th>
-														<th></th>
-														<th></th>
-														<th>Discount</th>
 														<th>
-                                                            <input readonly="readonly" id="salesorder_discount" name="salesorder_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($salesorder->salesorder_discount) ? $salesorder->salesorder_discount : 100?>" />
+															<p style="text-align:right;">Discount</p>
+														</th>
+														<th>
+															<input readonly="readonly" id="salesorder_discount_type" name="salesorder_discount_type" type="text" class="form-control input-sm required" placeholder="Discount type" value="<?=($salesorder->salesorder_discount_type) ? ucfirst($quotation->quotation_discount_type) : 'Percent'?>" />
+														</th>
+														<th>
+															<input readonly="readonly" id="salesorder_discount_value" name="salesorder_discount_value" type="number" min="0" class="form-control input-sm required" placeholder="Discount value" value="<?=($salesorder->salesorder_discount_value) ? $quotation->quotation_discount_value : '0'?>" />
+														</th>
+														<th>
+                                                            <input readonly="readonly" id="salesorder_discount" name="salesorder_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($salesorder->salesorder_discount) ? $salesorder->salesorder_discount : '0'?>" />
                                                         </th>
 													</tr>
                                                     <tr>
@@ -618,7 +643,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <th></th>
                                                         <th>Freight</th>
                                                         <th>
-                                                            <input readonly="readonly" id="salesorder_freight" name="salesorder_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($salesorder->salesorder_freight) ? $salesorder->salesorder_freight : 100?>" />
+                                                            <input readonly="readonly" id="salesorder_freight" name="salesorder_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($salesorder->salesorder_freight) ? $salesorder->salesorder_freight : '0'?>" />
                                                         </th>
                                                     </tr>
 													<tr>

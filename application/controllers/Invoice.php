@@ -36,6 +36,18 @@ class Invoice extends CI_Controller {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
 			$thisPOST['invoice_number'] = $thisPOST['number_prefix'].$thisPOST['invoice_number'];
+			//
+			$invoice_category_discount = array();
+			foreach ($thisPOST['category_name'] as $key => $value) {
+				$category = (object) [
+							    'category_id' => $thisPOST['category_id'][$key],
+							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount' => $thisPOST['category_discount'][$key]
+							  ];
+				$invoice_category_discount[] = $category;
+			}
+			$thisPOST['invoice_category_discount'] = json_encode($invoice_category_discount);
+			//
 			$this->invoice_model->update($thisPOST);
 
 			$thisInvoiceitem = get_array_prefix('invoiceitem_', $thisPOST);
@@ -68,6 +80,13 @@ class Invoice extends CI_Controller {
 				'return' => 'row'
 			);
 			$data['invoice'] = $this->invoice_model->select($thisSelect);
+
+			$invoice_category_discount = $data['invoice']->invoice_category_discount;
+			if( $invoice_category_discount ){
+				$data['invoice_category_discount'] = json_decode($invoice_category_discount);
+			}else{
+				$data['invoice_category_discount'] = array();
+			}
 
 			if( strpos($data['invoice']->invoice_number, 'DEP') !== false ){
 				if( strtolower($data['invoice']->invoice_currency) == 'hkd' || strtolower($data['invoice']->invoice_currency) == 'usd' ){
@@ -199,6 +218,18 @@ class Invoice extends CI_Controller {
 			$thisPOST['invoice_number'] = $thisPOST['number_prefix'].date('ym').$thisPOST['invoice_serial'];
 			$thisPOST['invoice_version'] = 1;
 			$thisPOST['invoice_status'] = 'processing';
+			//
+			$invoice_category_discount = array();
+			foreach ($thisPOST['category_name'] as $key => $value) {
+				$category = (object) [
+							    'category_id' => $thisPOST['category_id'][$key],
+							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount' => $thisPOST['category_discount'][$key]
+							  ];
+				$invoice_category_discount[] = $category;
+			}
+			$thisPOST['invoice_category_discount'] = json_encode($invoice_category_discount);
+			//
 			$thisPOST['invoice_id'] = $thisInsertId = $this->invoice_model->insert($thisPOST);
 
 			$thisQuotationitem = get_array_prefix('invoiceitem_', $thisPOST);
@@ -232,6 +263,12 @@ class Invoice extends CI_Controller {
 			$data['salesorder'] = $this->salesorder_model->select($thisSelect);
 			$data['invoice'] = convert_salesorder_to_invoice($data['salesorder']);
 
+			$invoice_category_discount = $data['invoice']->invoice_category_discount;
+			if( $invoice_category_discount ){
+				$data['invoice_category_discount'] = json_decode($invoice_category_discount);
+			}else{
+				$data['invoice_category_discount'] = array();
+			}
 
 			$thisSelect = array(
                 'where' => array('invoice_salesorder_id' => $data['salesorder']->salesorder_id),

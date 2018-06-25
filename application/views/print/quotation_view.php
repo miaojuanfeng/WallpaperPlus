@@ -192,7 +192,8 @@ switch($quotation->quotation_currency){
 				<td width="12%"><b>CODE</b></td>
                 <td width="12%"><b>NAME</b></td>
                 <td width="8%" align="center"><b>QTY</b></td>
-				<td width="15%" align="right"><b>UNIT PRICE</b></td>
+                <td width="11%" align="center"><b>SIZE</b></td>
+				<td width="13%" align="right"><b>UNIT PRICE</b></td>
 				<td width="10%" align="right"><b>AMOUNT</b></td>
 			</tr>
 		</table>
@@ -250,7 +251,8 @@ switch($quotation->quotation_currency){
 				<td width="12%"></td>
                 <td width="12%"></td>
 				<td width="8%"></td>
-				<td width="15%"></td>
+				<td width="11%"></td>
+				<td width="13%"></td>
 				<td width="10%"></td>
 			</tr>
 			<tr class="padding-bottom-5">
@@ -266,12 +268,14 @@ switch($quotation->quotation_currency){
 				<td valign="top"><?=$value->quotationitem_product_code?></td>
                 <td valign="top"><?=$value->quotationitem_product_name?></td>
                 <td valign="top" align="center"><?=$value->quotationitem_quantity.' '.get_unit($thisProduct->product_unit_id)->unit_name?></td>
+                <td valign="top" align="center"><?=$value->quotationitem_product_detail?></td>
 				<td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->quotationitem_product_price)?></td>
 				<td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->quotationitem_product_price * $value->quotationitem_quantity)?></td>
 			</tr>
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

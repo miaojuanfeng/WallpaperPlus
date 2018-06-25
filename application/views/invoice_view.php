@@ -113,13 +113,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).find('input[name="invoiceitem_subtotal[]"]').val(parseFloat($(this).find('input[name="invoiceitem_product_price[]"]').val() * $(this).find('input[name="invoiceitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 				total += parseFloat($(this).find('input[name="invoiceitem_subtotal[]"]').val());
 			});
-			// $('input[name="invoice_pay"]').val(parseFloat(parseFloat(total)-parseFloat($('input[name="invoice_paid"]').val())).toFixed(2));
-			// $('input[name="invoice_total"]').val(parseFloat(total - $('input[name="invoice_discount"]').val()).toFixed(2)).css('display', 'none').fadeIn();
-			// $('input[name="invoice_balance"]').val(parseFloat(total - $('input[name="invoice_discount"]').val() - $('input[name="invoice_paid"]').val() - $('input[name="invoice_pay"]').val()).toFixed(2)).css('display', 'none').fadeIn();
+			var category_discount_total = 0;
+            $('#category_discount input[name="category_discount[]"]').each(function(){
+            	category_discount_total += parseFloat($(this).val());
+            });
+            total = total - category_discount_total + parseFloat($('input[name="invoice_freight"]').val()) - parseFloat($('input[name="invoice_discount"]').val());
+			$('input[name="invoice_pay"]').val(parseFloat(parseFloat(total)-parseFloat($('input[name="invoice_paid"]').val())).toFixed(2));
+			$('input[name="invoice_total"]').val(parseFloat(total).toFixed(2)).css('display', 'none').fadeIn();
+			$('input[name="invoice_balance"]').val(parseFloat(total - parseFloat($('input[name="invoice_paid"]').val()) - parseFloat($('input[name="invoice_pay"]').val())).toFixed(2)).css('display', 'none').fadeIn();
 		}
 
 		function calc_balance(){
-			$('input[name="invoice_balance"]').val(parseFloat($('input[name="invoice_total"]').val() - $('input[name="invoice_discount"]').val() - $('input[name="invoice_paid"]').val() - $('input[name="invoice_pay"]').val()).toFixed(2)).css('display', 'none').fadeIn();
+			$('input[name="invoice_balance"]').val(parseFloat($('input[name="invoice_total"]').val() - $('input[name="invoice_paid"]').val() - $('input[name="invoice_pay"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 		}
 
 		function check_delete(id){
@@ -161,7 +166,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '<input id="invoiceitem_product_code" name="invoiceitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
 			invoiceitem_row += '</div>';
 			invoiceitem_row += '<div class="margin-top-10">';
-			invoiceitem_row += '<input id="invoiceitem_product_color_code" name="invoiceitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+			invoiceitem_row += '<input id="invoiceitem_product_color_code" name="invoiceitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="" />';
             invoiceitem_row += '</div>';
 			invoiceitem_row += '<div class="margin-top-10">';
 			invoiceitem_row += '<div class="btn-group">';
@@ -435,7 +440,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input id="invoiceitem_product_code" name="invoiceitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->invoiceitem_product_code?>" />
 															</div>
 															<div class="margin-top-10">
-																<input id="invoiceitem_product_color_code_<?=$key?>" name="invoiceitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->invoiceitem_product_color_code?>" />
+																<input id="invoiceitem_product_color_code_<?=$key?>" name="invoiceitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="<?=$value->invoiceitem_product_color_code?>" />
                                                             </div>
 															<div class="margin-top-10">
 																<div class="btn-group">
@@ -497,14 +502,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<?php } ?>
 												</tbody>
-												<tfoot>
+												<tfoot id="category_discount">
+													<?php foreach ($invoice_category_discount as $key => $value) { ?>
+													<tr id="category_discount_<?=$value->category_id?>">
+														<th></th>
+														<th></th>
+														<td></td>
+														<th>
+															<input name="category_id[]" type="hidden" value="<?=$value->category_id?>" />
+															<input name="category_name[]" type="hidden" value="<?=$value->category_name?>" />
+															<?=$value->category_name?> discount
+														</th>
+														<th>
+															<input readonly="readonly" exists="<?=$value->category_id?>" name="category_discount[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=$value->category_discount?>" />
+						                                </th>
+													</tr>
+													<?php } ?>
 													<tr>
 														<th></th>
-														<th></th>
-														<th></th>
-														<th>Discount</th>
-														<th><input readonly="readonly" id="invoice_discount" name="invoice_discount" type="text" class="form-control input-sm required" placeholder="Discount" value="<?=($invoice->invoice_discount) ? $invoice->invoice_discount : '0'?>" /></th>
+														<th>
+															<p style="text-align:right;">Discount</p>
+														</th>
+														<th>
+															<input readonly="readonly" id="invoice_discount_type" name="invoice_discount_type" type="text" class="form-control input-sm required" placeholder="Discount type" value="<?=($invoice->invoice_discount_type) ? ucfirst($invoice->invoice_discount_type) : 'Percent'?>" />
+														</th>
+														<th>
+															<input readonly="readonly" id="invoice_discount_value" name="invoice_discount_value" type="number" min="0" class="form-control input-sm required" placeholder="Discount value" value="<?=($invoice->invoice_discount_value) ? $invoice->invoice_discount_value : '0'?>" />
+														</th>
+														<th>
+                                                            <input readonly="readonly" id="invoice_discount" name="invoice_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($invoice->invoice_discount) ? $invoice->invoice_discount : '0'?>" />
+                                                        </th>
 													</tr>
+													<tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th>Freight</th>
+                                                        <th>
+                                                            <input readonly="readonly" id="invoice_freight" name="invoice_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($invoice->invoice_freight) ? $invoice->invoice_freight : '0'?>" />
+                                                        </th>
+                                                    </tr>
 													<tr>
 														<th></th>
 														<th></th>

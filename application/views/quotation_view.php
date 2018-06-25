@@ -98,14 +98,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				calc();
 			});
 			$(document).on('blur', 'input[name="category_discount[]"]', function(){
-				var category_discount_total = 0;
-				$('#category_discount_value input[name="category_discount[]"]').each(function(){
-                	category_discount_total += parseFloat($(this).val());
-                });
-                $('input[name="quotation_discount"]').val(category_discount_total).blur();
+				// var category_discount_total = 0;
+				// $('#category_discount input[name="category_discount[]"]').each(function(){
+    //             	category_discount_total += parseFloat($(this).val());
+    //             });
+    //             $('input[name="quotation_discount"]').val(category_discount_total).blur();
+				calc();
 			});
 			$(document).on('blur', 'input[name="quotation_discount"]', function(){
 				calc();
+			});
+			$(document).on('change', 'select[name="quotation_discount_type"]', function(){
+				discount_type_calc();
+			});
+			$(document).on('blur', 'input[name="quotation_discount_value"]', function(){
+				discount_type_calc();
 			});
             $(document).on('blur', 'input[name="quotation_freight"]', function(){
                 calc();
@@ -243,7 +250,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).find('input[name="quotationitem_subtotal[]"]').val(parseFloat($(this).find('input[name="quotationitem_product_price[]"]').val() * $(this).find('input[name="quotationitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
 				total += parseFloat($(this).find('input[name="quotationitem_subtotal[]"]').val());
 			});
-			$('input[name="quotation_total"]').val(parseFloat(total - parseFloat($('input[name="quotation_discount"]').val()) + parseFloat($('input[name="quotation_freight"]').val()) ).toFixed(2)).css('display', 'none').fadeIn();
+			var category_discount_total = 0;
+            $('#category_discount input[name="category_discount[]"]').each(function(){
+            	category_discount_total += parseFloat($(this).val());
+            });
+            var type_discount_total = parseFloat($('input[name="quotation_discount"]').val());
+			$('input[name="quotation_total"]').val(parseFloat((total - type_discount_total - category_discount_total) + parseFloat($('input[name="quotation_freight"]').val()) ).toFixed(2)).css('display', 'none').fadeIn();
+		}
+
+		function discount_type_calc(){
+			var total = 0;
+			$.each($('table.list tbody tr'), function(key, val){
+				$(this).find('input[name="quotationitem_subtotal[]"]').val(parseFloat($(this).find('input[name="quotationitem_product_price[]"]').val() * $(this).find('input[name="quotationitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
+				total += parseFloat($(this).find('input[name="quotationitem_subtotal[]"]').val());
+			});
+			var type_discount_total = 0;
+            if( $('select[name="quotation_discount_type"]').val() == 'percent' ){
+            	type_discount_total = total * (parseFloat($('input[name="quotation_discount_value"]').val())/100);
+            }else{
+            	type_discount_total = parseFloat($('input[name="quotation_discount_value"]').val());
+            }
+            $('input[name="quotation_discount"]').val(type_discount_total.toFixed(2));
+            calc();
 		}
 
 		function check_delete(id){
@@ -270,16 +298,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				category_discount_id[key] = $(this).val();
 			});
 			var exists_discount_id = new Array();
-			$('#category_discount_value input[name="category_discount[]"]').each(function(key){
+			$('#category_discount input[name="category_discount[]"]').each(function(key){
 				exists_discount_id[key] = $(this).attr('exists');
 			});
 			$('.scriptLoader').load('/load', {'thisTableId': 'quotationCategoryDiscountLoader', 'thisRecordId': category_discount_id, 'existsRecordId': exists_discount_id, 't': timestamp()}, function(){
                 quotationCategoryDiscountLoader();
-                var category_discount_total = 0;
-                $('#category_discount_value input[name="category_discount[]"]').each(function(){
-                	category_discount_total += parseFloat($(this).val());
-                });
-                $('input[name="quotation_discount"]').val(category_discount_total).blur();
             });
 		}
 
@@ -296,7 +319,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<input id="quotationitem_product_code_' + quotationitem_row_id + '" name="quotationitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="" />';
 			quotationitem_row += '</div>';
 			quotationitem_row += '<div class="margin-top-10">';
-			quotationitem_row += '<input id="quotationitem_product_color_code_' + quotationitem_row_id + '" name="quotationitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+			quotationitem_row += '<input id="quotationitem_product_color_code_' + quotationitem_row_id + '" name="quotationitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="" />';
             quotationitem_row += '</div>';
             quotationitem_row_id -= 1;
 			// quotationitem_row += '<div class="margin-top-10">';
@@ -715,7 +738,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input id="quotationitem_product_code_<?=$key?>" name="quotationitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$value->quotationitem_product_code?>" />
                                                             </div>
                                                             <div class="margin-top-10">
-																<input id="quotationitem_product_color_code_<?=$key?>" name="quotationitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->quotationitem_product_color_code?>" />
+																<input id="quotationitem_product_color_code_<?=$key?>" name="quotationitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="<?=$value->quotationitem_product_color_code?>" />
                                                             </div>
 															<div class="margin-top-10">
 																<div class="btn-group">
@@ -762,21 +785,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<?php } ?>
 												</tbody>
-												<tfoot>
-													<tr>
+												<tfoot id="category_discount">
+													<?php foreach ($quotation_category_discount as $key => $value) { ?>
+													<tr id="category_discount_<?=$value->category_id?>">
 														<th></th>
 														<th></th>
-														<th></th>
+														<td></td>
 														<th>
-															<span id="category_discount_name">
-																<p>Discount</p>
-															</span>
-															
+															<input name="category_id[]" type="hidden" value="<?=$value->category_id?>" />
+															<input name="category_name[]" type="hidden" value="<?=$value->category_name?>" />
+															<?=$value->category_name?> discount
 														</th>
 														<th>
-															<span id="category_discount_value">
-																<input id="quotation_discount" name="quotation_discount" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
-															</span>
+															<input exists="<?=$value->category_id?>" name="category_discount[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=$value->category_discount?>" />
+						                                </th>
+													</tr>
+													<?php } ?>
+													<tr>
+														<th></th>
+														<th>
+															<p style="text-align:right;">Discount</p>
+														</th>
+														<td>
+															<select id="quotation_discount_type" name="quotation_discount_type" data-placeholder="Discount type" class="chosen-select required">
+																<option value="percent" <?php if( $quotation->quotation_discount_type == 'percent' ) echo "selected"; ?>>Percent</option>
+																<option value="fixed" <?php if( $quotation->quotation_discount_type == 'fixed' ) echo "selected"; ?>>Fixed</option>
+															</select>
+														</td>
+														<th>
+															<input id="quotation_discount_value" name="quotation_discount_value" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount value" value="<?=($quotation->quotation_discount_value) ? $quotation->quotation_discount_value : '0'?>" />
+														</th>
+														<th>
+															<input id="quotation_discount" name="quotation_discount" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
                                                         </th>
 													</tr>
                                                     <tr>
@@ -784,7 +824,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <th></th>
                                                         <th></th>
                                                         <th>Freight</th>
-                                                        <th><input id="quotation_freight" name="quotation_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($quotation->quotation_freight) ? $quotation->quotation_freight : '0'?>" /></th>
+                                                        <th><input id="quotation_freight" name="quotation_freight" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Freight" value="<?=($quotation->quotation_freight) ? $quotation->quotation_freight : '0'?>" /></th>
                                                     </tr>
 													<tr>
 														<th width="10%">

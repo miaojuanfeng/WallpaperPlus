@@ -34,6 +34,18 @@ class Quotation extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
+			//
+			$quotation_category_discount = array();
+			foreach ($thisPOST['category_name'] as $key => $value) {
+				$category = (object) [
+							    'category_id' => $thisPOST['category_id'][$key],
+							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount' => $thisPOST['category_discount'][$key]
+							  ];
+				$quotation_category_discount[] = $category;
+			}
+			$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
+			//
 			switch($thisPOST['action']){
 				// case 'confirm':
 				case 'save':
@@ -155,6 +167,13 @@ class Quotation extends CI_Controller {
 			);
 			$data['quotation'] = $this->quotation_model->select($thisSelect);
 
+			$quotation_category_discount = $data['quotation']->quotation_category_discount;
+			if( $quotation_category_discount ){
+				$data['quotation_category_discount'] = json_decode($quotation_category_discount);
+			}else{
+				$data['quotation_category_discount'] = array();
+			}
+
 			/* language */
 			$data['languages'] = (object)array(
 				(object)array('language_name' => 'en'),
@@ -231,6 +250,10 @@ class Quotation extends CI_Controller {
 			);
 			$data['user'] = $this->user_model->select($thisSelect);
 
+			if( !empty($data['quotation']->quotation_user_name) ){
+				$data['user']->user_name = $data['quotation']->quotation_user_name;
+			}
+
 			/* quotation */
 			$thisSelect = array(
 				'where' => array(
@@ -264,6 +287,16 @@ class Quotation extends CI_Controller {
 			$thisPOST['quotation_serial'] = sprintf("%03s", (get_quotation_serial() + 1));
 			$thisPOST['quotation_number'] = $thisPOST['number_prefix'].date('ym').$thisPOST['quotation_serial'];
 			$thisPOST['quotation_version'] = 0;
+			$quotation_category_discount = array();
+			foreach ($thisPOST['category_name'] as $key => $value) {
+				$category = (object) [
+							    'category_id' => $thisPOST['category_id'][$key],
+							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount' => $thisPOST['category_discount'][$key]
+							  ];
+				$quotation_category_discount[] = $category;
+			}
+			$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
 			$thisPOST['quotation_id'] = $thisInsertId = $this->quotation_model->insert($thisPOST);
 
 			$thisQuotationitem = get_array_prefix('quotationitem_', $thisPOST);
@@ -301,6 +334,8 @@ class Quotation extends CI_Controller {
 				$thisArray[$value->Field] = '';
 			}
 			$data['quotation'] = (object)$thisArray;
+
+			$data['quotation_category_discount'] = array();
 
 			/* language */
 			$data['languages'] = (object)array(

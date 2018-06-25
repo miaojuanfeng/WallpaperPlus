@@ -204,7 +204,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '<input id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '<div class="margin-top-10">';
-			purchaseorderitem_row += '<input id="purchaseorderitem_product_color_code" name="purchaseorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="" />';
+			purchaseorderitem_row += '<input id="purchaseorderitem_product_color_code" name="purchaseorderitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="" />';
             purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '<div class="margin-top-10">';
 			purchaseorderitem_row += '<div class="btn-group">';
@@ -640,7 +640,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->purchaseorderitem_product_code?>" />
 															</div>
 															<div class="margin-top-10">
-																<input id="purchaseorderitem_product_color_code_<?=$key?>" name="purchaseorderitem_product_color_code[]" type="text" class="form-control input-sm required" placeholder="Color code" value="<?=$value->purchaseorderitem_product_color_code?>" />
+																<input id="purchaseorderitem_product_color_code_<?=$key?>" name="purchaseorderitem_product_color_code[]" type="text" class="form-control input-sm" placeholder="Color code" value="<?=$value->purchaseorderitem_product_color_code?>" />
                                                             </div>
 															<div class="margin-top-10">
 																<div class="btn-group">

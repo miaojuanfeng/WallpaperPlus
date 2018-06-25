@@ -36,6 +36,18 @@ class Salesorder extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
+			//
+			$salesorder_category_discount = array();
+			foreach ($thisPOST['category_name'] as $key => $value) {
+				$category = (object) [
+							    'category_id' => $thisPOST['category_id'][$key],
+							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount' => $thisPOST['category_discount'][$key]
+							  ];
+				$salesorder_category_discount[] = $category;
+			}
+			$thisPOST['salesorder_category_discount'] = json_encode($salesorder_category_discount);
+			//
 			$this->salesorder_model->update($thisPOST);
 
 			$thisSalesorderitem = get_array_prefix('salesorderitem_', $thisPOST);
@@ -74,6 +86,13 @@ class Salesorder extends CI_Controller {
 				'return' => 'row'
 			);
 			$data['salesorder'] = $this->salesorder_model->select($thisSelect);
+
+			$salesorder_category_discount = $data['salesorder']->salesorder_category_discount;
+			if( $salesorder_category_discount ){
+				$data['salesorder_category_discount'] = json_decode($salesorder_category_discount);
+			}else{
+				$data['salesorder_category_discount'] = array();
+			}
 
 			/* quotation */
 			$thisSelect = array(
@@ -178,6 +197,18 @@ class Salesorder extends CI_Controller {
 			$thisPOST['salesorder_number'] = 'SO'.date('ym').$thisPOST['salesorder_serial'];
 			$thisPOST['salesorder_version'] = 0;
 			$thisPOST['salesorder_status'] = 'processing';
+			//
+			$salesorder_category_discount = array();
+			foreach ($thisPOST['category_name'] as $key => $value) {
+				$category = (object) [
+							    'category_id' => $thisPOST['category_id'][$key],
+							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount' => $thisPOST['category_discount'][$key]
+							  ];
+				$salesorder_category_discount[] = $category;
+			}
+			$thisPOST['salesorder_category_discount'] = json_encode($salesorder_category_discount);
+			//
 			$thisPOST['salesorder_id'] = $thisInsertId = $this->salesorder_model->insert($thisPOST);
 
 			$thisQuotationitem = get_array_prefix('salesorderitem_', $thisPOST);
@@ -216,6 +247,13 @@ class Salesorder extends CI_Controller {
 			);
 			$data['quotation'] = $this->quotation_model->select($thisSelect);
 			$data['salesorder'] = convert_quotation_to_salesorder($data['quotation']);
+
+			$salesorder_category_discount = $data['salesorder']->salesorder_category_discount;
+			if( $salesorder_category_discount ){
+				$data['salesorder_category_discount'] = json_decode($salesorder_category_discount);
+			}else{
+				$data['salesorder_category_discount'] = array();
+			}
 
 			/* preset data */
 			$data['salesorder']->salesorder_quotation_id = $data['quotation']->quotation_id;
