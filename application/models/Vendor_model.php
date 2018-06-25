@@ -76,6 +76,7 @@ class Vendor_model extends CI_Model {
 						break;
 					case 'vendor_id_like':
 					case 'vendor_firstname_like':
+					case 'vendor_company_code_like':
 					case 'vendor_company_name_like':
 					case 'vendor_user_id_like':
 						$thisField = str_replace('_like', '', $key);

@@ -80,6 +80,7 @@ function changeSort(o){
 
 function clickSearch(){
     search = '';
+    page = 0;
     $('.search-control input[type="text"]').each(function(){
         var name = $(this).attr("name");
         var value = $(this).val();

@@ -8,7 +8,7 @@
                 <tr>
                     <td width="90%">
                         <div class="row search-control">
-                            <div class="col-sm-2"><h6>Product</h6></div>
+                            <!-- <div class="col-sm-1"><h6>Product</h6></div> -->
                             <div class="col-sm-2">
                                 <input type="text" name="product_id" class="form-control input-sm" placeholder="#" value="" />
                             </div>
@@ -22,10 +22,11 @@
                                 <input type="text" name="product_name_like" class="form-control input-sm" placeholder="Product name" value="" />
                             </div>
                             <div class="col-sm-2">
+                                <input type="text" name="vendor_company_code_like" class="form-control input-sm" placeholder="Vendor company code" value="" />
+                            </div>
+                            <div class="col-sm-2">
                                 <input type="text" name="vendor_company_name_like" class="form-control input-sm" placeholder="Vendor company name" value="" />
                             </div>
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-2"></div>
                         </div>
                     </td>
                     <td valign="top" width="10%" class="text-right">
@@ -52,6 +53,12 @@
                 <tr>
                     <th>#</th>
                     <th>
+                        Company ID
+                    </th>
+                    <th>
+                        Company name
+                    </th>
+                    <th>
                         <a href="javascript:;" onclick="changeSort('product_code')">
                             Code <i class="glyphicon glyphicon-sort corpcolor-font"></i>
                         </a>
@@ -64,11 +71,6 @@
                     <th>
                         <a href="javascript:;" onclick="changeSort('product_name')">
                             Name <i class="glyphicon glyphicon-sort corpcolor-font"></i>
-                        </a>
-                    </th>
-                    <th>
-                        <a href="javascript:;" onclick="changeSort('product_cost')">
-                            Cost <i class="glyphicon glyphicon-sort corpcolor-font"></i>
                         </a>
                     </th>
                     <th>
@@ -89,10 +91,11 @@
                         <td title="<?=$value->product_id?>">
                             <input type="checkbox" onclick="clickRecord(<?=$value->product_id?>)" />&nbsp;&nbsp;&nbsp;&nbsp;<?=$key+1?>
                         </td>
+                        <td><?=get_vendor($value->product_vendor_id)->vendor_company_code?></td>
+                        <td><?=get_vendor($value->product_vendor_id)->vendor_company_name?></td>
                         <td><?=$value->product_code?></td>
                         <td><?=$value->product_wpp_code?></td>
                         <td><?=$value->product_name?></td>
-                        <td><?='HKD '.$value->product_cost?></td>
                         <td><?='HKD '.$value->product_price_hkd?></td>
                         <td><?=convert_datetime_to_date($value->product_modify)?></td>
                     </tr>
