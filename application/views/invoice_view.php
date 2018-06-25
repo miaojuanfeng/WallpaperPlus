@@ -193,7 +193,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '</div>';
 			invoiceitem_row += '</td>';
 			invoiceitem_row += '<td>';
-			invoiceitem_row += '<input id="invoiceitem_product_price" name="invoiceitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
+			invoiceitem_row += '<input id="invoiceitem_product_price" name="invoiceitem_product_price[]" type="number" min="0" step="0.01" class="form-control input-sm" placeholder="Price" value="" />';
 			invoiceitem_row += '</td>';
 			invoiceitem_row += '<td>';
             invoiceitem_row += '<div class="input-group">';
@@ -466,7 +466,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 														</td>
 														<td>
-															<input id="invoiceitem_product_price" name="invoiceitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="<?=$value->invoiceitem_product_price?>" />
+															<input id="invoiceitem_product_price" name="invoiceitem_product_price[]" type="number" min="0" step="0.01" class="form-control input-sm" placeholder="Price" value="<?=$value->invoiceitem_product_price?>" />
 <!--															<div class="margin-top-10">-->
 <!--																<label>Sold</label>-->
 <!--															</div>-->

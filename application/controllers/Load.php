@@ -221,7 +221,7 @@ class Load extends CI_Controller {
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_unit[]\']").val("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') .quotationitem_unit").html("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
 			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') textarea[name=\'quotationitem_product_detail[]\']").val("'.convert_nl(get_product_size($thisData->product_id)->attribute_name.'\n'.$thisData->product_repeat).'").css("display", "none").fadeIn();';
-			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd*$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
+			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'quotationitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd/$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
 			echo 'category_discount();';
 			echo '}';
 			echo '</script>';
@@ -330,7 +330,7 @@ class Load extends CI_Controller {
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'salesorderitem_unit[]\']").val("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') .salesorderitem_unit").html("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
 			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') textarea[name=\'salesorderitem_product_detail[]\']").val("'.convert_nl(get_product_size($thisData->product_id)->attribute_name.'\n'.$thisData->product_repeat).'").css("display", "none").fadeIn();';
-			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'salesorderitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd*$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
+			echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'salesorderitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd/$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
 			echo '}';
 			echo '</script>';
 		}
@@ -398,7 +398,7 @@ class Load extends CI_Controller {
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'invoiceitem_unit[]\']").val("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') .invoiceitem_unit").html("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') textarea[name=\'invoiceitem_product_detail[]\']").val("'.convert_nl(get_product_size($thisData->product_id)->attribute_name.'\n'.$thisData->product_repeat).'").css("display", "none").fadeIn();';
-            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'invoiceitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd*$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'invoiceitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd/$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
             echo '}';
             echo '</script>';
         }
@@ -432,7 +432,7 @@ class Load extends CI_Controller {
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'deliverynoteitem_unit[]\']").val("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') .deliverynoteitem_unit").html("'.get_unit($thisData->product_unit_id)->unit_name.'").css("display", "none").fadeIn();';
             echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') textarea[name=\'deliverynoteitem_product_detail[]\']").val("'.convert_nl(get_product_size($thisData->product_id)->attribute_name.'\n'.$thisData->product_repeat).'").css("display", "none").fadeIn();';
-            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'deliverynoteitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd*$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
+            echo '$("table.list tbody tr:eq('.$this->input->post('thisRow').') input[name=\'deliverynoteitem_product_price[]\']").val("'.money_format('%!n', $thisData->product_price_hkd/$thisCurrency->currency_exchange_rate).'").css("display", "none").fadeIn();';
             echo '}';
             echo '</script>';
         }

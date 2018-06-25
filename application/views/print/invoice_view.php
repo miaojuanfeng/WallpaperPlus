@@ -189,7 +189,8 @@ switch($invoice->invoice_currency){
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
 			<tr>
 				<td width="12%"><b>PART NO.</b></td>
-				<td width="55%"><b>DESCRIPTION</b></td>
+				<td width="12%"><b>DESCRIPTION</b></td>
+				<td width="11%" align="center"><b>SIZE</b></td>
                 <td width="15%"><b>QTY</b></td>
 				<td width="12%"><b>UNIT PRICE</b></td>
 				<td width="10%" align="right"><b>AMOUNT</b></td>
@@ -240,24 +241,30 @@ switch($invoice->invoice_currency){
 
 		<?php if($this->router->fetch_method() == 'content'){ ?>
 		<table cellspacing="0" cellpadding="0" class="content-table line-height-12 document-separator-bottom">
-			<?php foreach($invoiceitems as $key => $value){ ?>
+			<?php 
+			foreach($invoiceitems as $key => $value){ 
+				$thisProduct = get_product($value->invoiceitem_product_id);
+			?>
 			<tr class="padding-top-5">
 				<td width="12%"></td>
-				<td width="55%"></td>
+				<td width="12%"></td>
+				<td width="11%"></td>
 				<td width="15%"></td>
 				<td width="12%"></td>
 				<td width="10%"></td>
 			</tr>
 			<tr class="padding-bottom-5">
 				<td valign="top"><div class="part_number"><?=$value->invoiceitem_product_code?></div></td>
-				<td valign="top"><?=$value->invoiceitem_product_code.' - '.$value->invoiceitem_product_name?></td>
-                <td valign="top"><?=$value->invoiceitem_quantity?></td>
+				<td valign="top"><?=$value->invoiceitem_product_name?></td>
+				<td valign="top" align="center"><?=$value->invoiceitem_product_detail?></td>
+                <td valign="top"><?=$value->invoiceitem_quantity.' '.get_unit($thisProduct->product_unit_id)->unit_name?></td>
 				<td valign="top"><?=strtoupper($invoice->invoice_currency).' '.money_format('%!n', $value->invoiceitem_product_price)?></td>
 				<td valign="top" align="right"><?=strtoupper($invoice->invoice_currency).' '.money_format('%!n', $value->invoiceitem_product_price * $value->invoiceitem_quantity)?></td>
 			</tr>
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

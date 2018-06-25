@@ -359,7 +359,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             quotationitem_row += '</div>';
 			quotationitem_row += '</td>';
 			quotationitem_row += '<td>';
-			quotationitem_row += '<input id="quotationitem_product_price" name="quotationitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
+			quotationitem_row += '<input id="quotationitem_product_price" name="quotationitem_product_price[]" type="number" min="0" step="0.01" class="form-control input-sm" placeholder="Price" value="" />';
 			quotationitem_row += '</td>';
 			quotationitem_row += '<td>';
             quotationitem_row += '<div class="input-group">';
@@ -770,7 +770,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             </div>
 														</td>
 														<td>
-															<input id="quotationitem_product_price" name="quotationitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="<?=$value->quotationitem_product_price?>" />
+															<input id="quotationitem_product_price" name="quotationitem_product_price[]" type="number" min="0" step="0.01" class="form-control input-sm" placeholder="Price" value="<?=$value->quotationitem_product_price?>" />
 														</td>
 														<td>
                                                             <div class="input-group">

@@ -186,7 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '</div>';
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
-			salesorderitem_row += '<input id="salesorderitem_product_price" name="salesorderitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="" />';
+			salesorderitem_row += '<input id="salesorderitem_product_price" name="salesorderitem_product_price[]" type="number" min="0" step="0.01" class="form-control input-sm" placeholder="Price" value="" />';
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
             salesorderitem_row += '<div class="input-group">';
@@ -591,7 +591,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 														</td>
 														<td>
-															<input id="salesorderitem_product_price" name="salesorderitem_product_price[]" type="number" min="0" class="form-control input-sm" placeholder="Price" value="<?=$value->salesorderitem_product_price?>" />
+															<input id="salesorderitem_product_price" name="salesorderitem_product_price[]" type="number" min="0" step="0.01" class="form-control input-sm" placeholder="Price" value="<?=$value->salesorderitem_product_price?>" />
 														</td>
 														<td>
                                                             <div class="input-group">
