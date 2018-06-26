@@ -138,10 +138,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <label for="waybill_number">Waybill number <span class="highlight">*</span></label>
                                             <input id="waybill_number" name="waybill_number" class="form-control input-sm required" placeholder="Waybill number" value="<?=$waybill->waybill_number?>" />
                                         </p>
-                                        <p class="form-group">
+                                        <!-- <p class="form-group">
                                             <label for="waybill_lot_number">Lot number</label>
                                             <input id="waybill_lot_number" name="waybill_lot_number" type="text" class="form-control input-sm" placeholder="Lot number" value="<?=$waybill->waybill_lot_number?>" />
-                                        </p>
+                                        </p> -->
 										<p class="form-group">
 											<label for="waybill_customs_number">Customs number <span class="highlight"></span></label>
 											<input id="waybill_customs_number" name="waybill_customs_number" type="text" class="form-control input-sm" placeholder="Customs number" value="<?=$waybill->waybill_customs_number?>" />
@@ -306,7 +306,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th>#</th>
 												<th>Waybill number</th>
-                                                <th>Lot number</th>
                                                 <th>Customs number</th>
                                                 <th>Express company</th>
                                                 <th>Delivery day</th>
@@ -325,7 +324,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td title="<?=$value->waybill_id?>"><?=$key+1?></td>
 												<td><?=ucfirst($value->waybill_number)?></td>
-                                                <td><?=ucfirst($value->waybill_lot_number)?></td>
                                                 <td><?=ucfirst($value->waybill_customs_number)?></td>
                                                 <td><?=ucfirst($value->waybill_express_company)?></td>
                                                 <td><?=ucfirst($value->waybill_delivery_day)?></td>

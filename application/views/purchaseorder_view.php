@@ -452,7 +452,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <p class="form-group">
                                             <label for="purchaseorder_arrive_date">Arrive date <span class="highlight">*</span></label>
 	                                        <span class="input-group date datetimepicker">
-	                                            <input id="purchaseorder_arrive_date" name="purchaseorder_arrive_date" type="text" class="form-control input-sm date-mask required" placeholder="Arrive date" value="<?=$purchaseorder->purchaseorder_arrive_date?>" />
+	                                            <input id="purchaseorder_arrive_date" name="purchaseorder_arrive_date" type="text" class="form-control input-sm date-mask required" placeholder="Arrive date" value="<?=($purchaseorder->purchaseorder_arrive_date != '') ? $purchaseorder->purchaseorder_arrive_date : date('Y-m-d', strtotime('+4 days', time()))?>" />
 	                                        	<span class="input-group-addon">
 													<span class="glyphicon glyphicon-calendar"></span>
 												</span>
@@ -465,6 +465,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <p class="form-group">
                                             <label for="purchaseorder_delivery_address">Delivery address <span class="highlight"></span></label>
                                             <textarea id="purchaseorder_delivery_address" name="purchaseorder_delivery_address" class="form-control input-sm" placeholder="Delivery address"><?=$purchaseorder->purchaseorder_delivery_address?></textarea>
+                                        </p>
+                                        <p class="form-group">
+                                            <label for="purchaseorder_tracking_number">Tracking number <span class="highlight"></span></label>
+                                            <input id="purchaseorder_tracking_number" name="purchaseorder_tracking_number" type="text" class="form-control input-sm" placeholder="Tracking number" value="<?=$purchaseorder->purchaseorder_tracking_number?>" />
                                         </p>
 <!--										<p class="form-group">-->
 <!--											<label for="purchaseorder_currency">Currency</label>-->

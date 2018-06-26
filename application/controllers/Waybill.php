@@ -56,7 +56,7 @@ class Waybill extends CI_Controller {
             $thisSelect = array(
             	'where' => array(
                     'purchaseorder_id_not_in' => $z_waybill_purchaseorder_purchaseorder_ids,
-					'purchaseorder_status_in' => array('processing', 'partial')
+					'purchaseorder_arrive_status' => 'complete'
 				),
                 'return' => 'result'
             );
@@ -118,7 +118,7 @@ class Waybill extends CI_Controller {
             $thisSelect = array(
             	'where' => array(
             	    'purchaseorder_id_not_in' => $z_waybill_purchaseorder_purchaseorder_ids,
-					'purchaseorder_status_in' => array('processing', 'partial')
+					'purchaseorder_arrive_status' => 'complete'
 				),
                 'return' => 'result'
             );
