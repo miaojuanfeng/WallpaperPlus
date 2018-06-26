@@ -269,8 +269,8 @@ switch($quotation->quotation_currency){
                 <td valign="top"><?=$value->quotationitem_product_name?></td>
                 <td valign="top" align="center"><?=$value->quotationitem_product_detail?></td>
                 <td valign="top" align="center"><?=$value->quotationitem_quantity.' '.get_unit($thisProduct->product_unit_id)->unit_name?></td>
-				<td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->quotationitem_product_price)?></td>
-				<td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->quotationitem_product_price * $value->quotationitem_quantity)?></td>
+				<td valign="top" align="right"><?=strtoupper($quotation->quotation_currency).' '.money_format('%!n', $value->quotationitem_product_price)?></td>
+				<td valign="top" align="right"><?=strtoupper($quotation->quotation_currency).' '.money_format('%!n', $value->quotationitem_product_price * $value->quotationitem_quantity)?></td>
 			</tr>
 			<?php } ?>
 			<tr class="document-separator-bottom">
@@ -285,6 +285,22 @@ switch($quotation->quotation_currency){
 		</table>
 
 		<table cellspacing="0" cellpadding="0">
+			<?php 
+				if( !empty($quotation->quotation_category_discount) ){ 
+					$quotation_category_discount = json_decode($quotation->quotation_category_discount);
+					foreach ($quotation_category_discount as $key => $value) {
+			?>
+			<tr>
+				<td width="12%"></td>
+				<td width="55%"></td>
+				<td width="15%" align="right"><b><?=strtoupper($value->category_name)?> DISCOUNT</b></td>
+				<td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
+				<td width="10%" align="right"><?=money_format('%!n', $value->category_discount)?></td>
+			</tr>
+			<?php 	
+					}
+				}
+			?>
 			<?php if($quotation->quotation_discount != 0){ ?>
 			<tr>
 				<td width="12%"></td>

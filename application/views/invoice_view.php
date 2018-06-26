@@ -376,8 +376,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<div class="input-group">
 																<span class="input-group-addon" style="padding:0;border:none;text-align:left;min-width:60px;">
 																	<select id="number_prefix" name="number_prefix" data-placeholder="Prefix" class="chosen-select required">
-																		<option value="<?=$number_prefix?>" <?php if( strpos($invoice->invoice_number, 'E'.$number_prefix) === false || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>><?=$number_prefix?></option>
-																		<option value="E<?=$number_prefix?>" <?php if( strpos($invoice->invoice_number, 'E'.$number_prefix) !== false || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>E<?=$number_prefix?></option>
+																		<option value="<?=$number_prefix?>" <?php if( ( !empty($invoice->invoice_number) && strpos($invoice->invoice_number, 'E'.$number_prefix) === false ) || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>><?=$number_prefix?></option>
+																		<option value="E<?=$number_prefix?>" <?php if( ( !empty($invoice->invoice_number) && strpos($invoice->invoice_number, 'E'.$number_prefix) !== false ) || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>E<?=$number_prefix?></option>
 																	</select>
 																</span>
 																<input readonly="readonly" id="invoice_number" name="invoice_number" type="text" class="form-control input-sm" placeholder="Invoice#" value="<?=str_replace(array('DEP', 'INV', 'E', 'C'), '', $invoice->invoice_number)?>" />
@@ -485,13 +485,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																$invoiceitem_sold = 0;
 															}
 															if($invoice->invoice_id > 0){
-																$thisInvoiceitemQuantity = $value->invoiceitem_quantity;	
+																$thisInvoiceitemQuantity = $value->invoiceitem_quantity;
 															}else{
 																$thisInvoiceitemQuantity = $salesorder_quantity - $invoiceitem_sold;
 															}
 															?>
                                                             <div class="input-group">
-                                                                <input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$salesorder_quantity - $invoiceitem_sold?>" />
+                                                                <input id="invoiceitem_quantity" name="invoiceitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$thisInvoiceitemQuantity?>" />
                                                                 <input id="invoiceitem_unit" name="invoiceitem_unit[]" type="hidden" value="<?=$value->invoiceitem_unit?>" />
                                                                 <span class="input-group-addon invoiceitem_unit"><?=($value->invoiceitem_unit) ? $value->invoiceitem_unit : 'Unit'?></span>
                                                             </div>

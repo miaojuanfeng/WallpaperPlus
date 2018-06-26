@@ -548,8 +548,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<div class="input-group">
 																<span class="input-group-addon" style="padding:0;border:none;text-align:left;min-width:60px;">
 																	<select id="number_prefix" name="number_prefix" data-placeholder="Prefix" class="chosen-select required">
-																		<option value="PO" <?php if( strpos($purchaseorder->purchaseorder_number, 'EPO') === false || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>PO</option>
-																		<option value="EPO" <?php if( strpos($purchaseorder->purchaseorder_number, 'EPO') !== false || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>EPO</option>
+																		<option value="PO" <?php if( ( !empty($purchaseorder->purchaseorder_number) && strpos($purchaseorder->purchaseorder_number, 'EPO') === false ) || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>PO</option>
+																		<option value="EPO" <?php if( ( !empty($purchaseorder->purchaseorder_number) && strpos($purchaseorder->purchaseorder_number, 'EPO') !== false ) || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>EPO</option>
 																	</select>
 																</span>
 																<input readonly="readonly" id="purchaseorder_number" name="purchaseorder_number" type="text" class="form-control input-sm" placeholder="Purchase order#" value="<?=str_replace(array('E', 'PO'), '', $purchaseorder->purchaseorder_number)?>" />

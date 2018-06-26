@@ -218,7 +218,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$('.scriptLoader').load('/load', {'thisTableId': 'quotationProductLoader', 'thisRecordId': $(thisObject).val(), 'thisCurrency': thisCurrency, 'thisRow': thisRow, 't': timestamp()}, function(){
 				quotationProductLoader();
 				textarea_auto_height();
-				calc();
+				discount_type_calc();
+				// calc();
 			});
 		}
 
@@ -228,7 +229,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $('.scriptLoader').load('/load', {'thisTableId': 'quotationProductCodeLoader', 'thisRecordId': $(thisObject).val(), 'thisCurrency': thisCurrency, 'thisRow': thisRow, 't': timestamp()}, function(){
                 quotationProductCodeLoader();
                 textarea_auto_height();
-                // calc();
+                calc();
             });
         }
 
@@ -647,8 +648,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<div class="input-group">
 																<span class="input-group-addon" style="padding:0;border:none;text-align:left;min-width:60px;">
 																	<select id="number_prefix" name="number_prefix" data-placeholder="Prefix" class="chosen-select required">
-																		<option value="Q" <?php if( strpos($quotation->quotation_number, 'EQ') === false || ( $this->router->fetch_method() == 'insert' && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>Q</option>
-																		<option value="EQ" <?php if( strpos($quotation->quotation_number, 'EQ') !== false || ( $this->router->fetch_method() == 'insert' && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>EQ</option>
+																		<option value="Q" <?php if( ( !empty($quotation->quotation_number) && strpos($quotation->quotation_number, 'EQ') === false ) || ( ( $this->router->fetch_method() == 'insert' || $this->router->fetch_method() == 'duplicate' ) && empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>Q</option>
+																		<option value="EQ" <?php if( ( !empty($quotation->quotation_number) && strpos($quotation->quotation_number, 'EQ') !== false ) || ( ( $this->router->fetch_method() == 'insert' || $this->router->fetch_method() == 'duplicate' ) && !empty($this->session->userdata('user_order_prefix')) ) ) echo "selected"; ?>>EQ</option>
 																	</select>
 																</span>
 																<input readonly="readonly" id="quotation_number" name="quotation_number" type="text" class="form-control input-sm" placeholder="Quotation#" value="<?=str_replace(array('E', 'Q'), '', $quotation->quotation_number)?>" />
@@ -704,10 +705,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</span>
 														</td>
 													</tr>
+													<?php if( $quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate' ) { ?>
 													<tr>
 														<td><label for="approval_code">Approval code</label></td>
-														<td><input id="approval_code" name="approval_code" type="text" class="form-control input-sm <?php if( $quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate' ) { echo "required"; }?>" placeholder="Approval code" value="" /></td>
+														<td><input id="approval_code" name="approval_code" type="text" class="form-control input-sm required" placeholder="Approval code" value="" /></td>
 													</tr>
+													<?php } ?>
 												</table>
 											</div>
 										</div>
