@@ -59,7 +59,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if(confirm('Confirm delete?')){
 					$(this).closest('tr').remove();
 					category_discount();
-					calc();
+					// discount_type_calc();
+					// calc();
 				}else{
 					return false;
 				}
@@ -304,6 +305,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			});
 			$('.scriptLoader').load('/load', {'thisTableId': 'quotationCategoryDiscountLoader', 'thisRecordId': category_discount_id, 'existsRecordId': exists_discount_id, 't': timestamp()}, function(){
                 quotationCategoryDiscountLoader();
+                discount_type_calc();
             });
 		}
 

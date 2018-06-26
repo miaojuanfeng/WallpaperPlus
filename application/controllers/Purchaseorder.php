@@ -188,7 +188,7 @@ class Purchaseorder extends CI_Controller {
 			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/purchaseorder/header/purchaseorder_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/purchaseorder/content/purchaseorder_id/'.$thisInsertId).'"';
-			$wkhtmltopdf .= ' assets/images/pdf/salesorder/'.$thisPOST['purchaseorder_number'].'.pdf';
+			$wkhtmltopdf .= ' assets/images/pdf/purchaseorder/'.$thisPOST['purchaseorder_number'].'.pdf';
 			$output = exec($wkhtmltopdf);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();
@@ -242,6 +242,7 @@ class Purchaseorder extends CI_Controller {
                 $data['purchaseorder']->purchaseorder_fax_no = '';
                 $data['purchaseorder']->purchaseorder_tel_no = '';
                 $data['purchaseorder']->purchaseorder_delivery_address = '';
+                $data['purchaseorder']->purchaseorder_tracking_number = '';
 			}
 
 			/* currency */

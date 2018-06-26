@@ -310,7 +310,7 @@ switch($quotation->quotation_currency){
 				<td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_discount)?></td>
 			</tr>
 			<?php } ?>
-            <?php if(1){ ?>
+            <?php if($quotation->quotation_freight != 0){ ?>
             <tr>
                 <td width="12%"></td>
                 <td width="55%"></td>

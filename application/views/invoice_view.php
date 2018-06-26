@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             total = total - category_discount_total + parseFloat($('input[name="invoice_freight"]').val()) - parseFloat($('input[name="invoice_discount"]').val());
 			$('input[name="invoice_pay"]').val(parseFloat(parseFloat(total)-parseFloat($('input[name="invoice_paid"]').val())).toFixed(2));
 			$('input[name="invoice_total"]').val(parseFloat(total).toFixed(2)).css('display', 'none').fadeIn();
-			$('input[name="invoice_balance"]').val(parseFloat(total - parseFloat($('input[name="invoice_paid"]').val()) - parseFloat($('input[name="invoice_pay"]').val())).toFixed(2)).css('display', 'none').fadeIn();
+			$('input[name="invoice_balance"]').val(parseFloat(total.toFixed(2) - parseFloat($('input[name="invoice_paid"]').val()).toFixed(2) - parseFloat($('input[name="invoice_pay"]').val()).toFixed(2)).toFixed(2)).css('display', 'none').fadeIn();
 		}
 
 		function calc_balance(){

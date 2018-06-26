@@ -175,7 +175,7 @@ class Deliverynote extends CI_Controller {
 			$wkhtmltopdf  = $this->config->item("wkhtmltox_path");
 			$wkhtmltopdf .= ' --no-outline --header-html "'.base_url('print/deliverynote/header/deliverynote_id/'.$thisInsertId).'"';
 			$wkhtmltopdf .= ' --margin-top 68 --header-spacing 0 "'.base_url('print/deliverynote/content/deliverynote_id/'.$thisInsertId).'"';
-			$wkhtmltopdf .= ' assets/images/pdf/salesorder/'.$thisPOST['deliverynote_number'].'.pdf';
+			$wkhtmltopdf .= ' assets/images/pdf/deliverynote/'.$thisPOST['deliverynote_number'].'.pdf';
 			$output = exec($wkhtmltopdf);
 
 			$thisLog['log_permission_class'] = $this->router->fetch_class();

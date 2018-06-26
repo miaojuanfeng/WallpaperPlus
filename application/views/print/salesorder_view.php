@@ -264,8 +264,8 @@ switch($salesorder->salesorder_currency){
                 <td valign="top"><?=$value->salesorderitem_product_name?></td>
                 <td valign="top" align="center"><?=$value->salesorderitem_product_detail?></td>
                 <td valign="top" align="center"><?=$value->salesorderitem_quantity.' '.get_unit($thisProduct->product_unit_id)->unit_name?></td>
-                <td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->salesorderitem_product_price)?></td>
-                <td valign="top" align="right"><?=strtoupper(get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name).' '.money_format('%!n', $value->salesorderitem_product_price * $value->salesorderitem_quantity)?></td>
+                <td valign="top" align="right"><?=strtoupper($salesorder->salesorder_currency).' '.money_format('%!n', $value->salesorderitem_product_price)?></td>
+                <td valign="top" align="right"><?=strtoupper($salesorder->salesorder_currency).' '.money_format('%!n', $value->salesorderitem_product_price * $value->salesorderitem_quantity)?></td>
 			</tr>
 			<?php } ?>
 			<tr class="document-separator-bottom">
@@ -280,15 +280,40 @@ switch($salesorder->salesorder_currency){
 		</table>
 
 		<table cellspacing="0" cellpadding="0">
+			<?php 
+				if( !empty($salesorder->salesorder_category_discount) ){ 
+					$salesorder_category_discount = json_decode($salesorder->salesorder_category_discount);
+					foreach ($salesorder_category_discount as $key => $value) {
+			?>
+			<tr>
+				<td width="12%"></td>
+				<td width="55%"></td>
+				<td width="15%" align="right"><b><?=strtoupper($value->category_name)?> DISCOUNT</b></td>
+				<td width="8%" align="center"><?=strtoupper($salesorder->salesorder_currency)?></td>
+				<td width="10%" align="right"><?=money_format('%!n', $value->category_discount)?></td>
+			</tr>
+			<?php 	
+					}
+				}
+			?>
 			<?php if($salesorder->salesorder_discount != 0){ ?>
 			<tr>
 				<td width="12%"></td>
 				<td width="55%"></td>
 				<td width="15%" align="right"><b>DISCOUNT</b></td>
 				<td width="8%" align="center"><?=strtoupper($salesorder->salesorder_currency)?></td>
-                <td width="10%" align="right"><?=money_format('%!n', $salesorder->salesorder_total * (1 - $salesorder->salesorder_discount / 100))?></td>
+                <td width="10%" align="right"><?=money_format('%!n', $salesorder->salesorder_discount)?></td>
 			</tr>
 			<?php } ?>
+			<?php if($salesorder->salesorder_freight != 0){ ?>
+            <tr>
+                <td width="12%"></td>
+                <td width="55%"></td>
+                <td width="15%" align="right"><b>FREIGHT</b></td>
+                <td width="8%" align="center"><?=strtoupper($salesorder->salesorder_currency)?></td>
+                <td width="10%" align="right"><?=money_format('%!n', $salesorder->salesorder_freight)?></td>
+            </tr>
+            <?php } ?>
 			<tr>
 				<td width="12%"></td>
 				<td width="55%"></td>

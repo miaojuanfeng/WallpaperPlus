@@ -204,11 +204,11 @@ switch($purchaseorder->purchaseorder_currency){
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
 			<tr>
 				<td width="12%"><b>Our ref.</b></td>
-				<td width="20%"><b>DESCRIPTION</b></td>
-				<td width="11%" align="center"><b>SIZE</b></td>
-                <td width="15%"><b>QUANTITY</b></td>
-				<td width="15%"><b>LIST PRICE</b></td>
-				<td width="8%"><b>NET PRICE</b></td>
+				<td width="15%"><b>DESCRIPTION</b></td>
+				<td width="15%" align="center"><b>SIZE</b></td>
+                <td width="15%"><b>QTY</b></td>
+				<td width="11%"><b>LIST PRICE</b></td>
+				<!-- <td width="8%"><b>NET PRICE</b></td> -->
 				<td width="10%" align="right"><b>AMOUNT</b></td>
 			</tr>
 		</table>
@@ -265,11 +265,11 @@ switch($purchaseorder->purchaseorder_currency){
 			    ?>
 			<tr class="padding-top-5">
                 <td width="12%"></td>
-                <td width="20%"></td>
+                <td width="15%"></td>
+                <td width="15%"></td>
+                <td width="15%"></td>
                 <td width="11%"></td>
-                <td width="15%"></td>
-                <td width="15%"></td>
-                <td width="8%"></td>
+                <!-- <td width="8%"></td> -->
                 <td width="10%"></td>
 			</tr>
 			<tr class="padding-bottom-5">
@@ -281,7 +281,7 @@ switch($purchaseorder->purchaseorder_currency){
                     }
                     ?>
                 </td>
-                <td valign="top">
+                <td valign="top" align="center">
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
                         echo '<div>'.$value1->invoiceitem_product_detail.'</div>';
@@ -303,13 +303,13 @@ switch($purchaseorder->purchaseorder_currency){
                     }
                     ?>
                 </td>
-                <td valign="top">
+                <!-- <td valign="top">
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
                         echo '<div>'.'xxx'.'</div>';
                     }
                     ?>
-                </td>
+                </td> -->
 				<td valign="top" align="right">
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
@@ -333,10 +333,10 @@ switch($purchaseorder->purchaseorder_currency){
 		<table cellspacing="0" cellpadding="0">
 			<tr>
                 <td width="12%"></td>
-                <td width="20%"></td>
-                <td width="15%"><?=$quantity_count?></td>
+                <td width="15%"></td>
+                <td width="15%"><?php //$quantity_count ?></td>
                 <td width="15%"><b>GRAND TOTAL</b></td>
-                <td width="8%"><?=strtoupper($purchaseorder->purchaseorder_currency)?></td>
+                <td width="11%"><?=strtoupper($purchaseorder->purchaseorder_currency)?></td>
                 <td width="10%" align="right"><?=money_format('%!n', $total)?></td>
 			</tr>
 		</table>

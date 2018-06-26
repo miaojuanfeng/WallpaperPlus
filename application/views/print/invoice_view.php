@@ -273,6 +273,23 @@ switch($invoice->invoice_currency){
 		</table>
 
 		<table cellspacing="0" cellpadding="0">
+			<?php 
+				if( !empty($invoice->invoice_category_discount) ){ 
+					$invoice_category_discount = json_decode($invoice->invoice_category_discount);
+					foreach ($invoice_category_discount as $key => $value) {
+			?>
+			<tr>
+				<td width="12%"></td>
+				<td width="55%"></td>
+				<td width="15%" align="right"><b><?=strtoupper($value->category_name)?> DISCOUNT</b></td>
+				<td width="8%" align="center"><?=strtoupper($invoice->invoice_currency)?></td>
+				<td width="10%" align="right"><?=money_format('%!n', $value->category_discount)?></td>
+			</tr>
+			<?php 	
+					}
+				}
+			?>
+			<?php if($invoice->invoice_discount != 0){ ?>
 			<tr>
 				<td width="12%"></td>
 				<td width="55%"></td>
@@ -280,6 +297,16 @@ switch($invoice->invoice_currency){
 				<td width="8%" align="center"><?=strtoupper($invoice->invoice_currency)?></td>
 				<td width="10%" align="right"><?=money_format('%!n', $invoice->invoice_discount)?></td>
 			</tr>
+			<?php } ?>
+			<?php if($invoice->invoice_freight != 0){ ?>
+            <tr>
+                <td width="12%"></td>
+                <td width="55%"></td>
+                <td width="15%" align="right"><b>FREIGHT</b></td>
+                <td width="8%" align="center"><?=strtoupper($invoice->invoice_currency)?></td>
+                <td width="10%" align="right"><?=money_format('%!n', $invoice->invoice_freight)?></td>
+            </tr>
+            <?php } ?>
 			<tr>
 				<td></td>
 				<td></td>
