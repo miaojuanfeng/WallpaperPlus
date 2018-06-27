@@ -141,17 +141,17 @@ class Salesreport extends CI_Controller {
 	public function select()
 	{
 		/* check invoice */
-		if(isset($thisGET['invoice_number_like']) || isset($thisGET['invoice_create_greateq']) || isset($thisGET['invoice_create_smalleq'])){
+		if(isset($this->thisGET['invoice_number_like']) || isset($this->thisGET['invoice_create_greateq']) || isset($this->thisGET['invoice_create_smalleq'])){
 			$thisSelect = array(
-				'where' => $thisGET,
+				'where' => $this->thisGET,
 				'return' => 'row'
 			);
 			$data['invoice'] = $this->invoice_model->select($thisSelect);
 
 			if($data['invoice']){
-				$thisGET['salesorder_id'] = $data['invoice']->invoice_salesorder_id;
+				$this->thisGET['salesorder_id'] = $data['invoice']->invoice_salesorder_id;
 			}else{
-				$thisGET['salesorder_id'] = 0;
+				$this->thisGET['salesorder_id'] = 0;
 			}
 		}
 		/* check invoice */

@@ -47,23 +47,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				format: 'Y-MM-DD'
 			});
 
-			$('input[name^="checklistStatus-"]').click(function(){
-				thisInputName = $(this).attr('name');
-				if($('input[name="'+thisInputName+'"]:checked')){
-					setTimeout(function(){ 
-						var answer = prompt("Please insert remark");
-						if(answer){
-							thisId = thisInputName.replace('checklistStatus-', '');
-							$('input[name="deliverynote_id"]').val(thisId);
-							$('input[name="deliverynote_status"]').val('complete');
-							$('input[name="deliverynote_status_remark"]').val(encodeURI(answer));
-							$('form[name="list"]').submit();
-						}else{
-							$('input[name="'+thisInputName+'"]').prop('checked', false);
-						}
-					}, 529);
-				}
-			});
+			// $('input[name^="checklistStatus-"]').click(function(){
+			// 	thisInputName = $(this).attr('name');
+			// 	if($('input[name="'+thisInputName+'"]:checked')){
+			// 		setTimeout(function(){ 
+			// 			var answer = prompt("Please insert remark");
+			// 			if(answer){
+			// 				thisId = thisInputName.replace('checklistStatus-', '');
+			// 				$('input[name="deliverynote_id"]').val(thisId);
+			// 				$('input[name="deliverynote_status"]').val('complete');
+			// 				$('input[name="deliverynote_status_remark"]').val(encodeURI(answer));
+			// 				$('form[name="list"]').submit();
+			// 			}else{
+			// 				$('input[name="'+thisInputName+'"]').prop('checked', false);
+			// 			}
+			// 		}, 529);
+			// 	}
+			// });
 		});
 		</script>
 	</head>
@@ -316,6 +316,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<input type="hidden" name="deliverynote_id" />
 									<!-- <input type="hidden" name="deliverynote_delete_reason" /> -->
 									<input type="hidden" name="deliverynote_status" />
+									<input type="hidden" name="deliverynote_status_date" />
 									<input type="hidden" name="deliverynote_status_remark" />
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
@@ -332,12 +333,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <th>Project</th>
                                                 <th>Sales</th>
                                                 <th>Status</th>
+                                                <th>Remark</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php foreach($deliverynotes as $key => $value){ ?>
 											<tr>
-												<td><input<?=($this->uri->uri_to_assoc()['deliverynote_status'] == 'complete') ? ' disabled="disabled" checked="checked"' : ''?> name="checklistStatus-<?=$value->deliverynote_id?>" type="checkbox" /></td>
+												<td>
+													<input<?=($this->uri->uri_to_assoc()['deliverynote_status'] == 'complete') ? ' disabled="disabled" checked="checked"' : ''?> name="checklistStatus-<?=$value->deliverynote_id?>" type="checkbox" 
+													name-id="deliverynote_id" 
+													name-status="deliverynote_status" 
+													name-date="deliverynote_status_date" 
+													name-remark="deliverynote_status_remark" />
+												</td>
 												<td>
 													<a href="<?=base_url('deliverynote/update/deliverynote_id/'.$value->deliverynote_id)?>">
 														<?=$value->deliverynote_number?>
@@ -349,6 +357,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <td><?=$value->deliverynote_project_name?></td>
 												<td><?=ucfirst(get_user($value->deliverynote_user_id)->user_name)?></td>
 												<td><?=ucfirst($value->deliverynote_status)?></td>
+												<td><?=($value->deliverynote_status_remark) ? $value->deliverynote_status_remark : 'N/A'?></td>
 											</tr>
 											<?php } ?>
 
@@ -426,3 +435,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </html>
 
 <div class="scriptLoader"></div>
+
+<?php $this->load->view('modal/checklist_modal.php'); ?>

@@ -17,7 +17,9 @@ class Commissionreport extends CI_Controller {
         'Commission',
         'Commission (HKD)',
         'Commission to',
-        'Status'
+        'Status',
+        'Paid date',
+        'Remark'
     );
 
     private $td_body = array();
@@ -35,6 +37,8 @@ class Commissionreport extends CI_Controller {
         '',
         '',
         'Commission',
+        '',
+        '',
         '',
         ''
     );
@@ -113,6 +117,16 @@ class Commissionreport extends CI_Controller {
                     $temp .= '<div class="no-wrap">'.$value1->invoice_commission_status.'<br/></div>';
                 }
                 $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.($value1->invoice_commission_status_date!="0000-00-00"?$value1->invoice_commission_status_date:'N/A').'<br/></div>';
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.($value1->invoice_commission_status_remark?$value1->invoice_commission_status_remark:'N/A').'<br/></div>';
+                }
+                $row[] = $temp;
                 $this->td_body[] = $row;
             }
             $this->th_footer[8] = 'HKD '.money_format('%!n', $subtotal);
@@ -172,18 +186,20 @@ class Commissionreport extends CI_Controller {
 	public function select()
 	{
 		/* check invoice */
-		if(isset($thisGET['invoice_number_like']) || isset($thisGET['invoice_create_greateq']) || isset($thisGET['invoice_create_smalleq'])){
+		if(isset($this->thisGET['invoice_number_like']) || isset($this->thisGET['invoice_create_greateq']) || isset($this->thisGET['invoice_create_smalleq']) || isset($this->thisGET['invoice_commission_status_date_greateq']) || isset($this->thisGET['invoice_commission_status_date_smalleq']) ){
 			$thisSelect = array(
-				'where' => $thisGET,
-				'return' => 'row'
-			);
-			$data['invoice'] = $this->invoice_model->select($thisSelect);
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+            $data['invoices'] = $this->invoice_model->select($thisSelect);
 
-			if($data['invoice']){
-				$thisGET['salesorder_id'] = $data['invoice']->invoice_salesorder_id;
-			}else{
-				$thisGET['salesorder_id'] = 0;
-			}
+            if($data['invoices']){
+                foreach($data['invoices'] as $key => $value){
+                    $this->thisGET['salesorder_id_in'][] = $value->invoice_salesorder_id;
+                }
+            }else{
+                $this->thisGET['salesorder_id_in'] = array(0);
+            }
 		}
 		/* check invoice */
 

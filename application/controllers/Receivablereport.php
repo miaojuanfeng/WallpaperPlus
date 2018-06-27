@@ -116,11 +116,11 @@ class Receivablereport extends CI_Controller {
 				);
 				$data['user_ids'] = convert_object_to_array($this->user_model->select($thisSelect), 'user_id');
 
-				$thisGET['invoice_quotation_user_id_in'] = $data['user_ids'];
+				$this->thisGET['invoice_quotation_user_id_in'] = $data['user_ids'];
 				break;
 			case in_array('4', $this->session->userdata('role')): // sales
 				/* get own client */
-				$thisGET['invoice_quotation_user_id'] = $this->session->userdata('user_id');
+				$this->thisGET['invoice_quotation_user_id'] = $this->session->userdata('user_id');
 				break;
 			default:
 				break;

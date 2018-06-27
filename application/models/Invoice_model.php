@@ -159,9 +159,17 @@ class Invoice_model extends CI_Model {
 						$thisField = str_replace('_greateq', '', $key);
 						$this->db->where('DATE(invoice_create) >=', urldecode($value));
 						break;
+					case 'invoice_commission_status_date_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$this->db->where('DATE(invoice_commission_status_date) >=', urldecode($value));
+						break;
 					case 'invoice_create_smalleq':
 						$thisField = str_replace('_smalleq', '', $key);
 						$this->db->where('DATE(invoice_create) <=', urldecode($value));
+						break;
+					case 'invoice_commission_status_date_smalleq':
+						$thisField = str_replace('_smalleq', '', $key);
+						$this->db->where('DATE(invoice_commission_status_date) <=', urldecode($value));
 						break;
 					case 'YEAR(invoice_create)':
 						$this->db->where('YEAR(invoice_create) = YEAR(CURDATE())');

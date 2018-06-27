@@ -225,4 +225,8 @@ class Modal extends CI_Controller {
         }
     }
 
+    public function checklist_update()
+    {
+        echo $this->load->view('modal/checklist_view', NULL, true);
+    }
 }

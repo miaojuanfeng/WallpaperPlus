@@ -47,23 +47,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				format: 'Y-MM-DD'
 			});
 
-			$('input[name^="checklistStatus-"]').click(function(){
-				thisInputName = $(this).attr('name');
-				if($('input[name="'+thisInputName+'"]:checked')){
-					setTimeout(function(){ 
-						var answer = prompt("Please insert remark");
-						if(answer){
-							thisId = thisInputName.replace('checklistStatus-', '');
-							$('input[name="purchaseorder_id"]').val(thisId);
-							$('input[name="purchaseorder_status"]').val('complete');
-							$('input[name="purchaseorder_status_remark"]').val(encodeURI(answer));
-							$('form[name="list"]').submit();
-						}else{
-							$('input[name="'+thisInputName+'"]').prop('checked', false);
-						}
-					}, 529);
-				}
-			});
+			// $('input[name^="checklistStatus-"]').click(function(){
+			// 	thisInputName = $(this).attr('name');
+			// 	if($('input[name="'+thisInputName+'"]:checked')){
+			// 		setTimeout(function(){ 
+			// 			var answer = prompt("Please insert remark");
+			// 			if(answer){
+			// 				thisId = thisInputName.replace('checklistStatus-', '');
+			// 				$('input[name="purchaseorder_id"]').val(thisId);
+			// 				$('input[name="purchaseorder_status"]').val('complete');
+			// 				$('input[name="purchaseorder_status_remark"]').val(encodeURI(answer));
+			// 				$('form[name="list"]').submit();
+			// 			}else{
+			// 				$('input[name="'+thisInputName+'"]').prop('checked', false);
+			// 			}
+			// 		}, 529);
+			// 	}
+			// });
 		});
 		</script>
 	</head>
@@ -279,6 +279,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<input type="hidden" name="purchaseorder_id" />
 									<!-- <input type="hidden" name="purchaseorder_delete_reason" /> -->
 									<input type="hidden" name="purchaseorder_status" />
+									<input type="hidden" name="purchaseorder_status_date" />
 									<input type="hidden" name="purchaseorder_status_remark" />
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
@@ -303,7 +304,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<tbody>
 											<?php foreach($purchaseorders as $key => $value){ ?>
 											<tr>
-												<td><input<?=($this->uri->uri_to_assoc()['purchaseorder_status'] == 'complete') ? ' disabled="disabled" checked="checked"' : ''?> name="checklistStatus-<?=$value->purchaseorder_id?>" type="checkbox" /></td>
+												<td>
+													<input<?=($this->uri->uri_to_assoc()['purchaseorder_status'] == 'complete') ? ' disabled="disabled" checked="checked"' : ''?> name="checklistStatus-<?=$value->purchaseorder_id?>" type="checkbox" 
+													name-id="purchaseorder_id" 
+													name-status="purchaseorder_status" 
+													name-date="purchaseorder_status_date" 
+													name-remark="purchaseorder_status_remark"/>
+												</td>
 												<td>
 													<a href="<?=base_url('purchaseorder/update/purchaseorder_id/'.$value->purchaseorder_id)?>">
 														<?=$value->purchaseorder_number?>
@@ -399,3 +406,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </html>
 
 <div class="scriptLoader"></div>
+
+<?php $this->load->view('modal/checklist_modal.php'); ?>

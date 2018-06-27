@@ -211,6 +211,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<div class="col-sm-2"></div>
 													</div>
 													<div class="row">
+														<div class="col-sm-2"><h6>Commission</h6></div>
+														<div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="invoice_commission_status_date_greateq" name="invoice_commission_status_date_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</div>
+														<div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="invoice_commission_status_date_smalleq" name="invoice_commission_status_date_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+														</div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+														<div class="col-sm-2"></div>
+													</div>
+													<div class="row">
 														<div class="col-sm-2"><h6>Customer</h6></div>
 														<div class="col-sm-2">
 															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
@@ -302,7 +324,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                         <?php if(!$td_body){ ?>
                                             <tr>
-                                                <td colspan="14">No record found</td>
+                                                <td colspan="16">No record found</td>
                                             </tr>
                                         <?php } ?>
                                         </tbody>
