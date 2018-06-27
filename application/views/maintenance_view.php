@@ -275,25 +275,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<a href="<?=base_url('commissionchecklist/select/invoice_commission_status/processing')?>">Commission checklist</a>
 									</blockquote>
 								</div>
-								<div class="col-md-3 col-sm-12"></div>
-							</div>
-
-							<div class="hr"></div>
-
-                            <h4>Operation</h4>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-12">
-                                    <blockquote>
+								<div class="col-md-3 col-sm-12">
+									<blockquote>
                                         <i class="glyphicon glyphicon-ok-circle"></i>
                                         <a href="<?=base_url('deliverychecklist/select/deliverynote_status/processing')?>">Delivery checklist</a>
                                     </blockquote>
-                                </div>
-                                <div class="col-md-3 col-sm-12"></div>
-                                <div class="col-md-3 col-sm-12"></div>
-                                <div class="col-md-3 col-sm-12"></div>
-                            </div>
+								</div>
+							</div>
 
-                            <div class="hr"></div>
+							<div class="hr"></div>
 							
 							<h4>Role / User</h4>
 							<div class="row">
