@@ -290,7 +290,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<th></th>
 												<th>IN No</th>
 												<th>SO No</th>
-												<th>Create</th>
+												<th>IN create</th>
 												<th>Customer</th>
 												<th>Project</th>
 												<th>Status</th>

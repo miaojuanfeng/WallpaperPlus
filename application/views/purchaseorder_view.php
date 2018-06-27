@@ -450,7 +450,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <input id="purchaseorder_shipment" name="purchaseorder_shipment" type="text" class="form-control input-sm required" placeholder="Shipment" value="<?=$purchaseorder->purchaseorder_shipment?>" />
                                         </p>
                                         <p class="form-group">
-                                            <label for="purchaseorder_arrive_date">Arrive date <span class="highlight">*</span></label>
+                                            <label for="purchaseorder_arrive_date">Arrive date (ETA) <span class="highlight">*</span></label>
 	                                        <span class="input-group date datetimepicker">
 	                                            <input id="purchaseorder_arrive_date" name="purchaseorder_arrive_date" type="text" class="form-control input-sm date-mask required" placeholder="Arrive date" value="<?=($purchaseorder->purchaseorder_arrive_date != '') ? $purchaseorder->purchaseorder_arrive_date : date('Y-m-d', strtotime('+4 days', time()))?>" />
 	                                        	<span class="input-group-addon">

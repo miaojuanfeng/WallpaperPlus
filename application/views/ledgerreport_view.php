@@ -107,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-
+ 
 
 
 
@@ -151,6 +151,63 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<h2 class="col-sm-12">General Ledger report</h2>
 
 					<div class="content-column-area col-md-12 col-sm-12">
+
+						<div class="fieldset">
+							
+							<div class="row">
+								<div class="col-md-3 col-sm-12">
+									<blockquote>
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('client')?>">Account receivable</a>
+									</blockquote>
+								</div>
+								<div class="col-md-3 col-sm-12">
+									<blockquote>
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('vendor')?>">Sales</a>
+									</blockquote>
+								</div>
+								<div class="col-md-3 col-sm-12">
+									<blockquote>
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('vendor')?>">Sales discount</a>
+									</blockquote>
+								</div>
+								<div class="col-md-3 col-sm-12">
+									<blockquote>
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('vendor')?>">Freight income</a>
+									</blockquote>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-3 col-sm-12">
+									<blockquote class="no-margin-bottom">
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('client')?>">Fire treatment</a>
+									</blockquote>
+								</div>
+								<div class="col-md-3 col-sm-12">
+									<blockquote class="no-margin-bottom">
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('vendor')?>">Inventory IN/OUT</a>
+									</blockquote>
+								</div>
+								<div class="col-md-3 col-sm-12">
+									<blockquote class="no-margin-bottom">
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('vendor')?>">Accounts Payable</a>
+									</blockquote>
+								</div>
+								<div class="col-md-3 col-sm-12">
+									<blockquote class="no-margin-bottom">
+										<i class="glyphicon glyphicon-user"></i>
+										<a href="<?=base_url('vendor')?>">Purchase</a>
+									</blockquote>
+								</div>
+							</div>
+						</div>
 
 						<div class="fieldset">
 							<?=$this->session->tempdata('alert');?>
