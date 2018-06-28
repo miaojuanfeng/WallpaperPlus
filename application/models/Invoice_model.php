@@ -239,6 +239,62 @@ class Invoice_model extends CI_Model {
 		}
 	}
 
+	function account($prefix, $data = array()){
+
+		$where = "";
+		if(isset($data['where'])){
+			foreach($data['where'] as $key => $value){
+				switch($key){
+					case 'date_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$where .= " AND ".$prefix."_sort >= '".urldecode($value)."'";
+						break;
+					case 'date_smalleq':
+						$thisField = str_replace('_smalleq', '', $key);
+						$where .= " AND ".$prefix."_sort <= '".urldecode($value)."'";
+						break;
+					case 'page':
+						$data['offset'] = $value;
+						break;
+				}
+			}
+		}
+
+		/* limit */
+		$limit = '';
+		if(isset($data['limit'])){
+			$limit = ' limit '.$data['limit'];
+		}
+
+		/* offset */
+
+		if(isset($data['offset'])){
+			if(isset($data['limit'])){
+				$limit = ' limit '.$data['offset'].','.$data['limit'];
+			}
+		}
+
+		$query = $this->db->query("SELECT * FROM (
+										SELECT *, DATE(".$prefix."_create) AS ".$prefix."_sort, 'debit' as ".$prefix."_type FROM ".$prefix." WHERE ".$prefix."_status != 'cancel'
+										UNION ALL
+										SELECT *, DATE(".$prefix."_modify) AS ".$prefix."_sort, 'credit' as ".$prefix."_type FROM ".$prefix." WHERE ".$prefix."_status = 'complete'
+									) account WHERE ".$prefix."_status != 'cancel' ".$where." ORDER BY ".$prefix."_sort ASC".$limit);
+		/* return */
+		if(isset($data['return'])){
+			switch($data['return']){
+				case 'num_rows':
+					return $query->num_rows();
+					break;
+				case 'row':
+					return $query->row();
+					break;
+				default:
+					return $query->result();
+					break;
+			}
+		}
+	}
+
 	function structure()
 	{
 		$query = $this->db->query("show full columns from invoice");

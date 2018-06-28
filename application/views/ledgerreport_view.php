@@ -158,7 +158,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('client')?>">Account receivable</a>
+										<a href="<?=base_url('ledgerreport/select/type/account_receivable')?>">Account receivable</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
@@ -197,7 +197,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote class="no-margin-bottom">
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('vendor')?>">Accounts Payable</a>
+										<a href="<?=base_url('ledgerreport/select/type/account_payable')?>">Accounts Payable</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
@@ -220,13 +220,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td width="90%">
 													<div class="row">
-														<div class="col-sm-2"><h6>Sales Order</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_number_like" class="form-control input-sm" placeholder="SONo" value="" />
-														</div>
+														<div class="col-sm-2"><h6>Date</h6></div>
 														<div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_greateq" name="salesorder_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<input id="date_greateq" name="date_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
@@ -234,7 +231,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</div>
 														<div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="salesorder_create_smalleq" name="salesorder_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<input id="date_smalleq" name="date_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
@@ -242,48 +239,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
-													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Customer</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
-														</div>
-														<div class="col-sm-2">
-															<select id="salesorder_user_id" name="salesorder_user_id" data-placeholder="Sales" class="chosen-select">
-																<option value></option>
-																<?php foreach($users as $key => $value){ ?>
-																<option value="<?=$value->user_id?>"><?=ucfirst($value->user_name)?></option>
-																<?php } ?>
-															</select>
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 													</div>
-													<div class="row">
-														<div class="col-sm-2"><h6>Project</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="salesorder_project_name_like" class="form-control input-sm" placeholder="Project Name" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div>
-													<!-- <div class="row">
-														<div class="col-sm-2"><h6>Product</h6></div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_code_like" class="form-control input-sm" placeholder="Item Code" value="" />
-														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_name_like" class="form-control input-sm" placeholder="Item Name" value="" />
-														</div>
-														<div class="col-sm-2">
-															<input type="text" name="quotationitem_product_detail_like" class="form-control input-sm" placeholder="Item Description" value="" />
-														</div>
-														<div class="col-sm-2"></div>
-														<div class="col-sm-2"></div>
-													</div> -->
 												</td>
 												<td valign="top" width="10%" class="text-right">
 													<button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Search">

@@ -69,6 +69,29 @@ if(!function_exists('get_vendor'))
 	}
 }
 
+if(!function_exists('get_client'))
+{
+	function get_client($thisId){
+		$CI =& get_instance();
+		$CI->load->model('client_model');
+
+		/* vendor */
+		$thisSelect = array(
+			'where' => array(
+				'client_id' => $thisId
+			),
+			'return' => 'row'
+		);
+		$data = $CI->client_model->select($thisSelect);
+
+		if($data){
+			return $data;
+		}else{
+			return false;
+		}
+	}
+}
+
 if(!function_exists('get_category'))
 {
     function get_category($thisId){

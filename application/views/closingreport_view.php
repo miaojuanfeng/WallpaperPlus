@@ -163,13 +163,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td width="90%">
                                                     <div class="row">
-                                                        <div class="col-sm-2"><h6>Delivery Note</h6></div>
+                                                        <div class="col-sm-2"><h6>Purchase order</h6></div>
                                                         <div class="col-sm-2">
-                                                            <input type="text" name="deliverynote_number_like" class="form-control input-sm" placeholder="DNNo" value="" />
+                                                            <input type="text" name="purchaseorder_number_like" class="form-control input-sm" placeholder="PONo" value="" />
                                                         </div>
                                                         <div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="deliverynote_create_greateq" name="deliverynote_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<input id="purchaseorder_create_greateq" name="purchaseorder_create_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
@@ -177,7 +177,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         </div>
                                                         <div class="col-sm-2">
 															<span class="input-group date datetimepicker">
-																<input id="deliverynote_create_smalleq" name="deliverynote_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<input id="purchaseorder_create_smalleq" name="purchaseorder_create_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>

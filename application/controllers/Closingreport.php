@@ -4,16 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Closingreport extends CI_Controller {
 
     private $th_header = array(
-        'DN No',
+        'PO No',
         'SO No',
-        'Item ID',
-        'Item Name',
+        'DEP/INV NO',
+        'Item Code',
         'Quantity',
+        'Unit Cost',
+        'Item Value',
+        'Item Value (HKD)',
         'Customer',
-        'Project',
-        'Sales',
-        'Status',
-        'Create',
+        'Location',
+        'Nature',
+        'Factory',
+        'ETA to Warehouse',
+        'ETD to Client'
     );
 
     private $td_body = array();
@@ -23,6 +27,10 @@ class Closingreport extends CI_Controller {
         '',
         '',
         '',
+        '',
+        '',
+        '',
+        'Item Value (HKD)',
         '',
         '',
         '',
@@ -47,9 +55,11 @@ class Closingreport extends CI_Controller {
 
         $this->load->library('PHPExcel');
 		$this->load->model('salesorder_model');
-		$this->load->model('deliverynote_model');
-        $this->load->model('deliverynoteitem_model');
+		$this->load->model('purchaseorder_model');
+        $this->load->model('purchaseorderitem_model');
+        $this->load->model('invoice_model');
 		$this->load->model('user_model');
+        $this->load->model('deliverynote_model');
 
         $this->per_page = get_setting('per_page')->setting_value;
         $this->thisGET = $this->uri->uri_to_assoc();
@@ -58,24 +68,45 @@ class Closingreport extends CI_Controller {
 	}
 
 	private function make_form_data(&$data){
+        $this->thisGET['purchaseorder_default'] = true;
+        $this->thisGET['purchaseorder_deleted'] = 'N';
         $thisSelect = array(
             'where' => $this->thisGET,
-            'group' => 'deliverynote_number',
             'limit' => $this->per_page,
             'return' => 'result'
         );
-        $data['deliverynotes'] = $this->deliverynote_model->select($thisSelect);
+        $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
 
-        foreach($data['deliverynotes'] as $key => $value){
-            /* deliverynotesitem */
+        foreach($data['purchaseorders'] as $key => $value){
+            /* purchaseorderitem */
             $thisSelect = array(
                 'where' => array(
-                    'deliverynoteitem_deliverynote_id' => $value->deliverynote_id
+                    'purchaseorderitem_purchaseorder_id' => $value->purchaseorder_id
                 ),
                 'return' => 'result'
             );
-            $data['deliverynoteitems'] = $this->deliverynoteitem_model->select($thisSelect);
-            $data['deliverynotes'][$key]->deliverynoteitems = $data['deliverynoteitems'];
+            $data['purchaseorderitems'] = $this->purchaseorderitem_model->select($thisSelect);
+            $data['purchaseorders'][$key]->purchaseorderitems = $data['purchaseorderitems'];
+
+            /* invoice */
+            $thisSelect = array(
+                'where' => array(
+                    'invoice_salesorder_id' => $value->purchaseorder_salesorder_id
+                ),
+                'return' => 'result'
+            );
+            $data['invoices'] = $this->invoice_model->select($thisSelect);
+            $data['purchaseorders'][$key]->invoices = $data['invoices'];
+
+            /* deliverynote */
+            $thisSelect = array(
+                'where' => array(
+                    'deliverynote_salesorder_id' => $value->purchaseorder_salesorder_id
+                ),
+                'return' => 'result'
+            );
+            $data['deliverynotes'] = $this->deliverynote_model->select($thisSelect);
+            $data['purchaseorders'][$key]->deliverynotes = $data['deliverynotes'];
         }
     }
 
@@ -86,34 +117,64 @@ class Closingreport extends CI_Controller {
         $this->td_body = array();
         if( $rows && count($rows) ) {
             $total = 0;
-            $subtotal = 0;
-            $commission_subtotal = 0;
             foreach ($rows as $key => $value) {
                 $row = array();
-                $row[] = '<a href="' . base_url('deliverynote/update/deliverynote_id/' . $value->deliverynote_id) . '">' . $value->deliverynote_number . '</a>';
-                $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->deliverynote_salesorder_id) . '">' . get_salesorder($value->deliverynote_salesorder_id)->salesorder_number . '</a>';
+                $row[] = '<a href="' . base_url('purchaseorder/update/purchaseorder_id/' . $value->purchaseorder_id) . '">' . $value->purchaseorder_number . '</a>';
+                $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->purchaseorder_salesorder_id) . '">' . get_salesorder($value->purchaseorder_salesorder_id)->salesorder_number . '</a>';
                 $temp = '';
-                foreach($value->deliverynoteitems as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.$value1->deliverynoteitem_product_code.'<br/></div>';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.'<a href="' . base_url('invoice/update/invoice_id/' . $value1->invoice_id) . '">'. $value1->invoice_number . '</a>' .'<br/></div>';
                 }
                 $row[] = $temp;
                 $temp = '';
-                foreach($value->deliverynoteitems as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.$value1->deliverynoteitem_product_name.'<br/></div>';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.$value1->purchaseorderitem_product_code.'<br/></div>';
                 }
                 $row[] = $temp;
                 $temp = '';
-                foreach($value->deliverynoteitems as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.$value1->deliverynoteitem_quantity.'<br/></div>';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.$value1->purchaseorderitem_quantity.'<br/></div>';
                 }
                 $row[] = $temp;
-                $row[] = $value->deliverynote_client_company_name;
-                $row[] = $value->deliverynote_project_name;
-                $row[] = ucfirst(get_user($value->deliverynote_user_id)->user_name);
-                $row[] = ucfirst($value->deliverynote_status);
-                $row[] = convert_datetime_to_date($value->deliverynote_create);
+                $temp = '';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.get_currency(get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_currency_id)->currency_name.' '.money_format('%!n', get_product($value1->purchaseorderitem_product_id)->product_cost).'<br/></div>';
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.get_currency(get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_currency_id)->currency_name.' '.money_format('%!n', $value1->purchaseorderitem_product_price).'<br/></div>';
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $total += $value1->purchaseorderitem_product_price*$value->purchaseorder_vendor_exchange_rate;
+                    $temp .= '<div class="no-wrap">'.'HKD '.money_format('%!n', $value1->purchaseorderitem_product_price*$value->purchaseorder_vendor_exchange_rate).'<br/></div>';
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->invoices as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.$value1->invoice_client_company_name.'<br/></div>';
+                }
+                $row[] = $temp;
+                
+                $row[] = '';
+                $row[] = '';
+
+                $temp = '';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_company_code.' - '.get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_company_name.'<br/></div>';
+                }
+                $row[] = $temp;
+                $row[] = $value->purchaseorder_arrive_date!='0000-00-00'?$value->purchaseorder_arrive_date:'N/A';
+                $temp = '';
+                foreach($value->deliverynotes as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.$value1->deliverynote_issue.'<br/></div>';
+                }
+                $row[] = $temp;
                 $this->td_body[] = $row;
             }
+            $this->th_footer[7] = 'HKD '.money_format('%!n', $total);
         }
         $data['th_header'] = $this->th_header;
         $data['td_body'] = $this->td_body;
@@ -187,14 +248,13 @@ class Closingreport extends CI_Controller {
 //		/* check salesorder */
 		
         $this->make_form_data($data);
-        $data = array_merge($data, $this->get_form_data($data['deliverynotes']));
+        $data = array_merge($data, $this->get_form_data($data['purchaseorders']));
 
 		$thisSelect = array(
 			'where' => $this->thisGET,
-			'group' => 'deliverynote_number',
 			'return' => 'num_rows'
 		);
-		$data['num_rows'] = $this->deliverynote_model->select($thisSelect);
+		$data['num_rows'] = $this->purchaseorder_model->select($thisSelect);
 
 		/* status */
 		$data['statuss'] = (object)array(
@@ -217,7 +277,7 @@ class Closingreport extends CI_Controller {
     public function export()
     {
         $this->make_form_data($data);
-        $this->get_form_data($data['deliverynotes']);
+        $this->get_form_data($data['purchaseorders']);
 
         $fileName = 'Closing_stock_report_'.date('YmdHis');
         php_excel_export($this->th_header, $this->td_body, $fileName);

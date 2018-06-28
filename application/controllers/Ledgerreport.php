@@ -4,14 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ledgerreport extends CI_Controller {
 
     private $th_header = array(
-        'Customer',
-        'SO No',
+        'Account Description',
         'Date',
-        'Deadline',
+        'Reference',
+        'Trans Description',
         'Debit Amt (HKD)',
         'Credit Amt (HKD)',
-        'Balance',
-        'Sales'
+        'Balance'
     );
 
     private $td_body = array();
@@ -21,68 +20,136 @@ class Ledgerreport extends CI_Controller {
         '',
         '',
         '',
-        'Pay (HKD)',
-        'Receive (HKD)',
-        '',
+        'Debit Amt (HKD)',
+        'Credit Amt (HKD)',
         ''
     );
 
     private $thisGET;
     private $per_page;
 
-    private function make_form_data(&$data){
-        /* client */
-        switch(true){
-            case in_array('3', $this->session->userdata('role')): // sales manager
-                /* get own & downline client */
-                $thisSelect = array(
-                    'where' => array(
-                        'OWN_USER_ID_AND_DOWNLINE_USER_ID' => $this->session->userdata('user_id')
-                    ),
-                    'return' => 'result'
-                );
-                $data['user_ids'] = convert_object_to_array($this->user_model->select($thisSelect), 'user_id');
+    private function make_form_data($type, &$data){
+        if( $type == 'account_receivable' ){
+            /* client */
+            // switch(true){
+            //     case in_array('3', $this->session->userdata('role')): // sales manager
+            //         /* get own & downline client */
+            //         $thisSelect = array(
+            //             'where' => array(
+            //                 'OWN_USER_ID_AND_DOWNLINE_USER_ID' => $this->session->userdata('user_id')
+            //             ),
+            //             'return' => 'result'
+            //         );
+            //         $data['user_ids'] = convert_object_to_array($this->user_model->select($thisSelect), 'user_id');
 
-                $this->thisGET['salesorder_quotation_user_id_in'] = $data['user_ids'];
-                break;
-            case in_array('4', $this->session->userdata('role')): // sales
-                /* get own client */
-                $this->thisGET['salesorder_quotation_user_id'] = $this->session->userdata('user_id');
-                break;
-            default:
-                break;
-        }
+            //         $this->thisGET['invoice_quotation_user_id_in'] = $data['user_ids'];
+            //         break;
+            //     case in_array('4', $this->session->userdata('role')): // sales
+            //         /* get own client */
+            //         $this->thisGET['invoice_quotation_user_id'] = $this->session->userdata('user_id');
+            //         break;
+            //     default:
+            //         break;
+            // }
 
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'order' => 'salesorder_client_id',
-            'ascend' => 'asc',
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
-        $data['salesorders'] = $this->salesorder_model->select($thisSelect);
-
-        foreach($data['salesorders'] as $key => $value){
-            /* purchaseorder */
             $thisSelect = array(
-                'where' => array(
-                    'purchaseorder_salesorder_id' => $value->salesorder_id,
-                    'purchaseorder_status_noteq' => 'cancel'
-                ),
+                'where' => $this->thisGET,
+                'return' => 'num_rows'
+            );
+            $data['num_rows'] = $this->invoice_model->account('invoice', $thisSelect);
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
                 'return' => 'result'
             );
-            $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-            $data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
-            /* invoice */
+            $invoices = $this->invoice_model->account('invoice', $thisSelect);
+
+            $data['data'] = array();
+            foreach($invoices as $key => $value){
+                $data['data'][$key][] = 'Accounts Receivable';
+                $data['data'][$key][] = $value->invoice_sort;
+                if( $value->invoice_type == 'debit' ){
+                    $data['data'][$key][] = $value->invoice_number;
+                    $data['data'][$key][] = get_client($value->invoice_client_id)->client_company_name;
+                    $data['data'][$key][] = money_format('%!n', $value->invoice_total);
+                    $data['data'][$key][] = '-';
+                }else{
+                    if( strpos($value->invoice_number, 'ECINV') !== false ){
+                        $rv = 'ECRV';
+                    }else if( strpos($value->invoice_number, 'EINV') !== false ){
+                        $rv = 'ERV';
+                    }else if( strpos($value->invoice_number, 'CINV') !== false ){
+                        $rv = 'CRV';
+                    }else{
+                        $rv = 'RV';
+                    }
+                    $data['data'][$key][] = $rv.substr($value->invoice_number, strlen($value->invoice_number)-7);
+                    $data['data'][$key][] = get_client($value->invoice_client_id)->client_company_name.' - Invoice: '.$value->invoice_number;
+                    $data['data'][$key][] = '-';
+                    $data['data'][$key][] = money_format('%!n', $value->invoice_total);
+                }
+                $data['data'][$key][] = '-';
+            }
+
+            // foreach($data['invoices'] as $key => $value){
+            //     /* purchaseorder */
+            //     $thisSelect = array(
+            //         'where' => array(
+            //             'purchaseorder_invoice_id' => $value->invoice_id,
+            //             'purchaseorder_status_noteq' => 'cancel'
+            //         ),
+            //         'return' => 'result'
+            //     );
+            //     $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+            //     $data['invoices'][$key]->purchaseorders = $data['purchaseorders'];
+            //     /* invoice */
+            //     $thisSelect = array(
+            //         'where' => array(
+            //             'invoice_invoice_id' => $value->invoice_id,
+            //             'invoice_status_noteq' => 'cancel'
+            //         ),
+            //         'return' => 'result'
+            //     );
+            //     $data['invoiceorders'] = $this->invoice_model->select($thisSelect);
+            //     $data['invoices'][$key]->invoiceorders = $data['invoiceorders'];
+            // }
+        }else if( $type == 'account_payable' ){
             $thisSelect = array(
-                'where' => array(
-                    'invoice_salesorder_id' => $value->salesorder_id,
-                    'invoice_status_noteq' => 'cancel'
-                ),
+                'where' => $this->thisGET,
+                'return' => 'num_rows'
+            );
+            $data['num_rows'] = $this->invoice_model->account('purchaseorder', $thisSelect);
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
                 'return' => 'result'
             );
-            $data['invoiceorders'] = $this->invoice_model->select($thisSelect);
-            $data['salesorders'][$key]->invoiceorders = $data['invoiceorders'];
+            $purchaseorders = $this->invoice_model->account('purchaseorder', $thisSelect);
+
+            $data['data'] = array();
+            foreach($purchaseorders as $key => $value){
+                $data['data'][$key][] = 'Accounts Payable';
+                $data['data'][$key][] = $value->purchaseorder_sort;
+                if( $value->purchaseorder_type == 'debit' ){
+                    if( strpos($value->purchaseorder_number, 'EPO') !== false ){
+                        $rv = 'EPV';
+                    }else{
+                        $rv = 'PV';
+                    }
+                    $data['data'][$key][] = $rv.substr($value->purchaseorder_number, strlen($value->purchaseorder_number)-7);
+                    $data['data'][$key][] = get_vendor($value->purchaseorder_vendor_id)->vendor_company_name.' - Invoice: '.$value->purchaseorder_number;
+                    $data['data'][$key][] = money_format('%!n', $value->purchaseorder_total);
+                    $data['data'][$key][] = '-';
+                }else{
+                    $data['data'][$key][] = $value->purchaseorder_number;
+                    $data['data'][$key][] = get_vendor($value->purchaseorder_vendor_id)->vendor_company_name;
+                    $data['data'][$key][] = '-';
+                    $data['data'][$key][] = money_format('%!n', $value->purchaseorder_total);
+                }
+                $data['data'][$key][] = '-';
+            }
         }
     }
 
@@ -92,33 +159,25 @@ class Ledgerreport extends CI_Controller {
         $total = 0;
         $this->td_body = array();
         if( $rows && count($rows) ) {
-            $purchase_total = 0;
-            $invoice_total = 0;
+            $debit_amt = 0;
+            $credit_amt = 0;
             foreach ($rows as $key => $value) {
                 $row = array();
-                $row[] = $value->salesorder_client_company_name;
-                $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->salesorder_id) . '">' . $value->salesorder_number . '</a>';
-                $row[] = $value->salesorder_issue;
-                $row[] = $value->salesorder_expire;
-                $purchaseorder_total = 0;
-                foreach ($value->purchaseorders as $k => $v){
-                    $purchaseorder_total += $v->purchaseorder_total*$v->purchaseorder_vendor_exchange_rate;
-                }
-                $purchase_total += $purchaseorder_total;
-                $row[] = 'HKD ' . money_format('%!n', $purchaseorder_total);
-                $invoiceorder_total = 0;
-                foreach ($value->invoiceorders as $k => $v){
-                    $invoiceorder_total += $v->invoice_total*$v->invoice_exchange_rate;
-                }
-                $invoice_total += $invoiceorder_total;
-                $row[] = 'HKD ' . money_format('%!n', $invoiceorder_total);
-                $row[] = 'HKD ' . money_format('%!n', $invoiceorder_total - $purchaseorder_total);
-                $row[] = get_user($value->salesorder_quotation_user_id)->user_name;
+                $row[] = $value[0];
+                $row[] = $value[1];
+                $row[] = $value[2];
+                $row[] = $value[3];
+                $debit_amt += $value[4];
+                $row[] = $value[4];
+                $credit_amt += $value[5];
+                $row[] = $value[5];
+                $row[] = $value[6];
                 $this->td_body[] = $row;
             }
-            $this->th_footer[4] = 'HKD '.money_format('%!n', $purchase_total);
-            $this->th_footer[5] = 'HKD '.money_format('%!n', $invoice_total);
-            $this->th_footer[6] = 'HKD '.money_format('%!n', $invoice_total - $purchase_total);
+            $this->th_footer[3] = 'Current Period Change';
+            $this->th_footer[4] = money_format('%!n', $debit_amt);
+            $this->th_footer[5] = money_format('%!n', $credit_amt);
+            $this->th_footer[6] = money_format('%!n', $debit_amt - $credit_amt);
         }
         $data['th_header'] = $this->th_header;
         $data['td_body'] = $this->td_body;
@@ -139,7 +198,7 @@ class Ledgerreport extends CI_Controller {
 		check_permission();
 
         $this->load->library('PHPExcel');
-        $this->load->model('salesorder_model');
+        $this->load->model('invoice_model');
 		$this->load->model('invoice_model');
         $this->load->model('purchaseorder_model');
 		$this->load->model('user_model');
@@ -148,6 +207,10 @@ class Ledgerreport extends CI_Controller {
         $this->thisGET = $this->uri->uri_to_assoc();
         $this->thisGET['invoice_status'] = 'complete';
         $this->thisGET['invoice_deleted'] = 'N';
+
+        if( !isset($this->thisGET['type']) ){
+            $this->thisGET['type'] = 'account_receivable';
+        }
 	}
 
 	public function index()
@@ -172,28 +235,27 @@ class Ledgerreport extends CI_Controller {
 
 	public function select()
 	{
-        $this->make_form_data($data);
-        $data = array_merge($data, $this->get_form_data($data['salesorders']));
+        $this->make_form_data($this->thisGET['type'], $data);
+        $data = array_merge($data, $this->get_form_data($data['data']));
 
-		$thisSelect = array(
-			'where' => $this->thisGET,
-			'group' => 'invoice_number',
-			'return' => 'num_rows'
-		);
-		$data['num_rows'] = $this->invoice_model->select($thisSelect);
+		// $thisSelect = array(
+		// 	'where' => $this->thisGET,
+		// 	'return' => 'num_rows'
+		// );
+		// $data['num_rows'] = $this->invoice_model->report($thisSelect);
 
 		/* status */
-		$data['statuss'] = (object)array(
-			(object)array('status_name' => 'processing'),
-			(object)array('status_name' => 'complete'),
-			(object)array('status_name' => 'cancel')
-		);
+		// $data['statuss'] = (object)array(
+		// 	(object)array('status_name' => 'processing'),
+		// 	(object)array('status_name' => 'complete'),
+		// 	(object)array('status_name' => 'cancel')
+		// );
 
-		/* user */
-		$thisSelect = array(
-			'return' => 'result'
-		);
-		$data['users'] = $this->user_model->select($thisSelect);
+		// /* user */
+		// $thisSelect = array(
+		// 	'return' => 'result'
+		// );
+		// $data['users'] = $this->user_model->select($thisSelect);
 
 		/* pagination */
 		$this->pagination->initialize(get_pagination_config($this->per_page, $data['num_rows']));
@@ -203,8 +265,8 @@ class Ledgerreport extends CI_Controller {
 
     public function export()
     {
-        $this->make_form_data($data);
-        $this->get_form_data($data['salesorders']);
+        $this->make_form_data($this->thisGET['type'], $data);
+        $this->get_form_data($data['data']);
 
         $fileName = 'General_ledger_report_'.date('YmdHis');
         php_excel_export($this->th_header, $this->td_body, $fileName);

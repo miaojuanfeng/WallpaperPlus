@@ -355,7 +355,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 													</tr>
 													<tr>
-														<td><label for="deliverynote_issue">Date</label></td>
+														<td><label for="deliverynote_issue">Date (ETD)</label></td>
 														<td>
 															<span class="input-group date datetimepicker">
 																<input id="deliverynote_issue" name="deliverynote_issue" type="text" class="form-control input-sm date-mask required" placeholder="Issue date" value="<?=($deliverynote->deliverynote_issue != '') ? $deliverynote->deliverynote_issue : date('Y-m-d')?>" />
