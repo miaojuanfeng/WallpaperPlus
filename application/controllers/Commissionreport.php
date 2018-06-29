@@ -119,12 +119,12 @@ class Commissionreport extends CI_Controller {
                 $row[] = $temp;
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.($value1->invoice_commission_status_date!="0000-00-00"?$value1->invoice_commission_status_date:'N/A').'<br/></div>';
+                    $temp .= '<div class="no-wrap">'.($value1->invoice_commission_status_date!="0000-00-00"?$value1->invoice_commission_status_date:'-').'<br/></div>';
                 }
                 $row[] = $temp;
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.($value1->invoice_commission_status_remark?$value1->invoice_commission_status_remark:'N/A').'<br/></div>';
+                    $temp .= '<div class="no-wrap">'.($value1->invoice_commission_status_remark?$value1->invoice_commission_status_remark:'-').'<br/></div>';
                 }
                 $row[] = $temp;
                 $this->td_body[] = $row;

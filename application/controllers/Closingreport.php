@@ -157,16 +157,23 @@ class Closingreport extends CI_Controller {
                     $temp .= '<div class="no-wrap">'.$value1->invoice_client_company_name.'<br/></div>';
                 }
                 $row[] = $temp;
-                
-                $row[] = '';
-                $row[] = '';
-
+                $temp = '';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $warehouse = get_product_warehouse($value1->purchaseorderitem_product_id);
+                    $temp .= '<div class="no-wrap">'.($warehouse?$warehouse->warehouse_name:'-').'<br/></div>';
+                }
+                $row[] = $temp;
+                $temp = '';
+                foreach($value->purchaseorderitems as $key1 => $value1){
+                    $temp .= '<div class="no-wrap">'.get_category($value1->purchaseorderitem_category_id)->category_name.'<br/></div>';
+                }
+                $row[] = $temp;
                 $temp = '';
                 foreach($value->purchaseorderitems as $key1 => $value1){
                     $temp .= '<div class="no-wrap">'.get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_company_code.' - '.get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_company_name.'<br/></div>';
                 }
                 $row[] = $temp;
-                $row[] = $value->purchaseorder_arrive_date!='0000-00-00'?$value->purchaseorder_arrive_date:'N/A';
+                $row[] = $value->purchaseorder_arrive_date!='0000-00-00'?$value->purchaseorder_arrive_date:'-';
                 $temp = '';
                 foreach($value->deliverynotes as $key1 => $value1){
                     $temp .= '<div class="no-wrap">'.$value1->deliverynote_issue.'<br/></div>';

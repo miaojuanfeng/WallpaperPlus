@@ -10,7 +10,7 @@ class Ledgerreport extends CI_Controller {
         'Trans Description',
         'Debit Amt (HKD)',
         'Credit Amt (HKD)',
-        'Balance'
+        'Balance (HKD)'
     );
 
     private $td_body = array();

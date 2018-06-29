@@ -322,6 +322,44 @@ if(!function_exists('get_warehouse'))
 	}
 }
 
+if(!function_exists('get_product_warehouse'))
+{
+	function get_product_warehouse($thisProductId){
+		$CI =& get_instance();
+		$CI->load->model('z_product_warehouse_model');
+		$CI->load->model('warehouse_model');
+
+		/* setting */
+		$thisSelect = array(
+			'where' => array(
+				'product_id' => $thisProductId,
+				'z_product_warehouse_quantity_noteq' => 0
+			),
+			'return' => 'row'
+		);
+		$data = $CI->z_product_warehouse_model->select($thisSelect);
+
+		if($data){
+			/* warehouse */
+			$thisSelect = array(
+				'where' => array(
+					'warehouse_id' => $data->warehouse_id
+				),
+				'return' => 'row'
+			);
+			$data = $CI->warehouse_model->select($thisSelect);
+
+			if($data){
+				return $data;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+}
+
 if(!function_exists('get_user'))
 {
 	function get_user($thisId){
