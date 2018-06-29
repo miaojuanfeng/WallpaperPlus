@@ -325,7 +325,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</a>
 												</td>
 												<td class="text-right">
-													<?php if(!check_permission('category_delete', 'display')){ ?>
+													<?php if(!check_permission('category_delete', 'display') && $value->category_id != 9){ ?>
 													<a onclick="check_delete(<?=$value->category_id?>);" data-toggle="tooltip" title="Remove" class="<?=check_permission('category_delete', 'disable')?>">
 														<i class="glyphicon glyphicon-remove"></i>
 													</a>

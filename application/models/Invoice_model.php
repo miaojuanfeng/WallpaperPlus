@@ -129,7 +129,7 @@ class Invoice_model extends CI_Model {
 						break;
 					case 'date_greateq':
 						$thisField = str_replace('_greateq', '', $key);
-						$this->db->where('invoice_issue >=', urldecode($value));
+						$this->db->where('DATE(invoice_create) >=', urldecode($value));
 						break;
 					case 'invoice_id_smalleq':
 					case 'invoice_number_smalleq':
@@ -138,7 +138,7 @@ class Invoice_model extends CI_Model {
 						break;
 					case 'date_smalleq':
 						$thisField = str_replace('_smalleq', '', $key);
-						$this->db->where('invoice_issue <=', urldecode($value));
+						$this->db->where('DATE(invoice_create) <=', urldecode($value));
 						break;
 					case 'invoice_discount_greateq':
 						$thisField = str_replace('_greateq', '', $key);
@@ -298,6 +298,68 @@ class Invoice_model extends CI_Model {
 										UNION ALL
 										SELECT *, DATE(".$prefix."_modify) AS ".$prefix."_sort, 'credit' as ".$prefix."_type FROM ".$prefix." WHERE ".$prefix."_status = 'complete'
 									) account WHERE ".$prefix."_status != 'cancel' ".$where." ORDER BY ".$prefix."_sort ASC".$limit);
+		/* return */
+		if(isset($data['return'])){
+			switch($data['return']){
+				case 'num_rows':
+					return $query->num_rows();
+					break;
+				case 'row':
+					return $query->row();
+					break;
+				default:
+					return $query->result();
+					break;
+			}
+		}
+	}
+
+	function inventory($data = array()){
+		$invoice_where = "";
+		$purchaseorder_where = "";
+		if(isset($data['where'])){
+			foreach($data['where'] as $key => $value){
+				switch($key){
+					case 'date_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$invoice_where .= " AND invoice_create >= '".urldecode($value)."'";
+						$purchaseorder_where .= " AND purchaseorder_create >= '".urldecode($value)."'";
+						break;
+					case 'date_smalleq':
+						$thisField = str_replace('_smalleq', '', $key);
+						$invoice_where .= " AND invoice_create <= '".urldecode($value)."'";
+						$purchaseorder_where .= " AND purchaseorder_create <= '".urldecode($value)."'";
+						break;
+					case 'page':
+						$data['offset'] = $value;
+						break;
+				}
+			}
+		}
+
+		$query = $this->db->query("SELECT * FROM (
+										SELECT 
+										invoiceitem_category_id as category_id,
+										invoiceitem_product_code as product_code, 
+										invoiceitem_subtotal as product_subtotal, 
+										invoice_exchange_rate as exchange_rate,
+										DATE(invoice_create) AS inventory_sort, 
+										invoice_number as inventory_number,
+										invoice_client_id as company_id,
+										'inv' as inventory_type 
+										FROM invoiceitem left join invoice on invoiceitem_invoice_id = invoice_id WHERE 1 ".$invoice_where."
+										UNION ALL
+										SELECT 
+										purchaseorderitem_category_id as category_id,
+										purchaseorderitem_product_code as product_code, 
+										purchaseorderitem_subtotal as product_subtotal, 
+										purchaseorder_vendor_exchange_rate as exchange_rate,
+										DATE(purchaseorder_create) AS inventory_sort, 
+										purchaseorder_number as inventory_number,
+										purchaseorder_vendor_id as company_id,
+										'po' as inventory_type  
+										FROM purchaseorderitem left join purchaseorder on purchaseorderitem_purchaseorder_id = purchaseorder_id WHERE 1 ".$purchaseorder_where."
+									) inventory ORDER BY category_id ASC, inventory_sort ASC");
 		/* return */
 		if(isset($data['return'])){
 			switch($data['return']){

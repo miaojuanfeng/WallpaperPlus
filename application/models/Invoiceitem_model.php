@@ -107,6 +107,7 @@ class Invoiceitem_model extends CI_Model {
 					case 'invoiceitem_id_in':
 					case 'invoiceitem_invoice_id_in':
 					case 'invoiceitem_product_id_in':
+					case 'invoiceitem_category_id_in':
 						$thisField = str_replace('_in', '', $key);
 						/* invoice replace _in exception */
 						if($thisField == 'invoiceitemvoice_id'){
@@ -117,6 +118,9 @@ class Invoiceitem_model extends CI_Model {
 						break;
 					case 'order':
 						$data['order'] = $value;
+						break;
+					case 'order_sort':
+						$data['order_sort'] = $value;
 						break;
 					case 'ascend':
 						$data['ascend'] = $value;
@@ -131,6 +135,11 @@ class Invoiceitem_model extends CI_Model {
 		/* order */
 		if(isset($data['order'])){
 			$this->db->order_by($data['order'], $data['ascend']);
+		}
+
+		/* order sort */
+		if(isset($data['order_sort'])){
+			$this->db->order_by($data['order_sort']);
 		}
 
 		/* limit */

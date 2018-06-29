@@ -185,13 +185,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote class="no-margin-bottom">
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('client')?>">Fire treatment</a>
+										<a href="<?=base_url('ledgerreport/select/type/fire')?>">Fire treatment</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote class="no-margin-bottom">
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('')?>">Inventory IN/OUT</a>
+										<a href="<?=base_url('ledgerreport/select/type/inventory')?>">Inventory IN/OUT</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
@@ -263,7 +263,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<input type="hidden" name="salesorder_delete_reason" />
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
-										<?=$this->pagination->create_links()?>
+										<?php //$this->pagination->create_links()?>
                                         <a href="<?=base_url('ledgerreport/export'.get_uri_string_parameters($this->uri->uri_string()))?>" class="btn btn-sm btn-primary pull-right" data-toggle="tooltip" data-original-title="Export">
                                             <i class="glyphicon glyphicon-export"></i>
                                         </a>
@@ -309,7 +309,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </table>
 									<div class="page-area">
 										<span class="btn btn-sm btn-default"><?php print_r($num_rows); ?></span>
-										<?=$this->pagination->create_links()?>
+										<?php //$this->pagination->create_links()?>
 									</div>
 								</form>
 							</div>

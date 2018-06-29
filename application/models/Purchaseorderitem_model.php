@@ -113,6 +113,9 @@ class Purchaseorderitem_model extends CI_Model {
 					case 'order':
 						$data['order'] = $value;
 						break;
+					case 'order_sort':
+						$data['order_sort'] = $value;
+						break;
 					case 'ascend':
 						$data['ascend'] = $value;
 						break;
@@ -126,6 +129,11 @@ class Purchaseorderitem_model extends CI_Model {
 		/* order */
 		if(isset($data['order'])){
 			$this->db->order_by($data['order'], $data['ascend']);
+		}
+
+		/* order sort */
+		if(isset($data['order_sort'])){
+			$this->db->order_by($data['order_sort']);
 		}
 
 		/* limit */
