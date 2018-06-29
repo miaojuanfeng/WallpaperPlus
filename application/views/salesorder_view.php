@@ -561,6 +561,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<div>
 																<input name="salesorderitem_id[]" type="hidden" value="<?=$value->salesorderitem_id?>" />
 																<input name="salesorderitem_salesorder_id[]" type="hidden" value="<?=$value->salesorderitem_salesorder_id?>" />
+																<input name="salesorderitem_category_id[]" type="hidden" value="<?=$value->salesorderitem_category_id?>" />
 																<input name="salesorderitem_product_type_name[]" type="hidden" value="<?=$value->salesorderitem_product_type_name?>" />
 																<input id="salesorderitem_product_code" name="salesorderitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="<?=$value->salesorderitem_product_code?>" />
 															</div>

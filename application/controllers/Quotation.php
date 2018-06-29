@@ -44,7 +44,11 @@ class Quotation extends CI_Controller {
 							  ];
 				$quotation_category_discount[] = $category;
 			}
-			$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
+			if( count($quotation_category_discount) ){
+				$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
+			}else{
+				$thisPOST['quotation_category_discount'] = '';
+			}
 			//
 			$thisPOST['quotation_number'] = $thisPOST['number_prefix'].$thisPOST['quotation_number'];
 			//
@@ -298,7 +302,11 @@ class Quotation extends CI_Controller {
 							  ];
 				$quotation_category_discount[] = $category;
 			}
-			$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
+			if( count($quotation_category_discount) ){
+				$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
+			}else{
+				$thisPOST['quotation_category_discount'] = '';
+			}
 			//
 			$thisPOST['quotation_id'] = $thisInsertId = $this->quotation_model->insert($thisPOST);
 
@@ -583,7 +591,11 @@ class Quotation extends CI_Controller {
 							  ];
 				$quotation_category_discount[] = $category;
 			}
-			$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
+			if( count($quotation_category_discount) ){
+				$thisPOST['quotation_category_discount'] = json_encode($quotation_category_discount);
+			}else{
+				$thisPOST['quotation_category_discount'] = '';
+			}
 			//
 			$thisPOST['quotation_id'] = $thisInsertId = $this->quotation_model->insert($thisPOST);
 

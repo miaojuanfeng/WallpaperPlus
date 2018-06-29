@@ -164,19 +164,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('vendor')?>">Sales</a>
+										<a href="<?=base_url('ledgerreport/select/type/sales')?>">Sales</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('vendor')?>">Sales discount</a>
+										<a href="<?=base_url('ledgerreport/select/type/discount')?>">Sales discount</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
 									<blockquote>
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('vendor')?>">Freight income</a>
+										<a href="<?=base_url('ledgerreport/select/type/freight')?>">Freight income</a>
 									</blockquote>
 								</div>
 							</div>
@@ -191,7 +191,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote class="no-margin-bottom">
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('vendor')?>">Inventory IN/OUT</a>
+										<a href="<?=base_url('')?>">Inventory IN/OUT</a>
 									</blockquote>
 								</div>
 								<div class="col-md-3 col-sm-12">
@@ -203,7 +203,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<div class="col-md-3 col-sm-12">
 									<blockquote class="no-margin-bottom">
 										<i class="glyphicon glyphicon-user"></i>
-										<a href="<?=base_url('vendor')?>">Purchase</a>
+										<a href="<?=base_url('ledgerreport/select/type/cost')?>">Purchase</a>
 									</blockquote>
 								</div>
 							</div>
@@ -215,6 +215,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 								<form salesorder="form" method="get">
 									<input type="hidden" name="salesorder_id" />
+									<input type="hidden" name="type" value="<?=$type?>" />
 									<table>
 										<tbody>
 											<tr>

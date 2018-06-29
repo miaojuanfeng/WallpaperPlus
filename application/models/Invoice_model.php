@@ -127,10 +127,29 @@ class Invoice_model extends CI_Model {
 						$thisField = str_replace('_greateq', '', $key);
 						$this->db->where($thisField.' >=', urldecode($value));
 						break;
+					case 'date_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$this->db->where('invoice_issue >=', urldecode($value));
+						break;
 					case 'invoice_id_smalleq':
 					case 'invoice_number_smalleq':
 						$thisField = str_replace('_smalleq', '', $key);
 						$this->db->where($thisField.' <=', urldecode($value));
+						break;
+					case 'date_smalleq':
+						$thisField = str_replace('_smalleq', '', $key);
+						$this->db->where('invoice_issue <=', urldecode($value));
+						break;
+					case 'invoice_discount_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$this->db->where($thisField.' >', urldecode($value));
+						$this->db->or_group_start();
+						$this->db->where('invoice_category_discount !=', '');
+						$this->db->group_end();
+						break;
+					case 'invoice_freight_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$this->db->where($thisField.' >', urldecode($value));
 						break;
 					case 'invoice_client_company_name_invoice_client_name_like':
 						$this->db->group_start()

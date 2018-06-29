@@ -29,6 +29,7 @@ class Ledgerreport extends CI_Controller {
     private $per_page;
 
     private function make_form_data($type, &$data){
+        $data['type'] = $type;
         if( $type == 'account_receivable' ){
             /* client */
             // switch(true){
@@ -87,7 +88,7 @@ class Ledgerreport extends CI_Controller {
                     $data['data'][$key][] = $rv.substr($value->invoice_number, strlen($value->invoice_number)-7);
                     $data['data'][$key][] = get_client($value->invoice_client_id)->client_company_name.' - Invoice: '.$value->invoice_number;
                     $data['data'][$key][] = '-';
-                    $data['data'][$key][] = money_format('%!n', $value->invoice_total);
+                    $data['data'][$key][] = money_format('%!n', $value->invoice_total*$value->invoice_exchange_rate);
                 }
                 $data['data'][$key][] = '-';
             }
@@ -146,8 +147,156 @@ class Ledgerreport extends CI_Controller {
                     $data['data'][$key][] = $value->purchaseorder_number;
                     $data['data'][$key][] = get_vendor($value->purchaseorder_vendor_id)->vendor_company_name;
                     $data['data'][$key][] = '-';
-                    $data['data'][$key][] = money_format('%!n', $value->purchaseorder_total);
+                    $data['data'][$key][] = money_format('%!n', $value->purchaseorder_total*$value->purchaseorder_vendor_exchange_rate);
                 }
+                $data['data'][$key][] = '-';
+            }
+        }else if( $type == 'sales' ){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+            $invoices = $this->invoice_model->select($thisSelect);
+            if( $invoices ){
+                $invoice_ids = convert_object_to_array($invoices, 'invoice_id');
+            }else{
+                $invoice_ids = array(0);
+            }
+            $this->thisGET['invoiceitem_invoice_id_in'] = $invoice_ids;
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'num_rows'
+            );
+            $data['num_rows'] = $this->invoiceitem_model->select($thisSelect);
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'order' => 'invoiceitem_category_id',
+                'ascend' => 'asc',
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+            $invoiceitems = $this->invoiceitem_model->select($thisSelect);
+
+            $data['data'] = array();
+            foreach($invoiceitems as $key => $value){
+                $invoice = get_invoice($value->invoiceitem_invoice_id);
+                $data['data'][$key][] = 'Sales - '.get_category($value->invoiceitem_category_id)->category_name;
+                $data['data'][$key][] = $invoice->invoice_issue;
+                $data['data'][$key][] = $invoice->invoice_number;
+                $data['data'][$key][] = get_client($invoice->invoice_client_id)->client_company_name.' - Item: '.$value->invoiceitem_product_code;
+                $data['data'][$key][] = '-';
+                $data['data'][$key][] = money_format('%!n', $value->invoiceitem_subtotal*$invoice->invoice_exchange_rate);
+                $data['data'][$key][] = '-';
+            }
+        }else if( $type == 'cost' ){
+            $this->thisGET['purchaseorder_status_noteq'] = 'cancel';
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+            $purchaseorders = $this->purchaseorder_model->select($thisSelect);
+            if( $purchaseorders ){
+                $purchaseorder_ids = convert_object_to_array($purchaseorders, 'purchaseorder_id');
+            }else{
+                $purchaseorder_ids = array(0);
+            }
+            $this->thisGET['purchaseorderitem_purchaseorder_id_in'] = $purchaseorder_ids;
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'num_rows'
+            );
+            $data['num_rows'] = $this->purchaseorderitem_model->select($thisSelect);
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'order' => 'purchaseorderitem_category_id',
+                'ascend' => 'asc',
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+            $purchaseorderitems = $this->purchaseorderitem_model->select($thisSelect);
+
+            $data['data'] = array();
+            foreach($purchaseorderitems as $key => $value){
+                $purchaseorder = get_purchaseorder($value->purchaseorderitem_purchaseorder_id);
+                $data['data'][$key][] = 'Purchases - '.get_category($value->purchaseorderitem_category_id)->category_name;
+                $data['data'][$key][] = $purchaseorder->purchaseorder_issue;
+                $data['data'][$key][] = $purchaseorder->purchaseorder_number;
+                $data['data'][$key][] = get_vendor($purchaseorder->purchaseorder_vendor_id)->vendor_company_name.' - Item: '.$value->purchaseorderitem_product_code;
+                $data['data'][$key][] = money_format('%!n', get_product($value->purchaseorderitem_product_id)->product_cost*$purchaseorder->purchaseorder_vendor_exchange_rate);
+                $data['data'][$key][] = '-';
+                $data['data'][$key][] = '-';
+            }
+        }else if( $type == 'discount' ){
+            $this->thisGET['invoice_discount_greateq'] = 0;
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'num_rows'
+            );
+            $data['num_rows'] = $this->invoice_model->select($thisSelect);
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+            $invoices = $this->invoice_model->select($thisSelect);
+
+            $data['data'] = array();
+            $k = 0;
+            foreach($invoices as $key => $value){
+                $invoice_category_discount = $value->invoice_category_discount;
+                if( $invoice_category_discount ){
+                    // $invoice_category_discount = json_decode($invoice_category_discount);
+                    // foreach ($invoice_category_discount as $key1 => $value1) {
+                    //     $data['data'][$k][] = 'Sales discount';
+                    //     $data['data'][$k][] = $value->invoice_issue;
+                    //     $data['data'][$k][] = $value->invoice_number;
+                    //     $data['data'][$k][] = get_client($value->invoice_client_id)->client_company_name.' - Item: DISCOUNT - '.($value->invoice_discount_type=='percent'&&$value->invoice_discount_value>0?$value->invoice_discount_value.'%':money_format('%!n', ($value->invoice_discount_value>0?$value->invoice_discount_value*$value->invoice_exchange_rate:$value->invoice_discount*$value->invoice_exchange_rate)));
+                    //     $data['data'][$k][] = money_format('%!n', $value->invoice_discount*$value->invoice_exchange_rate);
+                    //     $data['data'][$k][] = '-';
+                    //     $data['data'][$k][] = '-';
+                    //     $k++;
+                    // }
+                }
+                $data['data'][$k][] = 'Sales discount';
+                $data['data'][$k][] = $value->invoice_issue;
+                $data['data'][$k][] = $value->invoice_number;
+                $data['data'][$k][] = get_client($value->invoice_client_id)->client_company_name.' - Item: DISCOUNT - '.($value->invoice_discount_type=='percent'&&$value->invoice_discount_value>0?$value->invoice_discount_value.'%':money_format('%!n', ($value->invoice_discount_value>0?$value->invoice_discount_value*$value->invoice_exchange_rate:$value->invoice_discount*$value->invoice_exchange_rate)));
+                $data['data'][$k][] = money_format('%!n', $value->invoice_discount*$value->invoice_exchange_rate);
+                $data['data'][$k][] = '-';
+                $data['data'][$k][] = '-';
+                $k++;
+            }
+            // $data['num_rows'] = $k;
+        }else if( $type == 'freight' ){
+            $this->thisGET['invoice_freight_greateq'] = 0;
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'num_rows'
+            );
+            $data['num_rows'] = $this->invoice_model->select($thisSelect);
+
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+            $invoices = $this->invoice_model->select($thisSelect);
+
+            $data['data'] = array();
+            foreach($invoices as $key => $value){
+                $data['data'][$key][] = 'Freight Income';
+                $data['data'][$key][] = $value->invoice_issue;
+                $data['data'][$key][] = $value->invoice_number;
+                $data['data'][$key][] = get_client($value->invoice_client_id)->client_company_name.' - Item: FREIGHT INCOME';
+                $data['data'][$key][] = '-';
+                $data['data'][$key][] = money_format('%!n', $value->invoice_freight*$value->invoice_exchange_rate);
                 $data['data'][$key][] = '-';
             }
         }
@@ -199,14 +348,15 @@ class Ledgerreport extends CI_Controller {
 
         $this->load->library('PHPExcel');
         $this->load->model('invoice_model');
-		$this->load->model('invoice_model');
+		$this->load->model('invoiceitem_model');
         $this->load->model('purchaseorder_model');
+        $this->load->model('purchaseorderitem_model');
 		$this->load->model('user_model');
 
         $this->per_page = get_setting('per_page')->setting_value;
         $this->thisGET = $this->uri->uri_to_assoc();
-        $this->thisGET['invoice_status'] = 'complete';
-        $this->thisGET['invoice_deleted'] = 'N';
+        // $this->thisGET['invoice_status'] = 'complete';
+        // $this->thisGET['invoice_deleted'] = 'N';
 
         if( !isset($this->thisGET['type']) ){
             $this->thisGET['type'] = 'account_receivable';

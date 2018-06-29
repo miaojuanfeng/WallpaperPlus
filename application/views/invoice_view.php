@@ -436,6 +436,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<div>
 																<input name="invoiceitem_id[]" type="hidden" value="<?=$value->invoiceitem_id?>" />
 																<input name="invoiceitem_invoice_id[]" type="hidden" value="<?=$value->invoiceitem_invoice_id?>" />
+																<input name="invoiceitem_category_id[]" type="hidden" value="<?=$value->invoiceitem_category_id?>" />
 																<input name="invoiceitem_product_type_name[]" type="hidden" value="<?=$value->invoiceitem_product_type_name?>" />
 																<input id="invoiceitem_product_code" name="invoiceitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->invoiceitem_product_code?>" />
 															</div>

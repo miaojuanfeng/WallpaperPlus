@@ -168,6 +168,14 @@ class Purchaseorder_model extends CI_Model {
 						$thisField = str_replace('_smalleq', '', $key);
 						$this->db->where('DATE(purchaseorder_create) <=', urldecode($value));
 						break;
+					case 'date_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$this->db->where('purchaseorder_issue >=', urldecode($value));
+						break;
+					case 'date_smalleq':
+						$thisField = str_replace('_smalleq', '', $key);
+						$this->db->where('purchaseorder_issue <=', urldecode($value));
+						break;
 					case 'YEAR(purchaseorder_create)':
 						$this->db->where('YEAR(purchaseorder_create) = YEAR(CURDATE())');
 						break;
