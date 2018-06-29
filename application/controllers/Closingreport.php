@@ -65,11 +65,11 @@ class Closingreport extends CI_Controller {
         $this->thisGET = $this->uri->uri_to_assoc();
         $this->thisGET['deliverynote_status_like'] = 'processing';
         $this->thisGET['deliverynote_deleted'] = 'N';
+        $this->thisGET['purchaseorder_default'] = true;
+        $this->thisGET['purchaseorder_deleted'] = 'N';
 	}
 
 	private function make_form_data(&$data){
-        $this->thisGET['purchaseorder_default'] = true;
-        $this->thisGET['purchaseorder_deleted'] = 'N';
         $thisSelect = array(
             'where' => $this->thisGET,
             'limit' => $this->per_page,
