@@ -165,6 +165,86 @@ class Load extends CI_Controller {
         }
     }
 
+    public function approvalCodeLoader(){
+
+    	$thisDiscount = $this->input->post('thisDiscount');
+    	$thisTotal = $this->input->post('thisTotal');
+
+        echo '<script>';
+        echo 'function approvalCodeLoader(){';
+        if( $thisTotal && floatval($thisDiscount/$thisTotal) > 0.3 ){
+        	$html = '';
+            $html .= '<tr class="tr-approval">';
+            $html .= 	'<th></th>';
+			$html .=	'<th></th>';
+			$html .=	'<td></td>';
+			$html .= 	'<td><label for="approval_code">Approval code</label></td>';
+			$html .=	'<td><input id="approval_code" name="approval_code" type="text" class="form-control input-sm required approvalCodeCheckDuplicate" placeholder="Approval code" value="" /></td>';
+			$html .= '</tr>';
+			echo 'if( !($(".tr-approval").length > 0) ){';
+			echo 	'$(".table-approval").append(\''.$html.'\');';
+			echo 	'$(".tr-approval").css("display", "none").fadeIn();';
+			echo '}';
+        }else{
+        	echo '$(".tr-approval").remove();';
+        }
+        echo '}';
+        echo '</script>';
+    }
+
+    public function approvalCodeCheckDuplicate(){
+    	$this->load->model('user_model');
+
+    	$approval_code = $this->input->post('approvalCode');
+
+    	$thisSelect = array(
+            'where' => array('user_code' => $approval_code),
+            'return' => 'row'
+        );
+        $user = $this->user_model->select($thisSelect);
+        if( $approval_code && $user ) {
+            echo $user->user_id;
+        }
+    }
+
+    public function productCheckDuplicate(){
+    	$this->load->model('product_model');
+
+    	$product_id = trim($this->input->post('thisProductId'));
+    	$product_name = trim($this->input->post('productName'));
+    	$product_code = trim($this->input->post('productCode'));
+    	$product_wpp_code = trim($this->input->post('productWppCode'));
+
+    	if( !empty($product_name) ){
+    		$thisSelect = array(
+	            'where' => array('product_id_noteq' => $product_id, 'product_name' => $product_name),
+	            'return' => 'row'
+	        );
+	        $product = $this->product_model->select($thisSelect);
+	        if( $product ) {
+	            echo $product->product_id;
+	        }
+    	}else if( !empty($product_code) ){
+    		$thisSelect = array(
+	            'where' => array('product_id_noteq' => $product_id, 'product_code' => $product_code),
+	            'return' => 'row'
+	        );
+	        $product = $this->product_model->select($thisSelect);
+	        if( $product ) {
+	            echo $product->product_id;
+	        }
+    	}else if( !empty($product_wpp_code) ){
+    		$thisSelect = array(
+	            'where' => array('product_id_noteq' => $product_id, 'product_wpp_code' => $product_wpp_code),
+	            'return' => 'row'
+	        );
+	        $product = $this->product_model->select($thisSelect);
+	        if( $product ) {
+	            echo $product->product_id;
+	        }
+    	}
+    }
+
 	public function salesorderLoader()
 	{
 		$this->load->model('salesorder_model');

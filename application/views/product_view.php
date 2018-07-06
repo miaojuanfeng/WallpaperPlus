@@ -28,7 +28,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/function.js'); ?>"></script>
 
 		<script>
-        var products = <?=(!empty($products)) ? json_encode($products) : '[]'?>;
 
 		$(function(){
 			$('input[name="product_id"]').focus();
@@ -38,24 +37,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$('.pagination-area>strong').addClass('disabled');
 
             /*--------- jQuery validator ---------*/
-            jQuery.validator.addMethod("productNameCheckDuplicate", function(value, element) {
-                thisResult = true;
-                $(products).each(function(key, val){
-                    if(value.toUpperCase() == val.product_name.toUpperCase()){
-                        thisResult = false;
-                    }
-                });
-                return this.optional(element) || thisResult;
-            }, "This field is duplicated.");
+            // jQuery.validator.addMethod("productNameCheckDuplicate", function(value, element) {
+            //     thisResult = true;
+            //     $.ajax({
+            //         type : "post", 
+            //         url : "/load", 
+            //         data : {'thisTableId': 'productCheckDuplicate', 'thisProductId': $('input[name="product_id"]').val(), 'productName': value, 't': timestamp()}, 
+            //         async : false, 
+            //         success : function(data){
+            //             if(data != ''){
+            //                 thisResult = false;
+            //             }
+            //         } 
+            //     });
+            //     return this.optional(element) || thisResult;
+            // }, "This field is duplicated.");
             /*--------- jQuery validator ————*/
 
             /*--------- jQuery validator ---------*/
             jQuery.validator.addMethod("productCodeCheckDuplicate", function(value, element) {
                 thisResult = true;
-                $(products).each(function(key, val){
-                    if(value.toUpperCase() == val.product_code.toUpperCase()){
-                        thisResult = false;
-                    }
+                $.ajax({
+                    type : "post", 
+                    url : "/load", 
+                    data : {'thisTableId': 'productCheckDuplicate', 'thisProductId': $('input[name="product_id"]').val(), 'productCode': value, 't': timestamp()}, 
+                    async : false, 
+                    success : function(data){
+                        if(data != ''){
+                            thisResult = false;
+                        }
+                    } 
                 });
                 return this.optional(element) || thisResult;
             }, "This field is duplicated.");
@@ -64,10 +75,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             /*--------- jQuery validator ---------*/
             jQuery.validator.addMethod("productWppCodeCheckDuplicate", function(value, element) {
                 thisResult = true;
-                $(products).each(function(key, val){
-                    if(value.toUpperCase() == val.product_wpp_code.toUpperCase()){
-                        thisResult = false;
-                    }
+                $.ajax({
+                    type : "post", 
+                    url : "/load", 
+                    data : {'thisTableId': 'productCheckDuplicate', 'thisProductId': $('input[name="product_id"]').val(), 'productWppCode': value, 't': timestamp()}, 
+                    async : false, 
+                    success : function(data){
+                        if(data != ''){
+                            thisResult = false;
+                        }
+                    } 
                 });
                 return this.optional(element) || thisResult;
             }, "This field is duplicated.");

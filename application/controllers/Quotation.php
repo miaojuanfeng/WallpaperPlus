@@ -79,32 +79,6 @@ class Quotation extends CI_Controller {
 						$this->quotationitem_model->insert($value);
 					}
 					break;
-                case 'approval':
-                    /* user */
-                    $thisSelect = array(
-                        'where' => array('user_code' => $thisPOST['approval_code']),
-                        'return' => 'row'
-                    );
-                    $user = $this->user_model->select($thisSelect);
-                    if( $thisPOST['approval_code'] && $user ) {
-                        $quotation = array();
-                        $thisPOST['quotation_approval_user_id'] = $user->user_id;
-
-                        $this->quotation_model->update($thisPOST);
-
-                        $thisQuotationitem = get_array_prefix('quotationitem_', $thisPOST);
-                        $thisQuotationitem = convert_formArray_to_DBArray($thisQuotationitem, 'quotationitem_product_name');
-                        $this->quotationitem_model->delete($thisPOST);
-                        foreach($thisQuotationitem as $key => $value){
-                            $value['quotationitem_quotation_id'] = $thisPOST['quotation_id'];
-                            $this->quotationitem_model->insert($value);
-                        }
-
-                        $thisAlert = 'Data saved';
-                    }else{
-                        $thisAlert = 'Save failed, wrong approval code';
-                    }
-                    break;
 			}
 
 			/* attachment */

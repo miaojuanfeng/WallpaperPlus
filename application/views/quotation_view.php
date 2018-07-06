@@ -41,6 +41,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$('.pagination-area>a, .pagination-area>strong').addClass('btn btn-sm btn-primary');
 			$('.pagination-area>strong').addClass('disabled');
 
+			/*--------- jQuery validator ---------*/
+            jQuery.validator.addMethod("approvalCodeCheckDuplicate", function(value, element) {
+                thisResult = true;
+                $.ajax({
+					type : "post", 
+					url : "/load", 
+					data : {'thisTableId': 'approvalCodeCheckDuplicate', 'approvalCode': value, 't': timestamp()}, 
+					async : false, 
+					success : function(data){
+						if(data != ''){
+							$('input[name="quotation_approval_user_id"]').val(data);
+						}else{
+							$('input[name="quotation_approval_user_id"]').val('');
+							thisResult = false;
+						}
+					} 
+				});
+                return this.optional(element) || thisResult;
+            }, "This approval code is not correct.");
+            /*--------- jQuery validator ————*/
+
 			/*--------- date mask ---------*/
 			$('.date-mask').mask('9999-99-99');
 
@@ -257,7 +278,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             	category_discount_total += parseFloat($(this).val());
             });
             var type_discount_total = parseFloat($('input[name="quotation_discount"]').val());
-			$('input[name="quotation_total"]').val(parseFloat((total - type_discount_total - category_discount_total) + parseFloat($('input[name="quotation_freight"]').val()) ).toFixed(2)).css('display', 'none').fadeIn();
+            var freight_total = parseFloat($('input[name="quotation_freight"]').val());
+            $('button[value="save"]').addClass('disabled');
+            $('.scriptLoader').load('/load', {'thisTableId': 'approvalCodeLoader', 'thisDiscount': (type_discount_total + category_discount_total), 'thisTotal': (total + freight_total), 't': timestamp()}, function(){
+                approvalCodeLoader();
+                $('button[value="save"]').removeClass('disabled');
+            });
+			$('input[name="quotation_total"]').val(parseFloat(total + freight_total - type_discount_total - category_discount_total).toFixed(2)).css('display', 'none').fadeIn();
 		}
 
 		function discount_type_calc(){
@@ -442,6 +469,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="quotation_version" value="<?=$quotation->quotation_version?>" />
                             <input type="hidden" name="quotation_client_company_code" value="<?=$quotation->quotation_client_company_code?>" />
 							<input type="hidden" name="quotation_serial" value="<?=$quotation->quotation_serial?>" />
+							<input type="hidden" name="quotation_approval_user_id" value="" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
@@ -463,11 +491,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											?>
 										</blockquote>
 										<p class="form-group">
-                                            <?php if( $quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate' ) { ?>
-                                                <button type="submit" name="action" value="approval" class="btn btn-sm btn-primary btn-block" data-toggle="tooltip" title="Can only be updated with approved code"><i class="glyphicon glyphicon-floppy-disk"></i> Approval</button>
-                                            <?php }else{ ?>
-                                                <button<?=($quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate') ? ' disabled="disabled"' : ''?> type="submit" name="action" value="save" class="btn btn-sm btn-primary btn-block"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
-                                            <?php } ?>
+                                            <button<?=($quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate') ? ' disabled="disabled"' : ''?> type="submit" name="action" value="save" class="btn btn-sm btn-primary btn-block"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
 										</p>
 										<?php if($this->router->fetch_method() == 'update'){ ?>
 										<p class="form-group">
@@ -707,12 +731,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</span>
 														</td>
 													</tr>
-													<?php if( $quotation->quotation_confirmed == 'Y' && $this->router->fetch_method() != 'duplicate' ) { ?>
-													<tr>
-														<td><label for="approval_code">Approval code</label></td>
-														<td><input id="approval_code" name="approval_code" type="text" class="form-control input-sm required" placeholder="Approval code" value="" /></td>
-													</tr>
-													<?php } ?>
 												</table>
 											</div>
 										</div>
@@ -790,7 +808,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</tr>
 													<?php } ?>
 												</tbody>
-												<tfoot id="category_discount">
+												<tfoot class="table-approval" id="category_discount">
 													<?php foreach ($quotation_category_discount as $key => $value) { ?>
 													<tr id="category_discount_<?=$value->category_id?>">
 														<th></th>

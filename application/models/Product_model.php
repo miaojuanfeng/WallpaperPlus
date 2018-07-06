@@ -68,6 +68,7 @@ class Product_model extends CI_Model {
 				switch($key){
 					case 'product_id':
 					case 'product_code':
+					case 'product_wpp_code':
 					case 'product_name':
 						$thisField = $key;
 						$this->db->where($thisField, urldecode($value));

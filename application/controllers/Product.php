@@ -48,23 +48,6 @@ class Product extends CI_Controller {
 			);
 			$data['product'] = $this->product_model->select($thisSelect);
 
-            $thisSelect = array(
-                'where' => array(
-                    'product_id_noteq' => $data['product']->product_id
-                ),
-                'return' => 'result'
-            );
-            $data['products'] = $this->product_model->select($thisSelect);
-			
-//			/* products */
-//			$thisSelect = array(
-//				'where' => array(
-//					'product_code_noteq' => $data['product']->product_code
-//				),
-//				'return' => 'result'
-//			);
-//			$data['products'] = $this->product_model->select($thisSelect);
-
             /* z_product_attribute */
             $thisSelect = array(
                 'where' => $this->uri->uri_to_assoc(),
@@ -95,18 +78,6 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['units'] = $this->unit_model->select($thisSelect);
-
-			/* vendor */
-			// $thisSelect = array(
-			// 	'return' => 'result'
-			// );
-			// $data['vendors'] = $this->vendor_model->select($thisSelect);
-
-//			/* type */
-//			$thisSelect = array(
-//				'return' => 'result'
-//			);
-//			$data['types'] = $this->type_model->select($thisSelect);
 
             /* size */
             $thisSelect = array(
@@ -189,23 +160,6 @@ class Product extends CI_Controller {
 			}
 			$data['product'] = (object)$thisArray;
 
-            $thisSelect = array(
-                'where' => array(
-                    'product_id_noteq' => $data['product']->product_id
-                ),
-                'return' => 'result'
-            );
-            $data['products'] = $this->product_model->select($thisSelect);
-			
-//			/* products */
-//			$thisSelect = array(
-//				'where' => array(
-//					'product_code_noteq' => $data['product']->product_code
-//				),
-//				'return' => 'result'
-//			);
-//			$data['products'] = $this->product_model->select($thisSelect);
-
             /* vendor */
             $thisSelect = array(
                 'return' => 'result'
@@ -229,18 +183,6 @@ class Product extends CI_Controller {
 				'return' => 'result'
 			);
 			$data['units'] = $this->unit_model->select($thisSelect);
-
-			/* vendor */
-			// $thisSelect = array(
-			// 	'return' => 'result'
-			// );
-			// $data['vendors'] = $this->vendor_model->select($thisSelect);
-
-//			/* type */
-//			$thisSelect = array(
-//				'return' => 'result'
-//			);
-//			$data['types'] = $this->type_model->select($thisSelect);
 
             /* size */
             $thisSelect = array(

@@ -20,8 +20,8 @@ switch($deliverynote->deliverynote_currency){
 		<style>
 		body {
 			font-family: Helvetica, Arial, sans-serif;
-			font-size: 9px;
-			line-height: 16px;
+			font-size: 14px;
+			line-height: 20px;
 			margin: 0;
 			padding: 0;
 			-webkit-text-size-adjust: none;
@@ -36,7 +36,7 @@ switch($deliverynote->deliverynote_currency){
 			height: 280px;
 		}
 		.line-height-12 {
-			line-height: 12px;
+			line-height: 18px;
 		}
 		.padding-top-5 td {
 			padding-top: 5px;
@@ -51,7 +51,8 @@ switch($deliverynote->deliverynote_currency){
 			margin-left: -8px;
 		}
 		.corpcolor-font {
-			color: #f98700;
+			color: #cab132;
+			margin-left: 0;
 		}
 		.document-br-20 {
 			margin-top: 20px;
@@ -130,8 +131,8 @@ switch($deliverynote->deliverynote_currency){
 		<?php if($this->router->fetch_method() == 'header'){ ?>
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<td width="85%">
-					<h1 class="corpcolor-font">【Wallpaper+】 <small><b>Your Business Partner</b></small></h1>
+				<td width="85%" valign="top">
+					<h1 class="corpcolor-font">Wallpaper+</h1>
 				</td>
 				<td width="15%" align="right"><h2>Delivery note</h2></td>
 			</tr>
@@ -280,7 +281,7 @@ switch($deliverynote->deliverynote_currency){
 				<tr>
 					<td class="line-height-12">
 						All the received payments are non-refundable.
-						<br />Cheque(s) should be crossed & made payable to TOP EXCELLENT CONSULTANTS LIMITED.
+						<br />Cheque(s) should be crossed & made payable to Wallpaper+.
 						<br />This deliverynote is also an order confirmation. Once the order is confirmed, 100% balance of the total amount will be charged to the customer as a penalty for order cancellation.
 						<br />This deliverynote will expired on above expired date or unless otherwise stated and subject to change without notice.
 					</td>
@@ -323,7 +324,7 @@ switch($deliverynote->deliverynote_currency){
 					<td width="20%"></td>
 					<td width="40%">
 						<div><b>For and on behalf of</b></div>
-						<div>Top Excellent Consultants Limited</div>
+						<div>Wallpaper+</div>
 						<div class="sign-area">
 							<div class="sign"><?=$deliverynote->deliverynote_user_name?></div>
 						</div>
@@ -335,8 +336,9 @@ switch($deliverynote->deliverynote_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
 					<td class="line-height-12">
-						Pleas e return the copy of this deliverynote with your signature and company chop as confirmation of the above offer.
-						<br />Address: Flat D, 3/F, Fu Hop Factory Building, 209-211 Wai Yip Street, Kwun Tong,Kowloon, Hong Kong.Tel: 2709 0666 Fax: 2709 0669
+						Please return the copy of this deliverynote with your signature and company chop as confirmation of the above offer.
+						<br />Address: 9 Floor The Hennessy 256 Hennessy Road Wan Chal Hong Kong. 
+						<br />Tel: +852 3525 1785 Fax: +852 3525 1784 Email: sales@wallpaperplus.com.hk
 					</td>
 				</tr>
 			</table>

@@ -20,8 +20,8 @@ switch($quotation->quotation_currency){
 		<style>
 		body {
 			font-family: Helvetica, Arial, sans-serif;
-			font-size: 9px;
-			line-height: 16px;
+			font-size: 14px;
+			line-height: 20px;
 			margin: 0;
 			padding: 0;
 			-webkit-text-size-adjust: none;
@@ -36,7 +36,7 @@ switch($quotation->quotation_currency){
 			height: 280px;
 		}
 		.line-height-12 {
-			line-height: 12px;
+			line-height: 18px;
 		}
 		.padding-top-5 td {
 			padding-top: 5px;
@@ -51,7 +51,8 @@ switch($quotation->quotation_currency){
 			margin-left: -8px;
 		}
 		.corpcolor-font {
-			color: #f98700;
+			color: #cab132;
+			margin-left: 0;
 		}
 		.document-br-20 {
 			margin-top: 20px;
@@ -130,10 +131,10 @@ switch($quotation->quotation_currency){
 		<?php if($this->router->fetch_method() == 'header'){ ?>
 		<table cellpadding="0" cellspacing="0">
 			<tr>
-				<td width="85%">
-					<h1 class="corpcolor-font">【Wallpaper+】 <small><b>Your Business Partner</b></small></h1>
+				<td width="50%" valign="top">
+					<h1 class="corpcolor-font">Wallpaper+</h1>
 				</td>
-				<td width="15%" align="right"><h2>Quotation</h2></td>
+				<td width="50%" align="right"><h2>Quotation</h2></td>
 			</tr>
 		</table>
 		<table cellpadding="0" cellspacing="0">
@@ -141,12 +142,12 @@ switch($quotation->quotation_currency){
 				<td width="50%" valign="top">
 					<table cellpadding="0" cellspacing="0">
                         <tr>
-                            <td><b>Date</b></td>
-                            <td><?=$quotation->quotation_issue?></td>
+                            <td valign="top" width="24%"><b>Date</b></td>
+                            <td width="76%"><?=$quotation->quotation_issue?></td>
                         </tr>
 						<tr>
-							<td valign="top" width="24%"><b>To</b></td>
-							<td width="76%"><?=$quotation->quotation_client_company_name?></td>
+							<td valign="top"><b>To</b></td>
+							<td><?=$quotation->quotation_client_company_name?></td>
 						</tr>
                         <tr>
                             <td valign="top"><b>Attn</b></td>
@@ -178,8 +179,8 @@ switch($quotation->quotation_currency){
 							<td><?=$quotation->quotation_user_name?></td>
 						</tr>
 						<tr>
-							<td><b>Expire Date</b></td>
-							<td><?=$quotation->quotation_expire?></td>
+							<td></td>
+							<td></td>
 						</tr>
                         <tr></tr>
 					</table>
@@ -292,12 +293,11 @@ switch($quotation->quotation_currency){
 			?>
 			<tr>
 				<td width="12%"></td>
-				<td width="55%"></td>
-				<td width="15%" align="right"><b><?=strtoupper($value->category_name)?> DISCOUNT</b></td>
+				<td colspan="2" width="70%" align="right"><b><?=strtoupper($value->category_name)?> DISCOUNT</b></td>
 				<td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
 				<td width="10%" align="right"><?=money_format('%!n', $value->category_discount)?></td>
 			</tr>
-			<?php 	
+			<?php
 					}
 				}
 			?>
@@ -335,10 +335,20 @@ switch($quotation->quotation_currency){
 				</tr>
 				<tr>
 					<td class="line-height-12">
-						All the received payments are non-refundable.
-						<br />Cheque(s) should be crossed & made payable to TOP EXCELLENT CONSULTANTS LIMITED.
-						<br />This quotation is also an order confirmation. Once the order is confirmed, 100% balance of the total amount will be charged to the customer as a penalty for order cancellation.
-						<br />This quotation will expired on above expired date or unless otherwise stated and subject to change without notice.
+						1、付款方式：50%訂金於確認及簽回報價單時支付；餘款在送貨前付清。
+						<br />
+						2a、交貨期：確認簽妥報價單及收妥款項日起計，項目1-15：如廠家有貨約10-14天貨交香港。
+						<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;項目16廠家約於9/4完成生產，另加約10-14天貨交香港。
+						<br />
+						<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(逢星期二/三下單)
+						<br />
+						2b、由廠家至香港運輸途中如因天氣、清關而導致延誤則不計算於交貨天數內。
+						<br />
+						3、此報價單內之型號及數量經雙方簽定後不能取消及不接受退貨。
+						<br />
+						4、因貨品批期右異，買方訂購之型號與樣辨顏色可能有輕微及可接受之差距，乃屬正常。
 					</td>
 				</tr>
 			</table>
@@ -382,7 +392,7 @@ switch($quotation->quotation_currency){
 					<td width="20%"></td>
 					<td width="40%">
 						<div><b>For and on behalf of</b></div>
-						<div>Top Excellent Consultants Limited</div>
+						<div>Wallpaper+</div>
 						<div class="sign-area">
 							<div class="sign"><?=$quotation->quotation_user_name?></div>
 						</div>
@@ -394,8 +404,9 @@ switch($quotation->quotation_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
 					<td class="line-height-12">
-						Pleas e return the copy of this quotation with your signature and company chop as confirmation of the above offer.
-						<br />Address: Flat D, 3/F, Fu Hop Factory Building, 209-211 Wai Yip Street, Kwun Tong,Kowloon, Hong Kong.Tel: 2709 0666 Fax: 2709 0669
+						Please return the copy of this quotation with your signature and company chop as confirmation of the above offer.
+						<br />Address: 9 Floor The Hennessy 256 Hennessy Road Wan Chal Hong Kong. 
+						<br />Tel: +852 3525 1785 Fax: +852 3525 1784 Email: sales@wallpaperplus.com.hk
 					</td>
 				</tr>
 			</table>

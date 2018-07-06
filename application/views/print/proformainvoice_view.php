@@ -372,7 +372,7 @@ switch($proformainvoice->proformainvoice_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
 					<td class="line-height-12">
-						Pleas e return the copy of this proformainvoice with your signature and company chop as confirmation of the above offer.
+						Please return the copy of this proformainvoice with your signature and company chop as confirmation of the above offer.
 						<br />Address: Flat D, 3/F, Fu Hop Factory Building, 209-211 Wai Yip Street, Kwun Tong,Kowloon, Hong Kong.Tel: 2709 0666 Fax: 2709 0669
 					</td>
 				</tr>
