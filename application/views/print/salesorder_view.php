@@ -193,7 +193,7 @@ switch($salesorder->salesorder_currency){
                 <td width="12%"><b>PART NO.</b></td>
                 <td width="12%"><b>CODE</b></td>
                 <td width="12%"><b>NAME</b></td>
-                <td width="11%" align="center"><b>SIZE</b></td>
+                <td width="18%" align="left"><b>SIZE</b></td>
                 <td width="8%" align="center"><b>QTY</b></td>
                 <td width="13%" align="right"><b>UNIT PRICE</b></td>
                 <td width="10%" align="right"><b>AMOUNT</b></td>
@@ -247,12 +247,13 @@ switch($salesorder->salesorder_currency){
 			<?php
                 foreach($salesorderitems as $key => $value){
                     $thisProduct = get_product($value->salesorderitem_product_id);
+                    $thisUnit = get_unit($thisProduct->product_unit_id);
                 ?>
 			<tr class="padding-top-5">
                 <td width="12%"></td>
                 <td width="12%"></td>
                 <td width="12%"></td>
-                <td width="11%"></td>
+                <td width="18%"></td>
                 <td width="8%"></td>
                 <td width="13%"></td>
                 <td width="10%"></td>
@@ -261,10 +262,10 @@ switch($salesorder->salesorder_currency){
 				<td valign="top">
 					<div class="part_number"><?=$value->salesorderitem_product_code?></div>
 				</td>
-                <td valign="top"><?=$value->salesorderitem_product_code?></td>
+                <td valign="top"><?=$value->salesorderitem_product_code.' - '.$value->salesorderitem_product_color_code?></td>
                 <td valign="top"><?=$value->salesorderitem_product_name?></td>
-                <td valign="top" align="center"><?=$value->salesorderitem_product_detail?></td>
-                <td valign="top" align="center"><?=$value->salesorderitem_quantity.' '.get_unit($thisProduct->product_unit_id)->unit_name?></td>
+                <td valign="top" align="left"><?=convert_br($value->salesorderitem_product_detail)?></td>
+                <td valign="top" align="center"><?=$value->salesorderitem_quantity.' '.(!empty($thisUnit)?$thisUnit->unit_name:'')?></td>
                 <td valign="top" align="right"><?=strtoupper($salesorder->salesorder_currency).' '.money_format('%!n', $value->salesorderitem_product_price)?></td>
                 <td valign="top" align="right"><?=strtoupper($salesorder->salesorder_currency).' '.money_format('%!n', $value->salesorderitem_product_price * $value->salesorderitem_quantity)?></td>
 			</tr>

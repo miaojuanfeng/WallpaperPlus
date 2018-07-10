@@ -206,7 +206,7 @@ switch($purchaseorder->purchaseorder_currency){
 			<tr>
 				<td width="12%"><b>Our ref.</b></td>
 				<td width="15%"><b>DESCRIPTION</b></td>
-				<td width="15%" align="center"><b>SIZE</b></td>
+				<td width="18%"><b>SIZE</b></td>
                 <td width="15%"><b>QTY</b></td>
 				<td width="11%"><b>LIST PRICE</b></td>
 				<!-- <td width="8%"><b>NET PRICE</b></td> -->
@@ -267,7 +267,7 @@ switch($purchaseorder->purchaseorder_currency){
 			<tr class="padding-top-5">
                 <td width="12%"></td>
                 <td width="15%"></td>
-                <td width="15%"></td>
+                <td width="18%"></td>
                 <td width="15%"></td>
                 <td width="11%"></td>
                 <!-- <td width="8%"></td> -->
@@ -278,14 +278,14 @@ switch($purchaseorder->purchaseorder_currency){
 				<td valign="top">
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.$value1->invoiceitem_product_code.' - '.$value1->invoiceitem_product_name.'</div>';
+                        echo '<div>'.$value1->invoiceitem_product_code.' - '.$value1->invoiceitem_product_name.'</div><br/>';
                     }
                     ?>
                 </td>
-                <td valign="top" align="center">
+                <td valign="top" align="left">
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.$value1->invoiceitem_product_detail.'</div>';
+                        echo '<div>'.convert_br($value1->invoiceitem_product_detail).'</div>';
                     }
                     ?>
                 </td>
@@ -293,14 +293,14 @@ switch($purchaseorder->purchaseorder_currency){
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
                         $quantity_count += $value1->invoiceitem_quantity;
-                        echo '<div>'.$value1->invoiceitem_quantity.' '.$value1->invoiceitem_unit.'</div>';
+                        echo '<div>'.$value1->invoiceitem_quantity.' '.$value1->invoiceitem_unit.'</div><br/>';
                     }
                     ?>
                 </td>
                 <td valign="top">
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price).'</div>';
+                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price).'</div><br/>';
                     }
                     ?>
                 </td>
@@ -315,7 +315,7 @@ switch($purchaseorder->purchaseorder_currency){
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
                         $total += $value1->invoiceitem_product_price * $value1->invoiceitem_quantity;
-                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price * $value1->invoiceitem_quantity).'</div>';
+                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price * $value1->invoiceitem_quantity).'</div><br/>';
                     }
                     ?>
                 </td>

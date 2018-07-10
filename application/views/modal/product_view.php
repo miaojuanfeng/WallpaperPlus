@@ -19,7 +19,7 @@
                                 <input type="text" name="product_wpp_code_like" class="form-control input-sm" placeholder="Product wpp code" value="" />
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" name="product_name_like" class="form-control input-sm" placeholder="Product name" value="" />
+                                <input type="text" name="product_name_like" class="form-control input-sm" placeholder="Pattern book name" value="" />
                             </div>
                             <div class="col-sm-2">
                                 <input type="text" name="vendor_company_code_like" class="form-control input-sm" placeholder="Vendor company code" value="" />

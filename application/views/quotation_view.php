@@ -662,6 +662,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<td><label for="quotation_client_name">Attn</label></td>
 														<td><input id="quotation_client_name" name="quotation_client_name" type="text" class="form-control input-sm required" placeholder="Attn." value="<?=$quotation->quotation_client_name?>" /></td>
 													</tr>
+													<tr>
+														<td><label for="quotation_design_by">Design by</label></td>
+														<td><input id="quotation_design_by" name="quotation_design_by" type="text" class="form-control input-sm" placeholder="Design by" value="<?=$quotation->quotation_design_by?>" /></td>
+													</tr>
 												</table>
 											</div>
 											<div class="col-sm-1 col-xs-1">

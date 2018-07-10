@@ -216,6 +216,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
 														</div>
 														<div class="col-sm-2">
+															<input type="text" name="salesorder_design_by_like" class="form-control input-sm" placeholder="Design by" value="" />
+														</div>
+														<div class="col-sm-2">
 															<select id="salesorder_user_id" name="salesorder_user_id" data-placeholder="Sales" class="chosen-select">
 																<option value></option>
 																<?php foreach($users as $key => $value){ ?>
@@ -223,7 +226,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<?php } ?>
 															</select>
 														</div>
-														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 													</div>

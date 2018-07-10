@@ -162,6 +162,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '<div>';
 			invoiceitem_row += '<input name="invoiceitem_id[]" type="hidden" value="" />';
 			invoiceitem_row += '<input name="invoiceitem_invoice_id[]" type="hidden" value="" />';
+			invoiceitem_row += '<input name="invoiceitem_category_id[]" type="hidden" value="" />';
 			invoiceitem_row += '<input name="invoiceitem_product_type_name[]" type="hidden" value="" />';
 			invoiceitem_row += '<input id="invoiceitem_product_code" name="invoiceitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
 			invoiceitem_row += '</div>';
@@ -355,6 +356,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr>
 														<td><label for="invoice_client_name">Attn</label></td>
 														<td><input id="invoice_client_name" name="invoice_client_name" type="text" class="form-control input-sm required" placeholder="Attn." value="<?=$invoice->invoice_client_name?>" /></td>
+													</tr>
+													<tr>
+														<td><label for="invoice_design_by">Design by</label></td>
+														<td><input id="invoice_design_by" name="invoice_design_by" type="text" class="form-control input-sm" placeholder="Design by" value="<?=$invoice->invoice_design_by?>" /></td>
 													</tr>
                                                     <tr>
                                                         <td><label for="invoice_exchange_rate">Exchange rate</label></td>

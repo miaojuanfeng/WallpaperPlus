@@ -94,6 +94,7 @@ class Salesorder_model extends CI_Model {
 					case 'salesorder_number_like':
 					case 'salesorder_client_id_like':
 					case 'salesorder_client_company_name_like':
+					case 'salesorder_design_by_like':
 					case 'salesorder_project_name_like':
 					case 'salesorder_user_id_like':
 					case 'salesorder_status_like':

@@ -199,6 +199,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '<div>';
 			purchaseorderitem_row += '<input name="purchaseorderitem_id[]" type="hidden" value="" />';
 			purchaseorderitem_row += '<input name="purchaseorderitem_purchaseorder_id[]" type="hidden" value="" />';
+			purchaseorderitem_row += '<input name="purchaseorderitem_category_id[]" type="hidden" value="" />';
 			purchaseorderitem_row += '<input name="purchaseorderitem_type[]" type="hidden" value="main item" />';
 			purchaseorderitem_row += '<input name="purchaseorderitem_product_type_name[]" type="hidden" value="" />';
 			purchaseorderitem_row += '<input id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="" />';
@@ -527,6 +528,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr>
 														<td><label for="purchaseorder_vendor_name">Attn</label></td>
 														<td><input id="purchaseorder_vendor_name" name="purchaseorder_vendor_name" type="text" class="form-control input-sm required" placeholder="Attn." value="<?=$purchaseorder->purchaseorder_vendor_name?>" /></td>
+													</tr>
+													<tr>
+														<td><label for="purchaseorder_design_by">Design by</label></td>
+														<td><input id="purchaseorder_design_by" name="purchaseorder_design_by" type="text" class="form-control input-sm" placeholder="Design by" value="<?=$purchaseorder->purchaseorder_design_by?>" /></td>
 													</tr>
                                                     <tr>
                                                         <td><label for="purchaseorder_vendor_exchange_rate">Exchange rate</label></td>

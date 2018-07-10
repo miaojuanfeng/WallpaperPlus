@@ -155,6 +155,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '<div>';
 			salesorderitem_row += '<input name="salesorderitem_id[]" type="hidden" value="" />';
 			salesorderitem_row += '<input name="salesorderitem_salesorder_id[]" type="hidden" value="" />';
+			salesorderitem_row += '<input name="salesorderitem_category_id[]" type="hidden" value="" />';
 			salesorderitem_row += '<input name="salesorderitem_product_type_name[]" type="hidden" value="" />';
 			salesorderitem_row += '<input id="salesorderitem_product_code" name="salesorderitem_product_code[]" type="text" class="form-control input-sm required" placeholder="Code" value="" />';
 			salesorderitem_row += '</div>';
@@ -490,6 +491,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr>
 														<td><label for="salesorder_client_name">Attn</label></td>
 														<td><input id="salesorder_client_name" name="salesorder_client_name" type="text" class="form-control input-sm required" placeholder="Attn." value="<?=$salesorder->salesorder_client_name?>" /></td>
+													</tr>
+													<tr>
+														<td><label for="salesorder_design_by">Design by</label></td>
+														<td><input id="salesorder_design_by" name="salesorder_design_by" type="text" class="form-control input-sm" placeholder="Design by" value="<?=$salesorder->salesorder_design_by?>" /></td>
 													</tr>
 													<tr>
 														<td><label for="salesorder_client_delivery_address">Delivery</label></td>

@@ -1000,6 +1000,13 @@ if(!function_exists('convert_nl'))
 	}
 }
 
+if(!function_exists('convert_br'))
+{
+	function convert_br($thisText){
+		return preg_replace("/(\n)/i", '<br/>', $thisText);
+	}
+}
+
 // if(!function_exists('resolve_token'))
 // {
 // 	function resolve_token($thisToken){
