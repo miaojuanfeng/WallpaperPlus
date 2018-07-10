@@ -1088,6 +1088,18 @@ if(!function_exists('convert_quotation_to_salesorder'))
 	}
 }
 
+if(!function_exists('convert_salesorder_to_quotation'))
+{
+	function convert_salesorder_to_quotation($thisData){
+		$thisResult = new stdClass();
+		foreach($thisData as $key => $value){
+			$key = str_replace('salesorder', 'quotation', $key);
+			$thisResult->$key = $value;
+		}
+		return $thisResult;
+	}
+}
+
 if(!function_exists('convert_quotationitems_to_salesorderitems'))
 {
 	function convert_quotationitems_to_salesorderitems($thisData){
@@ -1095,6 +1107,20 @@ if(!function_exists('convert_quotationitems_to_salesorderitems'))
 			$thisResult[$key] = new stdClass();
 			foreach($value as $key1 => $value1){
 				$key1 = str_replace('quotation', 'salesorder', $key1);
+				$thisResult[$key]->$key1 = $value1;
+			}
+		}
+		return $thisResult;
+	}
+}
+
+if(!function_exists('convert_salesorderitems_to_quotationitems'))
+{
+	function convert_salesorderitems_to_quotationitems($thisData){
+		foreach($thisData as $key => $value){
+			$thisResult[$key] = new stdClass();
+			foreach($value as $key1 => $value1){
+				$key1 = str_replace('salesorder', 'quotation', $key1);
 				$thisResult[$key]->$key1 = $value1;
 			}
 		}

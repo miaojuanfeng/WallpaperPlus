@@ -120,12 +120,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				calc();
 			});
 			$(document).on('blur', 'input[name="category_discount[]"]', function(){
-				// var category_discount_total = 0;
-				// $('#category_discount input[name="category_discount[]"]').each(function(){
-    //             	category_discount_total += parseFloat($(this).val());
-    //             });
-    //             $('input[name="quotation_discount"]').val(category_discount_total).blur();
 				calc();
+			});
+			$(document).on('change', 'select[name="category_discount_type[]"]', function(){
+				category_type_calc($(this).parent().parent());
+			});
+			$(document).on('blur', 'input[name="category_discount_value[]"]', function(){
+				category_type_calc($(this).parent().parent());
 			});
 			$(document).on('blur', 'input[name="quotation_discount"]', function(){
 				calc();
@@ -159,6 +160,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$('table.list tbody tr').eq($(this).closest('tr').index()).before($('table.list tbody tr').eq($(this).closest('tr').index() + 1));
 				}
 			});
+			$(document).on('click', '#discount_enable', function(){
+				if( $('#discount_enable').is(':checked') ){
+					$('.discount_wrapper').show();
+					$('#discount_enable_wrapper').attr('colspan', '1');
+				}else{
+					$('input[name="quotation_discount_value"]').val('0.00');
+					$('input[name="quotation_discount"]').val('0.00');
+					$('.discount_wrapper').hide();
+					$('#discount_enable_wrapper').attr('colspan', '4');
+				}
+				calc();
+			});
+			<?php if( ($this->router->fetch_method() == 'update' || $this->router->fetch_method() == 'insert' || $this->router->fetch_method() == 'duplicate') && $quotation->quotation_discount != 0 ){ ?>
+			$('#discount_enable').click();
+			<?php } ?>
 
 			/* textarea auto height */
 			textarea_auto_height();
@@ -240,7 +256,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$('.scriptLoader').load('/load', {'thisTableId': 'quotationProductLoader', 'thisRecordId': $(thisObject).val(), 'thisCurrency': thisCurrency, 'thisRow': thisRow, 't': timestamp()}, function(){
 				quotationProductLoader();
 				textarea_auto_height();
-				discount_type_calc();
+				category_type_calc();
+				$('input[name="category_discount_value[]"]').each(function(){
+					category_type_calc($(this).parent().parent());
+				});
 				// calc();
 			});
 		}
@@ -299,7 +318,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }else{
             	type_discount_total = parseFloat($('input[name="quotation_discount_value"]').val());
             }
-            $('input[name="quotation_discount"]').val(type_discount_total.toFixed(2));
+            $('input[name="quotation_discount"]').val(type_discount_total.toFixed(2)).css("display", "none").fadeIn();
+            calc();
+		}
+
+		function category_type_calc($thisData){
+			var category_id = $($thisData).find('input[name="category_id[]"]').val();
+			var total = 0;
+			$.each($('table.list tbody tr'), function(key, val){
+				if( $(this).find('input[name="quotationitem_category_id[]"]').val() == category_id ){
+					$(this).find('input[name="quotationitem_subtotal[]"]').val(parseFloat($(this).find('input[name="quotationitem_product_price[]"]').val() * $(this).find('input[name="quotationitem_quantity[]"]').val()).toFixed(2)).css('display', 'none').fadeIn();
+					total += parseFloat($(this).find('input[name="quotationitem_subtotal[]"]').val());
+				}
+			});
+			var type_category_total = 0;
+            if( $($thisData).find('select[name="category_discount_type[]"]').val() == 'percent' ){
+            	type_category_total = total * (parseFloat($($thisData).find('input[name="category_discount_value[]"]').val())/100);
+            }else{
+            	type_category_total = parseFloat($($thisData).find('input[name="category_discount_value[]"]').val());
+            }
+            $($thisData).find('input[name="category_discount[]"]').val(type_category_total.toFixed(2)).css("display", "none").fadeIn();
             calc();
 		}
 
@@ -315,13 +353,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 		function category_discount(){
-			// console.log(id+name);
-			// if( !category_list[id] ){
-			// 	category_list[id] = name;
-			// 	console.log(category_list);
-			// 	$('#category_discount_name').append('<p id="category_name_'+id+'">'+name+'</p>');
-			// 	$('#category_discount_value').append('<input id="category_discount_'+id+'" name="category_discount[]" type="number" min="0" class="form-control input-sm required" placeholder="Discount" value="0" />');
-			// }
 			var category_discount_id = new Array();
 			$('input[name="quotationitem_category_id[]"]').each(function(key){
 				category_discount_id[key] = $(this).val();
@@ -363,6 +394,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>';
 			quotationitem_row += '<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>';
 			quotationitem_row += '</div>';
+			quotationitem_row += '</div>';
+			quotationitem_row += '</td>';
+			quotationitem_row += '<td>';
+			quotationitem_row += '<div>';
+			quotationitem_row += '<select id="quotationitem_price_type" name="quotationitem_price_type[]" data-placeholder="Price type" class="chosen-select required">';
+			quotationitem_row += '<option value="ex-fty">EX-FTY</option>';
+			quotationitem_row += '<option value="cif hk">CIF HK</option>';
+			quotationitem_row += '</select>';
 			quotationitem_row += '</div>';
 			quotationitem_row += '</td>';
 			quotationitem_row += '<td>';
@@ -675,6 +714,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr>
 														<td><label for="quotation_number">Quotation#</label></td>
 														<td>
+															<?php if( $this->router->fetch_method() == 'insert' && !empty($quotation->quotation_number) ){ ?>
+															<input readonly="readonly" id="quotation_number" name="quotation_number" type="text" class="form-control input-sm" placeholder="Quotation#" value="<?=$quotation->quotation_number?>" />
+															<?php }else{ ?>
 															<div class="input-group">
 																<span class="input-group-addon" style="padding:0;border:none;text-align:left;min-width:60px;">
 																	<select id="number_prefix" name="number_prefix" data-placeholder="Prefix" class="chosen-select required">
@@ -685,6 +727,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<input readonly="readonly" id="quotation_number" name="quotation_number" type="text" class="form-control input-sm" placeholder="Quotation#" value="<?=str_replace(array('E', 'Q'), '', $quotation->quotation_number)?>" />
                                                                 <span class="input-group-addon"><?=$quotation->quotation_version?'R'.$quotation->quotation_version:'N/A'?></span>
 															</div>
+															<?php } ?>
 														</td>
 													</tr>
 													<tr>
@@ -747,6 +790,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th width="12%"></th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
 														<th width="12%">Quantity</th>
@@ -773,6 +817,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																	<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>
 																	<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>
 																</div>
+															</div>
+														</td>
+														<td>
+															<div>
+																<select id="quotationitem_price_type" name="quotationitem_price_type[]" data-placeholder="Price type" class="chosen-select required">
+																	<option value="ex-fty" <?php if( $value->quotationitem_price_type == 'ex-fty' ) echo "selected"; ?>>EX-FTY</option>
+																	<option value="cif hk" <?php if( $value->quotationitem_price_type == 'cif hk' ) echo "selected"; ?>>CIF HK</option>
+																</select>
 															</div>
 														</td>
 														<td>
@@ -815,13 +867,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<tfoot class="table-approval" id="category_discount">
 													<?php foreach ($quotation_category_discount as $key => $value) { ?>
 													<tr id="category_discount_<?=$value->category_id?>">
-														<th></th>
-														<th></th>
-														<td></td>
-														<th>
+														<th colspan="3" style="text-align:right">
 															<input name="category_id[]" type="hidden" value="<?=$value->category_id?>" />
 															<input name="category_name[]" type="hidden" value="<?=$value->category_name?>" />
 															<?=$value->category_name?> discount
+														</th>
+														<td>
+															<select id="category_discount_type[]" name="category_discount_type[]" data-placeholder="Discount type" class="chosen-select required">
+																<option value="percent" <?php if( $value->category_discount_type == 'percent' ) echo "selected"; ?>>Percent</option>
+																<option value="fixed" <?php if( $value->category_discount_type == 'fixed' ) echo "selected"; ?>>Fixed</option>
+															</select>
+														</td>
+														<th>
+															<input id="category_discount_value[]" name="category_discount_value[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount value" value="<?=($value->category_discount_value) ? $value->category_discount_value : '0'?>" />
 														</th>
 														<th>
 															<input exists="<?=$value->category_id?>" name="category_discount[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=$value->category_discount?>" />
@@ -830,23 +888,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<?php } ?>
 													<tr>
 														<th></th>
-														<th>
-															<p style="text-align:right;">Discount</p>
+														<th></th>
+														<th id="discount_enable_wrapper" colspan="4">
+															<p style="text-align:right;"><input id="discount_enable" type="checkbox" /> Special discount</p>
 														</th>
-														<td>
+														<td class="discount_wrapper">
 															<select id="quotation_discount_type" name="quotation_discount_type" data-placeholder="Discount type" class="chosen-select required">
 																<option value="percent" <?php if( $quotation->quotation_discount_type == 'percent' ) echo "selected"; ?>>Percent</option>
 																<option value="fixed" <?php if( $quotation->quotation_discount_type == 'fixed' ) echo "selected"; ?>>Fixed</option>
 															</select>
 														</td>
-														<th>
+														<th class="discount_wrapper">
 															<input id="quotation_discount_value" name="quotation_discount_value" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount value" value="<?=($quotation->quotation_discount_value) ? $quotation->quotation_discount_value : '0'?>" />
 														</th>
-														<th>
+														<th class="discount_wrapper">
 															<input id="quotation_discount" name="quotation_discount" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=($quotation->quotation_discount) ? $quotation->quotation_discount : '0'?>" />
                                                         </th>
 													</tr>
                                                     <tr>
+                                                        <th></th>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
@@ -859,6 +919,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th></th>
 														<th></th>
 														<th></th>
 														<th>Grand total</th>

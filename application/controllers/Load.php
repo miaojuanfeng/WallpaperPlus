@@ -354,27 +354,31 @@ class Load extends CI_Controller {
 			foreach ($thisData as $key => $value) {
 				if( !in_array($value->category_id, $existsId) ){
 					$code = '<tr id=\"category_discount_'.$value->category_id.'\"> \
-								<th></th> \
-								<th></th> \
-								<td></td> \
+								<th colspan=\"3\" style=\"text-align:right\"> \
+									<input name=\"category_id[]\" type=\"hidden\" value=\"'.$value->category_id.'\" /> \
+									<input name=\"category_name[]\" type=\"hidden\" value=\"'.$value->category_name.'\" /> \
+									'.$value->category_name.' discount \
+								</th> \
+								<td> \
+									<select name=\"category_discount_type[]\" data-placeholder=\"Discount type\" class=\"chosen-select required\"> \
+										<option value=\"percent\">Percent</option> \
+										<option value=\"fixed\">Fixed</option> \
+									</select> \
+								</td> \
 								<th> \
-								<input name=\"category_id[]\" type=\"hidden\" value=\"'.$value->category_id.'\" /> \
-								<input name=\"category_name[]\" type=\"hidden\" value=\"'.$value->category_name.'\" /> \
-								'.$value->category_name.' discount</th> \
+									<input name=\"category_discount_value[]\" type=\"number\" min=\"0\" step=\"0.01\" class=\"form-control input-sm required\" placeholder=\"Discount value\" value=\"0.00\" /> \
+								</th> \
 								<th> \
-									<input exists=\"'.$value->category_id.'\" name=\"category_discount[]\" type=\"number\" min=\"0\" step=\"0.01\" class=\"form-control input-sm required\" placeholder=\"Discount\" value=\"0\" /> \
+									<input exists=\"'.$value->category_id.'\" name=\"category_discount[]\" type=\"number\" min=\"0\" step=\"0.01\" class=\"form-control input-sm required\" placeholder=\"Discount\" value=\"0.00\" /> \
                                 </th> \
 							</tr>';
 					echo '$("#category_discount").prepend("'.$code.'");';
-					// echo '$("#category_discount_name").prepend("<p id=\"category_name_'.$value->category_id.'\">'.$value->category_name.'</p>");';
-					// echo '$("#category_discount_value").prepend("<input id=\"category_discount_'.$value->category_id.'\" exists=\"'.$value->category_id.'\" name=\"category_discount[]\" type=\"number\" min=\"0\" class=\"form-control input-sm required\" placeholder=\"Discount\" value=\"0\" />");';
+					echo '$(".chosen-select").chosen();';
 				}
 			}
 		}
 		foreach ($existsId as $key => $value) {
 			if( !in_array($value, $categoryId) ){
-				// echo '$("#category_name_'.$value.'").remove();';
-				// echo '$("#category_discount_'.$value.'").remove();';
 				echo '$("#category_discount_'.$value.'").remove();';
 			}
 		}

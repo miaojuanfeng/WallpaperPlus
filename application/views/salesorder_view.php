@@ -171,6 +171,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '</div>';
 			salesorderitem_row += '</td>';
 			salesorderitem_row += '<td>';
+			salesorderitem_row += '<div>';
+			salesorderitem_row += '<select id="salesorderitem_price_type" name="salesorderitem_price_type[]" data-placeholder="Price type" class="chosen-select required">';
+			salesorderitem_row += '<option value="ex-fty">EX-FTY</option>';
+			salesorderitem_row += '<option value="cif hk">CIF HK</option>';
+			salesorderitem_row += '</select>';
+			salesorderitem_row += '</div>';
+			salesorderitem_row += '</td>';
+			salesorderitem_row += '<td>';
             salesorderitem_row += '<div>';
             salesorderitem_row += '<input id="salesorderitem_product_id" name="salesorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
             salesorderitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
@@ -300,6 +308,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<?php if($this->router->fetch_method() == 'update'){ ?>
 										<p class="form-group">
 											<a class="btn btn-sm btn-primary btn-block" target="_blank" href="<?=base_url('assets/images/pdf/salesorder/'.$salesorder->salesorder_number.'.pdf?'.time())?>" data-toggle="tooltip" title="Print"><i class="glyphicon glyphicon-print"></i> Print</a>
+										</p>
+										<p class="form-group">
+											<a class="btn btn-sm btn-primary btn-block<?=check_permission('quotation_insert', 'disable')?>" href="<?=base_url('quotation/insert/salesorder_id/'.$salesorder->salesorder_id)?>" data-toggle="tooltip" title="Quotation"><i class="glyphicon glyphicon-refresh"></i> Quotation</a>
 										</p>
 										<p class="form-group">
 											<a class="btn btn-sm btn-primary btn-block<?=check_permission('purchaseorder_insert', 'disable')?>" href="<?=base_url('purchaseorder/insert/salesorder_id/'.$salesorder->salesorder_id)?>" data-toggle="tooltip" title="Purchase Order"><i class="glyphicon glyphicon-refresh"></i> Purchase order</a>
@@ -553,10 +564,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th width="12%"></th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
 														<th width="12%">Quantity</th>
-														<th width="12%">Subtotal</th>
+														<th width="14%">Subtotal</th>
 													</tr>
 												</thead>
 												<tbody class="trModal">
@@ -579,6 +591,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																	<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>
 																	<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>
 																</div>
+															</div>
+														</td>
+														<td>
+															<div>
+																<select id="salesorderitem_price_type" name="salesorderitem_price_type[]" data-placeholder="Price type" class="chosen-select required">
+																	<option value="ex-fty" <?php if( $value->salesorderitem_price_type == 'ex-fty' ) echo "selected"; ?>>EX-FTY</option>
+																	<option value="cif hk" <?php if( $value->salesorderitem_price_type == 'cif hk' ) echo "selected"; ?>>CIF HK</option>
+																</select>
 															</div>
 														</td>
 														<td>
@@ -615,13 +635,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<tfoot id="category_discount">
 													<?php foreach ($salesorder_category_discount as $key => $value) { ?>
 													<tr id="category_discount_<?=$value->category_id?>">
-														<th></th>
-														<th></th>
-														<td></td>
-														<th>
+														<th colspan="3" style="text-align:right;">
 															<input name="category_id[]" type="hidden" value="<?=$value->category_id?>" />
 															<input name="category_name[]" type="hidden" value="<?=$value->category_name?>" />
 															<?=$value->category_name?> discount
+														</th>
+														<th>
+															<input readonly="readonly" name="category_discount_type[]" type="text" class="form-control input-sm required" placeholder="Discount type" value="<?=$value->category_discount_type?>" />
+														</th>
+														<th>
+															<input readonly="readonly" name="category_discount_value[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount value" value="<?=$value->category_discount_value?>" />
 														</th>
 														<th>
 															<input readonly="readonly" exists="<?=$value->category_id?>" name="category_discount[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=$value->category_discount?>" />
@@ -630,8 +653,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<?php } ?>
 													<tr>
 														<th></th>
+														<th></th>
 														<th>
-															<p style="text-align:right;">Discount</p>
+															<p style="text-align:right;">Special discount</p>
 														</th>
 														<th>
 															<input readonly="readonly" id="salesorder_discount_type" name="salesorder_discount_type" type="text" class="form-control input-sm required" placeholder="Discount type" value="<?=($salesorder->salesorder_discount_type) ? ucfirst($quotation->quotation_discount_type) : 'Percent'?>" />
@@ -647,6 +671,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
+                                                        <th></th>
                                                         <th>Freight</th>
                                                         <th>
                                                             <input readonly="readonly" id="salesorder_freight" name="salesorder_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($salesorder->salesorder_freight) ? $salesorder->salesorder_freight : '0'?>" />
@@ -658,6 +683,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th></th>
 														<th></th>
 														<th></th>
 														<th>Grand total</th>

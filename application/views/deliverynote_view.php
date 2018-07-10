@@ -165,6 +165,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '</td>';
+			deliverynoteitem_row += '<td>';
+			deliverynoteitem_row += '<div>';
+			deliverynoteitem_row += '<select id="deliverynoteitem_price_type" name="deliverynoteitem_price_type[]" data-placeholder="Price type" class="chosen-select required">';
+			deliverynoteitem_row += '<option value="ex-fty">EX-FTY</option>';
+			deliverynoteitem_row += '<option value="cif hk">CIF HK</option>';
+			deliverynoteitem_row += '</select>';
+			deliverynoteitem_row += '</div>';
+			deliverynoteitem_row += '</td>';
 			deliverynoteitem_row += '<td colspan="2">';
             deliverynoteitem_row += '<div>';
             deliverynoteitem_row += '<input id="deliverynoteitem_product_id" name="deliverynoteitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
@@ -397,6 +405,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th width="12%"></th>
 														<th>Detail</th>
 														<th width="10%"></th>
 														<th width="12%">Quantity</th>
@@ -409,6 +418,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															<div>
 																<input name="deliverynoteitem_id[]" type="hidden" value="<?=$value->deliverynoteitem_id?>" />
 																<input name="deliverynoteitem_deliverynote_id[]" type="hidden" value="<?=$value->deliverynoteitem_deliverynote_id?>" />
+																<input name="deliverynoteitem_category_id[]" type="hidden" value="<?=$value->deliverynoteitem_category_id?>" />
 																<input name="deliverynoteitem_product_type_name[]" type="hidden" value="<?=$value->deliverynoteitem_product_type_name?>" />
 																<input id="deliverynoteitem_product_code" name="deliverynoteitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->deliverynoteitem_product_code?>" />
 															</div>
@@ -421,6 +431,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																	<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>
 																	<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>
 																</div>
+															</div>
+														</td>
+														<td>
+															<div>
+																<select id="deliverynoteitem_price_type" name="deliverynoteitem_price_type[]" data-placeholder="Price type" class="chosen-select required">
+																	<option value="ex-fty" <?php if( $value->deliverynoteitem_price_type == 'ex-fty' ) echo "selected"; ?>>EX-FTY</option>
+																	<option value="cif hk" <?php if( $value->deliverynoteitem_price_type == 'cif hk' ) echo "selected"; ?>>CIF HK</option>
+																</select>
 															</div>
 														</td>
 														<td colspan="2">
@@ -455,6 +473,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th></th>
 														<th></th>
 														<th>Quantity total</th>
 														<th><input readonly="readonly" id="deliverynote_total" name="deliverynote_total" type="text" class="form-control input-sm" placeholder="Grand total" value="<?=($deliverynote->deliverynote_total) ? $deliverynote->deliverynote_total : '0'?>" /></th>

@@ -216,6 +216,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</td>';
 			purchaseorderitem_row += '<td>';
+			purchaseorderitem_row += '<div>';
+			purchaseorderitem_row += '<select id="purchaseorderitem_price_type" name="purchaseorderitem_price_type[]" data-placeholder="Price type" class="chosen-select required">';
+			purchaseorderitem_row += '<option value="ex-fty">EX-FTY</option>';
+			purchaseorderitem_row += '<option value="cif hk">CIF HK</option>';
+			purchaseorderitem_row += '</select>';
+			purchaseorderitem_row += '</div>';
+			purchaseorderitem_row += '</td>';
+			purchaseorderitem_row += '<td>';
             purchaseorderitem_row += '<div>';
             purchaseorderitem_row += '<input id="purchaseorderitem_product_id" name="purchaseorderitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
             purchaseorderitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
@@ -630,6 +638,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th width="12%"></th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
 														<th width="12%">Quantity</th>
@@ -658,6 +667,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																	<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>
 																	<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>
 																</div>
+															</div>
+														</td>
+														<td>
+															<div>
+																<select id="purchaseorderitem_price_type" name="purchaseorderitem_price_type[]" data-placeholder="Price type" class="chosen-select required">
+																	<option value="ex-fty" <?php if( $value->purchaseorderitem_price_type == 'ex-fty' ) echo "selected"; ?>>EX-FTY</option>
+																	<option value="cif hk" <?php if( $value->purchaseorderitem_price_type == 'cif hk' ) echo "selected"; ?>>CIF HK</option>
+																</select>
 															</div>
 														</td>
 														<td>
@@ -751,6 +768,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</th>
 														<th></th>
 														<th></th>
+                                                        <th></th>
                                                         <th></th>
 														<th>Grand total</th>
 														<th><input readonly="readonly" id="purchaseorder_total" name="purchaseorder_total" type="text" class="form-control input-sm" placeholder="Grand total" value="<?=($purchaseorder->purchaseorder_total) ? $purchaseorder->purchaseorder_total : '0'?>" /></th>

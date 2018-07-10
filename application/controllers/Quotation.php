@@ -19,8 +19,8 @@ class Quotation extends CI_Controller {
 		$this->load->model('terms_model');
 		$this->load->model('z_client_user_model');
 		$this->load->model('currency_model');
-		// $this->load->model('salesorder_model');
-		// $this->load->model('salesorderitem_model');
+		$this->load->model('salesorder_model');
+		$this->load->model('salesorderitem_model');
 
 		setlocale(LC_MONETARY, 'en_HK');
 	}
@@ -40,6 +40,8 @@ class Quotation extends CI_Controller {
 				$category = (object) [
 							    'category_id' => $thisPOST['category_id'][$key],
 							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount_type' => $thisPOST['category_discount_type'][$key],
+							    'category_discount_value' => $thisPOST['category_discount_value'][$key],
 							    'category_discount' => $thisPOST['category_discount'][$key]
 							  ];
 				$quotation_category_discount[] = $category;
@@ -263,15 +265,19 @@ class Quotation extends CI_Controller {
     {
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
-			$thisPOST['quotation_serial'] = sprintf("%03s", (get_quotation_serial() + 1));
-			$thisPOST['quotation_number'] = $thisPOST['number_prefix'].date('ym').$thisPOST['quotation_serial'];
-			$thisPOST['quotation_version'] = 0;
+			if( empty($thisPOST['quotation_number']) ){
+				$thisPOST['quotation_serial'] = sprintf("%03s", (get_quotation_serial() + 1));
+				$thisPOST['quotation_number'] = $thisPOST['number_prefix'].date('ym').$thisPOST['quotation_serial'];
+				$thisPOST['quotation_version'] = 0;
+			}
 			//
 			$quotation_category_discount = array();
 			foreach ($thisPOST['category_name'] as $key => $value) {
 				$category = (object) [
 							    'category_id' => $thisPOST['category_id'][$key],
 							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount_type' => $thisPOST['category_discount_type'][$key],
+							    'category_discount_value' => $thisPOST['category_discount_value'][$key],
 							    'category_discount' => $thisPOST['category_discount'][$key]
 							  ];
 				$quotation_category_discount[] = $category;
@@ -313,14 +319,52 @@ class Quotation extends CI_Controller {
 			$this->session->set_tempdata('alert', '<div class="btn btn-sm btn-primary btn-block bottom-buffer-10">'.$thisAlert.'</div>', 0);
 			redirect('quotation/update/quotation_id/'.$thisPOST['quotation_id']);
 		}else{
-			/* preset empty data */
-			$thisArray = array();
-			foreach($this->quotation_model->structure() as $key => $value){
-				$thisArray[$value->Field] = '';
-			}
-			$data['quotation'] = (object)$thisArray;
+			if(empty($this->uri->uri_to_assoc())){
+				/* preset empty data */
+				$thisArray = array();
+				foreach($this->quotation_model->structure() as $key => $value){
+					$thisArray[$value->Field] = '';
+				}
+				$data['quotation'] = (object)$thisArray;
 
-			$data['quotation_category_discount'] = array();
+				$data['quotation_category_discount'] = array();
+			}else{
+				/* salesorder */
+				$thisSelect = array(
+					'where' => $this->uri->uri_to_assoc(),
+					'return' => 'row'
+				);
+				$data['salesorder'] = $this->salesorder_model->select($thisSelect);
+				$data['quotation'] = convert_salesorder_to_quotation($data['salesorder']);
+
+				$quotation_category_discount = $data['quotation']->quotation_category_discount;
+				if( $quotation_category_discount ){
+					$data['quotation_category_discount'] = json_decode($quotation_category_discount);
+				}else{
+					$data['quotation_category_discount'] = array();
+				}
+
+				$data['quotation']->quotation_id = '0';
+				$data['quotation']->quotation_status = 'draft';
+				$data['quotation']->quotation_confirmed = 'N';
+				$data['quotation']->quotation_exchange_rate = '';
+				$data['quotation']->quotation_display_code = '';
+
+				$thisSelect = array(
+					'where' => array('quotation_id' => $data['salesorder']->salesorder_quotation_id),
+					'return' => 'row'
+				);
+				$quotations = $this->quotation_model->select($thisSelect);
+				if( $quotations ){
+					$data['quotation']->quotation_number = $quotations->quotation_number;
+					$thisSelect = array(
+						'where' => array('quotation_number' => $data['quotation']->quotation_number),
+						'return' => 'result'
+					);
+					$quotations = $this->quotation_model->select($thisSelect);
+					$data['quotation']->quotation_version = count($quotations);
+				}
+			}
 
 			/* language */
 			$data['languages'] = (object)array(
@@ -397,12 +441,39 @@ class Quotation extends CI_Controller {
 			);
 			$data['user'] = $this->user_model->select($thisSelect);
 
-			/* preset quotationitem empty data */
-			$thisArray = array();
-			foreach($this->quotationitem_model->structure() as $key => $value){
-				$thisArray[$value->Field] = '';
+			if(empty($this->uri->uri_to_assoc())){
+				/* preset quotationitem empty data */
+				$thisArray = array();
+				foreach($this->quotationitem_model->structure() as $key => $value){
+					$thisArray[$value->Field] = '';
+				}
+				$data['quotationitems'][0] = (object)$thisArray;
+			}else{
+				/* quotationitem */
+				$thisSelect = array(
+					'where' => array(
+						'salesorderitem_salesorder_id' => $data['salesorder']->salesorder_id
+					),
+					'return' => 'result'
+				);
+				$data['salesorderitems'] = $this->salesorderitem_model->select($thisSelect);
+				$data['quotationitems'] = convert_salesorderitems_to_quotationitems($data['salesorderitems']);
+				foreach($data['quotationitems'] as $key => $value){
+					$data['quotationitems'][$key]->purchaseorderitem_type = 'main item';
+					
+					/* get item cost */
+					$thisSelect = array(
+						'where' => array(
+							'product_id' => $value->quotationitem_product_id
+						),
+						'return' => 'row'
+					);
+					$data['quotationitems'][$key]->quotationitem_id = '0';
+					$data['quotationitems'][$key]->quotationitem_product_price = $this->product_model->select($thisSelect)->product_cost;
+                    $data['quotationitems'][$key]->quotationitem_product_link = $this->product_model->select($thisSelect)->product_link;
+                    $data['quotationitems'][$key]->quotationitem_discount = 0;
+				}
 			}
-			$data['quotationitems'][0] = (object)$thisArray;
 
 			$this->load->view('quotation_view', $data);
 		}
@@ -561,6 +632,8 @@ class Quotation extends CI_Controller {
 				$category = (object) [
 							    'category_id' => $thisPOST['category_id'][$key],
 							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount_type' => $thisPOST['category_discount_type'][$key],
+							    'category_discount_value' => $thisPOST['category_discount_value'][$key],
 							    'category_discount' => $thisPOST['category_discount'][$key]
 							  ];
 				$quotation_category_discount[] = $category;

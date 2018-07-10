@@ -178,6 +178,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '</div>';
 			invoiceitem_row += '</td>';
 			invoiceitem_row += '<td>';
+			invoiceitem_row += '<div>';
+			invoiceitem_row += '<select id="invoiceitem_price_type" name="invoiceitem_price_type[]" data-placeholder="Price type" class="chosen-select required">';
+			invoiceitem_row += '<option value="ex-fty">EX-FTY</option>';
+			invoiceitem_row += '<option value="cif hk">CIF HK</option>';
+			invoiceitem_row += '</select>';
+			invoiceitem_row += '</div>';
+			invoiceitem_row += '</td>';
+			invoiceitem_row += '<td>';
             invoiceitem_row += '<div>';
             invoiceitem_row += '<input id="invoiceitem_product_id" name="invoiceitem_product_id[]" type="hidden" class="form-control input-sm" placeholder="Product" value="" />';
             invoiceitem_row += '<input type="button" class="form-control input-sm showModal" modal="product_select" value="Select a product" />';
@@ -428,6 +436,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th width="12%"></th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
 														<th width="12%">Quantity</th>
@@ -454,6 +463,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																	<button type="button" class="btn btn-sm btn-primary up-btn"><i class="glyphicon glyphicon-chevron-up"></i></button>
 																	<button type="button" class="btn btn-sm btn-primary down-btn"><i class="glyphicon glyphicon-chevron-down"></i></button>
 																</div>
+															</div>
+														</td>
+														<td>
+															<div>
+																<select id="invoiceitem_price_type" name="invoiceitem_price_type[]" data-placeholder="Price type" class="chosen-select required">
+																	<option value="ex-fty" <?php if( $value->invoiceitem_price_type == 'ex-fty' ) echo "selected"; ?>>EX-FTY</option>
+																	<option value="cif hk" <?php if( $value->invoiceitem_price_type == 'cif hk' ) echo "selected"; ?>>CIF HK</option>
+																</select>
 															</div>
 														</td>
 														<td>
@@ -511,13 +528,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<tfoot id="category_discount">
 													<?php foreach ($invoice_category_discount as $key => $value) { ?>
 													<tr id="category_discount_<?=$value->category_id?>">
-														<th></th>
-														<th></th>
-														<td></td>
-														<th>
+														<th colspan="3" style="text-align:right;">
 															<input name="category_id[]" type="hidden" value="<?=$value->category_id?>" />
 															<input name="category_name[]" type="hidden" value="<?=$value->category_name?>" />
 															<?=$value->category_name?> discount
+														</th>
+														<th>
+															<input readonly="readonly" name="category_discount_type[]" type="text" class="form-control input-sm required" placeholder="Discount type" value="<?=$value->category_discount_type?>" />
+														</th>
+														<th>
+															<input readonly="readonly" name="category_discount_value[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount value" value="<?=$value->category_discount_value?>" />
 														</th>
 														<th>
 															<input readonly="readonly" exists="<?=$value->category_id?>" name="category_discount[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Discount" value="<?=$value->category_discount?>" />
@@ -526,8 +546,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<?php } ?>
 													<tr>
 														<th></th>
+														<th></th>
 														<th>
-															<p style="text-align:right;">Discount</p>
+															<p style="text-align:right;">Special discount</p>
 														</th>
 														<th>
 															<input readonly="readonly" id="invoice_discount_type" name="invoice_discount_type" type="text" class="form-control input-sm required" placeholder="Discount type" value="<?=($invoice->invoice_discount_type) ? ucfirst($invoice->invoice_discount_type) : 'Percent'?>" />
@@ -543,12 +564,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
+                                                        <th></th>
                                                         <th>Freight</th>
                                                         <th>
                                                             <input readonly="readonly" id="invoice_freight" name="invoice_freight" type="number" min="0" class="form-control input-sm required" placeholder="Freight" value="<?=($invoice->invoice_freight) ? $invoice->invoice_freight : '0'?>" />
                                                         </th>
                                                     </tr>
 													<tr>
+														<th></th>
 														<th></th>
 														<th></th>
 														<th></th>
@@ -559,10 +582,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th></th>
 														<th></th>
 														<th></th>
+														<th></th>
 														<th>Paid</th>
 														<th><input readonly="readonly" id="invoice_paid" name="invoice_paid" type="text" class="form-control input-sm" placeholder="Paid" value="<?=($invoice->invoice_paid) ? $invoice->invoice_paid : '0'?>" /></th>
 													</tr>
 													<tr>
+														<th></th>
 														<th></th>
 														<th></th>
 														<th></th>
@@ -575,6 +600,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th></th>
 														<th></th>
 														<th></th>
 														<th>Balance</th>

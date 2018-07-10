@@ -192,6 +192,7 @@ switch($salesorder->salesorder_currency){
             <tr>
                 <td width="12%"><b>PART NO.</b></td>
                 <td width="12%"><b>CODE</b></td>
+                <td width="12%"><b>PRICE TYPE</b></td>
                 <td width="12%"><b>NAME</b></td>
                 <td width="18%" align="left"><b>SIZE</b></td>
                 <td width="8%" align="center"><b>QTY</b></td>
@@ -253,6 +254,7 @@ switch($salesorder->salesorder_currency){
                 <td width="12%"></td>
                 <td width="12%"></td>
                 <td width="12%"></td>
+                <td width="12%"></td>
                 <td width="18%"></td>
                 <td width="8%"></td>
                 <td width="13%"></td>
@@ -263,6 +265,7 @@ switch($salesorder->salesorder_currency){
 					<div class="part_number"><?=$value->salesorderitem_product_code?></div>
 				</td>
                 <td valign="top"><?=$value->salesorderitem_product_code.' - '.$value->salesorderitem_product_color_code?></td>
+                <td valign="top"><?=strtoupper($value->salesorderitem_price_type)?></td>
                 <td valign="top"><?=$value->salesorderitem_product_name?></td>
                 <td valign="top" align="left"><?=convert_br($value->salesorderitem_product_detail)?></td>
                 <td valign="top" align="center"><?=$value->salesorderitem_quantity.' '.(!empty($thisUnit)?$thisUnit->unit_name:'')?></td>
@@ -272,6 +275,7 @@ switch($salesorder->salesorder_currency){
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

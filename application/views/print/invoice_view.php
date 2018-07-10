@@ -190,6 +190,7 @@ switch($invoice->invoice_currency){
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
 			<tr>
 				<td width="12%"><b>PART NO.</b></td>
+				<td width="12%"><b>PRICE TYPE</b></td>
 				<td width="12%"><b>DESCRIPTION</b></td>
 				<td width="18%"><b>SIZE</b></td>
                 <td width="15%"><b>QTY</b></td>
@@ -250,6 +251,7 @@ switch($invoice->invoice_currency){
 			<tr class="padding-top-5">
 				<td width="12%"></td>
 				<td width="12%"></td>
+				<td width="12%"></td>
 				<td width="18%"></td>
 				<td width="15%"></td>
 				<td width="12%"></td>
@@ -257,6 +259,7 @@ switch($invoice->invoice_currency){
 			</tr>
 			<tr class="padding-bottom-5">
 				<td valign="top"><div class="part_number"><?=$value->invoiceitem_product_code.' - '.$value->invoiceitem_product_color_code?></div></td>
+				<td valign="top"><?=strtoupper($value->invoiceitem_price_type)?></td>
 				<td valign="top"><?=$value->invoiceitem_product_name?></td>
 				<td valign="top"><?=convert_br($value->invoiceitem_product_detail)?></td>
                 <td valign="top"><?=$value->invoiceitem_quantity.' '.(!empty($thisUnit)?$thisUnit->unit_name:'')?></td>
@@ -266,6 +269,7 @@ switch($invoice->invoice_currency){
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

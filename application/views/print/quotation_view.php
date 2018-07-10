@@ -191,6 +191,7 @@ switch($quotation->quotation_currency){
 			<tr>
 				<td width="12%"><b>PART NO.</b></td>
 				<td width="12%"><b>CODE</b></td>
+				<td width="12%"><b>PRICE TYPE</b></td>
                 <td width="12%"><b>NAME</b></td>
                 <td width="18%" align="left"><b>SIZE</b></td>
                 <td width="8%" align="center"><b>QTY</b></td>
@@ -251,6 +252,7 @@ switch($quotation->quotation_currency){
 			<tr class="padding-top-5">
 				<td width="12%"></td>
 				<td width="12%"></td>
+				<td width="12%"></td>
                 <td width="12%"></td>
                 <td width="18%"></td>
 				<td width="8%"></td>
@@ -268,6 +270,7 @@ switch($quotation->quotation_currency){
 					?>
 				</td>
 				<td valign="top"><?=$value->quotationitem_product_code.' - '.$value->quotationitem_product_color_code?></td>
+                <td valign="top"><?=strtoupper($value->quotationitem_price_type)?></td>
                 <td valign="top"><?=$value->quotationitem_product_name?></td>
                 <td valign="top" align="left"><?=convert_br($value->quotationitem_product_detail)?></td>
                 <td valign="top" align="center"><?=$value->quotationitem_quantity.' '.(!empty($thisUnit)?$thisUnit->unit_name:'')?></td>
@@ -277,6 +280,7 @@ switch($quotation->quotation_currency){
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

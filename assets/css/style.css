@@ -118,6 +118,9 @@ small {
 .no-wrap{
 	white-space:nowrap;
 }
+.discount_wrapper{
+	display: none;
+}
 
 .popup-view{ width:260px; height:160px; background:#D8D8D8; position:fixed; right:-262px; bottom:10px; z-index: 99;}
 .popup-view .popup-header{background-color: #cab132; height: 25px;}

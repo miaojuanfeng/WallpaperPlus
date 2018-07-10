@@ -42,6 +42,8 @@ class Salesorder extends CI_Controller {
 				$category = (object) [
 							    'category_id' => $thisPOST['category_id'][$key],
 							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount_type' => $thisPOST['category_discount_type'][$key],
+							    'category_discount_value' => $thisPOST['category_discount_value'][$key],
 							    'category_discount' => $thisPOST['category_discount'][$key]
 							  ];
 				$salesorder_category_discount[] = $category;
@@ -203,6 +205,8 @@ class Salesorder extends CI_Controller {
 				$category = (object) [
 							    'category_id' => $thisPOST['category_id'][$key],
 							    'category_name' => $thisPOST['category_name'][$key],
+							    'category_discount_type' => $thisPOST['category_discount_type'][$key],
+							    'category_discount_value' => $thisPOST['category_discount_value'][$key],
 							    'category_discount' => $thisPOST['category_discount'][$key]
 							  ];
 				$salesorder_category_discount[] = $category;
