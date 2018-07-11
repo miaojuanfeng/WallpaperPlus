@@ -333,6 +333,7 @@ class Salesorder extends CI_Controller {
 			);
 			$data['payment'] = $this->payment_model->select($thisSelect);
 			if( $data['payment'] ){
+				$data['salesorder']->salesorder_remark = $data['payment']->payment_remark_content;
 				$data['salesorder']->salesorder_payment = $data['payment']->payment_content;
 			}
 

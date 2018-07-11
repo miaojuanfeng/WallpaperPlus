@@ -187,6 +187,7 @@ switch($invoice->invoice_currency){
 			<tr>
 				<td width="12%"><b><?=$language['part_no']?></b></td>
 				<td width="12%"><b><?=$language['price_type']?></b></td>
+				<td width="12%"><b><?=$language['location']?></b></td>
 				<td width="12%"><b><?=$language['description']?></b></td>
 				<td width="18%"><b><?=$language['size']?></b></td>
                 <td width="15%"><b><?=$language['qty']?></b></td>
@@ -248,6 +249,7 @@ switch($invoice->invoice_currency){
 				<td width="12%"></td>
 				<td width="12%"></td>
 				<td width="12%"></td>
+				<td width="12%"></td>
 				<td width="18%"></td>
 				<td width="15%"></td>
 				<td width="12%"></td>
@@ -256,6 +258,7 @@ switch($invoice->invoice_currency){
 			<tr class="padding-bottom-5">
 				<td valign="top"><div class="part_number"><?=$value->invoiceitem_product_code.' - '.$value->invoiceitem_product_color_code?></div></td>
 				<td valign="top"><?=strtoupper($value->invoiceitem_price_type)?></td>
+				<td valign="top"><?=$value->invoiceitem_product_location?></td>
 				<td valign="top"><?=$value->invoiceitem_product_name?></td>
 				<td valign="top"><?=convert_br($value->invoiceitem_product_detail)?></td>
                 <td valign="top"><?=$value->invoiceitem_quantity.' '.(!empty($thisUnit)?$thisUnit->unit_name:'')?></td>
@@ -265,6 +268,7 @@ switch($invoice->invoice_currency){
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

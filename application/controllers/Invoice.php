@@ -391,6 +391,7 @@ class Invoice extends CI_Controller {
 			);
 			$data['payment'] = $this->payment_model->select($thisSelect);
 			if( $data['payment'] ){
+				$data['invoice']->invoice_remark = $data['payment']->payment_remark_content;
 				$data['invoice']->invoice_payment = $data['payment']->payment_content;
 			}
 

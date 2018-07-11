@@ -289,8 +289,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 
         function payment_loader(){
-            $('.scriptLoader').load('/load', {'thisTableId': 'paymentLoader', 'thisType': 'quotation', 'thisLanguage': $('select[name="quotation_language"]').val(), 't': timestamp()}, function(data){
-                $('textarea[name="quotation_payment"]').val(data);
+            $('.scriptLoader').load('/load', {'thisTableId': 'quotationPaymentLoader', 'thisType': 'quotation', 'thisLanguage': $('select[name="quotation_language"]').val(), 't': timestamp()}, function(){
+                quotationPaymentLoader();
             });
         }
 

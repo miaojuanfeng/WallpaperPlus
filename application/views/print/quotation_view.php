@@ -192,6 +192,7 @@ switch($quotation->quotation_currency){
 				<td width="12%"><b><?=$language['part_no']?></b></td>
 				<td width="12%"><b><?=$language['code']?></b></td>
 				<td width="12%"><b><?=$language['price_type']?></b></td>
+				<td width="12%"><b><?=$language['location']?></b></td>
                 <td width="12%"><b><?=$language['name']?></b></td>
                 <td width="18%" align="left"><b><?=$language['size']?></b></td>
                 <td width="8%" align="center"><b><?=$language['qty']?></b></td>
@@ -254,6 +255,7 @@ switch($quotation->quotation_currency){
 				<td width="12%"></td>
 				<td width="12%"></td>
                 <td width="12%"></td>
+                <td width="12%"></td>
                 <td width="18%"></td>
 				<td width="8%"></td>
 				<td width="13%"></td>
@@ -271,6 +273,7 @@ switch($quotation->quotation_currency){
 				</td>
 				<td valign="top"><?=$value->quotationitem_product_code.' - '.$value->quotationitem_product_color_code?></td>
                 <td valign="top"><?=strtoupper($value->quotationitem_price_type)?></td>
+                <td valign="top"><?=$value->quotationitem_product_location?></td>
                 <td valign="top"><?=$value->quotationitem_product_name?></td>
                 <td valign="top" align="left"><?=convert_br($value->quotationitem_product_detail)?></td>
                 <td valign="top" align="center"><?=$value->quotationitem_quantity.' '.(!empty($thisUnit)?$thisUnit->unit_name:'')?></td>
@@ -280,6 +283,7 @@ switch($quotation->quotation_currency){
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

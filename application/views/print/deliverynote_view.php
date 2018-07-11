@@ -187,6 +187,7 @@ switch($deliverynote->deliverynote_currency){
 			<tr>
 				<td width="12%"><b><?=$language['part_no']?></b></td>
 				<td width="12%"><b><?=$language['price_type']?></b></td>
+				<td width="12%"><b><?=$language['location']?></b></td>
 				<td width="22%"><b><?=$language['description']?></b></td>
 				<td width="18%"><b><?=$language['size']?></b></td>
 				<td width="12%" align="right"><b><?=$language['qty']?></b></td>
@@ -245,6 +246,7 @@ switch($deliverynote->deliverynote_currency){
 			<tr class="padding-top-5">
 				<td width="12%"></td>
 				<td width="12%"></td>
+				<td width="12%"></td>
 				<td width="22%"></td>
 				<td width="18%"></td>
 				<td width="12%"></td>
@@ -252,6 +254,7 @@ switch($deliverynote->deliverynote_currency){
 			<tr class="padding-bottom-5">
 				<td valign="top"><div class="part_number"><?=$value->deliverynoteitem_product_code.' - '.$value->deliverynoteitem_product_color_code?></div></td>
 				<td valign="top"><?=strtoupper($value->deliverynoteitem_price_type)?></td>
+				<td valign="top"><?=$value->deliverynoteitem_product_location?></td>
 				<td valign="top"><?=$value->deliverynoteitem_product_code.' - '.$value->deliverynoteitem_product_name?></td>
 				<td valign="top"><?=convert_br($value->deliverynoteitem_product_detail)?></td>
 				<td valign="top" align="right"><?=$value->deliverynoteitem_quantity.' '.(!empty($thisUnit)?$thisUnit->unit_name:'')?></td>
@@ -259,6 +262,7 @@ switch($deliverynote->deliverynote_currency){
 			<?php } ?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>

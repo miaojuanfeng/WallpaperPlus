@@ -206,6 +206,7 @@ switch($purchaseorder->purchaseorder_currency){
 			<tr>
 				<td width="12%"><b>Our ref.</b></td>
 				<td width="12%"><b>PRICE TYPE</b></td>
+				<td width="12%"><b>LOCATION</b></td>
 				<td width="15%"><b>DESCRIPTION</b></td>
 				<td width="18%"><b>SIZE</b></td>
                 <td width="15%"><b>QTY</b></td>
@@ -268,6 +269,7 @@ switch($purchaseorder->purchaseorder_currency){
 			<tr class="padding-top-5">
                 <td width="12%"></td>
                 <td width="12%"></td>
+                <td width="12%"></td>
                 <td width="15%"></td>
                 <td width="18%"></td>
                 <td width="15%"></td>
@@ -281,6 +283,13 @@ switch($purchaseorder->purchaseorder_currency){
                     <?php
                     foreach ($value->invoiceitems as $key1 => $value1) {
                         echo '<div>'.strtoupper($value1->invoiceitem_price_type).'</div><br/>';
+                    }
+                    ?>
+                </td>
+                <td valign="top" align="left">
+                    <?php
+                    foreach ($value->invoiceitems as $key1 => $value1) {
+                        echo '<div>'.$value1->invoiceitem_product_location.'</div><br/>';
                     }
                     ?>
                 </td>

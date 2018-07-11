@@ -293,6 +293,7 @@ class Deliverynote extends CI_Controller {
 			);
 			$data['payment'] = $this->payment_model->select($thisSelect);
 			if( $data['payment'] ){
+				$data['deliverynote']->deliverynote_remark = $data['payment']->payment_remark_content;
 				$data['deliverynote']->deliverynote_payment = $data['payment']->payment_content;
 			}
 
