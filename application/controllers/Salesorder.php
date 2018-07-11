@@ -25,6 +25,7 @@ class Salesorder extends CI_Controller {
 		$this->load->model('quotationitem_model');
 		$this->load->model('terms_model');
 		$this->load->model('z_role_user_model');
+		$this->load->model('payment_model');
 	}
 
 	public function index()
@@ -264,6 +265,7 @@ class Salesorder extends CI_Controller {
 			$data['salesorder']->salesorder_client_delivery_address = '';
 			$data['salesorder']->salesorder_internal_remark = '';
 			$data['salesorder']->salesorder_quotation_user_id = $data['quotation']->quotation_user_id;
+			$data['salesorder']->salesorder_language = $data['quotation']->quotation_language;
 
 			/* currency */
 			$data['currencys'] = (object)array(
@@ -320,6 +322,19 @@ class Salesorder extends CI_Controller {
 			);
 			$data['quotationitems'] = $this->quotationitem_model->select($thisSelect);
 			$data['salesorderitems'] = convert_quotationitems_to_salesorderitems($data['quotationitems']);
+
+			/* payment */
+			$thisSelect = array(
+				'where' => array(
+					'payment_type' => 'salesorder',
+					'payment_language' => $data['salesorder']->salesorder_language
+				),
+				'return' => 'row'
+			);
+			$data['payment'] = $this->payment_model->select($thisSelect);
+			if( $data['payment'] ){
+				$data['salesorder']->salesorder_payment = $data['payment']->payment_content;
+			}
 
 			$this->load->view('salesorder_view', $data);
 		}

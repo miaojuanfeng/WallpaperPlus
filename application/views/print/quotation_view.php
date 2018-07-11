@@ -134,7 +134,7 @@ switch($quotation->quotation_currency){
 				<td width="50%" valign="top">
 					<h1 class="corpcolor-font">Wallpaper+</h1>
 				</td>
-				<td width="50%" align="right"><h2>Quotation</h2></td>
+				<td width="50%" align="right"><h2><?=$language['quotation']?></h2></td>
 			</tr>
 		</table>
 		<table cellpadding="0" cellspacing="0">
@@ -142,23 +142,23 @@ switch($quotation->quotation_currency){
 				<td width="50%" valign="top">
 					<table cellpadding="0" cellspacing="0">
                         <tr>
-                            <td valign="top" width="24%"><b>Date</b></td>
+                            <td valign="top" width="24%"><b><?=$language['date']?></b></td>
                             <td width="76%"><?=$quotation->quotation_issue?></td>
                         </tr>
 						<tr>
-							<td valign="top"><b>To</b></td>
+							<td valign="top"><b><?=$language['to']?></b></td>
 							<td><?=$quotation->quotation_client_company_name?></td>
 						</tr>
                         <tr>
-                            <td valign="top"><b>Attn</b></td>
+                            <td valign="top"><b><?=$language['attn']?></b></td>
                             <td><?=$quotation->quotation_client_name?></td>
                         </tr>
 						<tr>
-							<td valign="top"><b>Address</b></td>
+							<td valign="top"><b><?=$language['address']?></b></td>
 							<td><?=$quotation->quotation_client_company_address?></td>
 						</tr>
 						<tr>
-							<td valign="top"><b>Tel</b></td>
+							<td valign="top"><b><?=$language['tel']?></b></td>
 							<td><?=$quotation->quotation_client_phone?></td>
 						</tr>
 					</table>
@@ -167,15 +167,15 @@ switch($quotation->quotation_currency){
 				<td width="40%" valign="top">
 					<table cellpadding="0" cellspacing="0">
                         <tr>
-                            <td valign="top"><b>Email</b></td>
+                            <td valign="top"><b><?=$language['email']?></b></td>
                             <td><?=$quotation->quotation_client_email?></td>
                         </tr>
 						<tr>
-							<td width="40%"><b>Quotation No.</b></td>
+							<td width="40%"><b><?=$language['quotation_no']?></b></td>
 							<td width="60%"><?=$quotation->quotation_number?><?=$quotation->quotation_version?'-R'.$quotation->quotation_version:''?></td>
 						</tr>
 						<tr>
-							<td><b>Sales</b></td>
+							<td><b><?=$language['sales']?></b></td>
 							<td><?=$quotation->quotation_user_name?></td>
 						</tr>
 						<tr>
@@ -189,14 +189,14 @@ switch($quotation->quotation_currency){
 		</table>
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
 			<tr>
-				<td width="12%"><b>PART NO.</b></td>
-				<td width="12%"><b>CODE</b></td>
-				<td width="12%"><b>PRICE TYPE</b></td>
-                <td width="12%"><b>NAME</b></td>
-                <td width="18%" align="left"><b>SIZE</b></td>
-                <td width="8%" align="center"><b>QTY</b></td>
-				<td width="13%" align="right"><b>UNIT PRICE</b></td>
-				<td width="10%" align="right"><b>AMOUNT</b></td>
+				<td width="12%"><b><?=$language['part_no']?></b></td>
+				<td width="12%"><b><?=$language['code']?></b></td>
+				<td width="12%"><b><?=$language['price_type']?></b></td>
+                <td width="12%"><b><?=$language['name']?></b></td>
+                <td width="18%" align="left"><b><?=$language['size']?></b></td>
+                <td width="8%" align="center"><b><?=$language['qty']?></b></td>
+				<td width="13%" align="right"><b><?=$language['unit_price']?></b></td>
+				<td width="10%" align="right"><b><?=$language['amount']?></b></td>
 			</tr>
 		</table>
 		<?php } ?>
@@ -298,7 +298,7 @@ switch($quotation->quotation_currency){
 			?>
 			<tr>
 				<td width="12%"></td>
-				<td colspan="2" width="70%" align="right"><b><?=strtoupper($value->category_name)?> DISCOUNT</b></td>
+				<td colspan="2" width="70%" align="right"><b><?=strtoupper($value->category_name)?> <?=$language['discount']?></b></td>
 				<td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
 				<td width="10%" align="right"><?=money_format('%!n', $value->category_discount)?></td>
 			</tr>
@@ -310,7 +310,7 @@ switch($quotation->quotation_currency){
 			<tr>
 				<td width="12%"></td>
 				<td width="55%"></td>
-				<td width="15%" align="right"><b>DISCOUNT</b></td>
+				<td width="15%" align="right"><b><?=$language['special_discount']?></b></td>
 				<td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
 				<td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_discount)?></td>
 			</tr>
@@ -319,7 +319,7 @@ switch($quotation->quotation_currency){
             <tr>
                 <td width="12%"></td>
                 <td width="55%"></td>
-                <td width="15%" align="right"><b>FREIGHT</b></td>
+                <td width="15%" align="right"><b><?=$language['freight']?></b></td>
                 <td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
                 <td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_freight)?></td>
             </tr>
@@ -327,14 +327,14 @@ switch($quotation->quotation_currency){
 			<tr>
 				<td width="12%"></td>
 				<td width="55%"></td>
-				<td width="15%" align="right"><b>GRAND TOTAL</b></td>
+				<td width="15%" align="right"><b><?=$language['grand_total']?></b></td>
 				<td width="8%" align="center"><?=strtoupper($quotation->quotation_currency)?></td>
 				<td width="10%" align="right"><?=money_format('%!n', $quotation->quotation_total)?></td>
 			</tr>
 		</table>
 
 		<div class="page-break-inside-avoid">
-			<table cellspacing="0" cellpadding="0" class="document-br-20">
+			<!--table cellspacing="0" cellpadding="0" class="document-br-20">
 				<tr>
 					<td><b>TERMS AND CONDITIONS</b></td>
 				</tr>
@@ -356,29 +356,29 @@ switch($quotation->quotation_currency){
 						4、因貨品批期右異，買方訂購之型號與樣辨顏色可能有輕微及可接受之差距，乃屬正常。
 					</td>
 				</tr>
-			</table>
+			</table-->
 
+			<?php if($quotation->quotation_remark != ''){ ?>
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
-					<td><b>REMARK</b></td>
+					<td><b><?=$language['remark']?></b></td>
 				</tr>
-				<?php if($quotation->quotation_remark != ''){ ?>
 				<tr>
 					<td class="line-height-12">
-						<?=$quotation->quotation_remark?>
+						<?=convert_br($quotation->quotation_remark)?>
 					</td>
 				</tr>
-				<?php } ?>
 			</table>
+			<?php } ?>
 
 			<?php if($quotation->quotation_payment != ''){ ?>
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
-					<td><b>PAYMENT</b></td>
+					<td><b><?=$language['payment']?></b></td>
 				</tr>
 				<tr>
 					<td class="line-height-12">
-						<?=$quotation->quotation_payment?>
+						<?=convert_br($quotation->quotation_payment)?>
 					</td>
 				</tr>
 			</table>
@@ -389,19 +389,19 @@ switch($quotation->quotation_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-20">
 				<tr>
 					<td width="40%">
-						<div><b>Received By</b></div>
+						<div><b><?=$language['received_by']?></b></div>
 						<div><?=$quotation->quotation_client_company_name?></div>
 						<div class="sign-area"></div>
-						<div>Authority Signature & Co. Chop</div>
+						<div><?=$language['signature']?></div>
 					</td>
 					<td width="20%"></td>
 					<td width="40%">
-						<div><b>For and on behalf of</b></div>
+						<div><b><?=$language['for_and_on_behalf_of']?></b></div>
 						<div>Wallpaper+</div>
 						<div class="sign-area">
 							<div class="sign"><?=$quotation->quotation_user_name?></div>
 						</div>
-						<div>Authority Signature & Co. Chop</div>
+						<div><?=$language['signature']?></div>
 					</td>
 				</tr>
 			</table>
@@ -409,9 +409,9 @@ switch($quotation->quotation_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
 					<td class="line-height-12">
-						Please return the copy of this quotation with your signature and company chop as confirmation of the above offer.
-						<br />Address: 9 Floor The Hennessy 256 Hennessy Road Wan Chal Hong Kong. 
-						<br />Tel: +852 3525 1785 Fax: +852 3525 1784 Email: sales@wallpaperplus.com.hk
+						<?=$language['confirmation']?>
+						<br /><?=$language['address']?>: 9 Floor The Hennessy 256 Hennessy Road Wan Chal Hong Kong. 
+						<br /><?=$language['tel']?>: +852 3525 1785 <?=$language['fax']?>: +852 3525 1784 <?=$language['email']?>: sales@wallpaperplus.com.hk
 					</td>
 				</tr>
 			</table>

@@ -134,7 +134,7 @@ switch($invoice->invoice_currency){
 				<td width="85%" valign="top">
 					<h1 class="corpcolor-font">Wallpaper+</h1>
 				</td>
-				<td width="15%" align="right"><h2>Invoice</h2></td>
+				<td width="15%" align="right"><h2><?=$language['invoice']?></h2></td>
 			</tr>
 		</table>
 		<table cellpadding="0" cellspacing="0">
@@ -142,24 +142,20 @@ switch($invoice->invoice_currency){
 				<td width="50%" valign="top">
 					<table cellpadding="0" cellspacing="0">
 						<tr>
-							<td valign="top" width="24%"><b>To</b></td>
+							<td valign="top" width="24%"><b><?=$language['to']?></b></td>
 							<td width="76%"><?=$invoice->invoice_client_company_name?></td>
 						</tr>
 						<tr>
-							<td valign="top"><b>Address</b></td>
-							<td><?=$invoice->invoice_client_company_address?></td>
-						</tr>
-						<tr>
-							<td valign="top"><b>Tel</b></td>
+							<td valign="top"><b><?=$language['tel']?></b></td>
 							<td><?=$invoice->invoice_client_phone?></td>
 						</tr>
 						<tr>
-							<td valign="top"><b>Mobile</b></td>
-							<td><?=$invoice->invoice_client_phone?></td>
-						</tr>
-						<tr>
-							<td valign="top"><b>Attn</b></td>
+							<td valign="top"><b><?=$language['attn']?></b></td>
 							<td><?=$invoice->invoice_client_name?></td>
+						</tr>
+						<tr>
+							<td valign="top"><b><?=$language['address']?></b></td>
+							<td><?=$invoice->invoice_client_company_address?></td>
 						</tr>
 					</table>
 				</td>
@@ -167,19 +163,19 @@ switch($invoice->invoice_currency){
 				<td width="40%" valign="top">
 					<table cellpadding="0" cellspacing="0">
 						<tr>
-							<td width="40%"><b>Invoice No.</b></td>
+							<td width="40%"><b><?=$language['invoice_no']?></b></td>
 							<td width="60%"><?=$invoice->invoice_number?></td>
 						</tr>
 						<tr>
-							<td><b>Date</b></td>
+							<td><b><?=$language['date']?></b></td>
 							<td><?=$invoice->invoice_issue?></td>
 						</tr>
 						<tr>
-							<td><b>Sales</b></td>
+							<td><b><?=$language['sales']?></b></td>
 							<td><?=$invoice->invoice_user_name?></td>
 						</tr>
 						<tr>
-							<td><b>Expire Date</b></td>
+							<td><b><?=$language['expire_date']?></b></td>
 							<td><?=$invoice->invoice_expire?></td>
 						</tr>
                         <tr></tr>
@@ -189,13 +185,13 @@ switch($invoice->invoice_currency){
 		</table>
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
 			<tr>
-				<td width="12%"><b>PART NO.</b></td>
-				<td width="12%"><b>PRICE TYPE</b></td>
-				<td width="12%"><b>DESCRIPTION</b></td>
-				<td width="18%"><b>SIZE</b></td>
-                <td width="15%"><b>QTY</b></td>
-				<td width="12%"><b>UNIT PRICE</b></td>
-				<td width="10%" align="right"><b>AMOUNT</b></td>
+				<td width="12%"><b><?=$language['part_no']?></b></td>
+				<td width="12%"><b><?=$language['price_type']?></b></td>
+				<td width="12%"><b><?=$language['description']?></b></td>
+				<td width="18%"><b><?=$language['size']?></b></td>
+                <td width="15%"><b><?=$language['qty']?></b></td>
+				<td width="12%"><b><?=$language['unit_price']?></b></td>
+				<td width="10%" align="right"><b><?=$language['amount']?></b></td>
 			</tr>
 		</table>
 		<?php } ?>
@@ -286,7 +282,7 @@ switch($invoice->invoice_currency){
 			?>
 			<tr>
 				<td width="12%"></td>
-				<td colspan="2" width="70%" align="right"><b><?=strtoupper($value->category_name)?> DISCOUNT</b></td>
+				<td colspan="2" width="70%" align="right"><b><?=strtoupper($value->category_name)?> <?=$language['discount']?></b></td>
 				<td width="8%" align="center"><?=strtoupper($invoice->invoice_currency)?></td>
 				<td width="10%" align="right"><?=money_format('%!n', $value->category_discount)?></td>
 			</tr>
@@ -298,7 +294,7 @@ switch($invoice->invoice_currency){
 			<tr>
 				<td width="12%"></td>
 				<td width="55%"></td>
-				<td width="15%" align="right"><b>DISCOUNT</b></td>
+				<td width="15%" align="right"><b><?=$language['special_discount']?></b></td>
 				<td width="8%" align="center"><?=strtoupper($invoice->invoice_currency)?></td>
 				<td width="10%" align="right"><?=money_format('%!n', $invoice->invoice_discount)?></td>
 			</tr>
@@ -307,7 +303,7 @@ switch($invoice->invoice_currency){
             <tr>
                 <td width="12%"></td>
                 <td width="55%"></td>
-                <td width="15%" align="right"><b>FREIGHT</b></td>
+                <td width="15%" align="right"><b><?=$language['freight']?></b></td>
                 <td width="8%" align="center"><?=strtoupper($invoice->invoice_currency)?></td>
                 <td width="10%" align="right"><?=money_format('%!n', $invoice->invoice_freight)?></td>
             </tr>
@@ -315,35 +311,35 @@ switch($invoice->invoice_currency){
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="right"><b>GRAND TOTAL</b></td>
+				<td align="right"><b><?=$language['grand_total']?></b></td>
 				<td align="center"><?=strtoupper($invoice->invoice_currency)?></td>
 				<td align="right"><?=money_format('%!n', $invoice->invoice_total)?></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="right"><b>PAID</b></td>
+				<td align="right"><b><?=$language['paid']?></b></td>
 				<td align="center"><?=strtoupper($invoice->invoice_currency)?></td>
 				<td align="right"><?=money_format('%!n', $invoice->invoice_paid)?></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="right"><b>PAY</b></td>
+				<td align="right"><b><?=$language['pay']?></b></td>
 				<td align="center"><?=strtoupper($invoice->invoice_currency)?></td>
 				<td align="right"><?=money_format('%!n', $invoice->invoice_pay)?></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td></td>
-				<td align="right"><b>BALANCE</b></td>
+				<td align="right"><b><?=$language['balance']?></b></td>
 				<td align="center"><?=strtoupper($invoice->invoice_currency)?></td>
 				<td align="right"><?=money_format('%!n', $invoice->invoice_balance)?></td>
 			</tr>
 		</table>
 
 		<div class="page-break-inside-avoid">
-			<table cellspacing="0" cellpadding="0" class="document-br-20">
+			<!--table cellspacing="0" cellpadding="0" class="document-br-20">
 				<tr>
 					<td><b>TERMS AND CONDITIONS</b></td>
 				</tr>
@@ -355,29 +351,29 @@ switch($invoice->invoice_currency){
 						<br />This invoice will expired on above expired date or unless otherwise stated and subject to change without notice.
 					</td>
 				</tr>
-			</table>
+			</table-->
 
+			<?php if($invoice->invoice_remark != ''){ ?>
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
-					<td><b>REMARK</b></td>
+					<td><b><?=$language['remark']?></b></td>
 				</tr>
-				<?php if($invoice->invoice_remark != ''){ ?>
 				<tr>
 					<td class="line-height-12">
-						<?=$invoice->invoice_remark?>
+						<?=convert_br($invoice->invoice_remark)?>
 					</td>
 				</tr>
-				<?php } ?>
 			</table>
+			<?php } ?>
 
 			<?php if($invoice->invoice_payment != ''){ ?>
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
-					<td><b>PAYMENT</b></td>
+					<td><b><?=$language['payment']?></b></td>
 				</tr>
 				<tr>
 					<td class="line-height-12">
-						<?=$invoice->invoice_payment?>
+						<?=convert_br($invoice->invoice_payment)?>
 					</td>
 				</tr>
 			</table>
@@ -392,12 +388,12 @@ switch($invoice->invoice_currency){
 					</td>
 					<td width="20%"></td>
 					<td width="40%">
-						<div><b>For and on behalf of</b></div>
+						<div><b><?=$language['for_and_on_behalf_of']?></b></div>
 						<div>Wallpaper+</div>
 						<div class="sign-area">
 							<div class="sign"><?=$invoice->invoice_user_name?></div>
 						</div>
-						<div>Authority Signature & Co. Chop</div>
+						<div><?=$language['signature']?></div>
 					</td>
 				</tr>
 			</table>
@@ -405,9 +401,9 @@ switch($invoice->invoice_currency){
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
 					<td class="line-height-12">
-						Please return the copy of this invoice with your signature and company chop as confirmation of the above offer.
-						<br />Address: 9 Floor The Hennessy 256 Hennessy Road Wan Chal Hong Kong. 
-						<br />Tel: +852 3525 1785 Fax: +852 3525 1784 Email: sales@wallpaperplus.com.hk
+						<?=$language['confirmation']?>
+						<br /><?=$language['address']?>: 9 Floor The Hennessy 256 Hennessy Road Wan Chal Hong Kong. 
+						<br /><?=$language['tel']?>: +852 3525 1785 <?=$language['fax']?>: +852 3525 1784 <?=$language['email']?>: sales@wallpaperplus.com.hk
 					</td>
 				</tr>
 			</table>

@@ -31,6 +31,9 @@ class Salesorder extends CI_Controller {
 		);
 		$data['salesorder'] = $this->salesorder_model->select($thisSelect);
 
+		/* language */
+		$data['language'] = get_print_language($data['salesorder']->salesorder_language);
+
 		$this->load->view('print/salesorder_view', $data);
 	}
 
@@ -52,6 +55,9 @@ class Salesorder extends CI_Controller {
 			'return' => 'result'
 		);
 		$data['salesorderitems'] = $this->salesorderitem_model->select($thisSelect);
+
+		/* language */
+		$data['language'] = get_print_language($data['salesorder']->salesorder_language);
 
 		$this->load->view('print/salesorder_view', $data);
 	}

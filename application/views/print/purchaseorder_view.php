@@ -354,7 +354,7 @@ switch($purchaseorder->purchaseorder_currency){
 		</table>
 
 		<div class="page-break-inside-avoid">
-			<table cellspacing="0" cellpadding="0" class="document-br-20">
+			<!--table cellspacing="0" cellpadding="0" class="document-br-20">
 				<tr>
 					<td><b>TERMS AND CONDITIONS</b></td>
 				</tr>
@@ -366,20 +366,20 @@ switch($purchaseorder->purchaseorder_currency){
 						<br />This purchaseorder will expired on above expired date or unless otherwise stated and subject to change without notice.
 					</td>
 				</tr>
-			</table>
+			</table-->
 
+			<?php if($purchaseorder->purchaseorder_remark != ''){ ?>
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
 				<tr>
 					<td><b>REMARK</b></td>
 				</tr>
-				<?php if($purchaseorder->purchaseorder_remark != ''){ ?>
 				<tr>
 					<td class="line-height-12">
-						<?=$purchaseorder->purchaseorder_remark?>
+						<?=convert_br($purchaseorder->purchaseorder_remark)?>
 					</td>
 				</tr>
-				<?php } ?>
 			</table>
+			<?php } ?>
 
 			<?php if($purchaseorder->purchaseorder_payment != ''){ ?>
 			<table cellspacing="0" cellpadding="0" class="document-br-10">
@@ -388,7 +388,7 @@ switch($purchaseorder->purchaseorder_currency){
 				</tr>
 				<tr>
 					<td class="line-height-12">
-						<?=$purchaseorder->purchaseorder_payment?>
+						<?=convert_br($purchaseorder->purchaseorder_payment)?>
 					</td>
 				</tr>
 			</table>

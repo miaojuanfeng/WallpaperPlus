@@ -1730,3 +1730,163 @@ if (!function_exists('get_uri_string_parameters')) {
         return $retval;
     }
 }
+
+if (!function_exists('get_print_titles')) {
+    function get_print_language($language)
+    {
+        $retval = array(
+        	'en' => array(
+        		// Common
+        		'date' => 'Date',
+        		'to' => 'To',
+        		'attn' => 'Attn',
+        		'address' => 'Address',
+        		'tel' => 'Tel',
+        		'fax' => 'Fax',
+        		'email' => 'Email',
+        		'sales' => 'Sales',
+        		'expire_date' => 'Expire Date',
+        		// Table
+        		'part_no' => 'PART NO.',
+        		'code' => 'CODE',
+        		'price_type' => 'PRICE TYPE',
+        		'name' => 'NAME',
+        		'size' => 'SIZE',
+        		'qty' => 'QTY',
+        		'unit_price' => 'UNIT PRICE',
+        		'amount' => 'AMOUNT',
+        		'description' => 'DESCRIPTION',
+        		// Summary
+        		'discount' => 'DISCOUNT',
+        		'special_discount' => 'SPECIAL DISCOUNT',
+        		'freight' => 'FREIGHT',
+        		'paid' => 'PAID',
+        		'pay' => 'PAY',
+        		'balance' => 'BALANCE',
+        		'grand_total' => 'GRAND TOTAL',
+        		'quantity_total' => 'QUANTITY TOTAL',
+        		// Remark
+        		'remark' => 'REMARK',
+        		'payment' => 'PAYMENT',
+        		'received_by' => 'Received By',
+        		'for_and_on_behalf_of' => 'For and on behalf of',
+        		'signature' => 'Authority Signature & Co. Chop',
+        		'confirmation' => 'Please return the copy of this page with your signature and company chop as confirmation of the above offer.',
+        		// Quotation
+        		'quotation' => 'Quotation',
+        		'quotation_no' => 'Quotation No.',
+        		// Salesorder
+        		'salesorder' => 'Sales order',
+        		'salesorder_no' => 'Sales order No.',
+        		// Invoice
+        		'invoice' => 'Invoice',
+        		'invoice_no' => 'Invoice No.',
+        		// Deliverynote
+				'deliverynote' => 'Delivery note',
+				'deliverynote_no' => 'Delivery note No.',
+        	),
+        	'tc' => array(
+        		// Common
+        		'date' => '日期',
+        		'to' => '發給',
+        		'attn' => '收件人',
+        		'address' => '地址',
+        		'tel' => '電話',
+        		'fax' => '傳真',
+        		'email' => '電郵',
+        		'sales' => '銷售人員',
+        		'expire_date' => '過期日期',
+        		// Table
+        		'part_no' => '品號',
+        		'code' => '代碼',
+        		'price_type' => '報價類型',
+        		'name' => '名稱',
+        		'size' => '尺寸',
+        		'qty' => '數量',
+        		'unit_price' => '單價',
+        		'amount' => '總價',
+        		'description' => '描述',
+        		// Summary
+        		'discount' => '折扣',
+        		'special_discount' => '特殊折扣',
+        		'freight' => '運費',
+        		'paid' => '已付',
+        		'pay' => '現付',
+        		'balance' => '欠款',
+        		'grand_total' => '總計',
+        		'quantity_total' => '數量總計',
+        		// Remark
+        		'remark' => '備註',
+        		'payment' => '條款',
+        		'received_by' => '接收方簽名',
+        		'for_and_on_behalf_of' => '收益方簽名',
+        		'signature' => '簽名與蓋章',
+        		'confirmation' => '請將此單的複印件用簽字和公司蓋章作為上述報價的確認書。',
+        		// Quotation
+        		'quotation' => '報價單',
+        		'quotation_no' => '報價單編號',
+        		// Salesorder
+        		'salesorder' => '銷售單',
+        		'salesorder_no' => '銷售單編號',
+        		// Invoice
+        		'invoice' => '發票',
+        		'invoice_no' => '發票編號',
+        		// Deliverynote
+				'deliverynote' => '提貨單',
+				'deliverynote_no' => '提貨單編號',
+        	),
+        	'sc' => array(
+        		// Common
+        		'date' => '日期',
+        		'to' => '发给',
+        		'attn' => '收件人',
+        		'address' => '地址',
+        		'tel' => '电话',
+        		'fax' => '传真',
+        		'email' => '电邮',
+        		'sales' => '销售人员',
+        		'expire_date' => '过期日期',
+        		// Table
+        		'part_no' => '品号',
+        		'code' => '代码',
+        		'price_type' => '报价类型',
+        		'name' => '名称',
+        		'size' => '尺寸',
+        		'qty' => '数量',
+        		'unit_price' => '单价',
+        		'amount' => '总价',
+        		'description' => '描述',
+        		// Summary
+        		'discount' => '折扣',
+        		'special_discount' => '特殊折扣',
+        		'freight' => '运费',
+        		'paid' => '已付',
+        		'pay' => '现付',
+        		'balance' => '欠款',
+        		'grand_total' => '总计',
+        		'quantity_total' => '数量总计',
+        		// Remark
+        		'remark' => '备注',
+        		'payment' => '条款',
+        		'received_by' => '接收方签名',
+        		'for_and_on_behalf_of' => '收益方签名',
+        		'signature' => '签名与盖章',
+        		'confirmation' => '请将此单的复印件用签字和公司盖章作为上述报价的确认书。',
+        		// Quotation
+        		'quotation' => '报价单',
+        		'quotation_no' => '报价单编号',
+        		// Salesorder
+        		'salesorder' => '销售单',
+        		'salesorder_no' => '销售单编号',
+        		// Invoice
+        		'invoice' => '发票',
+        		'invoice_no' => '发票编号',
+        		// Deliverynote
+				'deliverynote' => '提货单',
+				'deliverynote_no' => '提货单编号',
+        	)
+        );
+
+        return $retval[$language];
+    }
+}

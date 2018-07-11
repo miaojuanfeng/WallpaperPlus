@@ -31,6 +31,9 @@ class Invoice extends CI_Controller {
 		);
 		$data['invoice'] = $this->invoice_model->select($thisSelect);
 
+		/* language */
+		$data['language'] = get_print_language($data['invoice']->invoice_language);
+
 		$this->load->view('print/invoice_view', $data);
 	}
 
@@ -52,6 +55,9 @@ class Invoice extends CI_Controller {
 			'return' => 'result'
 		);
 		$data['invoiceitems'] = $this->invoiceitem_model->select($thisSelect);
+
+		/* language */
+		$data['language'] = get_print_language($data['invoice']->invoice_language);
 
 		$this->load->view('print/invoice_view', $data);
 	}

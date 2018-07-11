@@ -181,8 +181,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			deliverynoteitem_row += '<div class="margin-top-10">';
 			// deliverynoteitem_row += '<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			deliverynoteitem_row += '<div class="input-group width100percent">';
-			deliverynoteitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
-			deliverynoteitem_row += '<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
+			deliverynoteitem_row += '<span class="input-group-addon corpcolor-font">Location</span>';
+			deliverynoteitem_row += '<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="" />';
+			deliverynoteitem_row += '<input id="deliverynoteitem_product_location" name="deliverynoteitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="" />';
 			deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '</div>';
 			deliverynoteitem_row += '<div>';
@@ -275,6 +276,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="deliverynote_expire" value="<?=$deliverynote->deliverynote_expire?>" />
 							<input type="hidden" name="salesorder_total" value="<?=$deliverynote->deliverynote_total?>" />
 							<input type="hidden" name="deliverynote_user_id" value="<?=$deliverynote->deliverynote_user_id?>" />
+							<input type="hidden" name="deliverynote_language" value="<?=$deliverynote->deliverynote_language?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
@@ -448,8 +450,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             </div>
 															<div class="margin-top-10">
 																<div class="input-group width100percent">
-																	<span class="input-group-addon corpcolor-font">Title</span>
-																	<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="<?=$value->deliverynoteitem_product_name?>" />
+																	<span class="input-group-addon corpcolor-font">Location</span>
+																	<input id="deliverynoteitem_product_name" name="deliverynoteitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="<?=$value->deliverynoteitem_product_name?>" />
+																	<input id="deliverynoteitem_product_location" name="deliverynoteitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="<?=$value->deliverynoteitem_product_location?>" />
 																</div>
 															</div>
 															<div>

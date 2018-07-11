@@ -31,6 +31,9 @@ class Deliverynote extends CI_Controller {
 		);
 		$data['deliverynote'] = $this->deliverynote_model->select($thisSelect);
 
+		/* language */
+		$data['language'] = get_print_language($data['deliverynote']->deliverynote_language);
+
 		$this->load->view('print/deliverynote_view', $data);
 	}
 
@@ -52,6 +55,9 @@ class Deliverynote extends CI_Controller {
 			'return' => 'result'
 		);
 		$data['deliverynoteitems'] = $this->deliverynoteitem_model->select($thisSelect);
+
+		/* language */
+		$data['language'] = get_print_language($data['deliverynote']->deliverynote_language);
 
 		$this->load->view('print/deliverynote_view', $data);
 	}

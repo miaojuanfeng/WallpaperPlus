@@ -186,8 +186,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			salesorderitem_row += '<div class="margin-top-10">';
 			// salesorderitem_row += '<input id="salesorderitem_product_name" name="salesorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			salesorderitem_row += '<div class="input-group">';
-			salesorderitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
-			salesorderitem_row += '<input id="salesorderitem_product_name" name="salesorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
+			salesorderitem_row += '<span class="input-group-addon corpcolor-font">Location</span>';
+			salesorderitem_row += '<input id="salesorderitem_product_name" name="salesorderitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="" />';
+			salesorderitem_row += '<input id="salesorderitem_product_location" name="salesorderitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="" />';
 			salesorderitem_row += '</div>';
 			salesorderitem_row += '</div>';
 			salesorderitem_row += '<div>';
@@ -287,6 +288,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="salesorder_expire" value="<?=$salesorder->salesorder_expire?>" />
 							<input type="hidden" name="quotation_total" value="<?=$salesorder->salesorder_total?>" />
 							<input type="hidden" name="salesorder_user_id" value="<?=$salesorder->salesorder_user_id?>" />
+							<input type="hidden" name="salesorder_language" value="<?=$salesorder->salesorder_language?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
@@ -608,8 +610,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 															<div class="margin-top-10">
 																<div class="input-group">
-																	<span class="input-group-addon corpcolor-font">Title</span>
-																	<input id="salesorderitem_product_name" name="salesorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="<?=$value->salesorderitem_product_name?>" />
+																	<span class="input-group-addon corpcolor-font">Location</span>
+																	<input id="salesorderitem_product_name" name="salesorderitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="<?=$value->salesorderitem_product_name?>" />
+																	<input id="salesorderitem_product_location" name="salesorderitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="<?=$value->salesorderitem_product_location?>" />
 																</div>
 															</div>
 															<div>

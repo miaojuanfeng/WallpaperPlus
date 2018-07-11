@@ -193,8 +193,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			invoiceitem_row += '<div class="margin-top-10">';
 			// invoiceitem_row += '<input id="invoiceitem_product_name" name="invoiceitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			invoiceitem_row += '<div class="input-group">';
-			invoiceitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
-			invoiceitem_row += '<input id="invoiceitem_product_name" name="invoiceitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
+			invoiceitem_row += '<span class="input-group-addon corpcolor-font">Location</span>';
+			invoiceitem_row += '<input id="invoiceitem_product_name" name="invoiceitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="" />';
+			invoiceitem_row += '<input id="invoiceitem_product_location" name="invoiceitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="" />';
 			invoiceitem_row += '</div>';
 			invoiceitem_row += '</div>';
 			invoiceitem_row += '<div>';
@@ -293,6 +294,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" name="invoice_expire" value="<?=$invoice->invoice_expire?>" />
 							<input type="hidden" name="salesorder_total" value="<?=$invoice->invoice_total?>" />
 							<input type="hidden" name="invoice_user_id" value="<?=$invoice->invoice_user_id?>" />
+							<input type="hidden" name="invoice_language" value="<?=$invoice->invoice_language?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
@@ -480,8 +482,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             </div>
 															<div class="margin-top-10">
 																<div class="input-group">
-																	<span class="input-group-addon corpcolor-font">Title</span>
-																	<input id="invoiceitem_product_name" name="invoiceitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="<?=$value->invoiceitem_product_name?>" />
+																	<span class="input-group-addon corpcolor-font">Location</span>
+																	<input id="invoiceitem_product_name" name="invoiceitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="<?=$value->invoiceitem_product_name?>" />
+																	<input id="invoiceitem_product_location" name="invoiceitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="<?=$value->invoiceitem_product_location?>" />
 																</div>
 															</div>
 															<div>

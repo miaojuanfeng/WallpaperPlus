@@ -23,6 +23,7 @@ class Deliverynote extends CI_Controller {
 		$this->load->model('salesorderitem_model');
 		$this->load->model('terms_model');
 		$this->load->model('z_role_user_model');
+		$this->load->model('payment_model');
 	}
 
 	public function index()
@@ -217,6 +218,7 @@ class Deliverynote extends CI_Controller {
             $data['deliverynote']->deliverynote_customs_number = '';
             $data['deliverynote']->deliverynote_express_company = '';
             $data['deliverynote']->deliverynote_delivery_day = '';
+            $data['deliverynote']->deliverynote_language = $data['salesorder']->salesorder_language;
 
 			/* currency */
 			$data['currencys'] = (object)array(
@@ -280,6 +282,19 @@ class Deliverynote extends CI_Controller {
 			);
 			$data['salesorderitems'] = $this->salesorderitem_model->select($thisSelect);
 			$data['deliverynoteitems'] = convert_salesorderitems_to_deliverynoteitems($data['salesorderitems']);
+
+			/* payment */
+			$thisSelect = array(
+				'where' => array(
+					'payment_type' => 'deliverynote',
+					'payment_language' => $data['deliverynote']->deliverynote_language
+				),
+				'return' => 'row'
+			);
+			$data['payment'] = $this->payment_model->select($thisSelect);
+			if( $data['payment'] ){
+				$data['deliverynote']->deliverynote_payment = $data['payment']->payment_content;
+			}
 
 			$this->load->view('deliverynote_view', $data);
 		}

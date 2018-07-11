@@ -31,6 +31,9 @@ class Quotation extends CI_Controller {
 		);
 		$data['quotation'] = $this->quotation_model->select($thisSelect);
 
+		/* language */
+		$data['language'] = get_print_language($data['quotation']->quotation_language);
+
 		$this->load->view('print/quotation_view', $data);
 	}
 
@@ -46,6 +49,9 @@ class Quotation extends CI_Controller {
 		);
 		$data['quotation'] = $this->quotation_model->select($thisSelect);
 		
+		/* language */
+		$data['language'] = get_print_language($data['quotation']->quotation_language);
+
 		/* quotationitem */
 		$thisSelect = array(
 			'where' => $thisGET,

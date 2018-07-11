@@ -100,6 +100,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// 	product_loader($(this));
 			// });
 
+			/* payment loader */
+			$(document).on('change', 'select[name="quotation_language"]', function(){
+				payment_loader();
+			});
+			<?php if( $this->router->fetch_method() == 'update' || $this->router->fetch_method() == 'insert' || $this->router->fetch_method() == 'duplicate' ){ ?>
+			payment_loader();
+			<?php } ?>
+
             $(document).on('change', 'select[name="quotation_display_code"]', function(){
                 $('input[name="quotationitem_product_id[]"]').each(function(){
                     product_code_loader($(this));
@@ -280,6 +288,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             });
         }
 
+        function payment_loader(){
+            $('.scriptLoader').load('/load', {'thisTableId': 'paymentLoader', 'thisType': 'quotation', 'thisLanguage': $('select[name="quotation_language"]').val(), 't': timestamp()}, function(data){
+                $('textarea[name="quotation_payment"]').val(data);
+            });
+        }
+
 		function textarea_auto_height(){
 			$.each($('textarea'), function(key, val){
 				$(this).attr('rows', $(this).val().split('\n').length + 1);
@@ -412,8 +426,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			quotationitem_row += '<div class="margin-top-10">';
             // quotationitem_row += '<input id="quotationitem_product_name" name="quotationitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
             quotationitem_row += '<div class="input-group">';
-            quotationitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
-            quotationitem_row += '<input id="quotationitem_product_name" name="quotationitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
+            quotationitem_row += '<span class="input-group-addon corpcolor-font">Location</span>';
+            quotationitem_row += '<input id="quotationitem_product_name" name="quotationitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="" />';
+            quotationitem_row += '<input id="quotationitem_product_location" name="quotationitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="" />';
             quotationitem_row += '</div>';
             quotationitem_row += '</div>';
 			quotationitem_row += '<div>';
@@ -552,7 +567,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="quotation_project_name">Project name <span class="highlight">*</span></label>
 											<input id="quotation_project_name" name="quotation_project_name" type="text" class="form-control input-sm required" placeholder="Project name" value="<?=$quotation->quotation_project_name?>" />
 										</p>
-										<!-- <p class="form-group">
+										<p class="form-group">
 											<label for="quotation_language">Language</label>
 											<select id="quotation_language" name="quotation_language" data-placeholder="Language" class="chosen-select required">
 												<option value></option>
@@ -566,7 +581,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												}
 												?>
 											</select>
-										</p> -->
+										</p>
                                         <p class="form-group">
                                             <label for="quotation_exchange_rate">Exchange rate <span class="highlight">*</span></label>
                                             <input id="quotation_exchange_rate" name="quotation_exchange_rate" type="text" readonly="readonly" class="form-control input-sm required" placeholder="Exchange rate" value="<?=$quotation->quotation_exchange_rate?$quotation->quotation_exchange_rate:'1.00'?>" />
@@ -834,8 +849,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 															<div class="margin-top-10">
 																<div class="input-group">
-																	<span class="input-group-addon corpcolor-font">Title</span>
-																	<input id="quotationitem_product_name" name="quotationitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="<?=$value->quotationitem_product_name?>" />
+																	<span class="input-group-addon corpcolor-font">Location</span>
+																	<input id="quotationitem_product_name" name="quotationitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="<?=$value->quotationitem_product_name?>" />
+																	<input id="quotationitem_product_location" name="quotationitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="<?=$value->quotationitem_product_location?>" />
 																</div>
 															</div>
 															<div>

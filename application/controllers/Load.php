@@ -542,6 +542,25 @@ class Load extends CI_Controller {
 		}
 	}
 
+	public function paymentLoader()
+	{
+		$this->load->model('payment_model');
+			
+		/* terms */
+		$thisSelect = array(
+			'where' => array(
+				'payment_type' => $this->input->post('thisType'),
+				'payment_language' => $this->input->post('thisLanguage')
+			),
+			'return' => 'row'
+		);
+		$thisData = $this->payment_model->select($thisSelect);
+
+		if($thisData){
+			echo $thisData->payment_content;
+		}
+	}
+
 	public function quotation()
 	{
 		echo 'test';

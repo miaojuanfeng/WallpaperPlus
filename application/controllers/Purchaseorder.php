@@ -222,6 +222,7 @@ class Purchaseorder extends CI_Controller {
 				// $data['purchaseorder']->purchaseorder_paid = '0';
 				$data['purchaseorder']->purchaseorder_pay = '0';
 				$data['purchaseorder']->purchaseorder_balance = '0';
+				$data['purchaseorder']->purchaseorder_language = $data['salesorder']->salesorder_language;
 
 				$data['purchaseorder']->purchaseorder_vendor_id = '';
 				$data['purchaseorder']->purchaseorder_number = '';

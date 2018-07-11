@@ -24,6 +24,7 @@ class Invoice extends CI_Controller {
 		$this->load->model('terms_model');
 		$this->load->model('z_role_user_model');
         $this->load->model('currency_model');
+        $this->load->model('payment_model');
 	}
 
 	public function index()
@@ -315,6 +316,7 @@ class Invoice extends CI_Controller {
 			$data['invoice']->invoice_pay = '0';
 			// $data['invoice']->invoice_balance = '0';
 			$data['invoice']->invoice_balance = $data['invoice']->invoice_total - $data['invoice']->invoice_paid;
+			$data['invoice']->invoice_language = $data['salesorder']->salesorder_language;
 
 			/* currency */
             $thisSelect = array(
@@ -378,6 +380,19 @@ class Invoice extends CI_Controller {
 			);
 			$data['salesorderitems'] = $this->salesorderitem_model->select($thisSelect);
 			$data['invoiceitems'] = convert_salesorderitems_to_invoiceitems($data['salesorderitems']);
+
+			/* payment */
+			$thisSelect = array(
+				'where' => array(
+					'payment_type' => 'invoice',
+					'payment_language' => $data['invoice']->invoice_language
+				),
+				'return' => 'row'
+			);
+			$data['payment'] = $this->payment_model->select($thisSelect);
+			if( $data['payment'] ){
+				$data['invoice']->invoice_payment = $data['payment']->payment_content;
+			}
 
 			$this->load->view('invoice_view', $data);
 		}

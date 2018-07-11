@@ -180,7 +180,36 @@ class Client extends CI_Controller {
 		$per_page = get_setting('per_page')->setting_value;
 
 		$thisGET = $this->uri->uri_to_assoc();
-		$thisGET['client_user_id'] = $this->session->userdata('user_id');
+
+		/* client */
+		switch(true){
+			case in_array('3', $this->session->userdata('role')): // sales manager
+				/* get own & downline client */
+				$thisSelect = array(
+					'where' => array(
+						'OWN_USER_ID_AND_DOWNLINE_USER_ID' => $this->session->userdata('user_id')
+					),
+					'return' => 'result'
+				);
+				$data['user_ids'] = convert_object_to_array($this->user_model->select($thisSelect), 'user_id');
+
+				$thisGET['client_user_id_in'] = $data['user_ids'];
+				break;
+			case in_array('4', $this->session->userdata('role')): // sales
+				/* get own client */
+				/* z_client_user */
+				$thisSelect = array(
+					'where' => array(
+						'user_id' => $this->session->userdata('user_id')
+					),
+					'return' => 'result'
+				);
+				$thisGET['client_id_in'] = convert_object_to_array($this->z_client_user_model->select($thisSelect), 'z_client_user_client_id');
+				break;
+			default:
+				$thisGET['client_user_id'] = $this->session->userdata('user_id');
+				break;
+		}
 
 		$thisSelect = array(
 			'where' => $thisGET,

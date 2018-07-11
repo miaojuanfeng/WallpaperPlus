@@ -231,8 +231,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '<div class="margin-top-10">';
 			// purchaseorderitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
 			purchaseorderitem_row += '<div class="input-group">';
-			purchaseorderitem_row += '<span class="input-group-addon corpcolor-font">Title</span>';
-			purchaseorderitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="" />';
+			purchaseorderitem_row += '<span class="input-group-addon corpcolor-font">Location</span>';
+			purchaseorderitem_row += '<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="" />';
+			purchaseorderitem_row += '<input id="purchaseorderitem_product_location" name="purchaseorderitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="" />';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '<div>';
@@ -411,6 +412,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <input type="hidden" name="purchaseorder_currency" value="<?=$purchaseorder->purchaseorder_currency?>" />
 							<input type="hidden" name="salesorder_total" value="<?=$purchaseorder->purchaseorder_total?>" />
 							<input type="hidden" name="purchaseorder_user_id" value="<?=$purchaseorder->purchaseorder_user_id?>" />
+							<input type="hidden" name="purchaseorder_language" value="<?=$purchaseorder->purchaseorder_language?>" />
 							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
 							<div class="fieldset">
 								<?=$this->session->tempdata('alert');?>
@@ -684,8 +686,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             </div>
 															<div class="margin-top-10">
 																<div class="input-group">
-																	<span class="input-group-addon corpcolor-font">Title</span>
-																	<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="text" class="form-control input-sm" placeholder="Name" value="<?=$value->purchaseorderitem_product_name?>" />
+																	<span class="input-group-addon corpcolor-font">Location</span>
+																	<input id="purchaseorderitem_product_name" name="purchaseorderitem_product_name[]" type="hidden" class="form-control input-sm" placeholder="Name" value="<?=$value->purchaseorderitem_product_name?>" />
+																	<input id="purchaseorderitem_product_location" name="purchaseorderitem_product_location[]" type="text" class="form-control input-sm" placeholder="Location" value="<?=$value->purchaseorderitem_product_location?>" />
 																</div>
 															</div>
 															<div>
