@@ -39,6 +39,7 @@ class Incomereport extends CI_Controller {
         $this->td_body = array();
         if( $rows && count($rows) ) {
             foreach ($rows as $key => $value) {
+            	$thisUser = get_user($value->invoice_quotation_user_id);
                 $row = array();
                 $row[] = $value->invoice_client_company_code;
                 $row[] = $value->invoice_client_company_name;
@@ -49,7 +50,7 @@ class Incomereport extends CI_Controller {
                 $row[] = 'HKD ' . money_format('%!n', $value->invoice_pay * $value->invoice_exchange_rate);
                 $row[] = convert_datetime_to_date($value->invoice_create);
                 $row[] = convert_datetime_to_date($value->invoice_confirmed_date);
-                $row[] = get_user($value->invoice_quotation_user_id)->user_name;
+                $row[] = ($thisUser?$thisUser->user_name:'');
                 $this->td_body[] = $row;
             }
             $this->th_footer[5] = strtoupper($value->invoice_currency).' '.money_format('%!n', $total);

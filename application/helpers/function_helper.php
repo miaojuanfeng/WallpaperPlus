@@ -847,7 +847,7 @@ if(!function_exists('get_salesorder_cost'))
 
 if(!function_exists('get_salesorderitem_quantity'))
 {
-	function get_salesorderitem_quantity($thisSalesorderId, $thisPurchaseorderItemId){
+	function get_salesorderitem_quantity($thisSalesorderId, $thisSalesorderItemId){
 		$CI =& get_instance();
 		$CI->load->model('salesorderitem_model');
 
@@ -855,7 +855,7 @@ if(!function_exists('get_salesorderitem_quantity'))
 		$thisSelect = array(
 			'where' => array(
 				'salesorderitem_salesorder_id' => $thisSalesorderId,
-				'salesorderitem_product_id' => $thisPurchaseorderItemId,
+				'salesorderitem_product_id' => $thisSalesorderItemId,
 			),
 			'return' => 'row'
 		);
@@ -956,6 +956,54 @@ if(!function_exists('get_invoiceitem_issued_quantity'))
 
 			if($data){
 				return $data->invoiceitem_sold;
+			}else{
+				return 0;
+			}
+		}else{
+			return 0;
+		}
+	}
+}
+
+if(!function_exists('get_deliverynoteitem_issued_quantity'))
+{
+	function get_deliverynoteitem_issued_quantity($thisSalesorderId, $thisDeliverynoteId, $thisDeliverynoteItemId){
+		$CI =& get_instance();
+		$CI->load->model('deliverynote_model');
+		$CI->load->model('deliverynoteitem_model');
+
+		/* deliverynote */
+		$thisSelect = array(
+			'where' => array(
+				'deliverynote_salesorder_id' => $thisSalesorderId,
+				'deliverynote_status_noteq' => 'cancel'
+			),
+			'return' => 'result'
+		);
+		$data['deliverynotes'] = $CI->deliverynote_model->select($thisSelect);
+
+		if($data['deliverynotes']){
+			$deliverynote_ids = array();
+			foreach($data['deliverynotes'] as $key => $value){
+				$deliverynote_ids[] = $value->deliverynote_id;
+			}
+
+			/* deliverynote item */
+			$thisSelect = array(
+				'select' => array(
+					'sum(deliverynoteitem_quantity) as deliverynoteitem_sold',
+				),
+				'where' => array(
+					'deliverynoteitem_deliverynote_id_in' => $deliverynote_ids,
+					'deliverynoteitem_product_id' => $thisDeliverynoteItemId,
+					'deliverynoteitem_deliverynote_id_noteq' => $thisDeliverynoteId,
+				),
+				'return' => 'row'
+			);
+			$data = $CI->deliverynoteitem_model->select($thisSelect);
+
+			if($data){
+				return $data->deliverynoteitem_sold;
 			}else{
 				return 0;
 			}

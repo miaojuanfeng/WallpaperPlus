@@ -295,9 +295,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<table class="table list" id="purchaseorder">
 												<thead>
 													<tr>
-														<th width="10%"></th>
+														<th width="2%"></th>
+														<th width="10%">Code</th>
 														<th>Detail</th>
 														<th width="12%">Quantity</th>
+														<th width="12%">Warehouse</th>
 														<th width="12%">Arrived</th>
 													</tr>
 												</thead>
@@ -306,9 +308,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<tr<?=($value->purchaseorderitem_type == 'sub item') ? ' class="subitem-row"' : ''?>>
 														<td>
 															<div>
+																<input type="checkbox" name="warehouse_to[]" data-toggle="tooltip" title="Warehouse to" value="<?=$value->purchaseorderitem_product_id?>" />
+															</div>
+														</td>
+														<td>
+															<div>
 																<input name="purchaseorderitem_id[]" type="hidden" value="<?=$value->purchaseorderitem_id?>" />
 																<input name="purchaseorderitem_purchaseorder_id[]" type="hidden" value="<?=$value->purchaseorderitem_purchaseorder_id?>" />
 																<input name="purchaseorderitem_type[]" type="hidden" value="<?=($value->purchaseorderitem_type != '') ? $value->purchaseorderitem_type : 'main item'?>" />
+																<input name="purchaseorderitem_product_id[]" type="hidden" value="<?=$value->purchaseorderitem_product_id?>" />
 																<input name="purchaseorderitem_product_type_name[]" type="hidden" value="<?=$value->purchaseorderitem_product_type_name?>" />
 																<input readonly="readonly" id="purchaseorderitem_product_code" name="purchaseorderitem_product_code[]" type="text" class="form-control input-sm" placeholder="Code" value="<?=$value->purchaseorderitem_product_code?>" />
 															</div>
@@ -350,7 +358,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<div>
-																<input id="purchaseorderitem_stock_arrive" name="purchaseorderitem_stock_arrive[]" type="number" min="0" class="form-control input-sm" placeholder="Arrived" value="<?=$value->purchaseorderitem_stock_arrive?>" />
+																<input readonly="readonly" id="purchaseorderitem_stock_arrive" name="purchaseorderitem_stock_arrive[]" type="number" min="0" class="form-control input-sm" placeholder="Warehouse" value="<?=$value->purchaseorderitem_stock_arrive?>" />
+															</div>
+														</td>
+														<td>
+															<div>
+																<input id="stock_arrive" name="stock_arrive[]" type="number" min="0" step="0.01" class="form-control input-sm" placeholder="Arrived" value="0" />
 															</div>
 														</td>
 													</tr>
@@ -358,7 +371,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</tbody>
 												<tfoot>
 													<tr>
+														<th></th>
 														<th width="10%"></th>
+														<th></th>
 														<th></th>
 														<th></th>
 														<th></th>

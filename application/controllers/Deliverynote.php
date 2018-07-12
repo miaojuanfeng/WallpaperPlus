@@ -209,6 +209,7 @@ class Deliverynote extends CI_Controller {
 			$data['deliverynote']->deliverynote_paid = $this->deliverynote_model->select($thisSelect)->sum_of_deliverynote_pay;
 
 			/* preset data */
+			$data['deliverynote']->deliverynote_id = '0';
 			$data['deliverynote']->deliverynote_salesorder_id = $data['salesorder']->salesorder_id;
 			// $data['deliverynote']->deliverynote_paid = '0';
 			$data['deliverynote']->deliverynote_pay = '0';

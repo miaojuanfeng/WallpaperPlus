@@ -264,81 +264,85 @@ switch($purchaseorder->purchaseorder_currency){
             $total = 0;
             $quantity_count = 0;
             $weight_count = 0;
-            foreach($salesorder->invoices as $key => $value){
-			    ?>
-			<tr class="padding-top-5">
-                <td width="12%"></td>
-                <td width="12%"></td>
-                <td width="12%"></td>
-                <td width="15%"></td>
-                <td width="18%"></td>
-                <td width="15%"></td>
-                <td width="11%"></td>
-                <!-- <td width="8%"></td> -->
-                <td width="10%"></td>
-			</tr>
-			<tr class="padding-bottom-5">
-				<td valign="top"><?=$value->invoice_number?></td>
-				<td valign="top" align="left">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.strtoupper($value1->invoiceitem_price_type).'</div><br/>';
-                    }
-                    ?>
-                </td>
-                <td valign="top" align="left">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.$value1->invoiceitem_product_location.'</div><br/>';
-                    }
-                    ?>
-                </td>
-				<td valign="top">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.$value1->invoiceitem_product_code.'</div><br/>';
-                    }
-                    ?>
-                </td>
-                <td valign="top" align="left">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.convert_br($value1->invoiceitem_product_detail).'</div>';
-                    }
-                    ?>
-                </td>
-                <td valign="top">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        $quantity_count += $value1->invoiceitem_quantity;
-                        echo '<div>'.$value1->invoiceitem_quantity.' '.$value1->invoiceitem_unit.'</div><br/>';
-                    }
-                    ?>
-                </td>
-                <td valign="top">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price).'</div><br/>';
-                    }
-                    ?>
-                </td>
-                <!-- <td valign="top">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        echo '<div>'.'xxx'.'</div>';
-                    }
-                    ?>
-                </td> -->
-				<td valign="top" align="right">
-                    <?php
-                    foreach ($value->invoiceitems as $key1 => $value1) {
-                        $total += $value1->invoiceitem_product_price * $value1->invoiceitem_quantity;
-                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price * $value1->invoiceitem_quantity).'</div><br/>';
-                    }
-                    ?>
-                </td>
-			</tr>
-			<?php } ?>
+            if( $salesorder ){
+	            foreach($salesorder->invoices as $key => $value){
+			?>
+				<tr class="padding-top-5">
+	                <td width="12%"></td>
+	                <td width="12%"></td>
+	                <td width="12%"></td>
+	                <td width="15%"></td>
+	                <td width="18%"></td>
+	                <td width="15%"></td>
+	                <td width="11%"></td>
+	                <!-- <td width="8%"></td> -->
+	                <td width="10%"></td>
+				</tr>
+				<tr class="padding-bottom-5">
+					<td valign="top"><?=$value->invoice_number?></td>
+					<td valign="top" align="left">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        echo '<div>'.strtoupper($value1->invoiceitem_price_type).'</div><br/>';
+	                    }
+	                    ?>
+	                </td>
+	                <td valign="top" align="left">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        echo '<div>'.$value1->invoiceitem_product_location.'</div><br/>';
+	                    }
+	                    ?>
+	                </td>
+					<td valign="top">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        echo '<div>'.$value1->invoiceitem_product_code.'</div><br/>';
+	                    }
+	                    ?>
+	                </td>
+	                <td valign="top" align="left">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        echo '<div>'.convert_br($value1->invoiceitem_product_detail).'</div>';
+	                    }
+	                    ?>
+	                </td>
+	                <td valign="top">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        $quantity_count += $value1->invoiceitem_quantity;
+	                        echo '<div>'.$value1->invoiceitem_quantity.' '.$value1->invoiceitem_unit.'</div><br/>';
+	                    }
+	                    ?>
+	                </td>
+	                <td valign="top">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price).'</div><br/>';
+	                    }
+	                    ?>
+	                </td>
+	                <!-- <td valign="top">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        echo '<div>'.'xxx'.'</div>';
+	                    }
+	                    ?>
+	                </td> -->
+					<td valign="top" align="right">
+	                    <?php
+	                    foreach ($value->invoiceitems as $key1 => $value1) {
+	                        $total += $value1->invoiceitem_product_price * $value1->invoiceitem_quantity;
+	                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price * $value1->invoiceitem_quantity).'</div><br/>';
+	                    }
+	                    ?>
+	                </td>
+				</tr>
+			<?php 
+				}
+			}
+			?>
 			<tr class="document-separator-bottom">
 				<td height="100%"></td>
 				<td></td>

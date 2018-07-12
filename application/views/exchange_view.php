@@ -142,7 +142,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p>
 										<p class="form-group">
 											<label for="exchange_product_id">Product</label>
-											<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Type" value="<?=get_product($this->uri->uri_to_assoc()['product_id'])->product_name?>" />
+											<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Product" value="<?=get_product($this->uri->uri_to_assoc()['product_id'])->product_name?>" />
 											<input id="exchange_product_id" name="exchange_product_id" type="hidden" value="<?=$this->uri->uri_to_assoc()['product_id']?>" />
 										</p>
 										<?php
@@ -201,8 +201,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-sm-4 col-xs-12">
 										<h4 class="corpcolor-font">Related information</h4>
 										<p class="form-group">
-											<label for="exchange_remark">Remark <span class="highlight">*</span></label>
-											<textarea id="exchange_remark" name="exchange_remark" class="form-control input-sm required" placeholder="Remark" rows="5"></textarea>
+											<label for="exchange_remark">Remark <span class="highlight"></span></label>
+											<textarea id="exchange_remark" name="exchange_remark" class="form-control input-sm" placeholder="Remark" rows="5"></textarea>
 										</p>
 									</div>
 								</div>
@@ -237,6 +237,114 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<?php if($this->router->fetch_method() == 'batchinsert'){ ?>
+		<div class="content-area">
+
+			<div class="container-fluid">
+				<div class="row">
+
+					<h2 class="col-sm-12"><a href="<?=base_url('exchange')?>">Exchange management</a> > <?=($this->router->fetch_method() == 'update') ? 'Upate' : 'Insert'?> Stock Batch In</h2>
+
+					<div class="col-sm-12">
+						<form method="post" enctype="multipart/form-data">
+							<input type="hidden" name="exchange_id" value="" />
+							<input type="hidden" name="referrer" value="<?=$this->agent->referrer()?>" />
+							<div class="fieldset">
+								<div class="row">
+									<div class="col-sm-4 col-xs-12 pull-right">
+										<blockquote>
+											<h4 class="corpcolor-font">Instructions</h4>
+											<p><span class="highlight">*</span> is a required field</p>
+										</blockquote>
+									</div>
+									<div class="col-sm-8 col-xs-12">
+										<h4 class="corpcolor-font">Basic information</h4>
+										<p class="form-group">
+											<label for="exchange_type">Type</label>
+											<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Type" value="Stock In" />
+											<input id="exchange_type" name="exchange_type" type="hidden" value="in" />
+										</p>
+										<p class="form-group">
+											<label for="exchange_warehouse_id_from">Warehouse from</label>
+											<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Type" value="Other" />
+											<input id="exchange_warehouse_id_from" name="exchange_warehouse_id_from" type="hidden" value="0" />
+										</p>
+										<?php
+										foreach($product_ids as $key => $value){
+										?>
+										<div class="row">
+											<div class="col-sm-3 col-xs-12">
+												<p class="form-group">
+													<label for="exchange_product_id">Product</label>
+													<input readonly="readonly" type="text" class="form-control input-sm" placeholder="Product" value="<?=get_product($value)->product_name?>" />
+													<input id="exchange_product_id" name="exchange_product_id[]" type="hidden" value="<?=$value?>" />
+												</p>
+											</div>
+											<div class="col-sm-3 col-xs-12">
+												<p class="form-group">
+													<label for="exchange_warehouse_id_to">Warehouse to</label>
+													<select id="exchange_warehouse_id_to" name="exchange_warehouse_id_to[]" data-placeholder="Warehouse to" class="chosen-select required">
+													<option value></option>;
+													<?php
+														foreach($warehousetos as $k => $v){
+															$selected = ($v->warehouse_id == $this->uri->uri_to_assoc()['warehouse_id']) ? ' selected="selected"' : "" ;
+															echo '<option value="'.$v->warehouse_id.'"'.$selected.'>'.strtoupper($v->warehouse_name).'</option>';
+														}
+													?>
+													</select>
+												</p>
+											</div>
+											<div class="col-sm-3 col-xs-12">
+												<p class="form-group">
+													<label for="exchange_quantity">Quantity <span class="highlight">*</span></label>
+													<input id="exchange_quantity" name="exchange_quantity[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Quantity" value="<?=$product_qtys[$key]?>" />
+												</p>
+											</div>
+											<div class="col-sm-3 col-xs-12 pull-right">
+												<p class="form-group">
+													<label for="exchange_remark">Remark <span class="highlight"></span></label>
+													<input id="exchange_remark" name="exchange_remark[]" class="form-control input-sm" placeholder="Remark" />
+												</p>
+											</div>
+										</div>
+										<?php
+										}
+										?>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+									</div>
+								</div>
+
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+
+
+
+
+		</div>
+		<?php } ?>
 
 
 

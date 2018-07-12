@@ -34,6 +34,9 @@ class Stockstatus extends CI_Controller {
 	{
 		if($this->input->post()){
 			$thisPOST = $this->input->post();
+			foreach ($thisPOST['stock_arrive'] as $key => $value) {
+				$thisPOST['purchaseorderitem_stock_arrive'][$key] = $thisPOST['purchaseorderitem_stock_arrive'][$key] + $thisPOST['stock_arrive'][$key];
+			}
             $this->purchaseorder_model->update($thisPOST);
 
 			$thisSalesorderitem = get_array_prefix('purchaseorderitem_', $thisPOST);
@@ -47,9 +50,21 @@ class Stockstatus extends CI_Controller {
 			$thisLog['log_record_id'] = $thisPOST['purchaseorder_id'];
 			set_log($thisLog);
 
-			$thisAlert = 'Data saved';
-			$this->session->set_tempdata('alert', '<div class="btn btn-sm btn-primary btn-block bottom-buffer-10">'.$thisAlert.'</div>', 0);
-			redirect('stockstatus/update/purchaseorder_id/'.$thisPOST['purchaseorder_id']);
+			if( !count($thisPOST['warehouse_to']) ){
+				$thisAlert = 'Data saved';
+				$this->session->set_tempdata('alert', '<div class="btn btn-sm btn-primary btn-block bottom-buffer-10">'.$thisAlert.'</div>', 0);
+				redirect('stockstatus/update/purchaseorder_id/'.$thisPOST['purchaseorder_id']);
+			}else{
+				$product_qty = array();
+				foreach ($thisPOST['purchaseorderitem_product_id'] as $key => $value) {
+					if( in_array($value, $thisPOST['warehouse_to']) ){
+						$product_qty[] = $thisPOST['stock_arrive'][$key];
+					}
+				}
+				$product_ids = implode('_', $thisPOST['warehouse_to']);
+				$product_qty = implode('_', $product_qty);
+				redirect('exchange/batchinsert/product_id/'.$product_ids.'/product_qty/'.$product_qty);
+			}
 		}else{
 			$thisPOST = $this->uri->uri_to_assoc();
 

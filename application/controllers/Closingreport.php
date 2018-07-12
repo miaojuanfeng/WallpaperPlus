@@ -118,9 +118,10 @@ class Closingreport extends CI_Controller {
         if( $rows && count($rows) ) {
             $total = 0;
             foreach ($rows as $key => $value) {
+                $thisSalesorder = get_salesorder($value->purchaseorder_salesorder_id);
                 $row = array();
                 $row[] = '<a href="' . base_url('purchaseorder/update/purchaseorder_id/' . $value->purchaseorder_id) . '">' . $value->purchaseorder_number . '</a>';
-                $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->purchaseorder_salesorder_id) . '">' . get_salesorder($value->purchaseorder_salesorder_id)->salesorder_number . '</a>';
+                $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->purchaseorder_salesorder_id) . '">' . ($thisSalesorder?$thisSalesorder->salesorder_number:'') . '</a>';
                 $temp = '';
                 foreach($value->invoices as $key1 => $value1){
                     $temp .= '<div class="no-wrap">'.'<a href="' . base_url('invoice/update/invoice_id/' . $value1->invoice_id) . '">'. $value1->invoice_number . '</a>' .'<br/></div>';
@@ -138,12 +139,14 @@ class Closingreport extends CI_Controller {
                 $row[] = $temp;
                 $temp = '';
                 foreach($value->purchaseorderitems as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.get_currency(get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_currency_id)->currency_name.' '.money_format('%!n', get_product($value1->purchaseorderitem_product_id)->product_cost).'<br/></div>';
+                    $thisProduct = get_product($value1->purchaseorderitem_product_id);
+                    $temp .= '<div class="no-wrap">'.($thisProduct?get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name.' '.money_format('%!n', $thisProduct->product_cost):'').'<br/></div>';
                 }
                 $row[] = $temp;
                 $temp = '';
                 foreach($value->purchaseorderitems as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.get_currency(get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_currency_id)->currency_name.' '.money_format('%!n', $value1->purchaseorderitem_product_price).'<br/></div>';
+                    $thisProduct = get_product($value1->purchaseorderitem_product_id);
+                    $temp .= '<div class="no-wrap">'.($thisProduct?get_currency(get_vendor($thisProduct->product_vendor_id)->vendor_currency_id)->currency_name.' '.money_format('%!n', $value1->purchaseorderitem_product_price):'').'<br/></div>';
                 }
                 $row[] = $temp;
                 $temp = '';
@@ -165,12 +168,14 @@ class Closingreport extends CI_Controller {
                 $row[] = $temp;
                 $temp = '';
                 foreach($value->purchaseorderitems as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.get_category($value1->purchaseorderitem_category_id)->category_name.'<br/></div>';
+                    $thisCategory = get_category($value1->purchaseorderitem_category_id);
+                    $temp .= '<div class="no-wrap">'.($thisCategory?$thisCategory ->category_name:'').'<br/></div>';
                 }
                 $row[] = $temp;
                 $temp = '';
                 foreach($value->purchaseorderitems as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">'.get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_company_code.' - '.get_vendor(get_product($value1->purchaseorderitem_product_id)->product_vendor_id)->vendor_company_name.'<br/></div>';
+                    $thisProduct = get_product($value1->purchaseorderitem_product_id);
+                    $temp .= '<div class="no-wrap">'.($thisProduct?get_vendor($thisProduct->product_vendor_id)->vendor_company_code.' - '.get_vendor($thisProduct->product_vendor_id)->vendor_company_name:'').'<br/></div>';
                 }
                 $row[] = $temp;
                 $row[] = $value->purchaseorder_arrive_date!='0000-00-00'?$value->purchaseorder_arrive_date:'-';

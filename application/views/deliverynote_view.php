@@ -301,10 +301,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p>
 										<?php } ?>
 										<h4 class="corpcolor-font">Setting</h4>
-										<p class="form-group">
-											<label for="deliverynote_lot_number">Lot number</label>
-											<input id="deliverynote_lot_number" name="deliverynote_lot_number" type="text" class="form-control input-sm" placeholder="Lot number" value="<?=$deliverynote->deliverynote_lot_number?>" />
-										</p>
                                         <p class="form-group">
                                             <label for="deliverynote_status">Status</label>
                                             <select id="deliverynote_status" name="deliverynote_status" data-placeholder="Status" class="chosen-select required">
@@ -460,8 +456,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															</div>
 														</td>
 														<td>
+															<?php
+															/* get salesorder quantity */
+															$salesorder_quantity = get_salesorderitem_quantity($deliverynote->deliverynote_salesorder_id, $value->deliverynoteitem_product_id);
+															/* get invoice sold */
+															$deliverynoteitem_sold = get_deliverynoteitem_issued_quantity($deliverynote->deliverynote_salesorder_id, $deliverynote->deliverynote_id, $value->deliverynoteitem_product_id);
+															if(is_null($deliverynoteitem_sold)){
+																$deliverynoteitem_sold = 0;
+															}
+															if($deliverynote->deliverynote_id > 0){
+																$thisDeliverynoteitemQuantity = $value->deliverynoteitem_quantity;
+															}else{
+																$thisDeliverynoteitemQuantity = $salesorder_quantity - $deliverynoteitem_sold;
+															}
+															?>
                                                             <div class="input-group">
-                                                                <input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=($value->deliverynoteitem_quantity) ? $value->deliverynoteitem_quantity : '1'?>" />
+                                                                <input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$thisDeliverynoteitemQuantity?>" />
                                                                 <input id="deliverynoteitem_unit" name="deliverynoteitem_unit[]" type="hidden" value="<?=$value->deliverynoteitem_unit?>" />
                                                                 <span class="input-group-addon deliverynoteitem_unit"><?=($value->deliverynoteitem_unit) ? $value->deliverynoteitem_unit : 'Unit'?></span>
                                                             </div>

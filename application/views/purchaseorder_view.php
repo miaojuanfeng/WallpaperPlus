@@ -98,6 +98,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				product_loader($(this));
 			});
 
+			$(document).on('change', 'select[name="shipment_select"]', function(){
+				if( $(this).val() != '' ){
+					$('input[name="purchaseorder_shipment"]').val($(this).val());
+				}
+			});
+			$(document).on('change', 'select[name="delivery_address_select"]', function(){
+				if( $(this).val() != '' ){
+					$('textarea[name="purchaseorder_delivery_address"]').val($(this).val());
+				}
+			});
+
 			/* trigger calc */
 			$(document).on('blur', 'input[name="purchaseorderitem_product_price[]"]', function(){
 				calc();
@@ -217,10 +228,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			purchaseorderitem_row += '</td>';
 			purchaseorderitem_row += '<td>';
 			purchaseorderitem_row += '<div>';
-			purchaseorderitem_row += '<select id="purchaseorderitem_price_type" name="purchaseorderitem_price_type[]" data-placeholder="Price type" class="chosen-select required">';
-			purchaseorderitem_row += '<option value="ex-fty">EX-FTY</option>';
-			purchaseorderitem_row += '<option value="cif hk">CIF HK</option>';
-			purchaseorderitem_row += '</select>';
+			purchaseorderitem_row += '<input id="purchaseorderitem_product_batch_number" name="purchaseorderitem_product_batch_number[]" type="text" class="form-control input-sm" placeholder="Batch number" value="" />';
 			purchaseorderitem_row += '</div>';
 			purchaseorderitem_row += '</td>';
 			purchaseorderitem_row += '<td>';
@@ -458,6 +466,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</p>
                                         <p class="form-group">
                                             <label for="purchaseorder_shipment">Shipment <span class="highlight">*</span></label>
+                                            <select id="shipment_select" name="shipment_select" data-placeholder="Select a shipment" class="chosen-select">
+												<option value></option>
+												<option value="Shipment_1">Shipment 1</option>
+												<option value="Shipment_2">Shipment 2</option>
+												<option value="Shipment_3">Shipment 3</option>
+											</select>
                                             <input id="purchaseorder_shipment" name="purchaseorder_shipment" type="text" class="form-control input-sm required" placeholder="Shipment" value="<?=$purchaseorder->purchaseorder_shipment?>" />
                                         </p>
                                         <p class="form-group">
@@ -475,6 +489,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </p>
                                         <p class="form-group">
                                             <label for="purchaseorder_delivery_address">Delivery address <span class="highlight"></span></label>
+                                            <select id="delivery_address_select" name="delivery_address_select" data-placeholder="Select a address" class="chosen-select">
+												<option value></option>
+												<option value="Address_1">Address 1</option>
+												<option value="Address_2">Address 2</option>
+												<option value="Address_3">Address 3</option>
+											</select>
                                             <textarea id="purchaseorder_delivery_address" name="purchaseorder_delivery_address" class="form-control input-sm" placeholder="Delivery address"><?=$purchaseorder->purchaseorder_delivery_address?></textarea>
                                         </p>
                                         <p class="form-group">
@@ -628,6 +648,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <td><label for="purchaseorder_fax_no">Fax No.</label></td>
                                                         <td><input id="purchaseorder_fax_no" name="purchaseorder_fax_no" type="text" class="form-control input-sm" placeholder="Fax No." value="<?=$purchaseorder->purchaseorder_fax_no?>" /></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td><label for="purchaseorder_send_out_date">Send out date</label></td>
+                                                        <td>
+                                                        	<span class="input-group date datetimepicker">
+																<input id="purchaseorder_send_out_date" name="purchaseorder_send_out_date" type="text" class="form-control input-sm date-mask required" placeholder="Send out date" value="<?=$purchaseorder->purchaseorder_send_out_date?>" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+                                                        </td>
+                                                    </tr>
 												</table>
 											</div>
 										</div>
@@ -640,7 +671,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
-														<th width="12%"></th>
+														<th width="12%">Batch number</th>
 														<th>Detail</th>
 														<th width="12%">Price</th>
 														<th width="12%">Quantity</th>
@@ -673,10 +704,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</td>
 														<td>
 															<div>
-																<select id="purchaseorderitem_price_type" name="purchaseorderitem_price_type[]" data-placeholder="Price type" class="chosen-select required">
-																	<option value="ex-fty" <?php if( $value->purchaseorderitem_price_type == 'ex-fty' ) echo "selected"; ?>>EX-FTY</option>
-																	<option value="cif hk" <?php if( $value->purchaseorderitem_price_type == 'cif hk' ) echo "selected"; ?>>CIF HK</option>
-																</select>
+																<input id="purchaseorderitem_product_batch_number" name="purchaseorderitem_product_batch_number[]" type="text" class="form-control input-sm" placeholder="Batch number" value="<?=$value->purchaseorderitem_product_batch_number?>" />
 															</div>
 														</td>
 														<td>

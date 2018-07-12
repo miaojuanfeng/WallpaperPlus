@@ -39,6 +39,7 @@ class Expensesreport extends CI_Controller {
         $this->td_body = array();
         if( $rows && count($rows) ) {
             foreach ($rows as $key => $value) {
+                $thisUser = get_user($value->purchaseorder_quotation_user_id);
                 $row = array();
                 $row[] = $value->purchaseorder_vendor_company_code;
                 $row[] = $value->purchaseorder_vendor_company_name;
@@ -49,7 +50,7 @@ class Expensesreport extends CI_Controller {
                 $total += $value->purchaseorder_total * $value->purchaseorder_vendor_exchange_rate;
                 $row[] = strtoupper($value->purchaseorder_currency) . ' ' . money_format('%!n', $value->purchaseorder_total * $value->purchaseorder_vendor_exchange_rate);
                 $row[] = convert_datetime_to_date($value->purchaseorder_create);
-                $row[] = get_user($value->purchaseorder_quotation_user_id)->user_name;
+                $row[] = ($thisUser?$thisUser->user_name:'');
                 $this->td_body[] = $row;
             }
             $this->th_footer[6] = strtoupper($value->purchaseorder_currency).' '.money_format('%!n', $total);

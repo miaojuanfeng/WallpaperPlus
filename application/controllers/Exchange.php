@@ -100,6 +100,61 @@ class Exchange extends CI_Controller {
 		}
 	}
 
+	public function batchinsert()
+	{
+		if($this->input->post()){
+			$thisPOST = $this->input->post();
+
+			foreach ($thisPOST['exchange_product_id'] as $key => $value) {
+				$thisData['exchange_type'] = $thisPOST['exchange_type'];
+				$thisData['exchange_warehouse_id_from'] = $thisPOST['exchange_warehouse_id_from'];
+				$thisData['exchange_product_id'] = $thisPOST['exchange_product_id'][$key];
+				$thisData['exchange_warehouse_id_to'] = $thisPOST['exchange_warehouse_id_to'][$key];
+				$thisData['exchange_quantity'] = $thisPOST['exchange_quantity'][$key];
+				$thisData['exchange_remark'] = $thisPOST['exchange_remark'][$key];
+				$thisInsertId = $this->exchange_model->insert($thisData);
+
+				$thisWarehouseToQuantity = get_z_product_warehouse_quantity($thisPOST['exchange_product_id'][$key], $thisPOST['exchange_warehouse_id_to'][$key]);
+				$thisData['z_product_warehouse_product_id'] = $thisPOST['exchange_product_id'][$key];
+				$thisData['z_product_warehouse_warehouse_id'] = $thisPOST['exchange_warehouse_id_to'][$key];
+				$thisData['z_product_warehouse_quantity'] = $thisWarehouseToQuantity + $thisPOST['exchange_quantity'][$key];
+				$this->z_product_warehouse_model->update($thisData);
+
+				$thisLog['log_permission_class'] = $this->router->fetch_class();
+				$thisLog['log_permission_action'] = $this->router->fetch_method();
+				$thisLog['log_record_id'] = $thisInsertId;
+				set_log($thisLog);
+			}
+
+			// redirect($thisPOST['referrer']);
+			redirect('exchange/select/exchange_type/in');
+		}else{
+			/* preset empty data */
+			$thisArray = array();
+			foreach($this->exchange_model->structure() as $key => $value){
+				$thisArray[$value->Field] = '';
+			}
+			$data['exchange'] = (object)$thisArray;
+
+			/* warehouse */
+			$thisSelect = array(
+				'return' => 'result'
+			);
+			$data['warehousefroms'] = $this->warehouse_model->select($thisSelect);
+
+			/* warehouse */
+			$thisSelect = array(
+				'return' => 'result'
+			);
+			$data['warehousetos'] = $this->warehouse_model->select($thisSelect);
+
+			$data['product_ids'] = explode('_', $this->uri->uri_to_assoc()['product_id']);
+			$data['product_qtys'] = explode('_', $this->uri->uri_to_assoc()['product_qty']);
+
+			$this->load->view('exchange_view', $data);
+		}
+	}
+
 	public function select()
 	{
 		$per_page = get_setting('per_page')->setting_value;

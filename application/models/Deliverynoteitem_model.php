@@ -62,6 +62,13 @@ class Deliverynoteitem_model extends CI_Model {
 
 	function select($data = array())
 	{
+		/* select */
+		if(isset($data['select'])){
+			foreach($data['select'] as $key => $value){
+				$this->db->select($value);
+			}
+		}
+		
 		/* where */
 		$where = "";
 		if(isset($data['where'])){
@@ -69,6 +76,7 @@ class Deliverynoteitem_model extends CI_Model {
 				switch($key){
 					case 'deliverynoteitem_id':
 					case 'deliverynoteitem_deliverynote_id':
+					case 'deliverynoteitem_product_id':
 					case 'deliverynoteitem_product_code':
 					case 'deliverynoteitem_product_name':
 					case 'deliverynoteitem_product_detail':
@@ -93,6 +101,10 @@ class Deliverynoteitem_model extends CI_Model {
 					case 'deliverynoteitem_name_noteq':
 						$thisField = str_replace('_noteq', '', $key);
 						$this->db->where($thisField.' !=', urldecode($value));
+						break;
+					case 'deliverynoteitem_deliverynote_id_in':
+						$thisField = str_replace('_in', '', $key);
+						$this->db->where($thisField.' in ('.implode(',', $value).')');
 						break;
 					case 'order':
 						$data['order'] = $value;

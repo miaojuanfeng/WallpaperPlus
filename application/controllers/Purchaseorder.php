@@ -244,6 +244,7 @@ class Purchaseorder extends CI_Controller {
                 $data['purchaseorder']->purchaseorder_tel_no = '';
                 $data['purchaseorder']->purchaseorder_delivery_address = '';
                 $data['purchaseorder']->purchaseorder_tracking_number = '';
+                $data['purchaseorder']->purchaseorder_send_out_date = '';
 			}
 
 			/* currency */
@@ -335,6 +336,7 @@ class Purchaseorder extends CI_Controller {
 					);
 					$data['purchaseorderitems'][$key]->purchaseorderitem_product_price = $this->product_model->select($thisSelect)->product_cost;
                     $data['purchaseorderitems'][$key]->purchaseorderitem_discount = 0;
+                    $data['purchaseorderitems'][$key]->purchaseorderitem_product_batch_number = '';
 				}
 			}
 
