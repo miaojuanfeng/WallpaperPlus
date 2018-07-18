@@ -26,7 +26,7 @@ class Quantityreport extends CI_Controller {
     private $thisGET;
     private $per_page;
 
-    private function make_form_data(&$data){
+    private function make_form_data(&$data, $isExport){
         /* check salesorders */
         if(isset($this->thisGET['salesorder_number_like']) || isset($this->thisGET['salesorder_create_greateq']) || isset($this->thisGET['salesorder_create_smalleq'])){
             $thisSelect = array(
@@ -45,11 +45,19 @@ class Quantityreport extends CI_Controller {
         }
         /* check invoice */
 
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
+        if( $isExport ){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+        }else{
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+        }
+        
         $data['salesorders'] = $this->salesorder_model->select($thisSelect);
 
         foreach($data['salesorders'] as $key => $value){
@@ -242,7 +250,7 @@ class Quantityreport extends CI_Controller {
 
 	public function select()
 	{
-		$this->make_form_data($data);
+		$this->make_form_data($data, false);
         $data = array_merge($data, $this->get_form_data($data['salesorders']));
 
 		$thisSelect = array(
@@ -273,7 +281,7 @@ class Quantityreport extends CI_Controller {
 
     public function export()
     {
-        $this->make_form_data($data);
+        $this->make_form_data($data, true);
         $this->get_form_data($data['salesorders']);
 
         $fileName = 'Quantity_report_'.date('YmdHis');

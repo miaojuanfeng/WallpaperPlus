@@ -32,6 +32,33 @@ class Payablereport extends CI_Controller {
     private $thisGET;
     private $per_page;
 
+    private function make_form_data(&$data, $isExport){
+        if( $isExport ){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'order' => 'purchaseorder_vendor_id',
+                'ascend' => 'asc',
+                'return' => 'result'
+            );
+        }else{
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'order' => 'purchaseorder_vendor_id',
+                'ascend' => 'asc',
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+        }
+        $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+
+        $thisSelect = array(
+            'where' => $this->thisGET,
+            'group' => 'purchaseorder_number',
+            'return' => 'num_rows'
+        );
+        $data['num_rows'] = $this->purchaseorder_model->select($thisSelect);
+    }
+
     private function get_form_data($rows){
         $data = array();
 
@@ -105,23 +132,8 @@ class Payablereport extends CI_Controller {
 
 	public function select()
 	{
-		$thisSelect = array(
-			'where' => $this->thisGET,
-			'order' => 'purchaseorder_vendor_id',
-			'ascend' => 'asc',
-			'limit' => $this->per_page,
-			'return' => 'result'
-		);
-		$data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-
-        $data = array_merge($data, $this->get_form_data($data['purchaseorders']));
-
-		$thisSelect = array(
-			'where' => $this->thisGET,
-			'group' => 'purchaseorder_number',
-			'return' => 'num_rows'
-		);
-		$data['num_rows'] = $this->purchaseorder_model->select($thisSelect);
+        $this->make_form_data($data, false);
+		$data = array_merge($data, $this->get_form_data($data['purchaseorders']));
 
 		/* status */
 		$data['statuss'] = (object)array(
@@ -144,15 +156,8 @@ class Payablereport extends CI_Controller {
 
     public function export()
     {
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'order' => 'purchaseorder_vendor_id',
-            'ascend' => 'asc',
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
-        $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-        $this->get_form_data($data['purchaseorders']);
+        $this->make_form_data($data, true);
+        $data = array_merge($data, $this->get_form_data($data['purchaseorders']));
 
         $fileName = 'Payable_report_'.date('YmdHis');
         php_excel_export($this->th_header, $this->td_body, $fileName);

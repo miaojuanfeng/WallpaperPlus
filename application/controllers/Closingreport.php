@@ -63,18 +63,41 @@ class Closingreport extends CI_Controller {
 
         $this->per_page = get_setting('per_page')->setting_value;
         $this->thisGET = $this->uri->uri_to_assoc();
-        $this->thisGET['deliverynote_status_like'] = 'processing';
+        // $this->thisGET['deliverynote_status_like'] = 'processing';
         $this->thisGET['deliverynote_deleted'] = 'N';
         $this->thisGET['purchaseorder_default'] = true;
         $this->thisGET['purchaseorder_deleted'] = 'N';
 	}
 
-	private function make_form_data(&$data){
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
+	private function make_form_data(&$data, $isExport){
+        /* deliverynote */
+        if(isset($this->thisGET['deliverynote_issue_greateq']) || isset($this->thisGET['deliverynote_issue_smalleq'])){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+            $data['deliverynotes'] = $this->deliverynote_model->select($thisSelect);
+
+            if($data['deliverynotes']){
+                $this->thisGET['purchaseorder_salesorder_id_in'] = convert_object_to_array($data['deliverynotes'], 'deliverynote_salesorder_id');
+            }else{
+                $this->thisGET['purchaseorder_salesorder_id'] = -1;
+            }
+        }
+        /* deliverynote */
+
+        if( $isExport ){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+        }else{
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+        }
         $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
 
         foreach($data['purchaseorders'] as $key => $value){
@@ -259,7 +282,7 @@ class Closingreport extends CI_Controller {
 //		}
 //		/* check salesorder */
 		
-        $this->make_form_data($data);
+        $this->make_form_data($data, false);
         $data = array_merge($data, $this->get_form_data($data['purchaseorders']));
 
 		$thisSelect = array(
@@ -288,7 +311,7 @@ class Closingreport extends CI_Controller {
 
     public function export()
     {
-        $this->make_form_data($data);
+        $this->make_form_data($data, true);
         $this->get_form_data($data['purchaseorders']);
 
         $fileName = 'Closing_stock_report_'.date('YmdHis');

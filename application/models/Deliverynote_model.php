@@ -149,9 +149,17 @@ class Deliverynote_model extends CI_Model {
 						$thisField = str_replace('_greateq', '', $key);
 						$this->db->where('DATE(deliverynote_create) >=', urldecode($value));
 						break;
+					case 'deliverynote_issue_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$this->db->where('DATE(deliverynote_issue) >=', urldecode($value));
+						break;
 					case 'deliverynote_create_smalleq':
 						$thisField = str_replace('_smalleq', '', $key);
 						$this->db->where('DATE(deliverynote_create) <=', urldecode($value));
+						break;
+					case 'deliverynote_issue_smalleq':
+						$thisField = str_replace('_smalleq', '', $key);
+						$this->db->where('DATE(deliverynote_issue) <=', urldecode($value));
 						break;
 					case 'YEAR(deliverynote_create)':
 						$this->db->where('YEAR(deliverynote_create) = YEAR(CURDATE())');

@@ -42,6 +42,28 @@ class Stockreport extends CI_Controller {
     private $thisGET;
     private $per_page;
 
+    private function make_form_data(&$data, $isExport){
+        if( $isExport ){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+        }else{
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+        }
+        $data['exchanges'] = $this->exchange_model->select($thisSelect);
+
+        $thisSelect = array(
+            'where' => $this->thisGET,
+            'return' => 'num_rows'
+        );
+        $data['num_rows'] = $this->exchange_model->select($thisSelect);
+    }
+
     private function get_form_data($rows){
         $data = array();
 
@@ -136,20 +158,8 @@ class Stockreport extends CI_Controller {
 
 	public function select()
 	{
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
-        $data['exchanges'] = $this->exchange_model->select($thisSelect);
-
+        $this->make_form_data($data, false);
         $data = array_merge($data, $this->get_form_data($data['exchanges']));
-
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'return' => 'num_rows'
-        );
-        $data['num_rows'] = $this->exchange_model->select($thisSelect);
 
         /* type */
         $data['types'] = (object)array(
@@ -172,14 +182,8 @@ class Stockreport extends CI_Controller {
 
     public function export()
     {
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
-        $data['exchanges'] = $this->exchange_model->select($thisSelect);
-
-        $this->get_form_data($data['exchanges']);
+        $this->make_form_data($data, true);
+        $data = array_merge($data, $this->get_form_data($data['exchanges']));
 
         $fileName = 'Stock_report_'.date('YmdHis');
         php_excel_export($this->th_header, $this->td_body, $fileName);

@@ -213,7 +213,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<div class="row">
 														<div class="col-sm-2"><h6>Customer</h6></div>
 														<div class="col-sm-2">
-															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
+															<input type="text" name="client_company_name_like" class="form-control input-sm" placeholder="Customer company name" value="" />
 														</div>
 														<div class="col-sm-2">
 															<input type="text" name="salesorder_design_by_like" class="form-control input-sm" placeholder="Design by" value="" />
@@ -232,7 +232,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<div class="row">
 														<div class="col-sm-2"><h6>Vendor</h6></div>
 														<div class="col-sm-2">
-															<input type="text" name="salesorder_client_company_name_like" class="form-control input-sm" placeholder="Vendor company name" value="" />
+															<input type="text" name="vendor_company_name_like" class="form-control input-sm" placeholder="Vendor company name" value="" />
 														</div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>

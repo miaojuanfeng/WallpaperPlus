@@ -205,13 +205,12 @@ switch($purchaseorder->purchaseorder_currency){
 		<table cellpadding="0" cellspacing="0" class="document-br-20 document-separator-bottom">
 			<tr>
 				<td width="12%"><b>Our ref.</b></td>
-				<td width="12%"><b>PRICE TYPE</b></td>
+				<td width="12%"><b>BATCH NUMBER</b></td>
 				<td width="12%"><b>LOCATION</b></td>
 				<td width="15%"><b>DESCRIPTION</b></td>
 				<td width="18%"><b>SIZE</b></td>
                 <td width="15%"><b>QTY</b></td>
 				<td width="11%"><b>LIST PRICE</b></td>
-				<!-- <td width="8%"><b>NET PRICE</b></td> -->
 				<td width="10%" align="right"><b>AMOUNT</b></td>
 			</tr>
 		</table>
@@ -264,8 +263,7 @@ switch($purchaseorder->purchaseorder_currency){
             $total = 0;
             $quantity_count = 0;
             $weight_count = 0;
-            if( $salesorder ){
-	            foreach($salesorder->invoices as $key => $value){
+	        foreach($purchaseorderitems as $key => $value){
 			?>
 				<tr class="padding-top-5">
 	                <td width="12%"></td>
@@ -275,72 +273,24 @@ switch($purchaseorder->purchaseorder_currency){
 	                <td width="18%"></td>
 	                <td width="15%"></td>
 	                <td width="11%"></td>
-	                <!-- <td width="8%"></td> -->
 	                <td width="10%"></td>
 				</tr>
 				<tr class="padding-bottom-5">
-					<td valign="top"><?=$value->invoice_number?></td>
-					<td valign="top" align="left">
-	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        echo '<div>'.strtoupper($value1->invoiceitem_price_type).'</div><br/>';
-	                    }
-	                    ?>
-	                </td>
-	                <td valign="top" align="left">
-	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        echo '<div>'.$value1->invoiceitem_product_location.'</div><br/>';
-	                    }
-	                    ?>
-	                </td>
-					<td valign="top">
-	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        echo '<div>'.$value1->invoiceitem_product_code.'</div><br/>';
-	                    }
-	                    ?>
-	                </td>
-	                <td valign="top" align="left">
-	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        echo '<div>'.convert_br($value1->invoiceitem_product_detail).'</div>';
-	                    }
-	                    ?>
-	                </td>
-	                <td valign="top">
-	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        $quantity_count += $value1->invoiceitem_quantity;
-	                        echo '<div>'.$value1->invoiceitem_quantity.' '.$value1->invoiceitem_unit.'</div><br/>';
-	                    }
-	                    ?>
-	                </td>
-	                <td valign="top">
-	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price).'</div><br/>';
-	                    }
-	                    ?>
-	                </td>
-	                <!-- <td valign="top">
-	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        echo '<div>'.'xxx'.'</div>';
-	                    }
-	                    ?>
-	                </td> -->
+					<td valign="top"><div class="part_number"><?=$value->purchaseorderitem_product_code.' - '.$value->purchaseorderitem_product_color_code?></div></td>
+					<td valign="top" align="left"><?=$value->purchaseorderitem_product_batch_number?></td>
+	                <td valign="top" align="left"><?=$value->purchaseorderitem_product_location?></td>
+					<td valign="top"><?=$value->purchaseorderitem_product_location?></td>
+	                <td valign="top" align="left"><?=convert_br($value->purchaseorderitem_product_detail)?></td>
+	                <td valign="top"><?=$value->purchaseorderitem_quantity.' '.$value->purchaseorderitem_unit?></td>
+	                <td valign="top"><?=strtoupper($purchaseorder->purchaseorder_vendor_currency).' '.money_format('%!n', $value->purchaseorderitem_product_price)?></td>
 					<td valign="top" align="right">
 	                    <?php
-	                    foreach ($value->invoiceitems as $key1 => $value1) {
-	                        $total += $value1->invoiceitem_product_price * $value1->invoiceitem_quantity;
-	                        echo '<div>'.strtoupper($value->invoice_currency).' '.money_format('%!n', $value1->invoiceitem_product_price * $value1->invoiceitem_quantity).'</div><br/>';
-	                    }
+	                        $total += $value->purchaseorderitem_product_price * $value->purchaseorderitem_quantity;
+	                        echo strtoupper($purchaseorder->purchaseorder_vendor_currency).' '.money_format('%!n', $value->purchaseorderitem_product_price * $value->purchaseorderitem_quantity);
 	                    ?>
 	                </td>
 				</tr>
-			<?php 
-				}
+			<?php
 			}
 			?>
 			<tr class="document-separator-bottom">
@@ -358,10 +308,12 @@ switch($purchaseorder->purchaseorder_currency){
 		<table cellspacing="0" cellpadding="0">
 			<tr>
                 <td width="12%"></td>
+                <td width="12%"></td>
+                <td width="12%"></td>
                 <td width="15%"></td>
-                <td width="15%"><?php //$quantity_count ?></td>
+                <td width="18%"><?php //$quantity_count ?></td>
                 <td width="15%"><b>GRAND TOTAL</b></td>
-                <td width="11%"><?=strtoupper($purchaseorder->purchaseorder_currency)?></td>
+                <td width="11%"><?=strtoupper($purchaseorder->purchaseorder_vendor_currency)?></td>
                 <td width="10%" align="right"><?=money_format('%!n', $total)?></td>
 			</tr>
 		</table>

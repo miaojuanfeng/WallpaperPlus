@@ -48,41 +48,41 @@ class Purchaseorder extends CI_Controller {
 		);
 		$data['purchaseorder'] = $this->purchaseorder_model->select($thisSelect);
 		
-//		/* purchaseorderitem */
-//		$thisSelect = array(
-//			'where' => $thisGET,
-//			'return' => 'result'
-//		);
-//		$data['purchaseorderitems'] = $this->purchaseorderitem_model->select($thisSelect);
+		/* purchaseorderitem */
+		$thisSelect = array(
+			'where' => $thisGET,
+			'return' => 'result'
+		);
+		$data['purchaseorderitems'] = $this->purchaseorderitem_model->select($thisSelect);
 
-        $data['salesorder'] = get_salesorder($data['purchaseorder']->purchaseorder_salesorder_id);
+   //      $data['salesorder'] = get_salesorder($data['purchaseorder']->purchaseorder_salesorder_id);
 
-        if( $data['salesorder'] ){
-			/* invoice */
-	        $thisSelect = array(
-	            'where' => array(
-	                'invoice_salesorder_id' => $data['salesorder']->salesorder_id,
-	                'invoice_status_noteq' => 'cancel'
-	            ),
-	            'return' => 'result'
-	        );
-	        $data['invoices'] = $this->invoice_model->select($thisSelect);
+   //      if( $data['salesorder'] ){
+			// /* invoice */
+	  //       $thisSelect = array(
+	  //           'where' => array(
+	  //               'invoice_salesorder_id' => $data['salesorder']->salesorder_id,
+	  //               'invoice_status_noteq' => 'cancel'
+	  //           ),
+	  //           'return' => 'result'
+	  //       );
+	  //       $data['invoices'] = $this->invoice_model->select($thisSelect);
 
-	        /* invoiceitem */
-	        foreach($data['invoices'] as $key => $value) {
-	            $thisSelect = array(
-	                'where' => array(
-	                    'invoiceitem_invoice_id' => $value->invoice_id
-	                ),
-	                'return' => 'result'
-	            );
-	            $data['invoices'][$key]->invoiceitems = $this->invoiceitem_model->select($thisSelect);
-	        }
+	  //       /* invoiceitem */
+	  //       foreach($data['invoices'] as $key => $value) {
+	  //           $thisSelect = array(
+	  //               'where' => array(
+	  //                   'invoiceitem_invoice_id' => $value->invoice_id
+	  //               ),
+	  //               'return' => 'result'
+	  //           );
+	  //           $data['invoices'][$key]->invoiceitems = $this->invoiceitem_model->select($thisSelect);
+	  //       }
 
-	        $data['salesorder']->invoices = $data['invoices'];
-	    }else{
-	    	$data['invoices'] = array();
-	    }
+	  //       $data['salesorder']->invoices = $data['invoices'];
+	  //   }else{
+	  //   	$data['invoices'] = array();
+	  //   }
 
 		$this->load->view('print/purchaseorder_view', $data);
 	}

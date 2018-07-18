@@ -652,7 +652,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <td><label for="purchaseorder_send_out_date">Send out date</label></td>
                                                         <td>
                                                         	<span class="input-group date datetimepicker">
-																<input id="purchaseorder_send_out_date" name="purchaseorder_send_out_date" type="text" class="form-control input-sm date-mask required" placeholder="Send out date" value="<?=$purchaseorder->purchaseorder_send_out_date?>" />
+																<input id="purchaseorder_send_out_date" name="purchaseorder_send_out_date" type="text" class="form-control input-sm date-mask" placeholder="Send out date" value="<?=$purchaseorder->purchaseorder_send_out_date?>" />
 																<span class="input-group-addon">
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>

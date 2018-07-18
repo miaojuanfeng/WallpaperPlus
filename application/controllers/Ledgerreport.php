@@ -164,6 +164,7 @@ class Ledgerreport extends CI_Controller {
             }
             $this->thisGET['invoiceitem_invoice_id_in'] = $invoice_ids;
 
+            $this->thisGET['invoiceitem_category_id_noteq'] = 9;
             $thisSelect = array(
                 'where' => $this->thisGET,
                 'return' => 'num_rows'
@@ -182,7 +183,8 @@ class Ledgerreport extends CI_Controller {
             $data['data'] = array();
             foreach($invoiceitems as $key => $value){
                 $invoice = get_invoice($value->invoiceitem_invoice_id);
-                $data['data'][$key][] = 'Sales - '.get_category($value->invoiceitem_category_id)->category_name;
+                $category = get_category($value->invoiceitem_category_id);
+                $data['data'][$key][] = 'Sales - '.($category?$category->category_name:'N/A');
                 $data['data'][$key][] = date('Y-m-d', strtotime($invoice->invoice_create));
                 $data['data'][$key][] = $invoice->invoice_number;
                 $data['data'][$key][] = get_client($invoice->invoice_client_id)->client_company_name.' - Item: '.$value->invoiceitem_product_code;
@@ -222,11 +224,13 @@ class Ledgerreport extends CI_Controller {
             $data['data'] = array();
             foreach($purchaseorderitems as $key => $value){
                 $purchaseorder = get_purchaseorder($value->purchaseorderitem_purchaseorder_id);
-                $data['data'][$key][] = 'Purchases - '.get_category($value->purchaseorderitem_category_id)->category_name;
+                $category = get_category($value->purchaseorderitem_category_id);
+                $product = get_product($value->purchaseorderitem_product_id);
+                $data['data'][$key][] = 'Purchases - '.($category?$category->category_name:'N/A');
                 $data['data'][$key][] = date('Y-m-d', strtotime($purchaseorder->purchaseorder_create));
                 $data['data'][$key][] = $purchaseorder->purchaseorder_number;
                 $data['data'][$key][] = get_vendor($purchaseorder->purchaseorder_vendor_id)->vendor_company_name.' - Item: '.$value->purchaseorderitem_product_code;
-                $data['data'][$key][] = money_format('%!n', get_product($value->purchaseorderitem_product_id)->product_cost*$purchaseorder->purchaseorder_vendor_exchange_rate);
+                $data['data'][$key][] = money_format('%!n', ($product?$product->product_cost:$value->purchaseorderitem_product_price)*($purchaseorder?$purchaseorder->purchaseorder_vendor_exchange_rate:1));
                 $data['data'][$key][] = '-';
                 $data['data'][$key][] = '-';
             }
@@ -381,7 +385,8 @@ class Ledgerreport extends CI_Controller {
 
             $data['data'] = array();
             foreach($invoiceitems as $key => $value){
-                $data['data'][$key][] = 'Inventory - '.get_category($value->category_id)->category_name;
+                $category = get_category($value->category_id);
+                $data['data'][$key][] = 'Inventory - '.($category?$category->category_name:'N/A');
                 $data['data'][$key][] = $value->inventory_sort;
                 $data['data'][$key][] = $value->inventory_number;
                 if( $value->inventory_type == 'inv' ){
@@ -449,6 +454,7 @@ class Ledgerreport extends CI_Controller {
         $this->load->model('purchaseorder_model');
         $this->load->model('purchaseorderitem_model');
 		$this->load->model('user_model');
+        $this->load->model('category_model');
 
         $this->per_page = get_setting('per_page')->setting_value;
         $this->thisGET = $this->uri->uri_to_assoc();
@@ -491,11 +497,11 @@ class Ledgerreport extends CI_Controller {
         $this->make_form_data($this->thisGET['type'], $data);
         $data = array_merge($data, $this->get_form_data($data['data']));
 
-		// $thisSelect = array(
-		// 	'where' => $this->thisGET,
-		// 	'return' => 'num_rows'
-		// );
-		// $data['num_rows'] = $this->invoice_model->report($thisSelect);
+        /* category */
+        $thisSelect = array(
+            'return' => 'result'
+        );
+        $data['categorys'] = $this->category_model->select($thisSelect);
 
 		/* status */
 		// $data['statuss'] = (object)array(

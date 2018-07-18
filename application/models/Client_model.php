@@ -76,6 +76,7 @@ class Client_model extends CI_Model {
 					case 'client_id_like':
 					case 'client_firstname_like':
 					case 'client_user_id_like':
+					case 'client_company_name_like':
 						$thisField = str_replace('_like', '', $key);
 						$this->db->like($thisField, urldecode($value));
 						break;

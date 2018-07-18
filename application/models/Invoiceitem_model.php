@@ -81,6 +81,7 @@ class Invoiceitem_model extends CI_Model {
 					case 'invoiceitem_product_name':
 					case 'invoiceitem_product_detail':
 					case 'invoiceitem_name':
+					case 'invoiceitem_category_id':
 						$thisField = $key;
 						$this->db->where($thisField, urldecode($value));
 						break;
@@ -101,6 +102,7 @@ class Invoiceitem_model extends CI_Model {
 					case 'invoiceitem_product_name_noteq':
 					case 'invoiceitem_product_detail_noteq':
 					case 'invoiceitem_name_noteq':
+					case 'invoiceitem_category_id_noteq':
 						$thisField = str_replace('_noteq', '', $key);
 						$this->db->where($thisField.' !=', urldecode($value));
 						break;

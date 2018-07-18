@@ -157,6 +157,7 @@ class Purchaseorder_model extends CI_Model {
 						break;
 					case 'purchaseorder_id_in':
 					case 'purchaseorder_salesorder_id_in':
+					case 'purchaseorder_vendor_id_in':
 						$thisField = str_replace('_in', '', $key);
 						$this->db->where_in($thisField, $value);
 						break;
@@ -164,9 +165,17 @@ class Purchaseorder_model extends CI_Model {
 						$thisField = str_replace('_greateq', '', $key);
 						$this->db->where('DATE(purchaseorder_create) >=', urldecode($value));
 						break;
+					case 'purchaseorder_arrive_date_greateq':
+						$thisField = str_replace('_greateq', '', $key);
+						$this->db->where('DATE(purchaseorder_arrive_date) >=', urldecode($value));
+						break;
 					case 'purchaseorder_create_smalleq':
 						$thisField = str_replace('_smalleq', '', $key);
 						$this->db->where('DATE(purchaseorder_create) <=', urldecode($value));
+						break;
+					case 'purchaseorder_arrive_date_smalleq':
+						$thisField = str_replace('_smalleq', '', $key);
+						$this->db->where('DATE(purchaseorder_arrive_date) <=', urldecode($value));
 						break;
 					case 'date_greateq':
 						$thisField = str_replace('_greateq', '', $key);

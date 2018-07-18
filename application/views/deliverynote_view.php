@@ -406,6 +406,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<th width="12%"></th>
 														<th>Detail</th>
 														<th width="10%"></th>
+														<th width="10%">Sold</th>
 														<th width="12%">Quantity</th>
 													</tr>
 												</thead>
@@ -455,8 +456,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<textarea id="deliverynoteitem_product_detail" name="deliverynoteitem_product_detail[]" class="form-control input-sm" placeholder="Detail"><?=$value->deliverynoteitem_product_detail?></textarea>
 															</div>
 														</td>
-														<td>
-															<?php
+														<?php
 															/* get salesorder quantity */
 															$salesorder_quantity = get_salesorderitem_quantity($deliverynote->deliverynote_salesorder_id, $value->deliverynoteitem_product_id);
 															/* get invoice sold */
@@ -469,7 +469,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 															}else{
 																$thisDeliverynoteitemQuantity = $salesorder_quantity - $deliverynoteitem_sold;
 															}
-															?>
+														?>
+														<td>
+															<div class="input-group">
+                                                                <input readonly="readonly" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$deliverynoteitem_sold?>" />
+                                                            </div>
+                                                        </td>
+                                                        <td>
                                                             <div class="input-group">
                                                                 <input id="deliverynoteitem_quantity" name="deliverynoteitem_quantity[]" type="number" min="0" class="form-control input-sm" placeholder="Quantity" value="<?=$thisDeliverynoteitemQuantity?>" />
                                                                 <input id="deliverynoteitem_unit" name="deliverynoteitem_unit[]" type="hidden" value="<?=$value->deliverynoteitem_unit?>" />
@@ -486,6 +492,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<i class="glyphicon glyphicon-plus"></i>
 															</a>
 														</th>
+														<th></th>
 														<th></th>
 														<th></th>
 														<th>Quantity total</th>

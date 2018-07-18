@@ -40,6 +40,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$(document).on('keyup', 'textarea', function(){
 				textarea_auto_height();
 			});
+
+			if($.validator){
+			//fix: when several input elements shares the same name, but has different id-ies....
+				$.validator.prototype.elements = function(){
+					var validator = this,
+					rulesCache = {};
+					// select all valid inputs inside the form (no submit or reset buttons)
+					// workaround $Query([]).add until http://dev.jquery.com/ticket/2114 is solved
+					return $([]).add(this.currentForm.elements).filter(":input").not(":submit, :reset, :image, [disabled]").not(this.settings.ignore).filter(function() {
+					// 这里加入ID判断
+					var elementIdentification = this.id || this.name; ! elementIdentification && validator.settings.debug && window.console && console.error("%o has no id nor name assigned", this);
+					// select only the first element for each name, and only those with rules specified
+					if (elementIdentification in rulesCache || !validator.objectLength($(this).rules())) return false;
+					rulesCache[elementIdentification] = true;
+					return true;
+					});
+				};
+			}
 		});
 
 		function check_delete(id){
@@ -296,12 +314,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 											<div class="col-sm-3 col-xs-12">
 												<p class="form-group">
-													<label for="exchange_warehouse_id_to">Warehouse to</label>
-													<select id="exchange_warehouse_id_to" name="exchange_warehouse_id_to[]" data-placeholder="Warehouse to" class="chosen-select required">
-													<option value></option>;
+													<label for="exchange_warehouse_id_to">Warehouse to <span class="highlight">*</span></label>
+													<select id="exchange_warehouse_id_to_<?=$value?>" name="exchange_warehouse_id_to[]" data-placeholder="Warehouse to" class="chosen-select required">
+													<option value></option>
 													<?php
 														foreach($warehousetos as $k => $v){
-															$selected = ($v->warehouse_id == $this->uri->uri_to_assoc()['warehouse_id']) ? ' selected="selected"' : "" ;
+															// $selected = ($v->warehouse_id == $this->uri->uri_to_assoc()['warehouse_id']) ? ' selected="selected"' : "" ;
+															$selected = '';
 															echo '<option value="'.$v->warehouse_id.'"'.$selected.'>'.strtoupper($v->warehouse_name).'</option>';
 														}
 													?>
@@ -311,7 +330,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<div class="col-sm-3 col-xs-12">
 												<p class="form-group">
 													<label for="exchange_quantity">Quantity <span class="highlight">*</span></label>
-													<input id="exchange_quantity" name="exchange_quantity[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Quantity" value="<?=$product_qtys[$key]?>" />
+													<input id="exchange_quantity_<?=$value?>" name="exchange_quantity[]" type="number" min="0" step="0.01" class="form-control input-sm required" placeholder="Quantity" value="<?=$product_qtys[$key]?>" />
 												</p>
 											</div>
 											<div class="col-sm-3 col-xs-12 pull-right">

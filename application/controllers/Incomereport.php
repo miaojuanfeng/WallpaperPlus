@@ -32,6 +32,55 @@ class Incomereport extends CI_Controller {
     private $thisGET;
     private $per_page;
 
+    private function make_form_data(&$data, $isExport){
+    	/* client */
+		switch(true){
+			case in_array('3', $this->session->userdata('role')): // sales manager
+				/* get own & downline client */
+				$thisSelect = array(
+					'where' => array(
+						'OWN_USER_ID_AND_DOWNLINE_USER_ID' => $this->session->userdata('user_id')
+					),
+					'return' => 'result'
+				);
+				$data['user_ids'] = convert_object_to_array($this->user_model->select($thisSelect), 'user_id');
+
+				$this->thisGET['invoice_quotation_user_id_in'] = $data['user_ids'];
+				break;
+			case in_array('4', $this->session->userdata('role')): // sales
+				/* get own client */
+				$this->thisGET['invoice_quotation_user_id'] = $this->session->userdata('user_id');
+				break;
+			default:
+				break;
+		}
+
+		if( $isExport ){
+			$thisSelect = array(
+				'where' => $this->thisGET,
+				'order' => 'invoice_client_id',
+				'ascend' => 'asc',
+				'return' => 'result'
+			);
+		}else{
+			$thisSelect = array(
+				'where' => $this->thisGET,
+				'order' => 'invoice_client_id',
+				'ascend' => 'asc',
+				'limit' => $this->per_page,
+				'return' => 'result'
+			);
+		}
+		$data['invoices'] = $this->invoice_model->select($thisSelect);
+
+		$thisSelect = array(
+			'where' => $this->thisGET,
+			'group' => 'invoice_number',
+			'return' => 'num_rows'
+		);
+		$data['num_rows'] = $this->invoice_model->select($thisSelect);
+    }
+
     private function get_form_data($rows){
         $data = array();
 
@@ -105,45 +154,8 @@ class Incomereport extends CI_Controller {
 
 	public function select()
 	{
-		/* client */
-		switch(true){
-			case in_array('3', $this->session->userdata('role')): // sales manager
-				/* get own & downline client */
-				$thisSelect = array(
-					'where' => array(
-						'OWN_USER_ID_AND_DOWNLINE_USER_ID' => $this->session->userdata('user_id')
-					),
-					'return' => 'result'
-				);
-				$data['user_ids'] = convert_object_to_array($this->user_model->select($thisSelect), 'user_id');
-
-				$this->thisGET['invoice_quotation_user_id_in'] = $data['user_ids'];
-				break;
-			case in_array('4', $this->session->userdata('role')): // sales
-				/* get own client */
-				$this->thisGET['invoice_quotation_user_id'] = $this->session->userdata('user_id');
-				break;
-			default:
-				break;
-		}
-
-		$thisSelect = array(
-			'where' => $this->thisGET,
-			'order' => 'invoice_client_id',
-			'ascend' => 'asc',
-			'limit' => $this->per_page,
-			'return' => 'result'
-		);
-		$data['invoices'] = $this->invoice_model->select($thisSelect);
-
-        $data = array_merge($data, $this->get_form_data($data['invoices']));
-
-		$thisSelect = array(
-			'where' => $this->thisGET,
-			'group' => 'invoice_number',
-			'return' => 'num_rows'
-		);
-		$data['num_rows'] = $this->invoice_model->select($thisSelect);
+		$this->make_form_data($data, false);
+		$data = array_merge($data, $this->get_form_data($data['invoices']));
 
 		/* status */
 		$data['statuss'] = (object)array(
@@ -166,15 +178,8 @@ class Incomereport extends CI_Controller {
 
     public function export()
     {
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'order' => 'invoice_client_id',
-            'ascend' => 'asc',
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
-        $data['invoices'] = $this->invoice_model->select($thisSelect);
-        $this->get_form_data($data['invoices']);
+        $this->make_form_data($data, true);
+		$data = array_merge($data, $this->get_form_data($data['invoices']));
 
         $fileName = 'Income_report_'.date('YmdHis');
         php_excel_export($this->th_header, $this->td_body, $fileName);

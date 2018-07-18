@@ -186,6 +186,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <div class="col-sm-2"></div>
                                                         <div class="col-sm-2"></div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2"><h6>ETA to Warehouse</h6></div>
+                                                        <div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="purchaseorder_arrive_date_greateq" name="purchaseorder_arrive_date_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+                                                        </div>
+                                                        <div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="purchaseorder_arrive_date_smalleq" name="purchaseorder_arrive_date_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+                                                        </div>
+                                                        <div class="col-sm-2"></div>
+                                                        <div class="col-sm-2"></div>
+                                                        <div class="col-sm-2"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2"><h6>ETD to Client</h6></div>
+                                                        <div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="deliverynote_issue_greateq" name="deliverynote_issue_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+                                                        </div>
+                                                        <div class="col-sm-2">
+															<span class="input-group date datetimepicker">
+																<input id="deliverynote_issue_smalleq" name="deliverynote_issue_smalleq" type="text" class="form-control input-sm date-mask" placeholder="Date To (YYYY-MM-DD)" />
+																<span class="input-group-addon">
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+															</span>
+                                                        </div>
+                                                        <div class="col-sm-2"></div>
+                                                        <div class="col-sm-2"></div>
+                                                        <div class="col-sm-2"></div>
+                                                    </div>
 <!--													<div class="row">-->
 <!--														<div class="col-sm-2"><h6>Sales Order</h6></div>-->
 <!--														<div class="col-sm-2">-->
@@ -276,7 +320,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                         <?php if(!$td_body){ ?>
                                             <tr>
-                                                <td colspan="11">No record found</td>
+                                                <td colspan="20">No record found</td>
                                             </tr>
                                         <?php } ?>
                                         </tbody>

@@ -116,6 +116,7 @@ class Salesorder_model extends CI_Model {
 						break;
 					case 'salesorder_id_in':
 					case 'salesorder_user_id_in':
+					case 'salesorder_client_id_in':
 						$thisField = str_replace('_in', '', $key);
 						$this->db->where($thisField.' in ('.implode(',', $value).')');
 						break;

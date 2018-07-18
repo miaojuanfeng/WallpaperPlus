@@ -306,6 +306,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<th>#</th>
 												<th>Waybill number</th>
+												<th>PO No</th>
                                                 <th>Customs number</th>
                                                 <th>Express company</th>
                                                 <th>Delivery day</th>
@@ -324,6 +325,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<tr>
 												<td title="<?=$value->waybill_id?>"><?=$key+1?></td>
 												<td><?=ucfirst($value->waybill_number)?></td>
+												<td>
+													<?php foreach($value->purchaseorders as $key1 => $value1){ ?>
+													<div class="no-wrap">
+														<a href="<?=base_url('purchaseorder/update/purchaseorder_id/'.$value1->purchaseorder_id)?>"><?=$value1->purchaseorder_number?></a>
+													</div>
+													<?php } ?>
+												</td>
                                                 <td><?=ucfirst($value->waybill_customs_number)?></td>
                                                 <td><?=ucfirst($value->waybill_express_company)?></td>
                                                 <td><?=ucfirst($value->waybill_delivery_day)?></td>

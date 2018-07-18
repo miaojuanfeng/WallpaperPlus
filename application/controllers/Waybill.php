@@ -174,6 +174,29 @@ class Waybill extends CI_Controller {
 		);
 		$data['waybills'] = $this->waybill_model->select($thisSelect);
 
+		foreach($data['waybills'] as $key => $value){
+			$thisSelect = array(
+				'where' => array('waybill_id' => $value->waybill_id),
+                'return' => 'result'
+            );
+			$z_waybill_purchaseorder_purchaseorder_ids = convert_object_to_array($this->z_waybill_purchaseorder_model->select($thisSelect), 'z_waybill_purchaseorder_purchaseorder_id');
+
+			if( $z_waybill_purchaseorder_purchaseorder_ids ){  
+				/* purchaseorder */
+				$thisSelect = array(
+					'where' => array(
+						'purchaseorder_id_in' => $z_waybill_purchaseorder_purchaseorder_ids,
+						'purchaseorder_status_noteq' => 'cancel'
+					),
+					'return' => 'result'
+				);
+				$data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+	            $data['waybills'][$key]->purchaseorders = $data['purchaseorders'];
+	        }else{
+	        	$data['waybills'][$key]->purchaseorders = array();
+	        }
+		}
+
 		$thisSelect = array(
 			'where' => $thisGET,
 			'return' => 'num_rows'

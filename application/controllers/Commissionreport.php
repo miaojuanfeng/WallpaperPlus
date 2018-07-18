@@ -46,7 +46,7 @@ class Commissionreport extends CI_Controller {
     private $thisGET;
     private $per_page;
 
-    private function make_form_data(&$data){
+    private function make_form_data(&$data, $isExport){
         /* client */
         switch(true){
             case in_array('3', $this->session->userdata('role')): // sales manager
@@ -70,7 +70,7 @@ class Commissionreport extends CI_Controller {
         }
 
         /* check invoice */
-        if(isset($this->thisGET['invoice_number_like']) || isset($this->thisGET['invoice_create_greateq']) || isset($this->thisGET['invoice_create_smalleq']) || isset($this->thisGET['invoice_commission_status_date_greateq']) || isset($this->thisGET['invoice_commission_status_date_smalleq']) ){
+        if(isset($this->thisGET['invoice_status']) || isset($this->thisGET['invoice_number_like']) || isset($this->thisGET['invoice_create_greateq']) || isset($this->thisGET['invoice_create_smalleq']) || isset($this->thisGET['invoice_commission_status_date_greateq']) || isset($this->thisGET['invoice_commission_status_date_smalleq']) ){
             $thisSelect = array(
                 'where' => $this->thisGET,
                 'return' => 'result'
@@ -87,11 +87,18 @@ class Commissionreport extends CI_Controller {
         }
         /* check invoice */
 
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
+        if( $isExport ){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+        }else{
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+        }
         $data['salesorders'] = $this->salesorder_model->select($thisSelect);
 
         foreach($data['salesorders'] as $key => $value){
@@ -112,7 +119,8 @@ class Commissionreport extends CI_Controller {
             $thisSelect = array(
                 'where' => array(
                     'invoice_salesorder_id' => $value->salesorder_id,
-                    'invoice_status_noteq' => 'cancel'
+                    'invoice_status_noteq' => 'cancel',
+                    'invoice_status' => 'complete'
                 ),
                 'return' => 'result'
             );
@@ -241,6 +249,7 @@ class Commissionreport extends CI_Controller {
 
         $this->per_page = get_setting('per_page')->setting_value;
         $this->thisGET = $this->uri->uri_to_assoc();
+        $this->thisGET['invoice_status'] = 'complete';
         $this->thisGET['salesorder_status_noteq'] = 'cancel';
         $this->thisGET['salesorder_deleted'] = 'N';
 	}
@@ -267,7 +276,7 @@ class Commissionreport extends CI_Controller {
 
 	public function select()
 	{
-		$this->make_form_data($data);
+		$this->make_form_data($data, false);
         $data = array_merge($data, $this->get_form_data($data['salesorders']));
 
 		/* status */
@@ -291,7 +300,7 @@ class Commissionreport extends CI_Controller {
 
     public function export()
     {
-        $this->make_form_data($data);
+        $this->make_form_data($data, true);
         $this->get_form_data($data['salesorders']);
 
         $fileName = 'Income_report_'.date('YmdHis');

@@ -202,6 +202,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<label for="vendor_fax">Fax</label>
 											<input id="vendor_fax" name="vendor_fax" type="text" class="form-control input-sm" placeholder="Fax" value="<?=$vendor->vendor_fax?>" />
 										</p>
+										<p class="form-group">
+											<label for="vendor_location">Location</label>
+											<input id="vendor_location" name="vendor_location" type="text" class="form-control input-sm" placeholder="Location" value="<?=$vendor->vendor_location?>" />
+										</p>
                                         <p class="form-group">
                                             <label>Currency <span class="highlight">*</span></label>
                                             <select id="vendor_currency_id" name="vendor_currency_id" data-placeholder="Currency" class="chosen-select required">

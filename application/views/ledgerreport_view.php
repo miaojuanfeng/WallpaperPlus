@@ -223,6 +223,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<div class="row">
 														<div class="col-sm-2"><h6>Date</h6></div>
 														<div class="col-sm-2">
+															<select id="invoiceitem_category_id" name="invoiceitem_category_id" data-placeholder="Category" class="chosen-select">
+																<option value=""></option>
+																<?php
+																foreach($categorys as $key => $value){
+																	echo '<option value="'.$value->category_id.'">'.ucfirst($value->category_name).'</option>';
+																}
+																?>
+															</select>
+														</div>
+														<div class="col-sm-2">
 															<span class="input-group date datetimepicker">
 																<input id="date_greateq" name="date_greateq" type="text" class="form-control input-sm date-mask" placeholder="Date From (YYYY-MM-DD)" />
 																<span class="input-group-addon">
@@ -238,7 +248,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																</span>
 															</span>
 														</div>
-														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 													</div>

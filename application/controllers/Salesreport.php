@@ -34,6 +34,120 @@ class Salesreport extends CI_Controller {
     private $thisGET;
     private $per_page;
 
+    private function make_form_data(&$data, $isExport){
+        /* check invoice */
+        if(isset($this->thisGET['invoice_number_like']) || isset($this->thisGET['invoice_create_greateq']) || isset($this->thisGET['invoice_create_smalleq'])){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'row'
+            );
+            $data['invoice'] = $this->invoice_model->select($thisSelect);
+
+            if($data['invoice']){
+                $this->thisGET['salesorder_id'] = $data['invoice']->invoice_salesorder_id;
+            }else{
+                $this->thisGET['salesorder_id'] = -1;
+            }
+        }
+        /* check invoice */
+
+        /* check customer */
+        if(isset($this->thisGET['client_company_name_like'])){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+            $data['clients'] = $this->client_model->select($thisSelect);
+
+            if($data['clients']){
+                $this->thisGET['salesorder_client_id_in'] = convert_object_to_array($data['clients'], 'client_id');
+            }else{
+                $this->thisGET['salesorder_client_id'] = -1;
+            }
+        }
+        /* check customer */
+
+        /* check vendor */
+        if(isset($this->thisGET['vendor_company_name_like'])){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+            $data['vendors'] = $this->vendor_model->select($thisSelect);
+
+            if($data['vendors']){
+                $data['purchaseorder_vendor_ids'] = convert_object_to_array($data['vendors'], 'vendor_id');
+
+                if($data['purchaseorder_vendor_ids']){
+                    $thisSelect = array(
+                        'where' => array('purchaseorder_vendor_id_in' => $data['purchaseorder_vendor_ids']),
+                        'return' => 'result'
+                    );
+                    $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+
+                    if($data['purchaseorders']){
+
+                        $this->thisGET['salesorder_id_in'] = convert_object_to_array($data['purchaseorders'], 'purchaseorder_salesorder_id');
+                    }else{
+                        $this->thisGET['salesorder_id'] = -1;
+                    }
+                }else{
+                    $this->thisGET['salesorder_id'] = -1;
+                }
+            }else{
+                $this->thisGET['salesorder_id'] = -1;
+            }
+        }
+        /* check vendor */
+
+        if( $isExport ){
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'return' => 'result'
+            );
+        }else{
+            $thisSelect = array(
+                'where' => $this->thisGET,
+                'limit' => $this->per_page,
+                'return' => 'result'
+            );
+        }
+        $data['salesorders'] = $this->salesorder_model->select($thisSelect);
+
+        foreach($data['salesorders'] as $key => $value){
+            /* purchaseorder */
+            $thisSelect = array(
+                'where' => array(
+                    'purchaseorder_salesorder_id' => $value->salesorder_id,
+                    'purchaseorder_status_noteq' => 'cancel'
+                ),
+                'return' => 'result'
+            );
+            $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
+            $data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
+        }
+
+        foreach($data['salesorders'] as $key => $value){
+            /* invoice */
+            $thisSelect = array(
+                'where' => array(
+                    'invoice_salesorder_id' => $value->salesorder_id,
+                    'invoice_status_noteq' => 'cancel'
+                ),
+                'return' => 'result'
+            );
+            $data['invoices'] = $this->invoice_model->select($thisSelect);
+            $data['salesorders'][$key]->invoices = $data['invoices'];
+        }
+
+        $thisSelect = array(
+            'where' => $this->thisGET,
+            'group' => 'salesorder_number',
+            'return' => 'num_rows'
+        );
+        $data['num_rows'] = $this->salesorder_model->select($thisSelect);
+    }
+
     private function get_form_data($rows){
         $data = array();
 
@@ -108,6 +222,7 @@ class Salesreport extends CI_Controller {
         $this->load->library('PHPExcel');
 		$this->load->model('salesorder_model');
 		$this->load->model('client_model');
+        $this->load->model('vendor_model');
 		$this->load->model('purchaseorder_model');
 		$this->load->model('invoice_model');
 		$this->load->model('user_model');
@@ -140,63 +255,8 @@ class Salesreport extends CI_Controller {
 
 	public function select()
 	{
-		/* check invoice */
-		if(isset($this->thisGET['invoice_number_like']) || isset($this->thisGET['invoice_create_greateq']) || isset($this->thisGET['invoice_create_smalleq'])){
-			$thisSelect = array(
-				'where' => $this->thisGET,
-				'return' => 'row'
-			);
-			$data['invoice'] = $this->invoice_model->select($thisSelect);
-
-			if($data['invoice']){
-				$this->thisGET['salesorder_id'] = $data['invoice']->invoice_salesorder_id;
-			}else{
-				$this->thisGET['salesorder_id'] = 0;
-			}
-		}
-		/* check invoice */
-
-		$thisSelect = array(
-			'where' => $this->thisGET,
-			'limit' => $this->per_page,
-			'return' => 'result'
-		);
-		$data['salesorders'] = $this->salesorder_model->select($thisSelect);
-
-		foreach($data['salesorders'] as $key => $value){
-			/* purchaseorder */
-			$thisSelect = array(
-				'where' => array(
-					'purchaseorder_salesorder_id' => $value->salesorder_id,
-					'purchaseorder_status_noteq' => 'cancel'
-				),
-				'return' => 'result'
-			);
-			$data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-			$data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
-		}
-
-		foreach($data['salesorders'] as $key => $value){
-			/* invoice */
-			$thisSelect = array(
-				'where' => array(
-					'invoice_salesorder_id' => $value->salesorder_id,
-					'invoice_status_noteq' => 'cancel'
-				),
-				'return' => 'result'
-			);
-			$data['invoices'] = $this->invoice_model->select($thisSelect);
-			$data['salesorders'][$key]->invoices = $data['invoices'];
-		}
-
-        $data = array_merge($data, $this->get_form_data($data['salesorders']));
-
-		$thisSelect = array(
-			'where' => $this->thisGET,
-			'group' => 'salesorder_number',
-			'return' => 'num_rows'
-		);
-		$data['num_rows'] = $this->salesorder_model->select($thisSelect);
+        $this->make_form_data($data, false);
+		$data = array_merge($data, $this->get_form_data($data['salesorders']));
 
 		/* status */
 		$data['statuss'] = (object)array(
@@ -219,40 +279,8 @@ class Salesreport extends CI_Controller {
 
     public function export()
     {
-        $thisSelect = array(
-            'where' => $this->thisGET,
-            'limit' => $this->per_page,
-            'return' => 'result'
-        );
-        $data['salesorders'] = $this->salesorder_model->select($thisSelect);
-
-        foreach($data['salesorders'] as $key => $value){
-            /* purchaseorder */
-            $thisSelect = array(
-                'where' => array(
-                    'purchaseorder_salesorder_id' => $value->salesorder_id,
-                    'purchaseorder_status_noteq' => 'cancel'
-                ),
-                'return' => 'result'
-            );
-            $data['purchaseorders'] = $this->purchaseorder_model->select($thisSelect);
-            $data['salesorders'][$key]->purchaseorders = $data['purchaseorders'];
-        }
-
-        foreach($data['salesorders'] as $key => $value){
-            /* invoice */
-            $thisSelect = array(
-                'where' => array(
-                    'invoice_salesorder_id' => $value->salesorder_id,
-                    'invoice_status_noteq' => 'cancel'
-                ),
-                'return' => 'result'
-            );
-            $data['invoices'] = $this->invoice_model->select($thisSelect);
-            $data['salesorders'][$key]->invoices = $data['invoices'];
-        }
-
-        $this->get_form_data($data['salesorders']);
+        $this->make_form_data($data, true);
+        $data = array_merge($data, $this->get_form_data($data['salesorders']));
 
         $fileName = 'Sales_report_'.date('YmdHis');
         php_excel_export($this->th_header, $this->td_body, $fileName);
