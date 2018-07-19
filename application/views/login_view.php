@@ -138,11 +138,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<tbody>
 										<tr>
 											<td><label for="user_username">Username</label></td>
-											<td><input type="text" id="user_username" name="user_username" autocomplete="off" class="form-control input-sm required" placeholder="Username" value="chuyan" /></td>
+											<td><input type="text" id="user_username" name="user_username" autocomplete="off" class="form-control input-sm required" placeholder="Username" /></td>
 										</tr>
 										<tr>
 											<td><label for="user_password">Password</label></td>
-											<td><input type="password" id="user_password" name="user_password" autocomplete="off" class="form-control input-sm required" placeholder="Password" value="chuyan" /></td>
+											<td><input type="password" id="user_password" name="user_password" autocomplete="off" class="form-control input-sm required" placeholder="Password" /></td>
 										</tr>
 										<tr>
 											<td><label for="code">Sec. code</label></td>

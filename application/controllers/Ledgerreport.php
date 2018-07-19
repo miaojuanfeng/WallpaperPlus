@@ -77,13 +77,13 @@ class Ledgerreport extends CI_Controller {
                     $data['data'][$key][] = '-';
                 }else{
                     if( strpos($value->invoice_number, 'ECINV') !== false ){
-                        $rv = 'ECRV';
+                        $rv = 'ECINV';
                     }else if( strpos($value->invoice_number, 'EINV') !== false ){
-                        $rv = 'ERV';
+                        $rv = 'EINV';
                     }else if( strpos($value->invoice_number, 'CINV') !== false ){
-                        $rv = 'CRV';
+                        $rv = 'CINV';
                     }else{
-                        $rv = 'RV';
+                        $rv = 'INV';
                     }
                     $data['data'][$key][] = $rv.substr($value->invoice_number, strlen($value->invoice_number)-7);
                     $data['data'][$key][] = get_client($value->invoice_client_id)->client_company_name.' - Invoice: '.$value->invoice_number;
