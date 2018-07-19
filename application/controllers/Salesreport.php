@@ -5,7 +5,7 @@ class Salesreport extends CI_Controller {
 
     private $th_header = array(
         'Customer',
-        'Customer PO ? PO No',
+        'PO No',
         'SO No',
         'Total',
         'IN No',
@@ -161,7 +161,7 @@ class Salesreport extends CI_Controller {
                 $row[] = $value->salesorder_client_company_name;
                 $temp = '';
                 foreach($value->purchaseorders as $key1 => $value1){
-                    $temp .= '<div class="no-wrap">Customer PO ? <a href="'.base_url('purchaseorder/update/purchaseorder_id/'.$value1->purchaseorder_id).'">'.$value1->purchaseorder_number.'</a><br/></div>';
+                    $temp .= '<div class="no-wrap"><a href="'.base_url('purchaseorder/update/purchaseorder_id/'.$value1->purchaseorder_id).'">'.$value1->purchaseorder_number.'</a><br/></div>';
                 }
                 $row[] = $temp;
                 $row[] = '<a href="' . base_url('salesorder/update/salesorder_id/' . $value->salesorder_id) . '">' . $value->salesorder_number . '</a>';

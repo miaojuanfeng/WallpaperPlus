@@ -594,9 +594,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																<?php } ?>
 															</select>
 														</div>
-														<div class="col-sm-2">
-															<!-- <input type="text" name="invoice_client_company_name_invoice_client_name_like" class="form-control input-sm" placeholder="Customer PO" value="" /> -->
-														</div>
+														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
 														<div class="col-sm-2"></div>
